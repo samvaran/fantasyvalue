@@ -5,11 +5,11 @@ import numpy as np
 
 BUDGET = 60000
 
-QB_SHORTLIST = ['lamar jackson']
+QB_SHORTLIST = []
 D_SHORTLIST = []
 
 INCLUDE_LIST = []
-BLOCK_LIST = ['tetairoa mcmillan', 'davante adams']
+BLOCK_LIST = []
 
 # PROJECTED_PTS_WEIGHTS = [0.95, 0.5, 0.05]
 PROJECTED_PTS_WEIGHTS = [0.5]

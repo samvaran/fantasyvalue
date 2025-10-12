@@ -1,406 +1,355 @@
 name,position,team,game,projPts,salary,value,tdOdds,tdProbability,tdProbSigmoid,tdValue,injury
-brock purdy,QB,SF,JAC@SF,18.2,6600,2.76,+600,14.29,4.43,0.67,: 
-drake maye,QB,NE,CAR@NE,19.2,7100,2.7,+275,26.67,13.79,1.94,: 
-josh allen,QB,BUF,NO@BUF,23.6,9000,2.62,−155,60.78,82.89,9.21,: 
-lamar jackson,QB,BAL,BAL@KC,22.7,8700,2.61,+220,31.25,20.18,2.32,: 
-justin herbert,QB,LAC,LAC@NYG,20.6,7900,2.61,+380,20.83,8.19,1.04,: 
-caleb williams,QB,CHI,CHI@LV,19.4,7500,2.59,+425,19.05,6.95,0.93,: 
-bo nix,QB,DEN,CIN@DEN,19,7400,2.57,+285,25.97,12.98,1.75,: 
-patrick mahomes,QB,KC,BAL@KC,19.8,7800,2.54,+400,20.00,7.59,0.97,: 
-jalen hurts,QB,PHI,PHI@TB,21.5,8500,2.53,−125,55.56,74.19,8.73,: 
-justin fields,QB,NYJ,NYJ@MIA,18.5,7300,2.53,+205,32.79,22.78,3.12,: 
-marcus mariota,QB,WAS,WAS@ATL,16.4,6600,2.48,+380,20.83,8.19,1.24,: 
-jordan love,QB,GB,GB@DAL,18.8,7600,2.47,+600,14.29,4.43,0.58,: 
-matthew stafford,QB,LAR,IND@LAR,17.3,7000,2.47,+1600,5.88,1.96,0.28,: 
-geno smith,QB,LV,CHI@LV,17.6,7200,2.44,+700,12.50,3.73,0.52,: 
-daniel jones,QB,IND,IND@LAR,17.8,7400,2.41,+185,35.09,27.07,3.66,: 
-jaxson dart,QB,NYG,LAC@NYG,15.2,6300,2.41,+370,21.28,8.53,1.35,: 
-cj stroud,QB,HOU,TEN@HOU,16,6800,2.35,+650,13.33,4.04,0.59,: 
-tua tagovailoa,QB,MIA,NYJ@MIA,15.4,6800,2.26,+1800,5.26,1.85,0.27,: 
-michael penix,QB,ATL,WAS@ATL,14.7,6500,2.26,+800,11.11,3.26,0.50,: 
-jared goff,QB,DET,CLE@DET,17.1,7600,2.25,+1600,5.88,1.96,0.26,: 
-trevor lawrence,QB,JAC,JAC@SF,14.9,6700,2.22,+550,15.38,4.92,0.73,: 
-carson wentz,QB,MIN,MIN@PIT,14.6,6600,2.21,0,0,1.10,0.17,: 
-baker mayfield,QB,TB,PHI@TB,16.8,7700,2.18,+650,13.33,4.04,0.52,Q: Biceps
-bryce young,QB,CAR,CAR@NE,14.3,6700,2.13,+700,12.50,3.73,0.56,: 
-dak prescott,QB,DAL,GB@DAL,15,7100,2.11,+1000,9.09,2.68,0.38,: 
-jake browning,QB,CIN,CIN@DEN,13.9,6700,2.07,+850,10.53,3.09,0.46,: 
-joe flacco,QB,CLE,CLE@DET,13.4,6500,2.06,+2800,3.45,1.54,0.24,: 
-spencer rattler,QB,NO,NO@BUF,12.1,6400,1.89,+700,12.50,3.73,0.58,: 
-cam ward,QB,TEN,TEN@HOU,11.6,6400,1.81,0,0,1.10,0.17,: 
-aaron rodgers,QB,PIT,MIN@PIT,12.8,7100,1.8,0,0,1.10,0.15,: 
-tyrod taylor,QB,NYJ,NYJ@MIA,1.3,6900,0.19,0,0,1.10,0.16,: 
-tyler shough,QB,NO,NO@BUF,1,6300,0.16,0,0,1.10,0.17,: 
-mac jones,QB,SF,JAC@SF,0.7,6600,0.11,0,0,1.10,0.17,Q: Knee - pcl
-zach wilson,QB,MIA,NYJ@MIA,0.5,6000,0.08,0,0,1.10,0.18,: 
-dillon gabriel,QB,CLE,CLE@DET,0.5,6000,0.08,0,0,1.10,0.18,: 
-mitchell trubisky,QB,BUF,NO@BUF,0.5,6000,0.08,0,0,1.10,0.18,: 
-anthony richardson sr,QB,IND,IND@LAR,0.5,6000,0.08,0,0,1.10,0.18,: 
-jimmy garoppolo,QB,LAR,IND@LAR,0.5,6000,0.08,0,0,1.10,0.18,: 
-russell wilson,QB,NYG,LAC@NYG,0.5,6900,0.07,0,0,1.10,0.16,: 
-malik willis,QB,GB,GB@DAL,0.4,6000,0.07,0,0,1.10,0.18,: 
-joshua dobbs,QB,NE,CAR@NE,0.4,6000,0.07,0,0,1.10,0.18,: 
-jarrett stidham,QB,DEN,CIN@DEN,0.4,6000,0.07,0,0,1.10,0.18,: 
-tyson bagent,QB,CHI,CHI@LV,0.4,6000,0.07,0,0,1.10,0.18,: 
-joe milton,QB,DAL,GB@DAL,0.4,6000,0.07,0,0,1.10,0.18,: 
-cooper rush,QB,BAL,BAL@KC,0.4,6000,0.07,0,0,1.10,0.18,: 
-andy dalton,QB,CAR,CAR@NE,0.4,6000,0.07,0,0,1.10,0.18,: 
-davis mills,QB,HOU,TEN@HOU,0.4,6000,0.07,0,0,1.10,0.18,: 
-nick mullens,QB,JAC,JAC@SF,0.4,6000,0.07,0,0,1.10,0.18,: 
-hendon hooker,QB,CAR,CAR@NE,0.4,6000,0.07,0,0,1.10,0.18,: 
-mason rudolph,QB,PIT,MIN@PIT,0.4,6000,0.07,0,0,1.10,0.18,: 
-tanner mckee,QB,PHI,PHI@TB,0.4,6000,0.07,0,0,1.10,0.18,: 
-kirk cousins,QB,ATL,WAS@ATL,0.4,6300,0.06,0,0,1.10,0.17,: 
-trey lance,QB,LAC,LAC@NYG,0.3,6000,0.05,0,0,1.10,0.18,: 
-brandon allen,QB,TEN,TEN@HOU,0.3,6000,0.05,0,0,1.10,0.18,: 
-brett rypien,QB,CIN,CIN@DEN,0.3,6000,0.05,0,0,1.10,0.18,: 
-gardner minshew,QB,KC,BAL@KC,0.2,6000,0.03,0,0,1.10,0.18,: 
-max brosmer,QB,MIN,MIN@PIT,0.2,6000,0.03,0,0,1.10,0.18,: 
-cam skattebo,RB,NYG,LAC@NYG,12.5,5400,2.31,0,0,1.10,0.20,: 
-devon achane,RB,MIA,NYJ@MIA,16.6,7700,2.16,−130,56.52,75.99,9.87,: 
-christian mccaffrey,RB,SF,JAC@SF,19.5,9300,2.1,−180,64.29,87.31,9.39,: 
-omarion hampton,RB,LAC,LAC@NYG,14.7,7000,2.1,−110,52.38,67.66,9.67,: 
-josh jacobs,RB,GB,GB@DAL,16.3,8000,2.04,−200,66.67,89.72,11.21,: 
-bijan robinson,RB,ATL,WAS@ATL,17.9,8900,2.01,−190,65.52,88.61,9.96,: 
-bucky irving,RB,TB,PHI@TB,14.5,7300,1.99,+110,47.62,56.51,7.74,: 
-kenneth gainwell,RB,PIT,MIN@PIT,10.5,5300,1.98,0,0,1.10,0.21,: 
-james cook,RB,BUF,NO@BUF,16.7,8500,1.96,−190,65.52,88.61,10.42,: 
-jordan mason,RB,MIN,MIN@PIT,14.1,7200,1.96,0,0,1.10,0.15,: 
-jk dobbins,RB,DEN,CIN@DEN,12.6,6600,1.91,−130,56.52,75.99,11.51,: 
-saquon barkley,RB,PHI,PHI@TB,16.5,8700,1.9,−135,57.45,77.64,8.92,: 
-tony pollard,RB,TEN,TEN@HOU,11.7,6200,1.89,+130,43.48,46.21,7.45,: 
-ashton jeanty,RB,LV,CHI@LV,12.8,6800,1.88,−145,59.18,80.50,11.84,: 
-jahmyr gibbs,RB,DET,CLE@DET,15.4,8300,1.86,−185,64.91,87.98,10.60,: 
-breece hall,RB,NYJ,NYJ@MIA,12.6,6800,1.85,+155,39.22,35.94,5.29,: 
-chuba hubbard,RB,CAR,CAR@NE,12.2,6600,1.85,+130,43.48,46.21,7.00,Q: Calf
-jonathan taylor,RB,IND,IND@LAR,17.2,9500,1.81,−185,64.91,87.98,9.26,: 
-quinshon judkins,RB,CLE,CLE@DET,11.4,6300,1.81,+165,37.74,32.61,5.18,: 
-javonte williams,RB,DAL,GB@DAL,12.2,6900,1.77,+155,39.22,35.94,5.21,: 
-dandre swift,RB,CHI,CHI@LV,11.2,6400,1.75,+135,42.55,43.91,6.86,Q: Hip
-nick chubb,RB,HOU,TEN@HOU,10.4,6000,1.73,+140,41.67,41.75,6.96,: 
-travis etienne,RB,JAC,JAC@SF,11.9,7100,1.68,+135,42.55,43.91,6.18,: 
-derrick henry,RB,BAL,BAL@KC,15,9000,1.67,−150,60.00,81.76,9.08,: 
-chase brown,RB,CIN,CIN@DEN,12.3,7400,1.66,+140,41.67,41.75,5.64,: 
-kyren williams,RB,LAR,IND@LAR,12.8,7800,1.64,−180,64.29,87.31,11.19,: 
-treveyon henderson,RB,NE,CAR@NE,9.3,5700,1.63,+155,39.22,35.94,6.31,: 
-alvin kamara,RB,NO,NO@BUF,12,7500,1.6,+130,43.48,46.21,6.16,: 
-david montgomery,RB,DET,CLE@DET,10.6,6700,1.58,−105,51.22,65.07,9.71,: 
-rhamondre stevenson,RB,NE,CAR@NE,8.6,5500,1.56,+160,38.46,34.21,6.22,: 
-woody marks,RB,HOU,TEN@HOU,6.6,4800,1.38,+205,32.79,22.78,4.75,: 
-kareem hunt,RB,KC,BAL@KC,6.9,5200,1.33,+195,33.90,24.79,4.77,: 
-jacory croskeymerritt,RB,WAS,WAS@ATL,7,5500,1.27,+260,27.78,15.16,2.76,Q: Knee
-rj harvey,RB,DEN,CIN@DEN,6.4,5100,1.25,+275,26.67,13.79,2.70,: 
-isiah pacheco,RB,KC,BAL@KC,7.2,5900,1.22,+225,30.77,19.42,3.29,: 
-ollie gordon,RB,MIA,NYJ@MIA,5.8,4800,1.21,+295,25.32,12.26,2.55,: 
-bhayshul tuten,RB,JAC,JAC@SF,6.2,5200,1.19,+300,25.00,11.92,2.29,: 
-tyler allgeier,RB,ATL,WAS@ATL,5.8,5000,1.16,+310,24.39,11.29,2.26,: 
-chris rodriguez,RB,WAS,WAS@ATL,6.1,5600,1.09,+280,26.32,13.38,2.39,: 
-rachaad white,RB,TB,PHI@TB,5.7,5300,1.08,+380,20.83,8.19,1.55,: 
-rico dowdle,RB,CAR,CAR@NE,5.2,4800,1.08,+360,21.74,8.90,1.85,: 
-braelon allen,RB,NYJ,NYJ@MIA,5.4,5200,1.04,+220,31.25,20.18,3.88,: 
-blake corum,RB,LAR,IND@LAR,5,4900,1.02,+360,21.74,8.90,1.82,: 
-devin singletary,RB,NYG,LAC@NYG,4.4,4300,1.02,+800,11.11,3.26,0.76,: 
-brian robinson,RB,SF,JAC@SF,4.7,4900,0.96,+550,15.38,4.92,1.00,: 
-jerome ford,RB,CLE,CLE@DET,4.5,4700,0.96,+800,11.11,3.26,0.69,: 
-kaleb johnson,RB,PIT,MIN@PIT,4,4200,0.95,0,0,1.10,0.26,: 
-justice hill,RB,BAL,BAL@KC,5,5300,0.94,+600,14.29,4.43,0.84,: 
-miles sanders,RB,DAL,GB@DAL,4.7,5000,0.94,+650,13.33,4.04,0.81,: 
-kyle monangai,RB,CHI,CHI@LV,4.7,5000,0.94,+360,21.74,8.90,1.78,: 
-ray davis,RB,BUF,NO@BUF,4.2,4700,0.89,+425,19.05,6.95,1.48,: 
-ty johnson,RB,BUF,NO@BUF,4.1,4600,0.89,+500,16.67,5.56,1.21,: 
-jeremy mcnichols,RB,WAS,WAS@ATL,4.7,5400,0.87,+600,14.29,4.43,0.82,: 
-zavier scott,WR,MIN,MIN@PIT,3.7,4300,0.86,0,0,1.10,0.26,: 
-kendre miller,RB,NO,NO@BUF,3.8,4700,0.81,+700,12.50,3.73,0.79,: 
-antonio gibson,RB,NE,CAR@NE,3.8,5100,0.75,+550,15.38,4.92,0.96,: 
-zamir white,RB,LV,CHI@LV,3.4,4600,0.74,+850,10.53,3.09,0.67,: 
-chris brooks,RB,GB,GB@DAL,2.8,4200,0.67,+950,9.52,2.80,0.67,: 
-lequint allen,RB,JAC,JAC@SF,2.7,4200,0.64,+1300,7.14,2.22,0.53,: 
-emanuel wilson,RB,GB,GB@DAL,2.6,4300,0.6,+700,12.50,3.73,0.87,: 
-dylan sampson,RB,CLE,CLE@DET,3,5100,0.59,+800,11.11,3.26,0.64,: 
-samaje perine,RB,CIN,CIN@DEN,2.4,4300,0.56,+1200,7.69,2.34,0.54,: 
-will shipley,RB,PHI,PHI@TB,2.3,4400,0.52,+950,9.52,2.80,0.64,: 
-brashard smith,RB,KC,BAL@KC,2.2,4200,0.52,+1200,7.69,2.34,0.56,: 
-hassan haskins,RB,LAC,LAC@NYG,1.8,4600,0.39,+600,14.29,4.43,0.96,: 
-isaiah davis,RB,NYJ,NYJ@MIA,1.6,4100,0.39,+1600,5.88,1.96,0.48,: 
-cam akers,RB,MIN,MIN@PIT,1.6,4100,0.39,0,0,1.10,0.27,: 
-dj giddens,RB,IND,IND@LAR,1.7,4500,0.38,+1100,8.33,2.49,0.55,: 
-tyler badie,RB,DEN,CIN@DEN,1.6,4200,0.38,+950,9.52,2.80,0.67,: 
-trey sermon,RB,PIT,MIN@PIT,1.5,4000,0.38,0,0,1.10,0.28,: 
-julius chestnut,RB,TEN,TEN@HOU,1.6,4300,0.37,+1100,8.33,2.49,0.58,: 
-tahj brooks,RB,CIN,CIN@DEN,1.5,4200,0.36,+1700,5.56,1.90,0.45,: 
-kimani vidal,RB,LAC,LAC@NYG,1.4,4000,0.35,+1300,7.14,2.22,0.56,: 
-dylan laube,RB,LV,CHI@LV,1.4,4000,0.35,+2000,4.76,1.76,0.44,: 
-aj dillon,RB,PHI,PHI@TB,1.3,4100,0.32,+1700,5.56,1.90,0.46,: 
-kyle juszczyk,RB,SF,JAC@SF,1.2,4200,0.29,+800,11.11,3.26,0.78,: 
-alec ingold,RB,MIA,NYJ@MIA,1.1,4000,0.28,+1900,5.00,1.80,0.45,: 
-dare ogunbowale,RB,HOU,TEN@HOU,1.1,4300,0.26,+1500,6.25,2.03,0.47,: 
-tyler goodson,RB,IND,IND@LAR,1.1,4300,0.26,+1100,8.33,2.49,0.58,: 
-jaylen wright,RB,MIA,NYJ@MIA,1.1,4500,0.24,+1300,7.14,2.22,0.49,: 
-trevor etienne,RB,CAR,CAR@NE,1,4100,0.24,+1400,6.67,2.12,0.52,: 
-roschon johnson,RB,CHI,CHI@LV,0.9,4200,0.21,+1200,7.69,2.34,0.56,: 
-isaac guerendo,RB,SF,JAC@SF,0.8,4100,0.2,+2200,4.35,1.69,0.41,: 
-hunter luepke,RB,DAL,GB@DAL,0.8,4000,0.2,+3000,3.23,1.51,0.38,: 
-sean tucker,RB,TB,PHI@TB,0.8,4200,0.19,+2200,4.35,1.69,0.40,: 
-rasheen ali,RB,BAL,BAL@KC,0.8,4500,0.18,+2500,3.85,1.61,0.36,: 
-adam prentice,RB,DEN,CIN@DEN,0.7,4000,0.17,+2200,4.35,1.69,0.42,: 
-tank bigsby,RB,PHI,PHI@TB,0.7,4400,0.16,+2200,4.35,1.69,0.38,: 
-jarquez hunter,RB,LAR,IND@LAR,0.6,4000,0.15,+2200,4.35,1.69,0.42,: 
-reggie gilliam,RB,BUF,NO@BUF,0.6,4000,0.15,+5000,1.96,1.33,0.33,: 
-craig reynolds,RB,DET,CLE@DET,0.6,4300,0.14,+2000,4.76,1.76,0.41,: 
-dante miller,RB,NYG,LAC@NYG,0.5,4000,0.13,0,0,1.10,0.28,: 
-carlos washington,RB,ATL,WAS@ATL,0.3,4000,0.07,+4500,2.17,1.36,0.34,: 
-tetairoa mcmillan,WR,CAR,CAR@NE,11.4,5800,1.97,+195,33.90,24.79,4.27,Q: Calf
-jakobi meyers,WR,LV,CHI@LV,11.5,6100,1.89,+160,38.46,34.21,5.61,: 
-puka nacua,WR,LAR,IND@LAR,17.6,9400,1.87,+105,48.78,59.34,6.31,: 
-davante adams,WR,LAR,IND@LAR,13.5,7400,1.82,+130,43.48,46.21,6.24,Q: Hamstring
-chris olave,WR,NO,NO@BUF,10.8,6000,1.8,+270,27.03,14.22,2.37,: 
-garrett wilson,WR,NYJ,NYJ@MIA,12.6,7100,1.77,+155,39.22,35.94,5.06,: 
-ricky pearsall,WR,SF,JAC@SF,11.1,6300,1.76,+190,34.48,25.88,4.11,Q: Knee
-michael pittman,WR,IND,IND@LAR,10.2,5800,1.76,+235,29.85,18.02,3.11,: 
-drake london,WR,ATL,WAS@ATL,12.4,7100,1.75,+160,38.46,34.21,4.82,: 
-jaylen waddle,WR,MIA,NYJ@MIA,9.8,5600,1.75,+170,37.04,31.09,5.55,: 
-quentin johnston,WR,LAC,LAC@NYG,10.7,6200,1.73,+185,35.09,27.07,4.37,: 
-rome odunze,WR,CHI,CHI@LV,12.4,7200,1.72,+145,40.82,39.70,5.51,: 
-deebo samuel sr,WR,WAS,WAS@ATL,11,6400,1.72,0,0,1.10,0.17,: 
-nico collins,WR,HOU,TEN@HOU,14,8200,1.71,+115,46.51,53.77,6.56,: 
-courtland sutton,WR,DEN,CIN@DEN,12,7000,1.71,+130,43.48,46.21,6.60,: 
-emeka egbuka,WR,TB,PHI@TB,11.9,7000,1.7,+200,33.33,23.74,3.39,: 
-keenan allen,WR,LAC,LAC@NYG,10.9,6500,1.68,+175,36.36,29.65,4.56,: 
-zay flowers,WR,BAL,BAL@KC,12.2,7300,1.67,+150,40.00,37.75,5.17,: 
-tyreek hill,WR,MIA,NYJ@MIA,12.1,7300,1.66,+125,44.44,48.60,6.66,: 
-malik nabers,WR,NYG,LAC@NYG,13.9,8400,1.65,+180,35.71,28.31,3.37,: 
-calvin ridley,WR,TEN,TEN@HOU,8.9,5400,1.65,+360,21.74,8.90,1.65,: 
-amonra st brown,WR,DET,CLE@DET,14.3,8800,1.63,+115,46.51,53.77,6.11,: 
-justin jefferson,WR,MIN,MIN@PIT,14.2,8700,1.63,0,0,1.10,0.13,: 
-dj moore,WR,CHI,CHI@LV,10.2,6300,1.62,+210,32.26,21.86,3.47,: 
-matthew golden,WR,GB,GB@DAL,9.5,5900,1.61,+235,29.85,18.02,3.05,: 
-devonta smith,WR,PHI,PHI@TB,10.5,6600,1.59,+255,28.17,15.67,2.37,: 
-george pickens,WR,DAL,GB@DAL,11.4,7200,1.58,+155,39.22,35.94,4.99,: 
-jerry jeudy,WR,CLE,CLE@DET,9,5700,1.58,+300,25.00,11.92,2.09,: 
-dk metcalf,WR,PIT,MIN@PIT,10.7,6800,1.57,0,0,1.10,0.16,: 
-romeo doubs,WR,GB,GB@DAL,9.4,6000,1.57,+195,33.90,24.79,4.13,: 
-khalil shakir,WR,BUF,NO@BUF,9.2,5900,1.56,+235,29.85,18.02,3.05,: 
-cedric tillman,WR,CLE,CLE@DET,8.2,5300,1.55,+350,22.22,9.30,1.75,: 
-troy franklin,WR,DEN,CIN@DEN,8.3,5400,1.54,+255,28.17,15.67,2.90,: 
-josh downs,WR,IND,IND@LAR,7.8,5100,1.53,+390,20.41,7.88,1.55,: 
-ladd mcconkey,WR,LAC,LAC@NYG,11.7,7700,1.52,+205,32.79,22.78,2.96,: 
-aj brown,WR,PHI,PHI@TB,12.1,8000,1.51,+180,35.71,28.31,3.54,: 
-darnell mooney,WR,ATL,WAS@ATL,8.6,5700,1.51,+290,25.64,12.61,2.21,: 
-jauan jennings,WR,SF,JAC@SF,8.8,5900,1.49,+240,29.41,17.38,2.95,Q: Ankle
-jamarr chase,WR,CIN,CIN@DEN,13.5,9100,1.48,+180,35.71,28.31,3.11,: 
-brian thomas,WR,JAC,JAC@SF,11.1,7500,1.48,+185,35.09,27.07,3.61,: 
-tee higgins,WR,CIN,CIN@DEN,9.8,6600,1.48,+250,28.57,16.21,2.46,: 
-tre tucker,WR,LV,CHI@LV,8.8,6000,1.47,+210,32.26,21.86,3.64,: 
-jordan addison,WR,MIN,MIN@PIT,8.8,6000,1.47,0,0,1.10,0.18,: 
-keon coleman,WR,BUF,NO@BUF,8.4,5700,1.47,+195,33.90,24.79,4.35,: 
-christian kirk,WR,HOU,TEN@HOU,8.1,5500,1.47,+310,24.39,11.29,2.05,: 
-jameson williams,WR,DET,CLE@DET,9.9,6800,1.46,+245,28.99,16.78,2.47,: 
-xavier worthy,WR,KC,BAL@KC,9.8,6700,1.46,+175,36.36,29.65,4.43,: 
-wandale robinson,WR,NYG,LAC@NYG,8.3,5800,1.43,+425,19.05,6.95,1.20,: 
-travis hunter,WR,JAC,JAC@SF,7.4,5300,1.4,+290,25.64,12.61,2.38,: 
-stefon diggs,WR,NE,CAR@NE,7.7,5600,1.38,+250,28.57,16.21,2.89,: 
-rashid shaheed,WR,NO,NO@BUF,7.5,5500,1.36,+370,21.28,8.53,1.55,: 
-dontayvion wicks,WR,GB,GB@DAL,7.4,5500,1.35,+250,28.57,16.21,2.95,: 
-elic ayomanor,WR,TEN,TEN@HOU,7.3,5400,1.35,+500,16.67,5.56,1.03,: 
-kayshon boutte,WR,NE,CAR@NE,6.9,5200,1.33,+245,28.99,16.78,3.23,: 
-calvin austin,WR,PIT,MIN@PIT,7.1,5600,1.27,0,0,1.10,0.20,: 
-adonai mitchell,WR,IND,IND@LAR,5.6,4400,1.27,+475,17.39,5.95,1.35,: 
-hunter renfrow,WR,CAR,CAR@NE,6.3,5100,1.24,+310,24.39,11.29,2.21,: 
-rashod bateman,WR,BAL,BAL@KC,6.9,5600,1.23,+275,26.67,13.79,2.46,: 
-sterling shepard,WR,TB,PHI@TB,6.5,5300,1.23,+360,21.74,8.90,1.68,: 
-tyquan thornton,WR,KC,BAL@KC,6.6,5400,1.22,+475,17.39,5.95,1.10,: 
-marvin mims,WR,DEN,CIN@DEN,6.3,5200,1.21,+370,21.28,8.53,1.64,Q: Hip
-donte thornton,WR,LV,CHI@LV,5.7,4800,1.19,+400,20.00,7.59,1.58,: 
-parker washington,WR,JAC,JAC@SF,6,5100,1.18,+350,22.22,9.30,1.82,: 
-jalen tolbert,WR,DAL,GB@DAL,5.9,5000,1.18,+425,19.05,6.95,1.39,: 
-luther burden,WR,CHI,CHI@LV,5.8,4900,1.18,+600,14.29,4.43,0.90,: 
-kavontae turpin,WR,DAL,GB@DAL,6.8,5800,1.17,+340,22.73,9.74,1.68,: 
-demario douglas,WR,NE,CAR@NE,5.4,4600,1.17,+475,17.39,5.95,1.29,: 
-jaylin lane,WR,WAS,WAS@ATL,4.9,4300,1.14,+500,16.67,5.56,1.29,: 
-darius slayton,WR,NYG,LAC@NYG,5.3,4700,1.13,+600,14.29,4.43,0.94,: 
-joshua palmer,WR,BUF,NO@BUF,5.8,5200,1.12,+300,25.00,11.92,2.29,: 
-olamide zaccheaus,WR,CHI,CHI@LV,5.6,5000,1.12,+450,18.18,6.40,1.28,: 
-malik washington,WR,MIA,NYJ@MIA,5.4,4900,1.1,+425,19.05,6.95,1.42,: 
-isaiah bond,WR,CLE,CLE@DET,4.7,4300,1.09,+700,12.50,3.73,0.87,: 
-luke mccaffrey,WR,WAS,WAS@ATL,4.9,4600,1.07,+500,16.67,5.56,1.21,: 
-chris moore,WR,WAS,WAS@ATL,4.3,4000,1.07,+900,10.00,2.93,0.73,: 
-kendrick bourne,WR,SF,JAC@SF,5.2,5000,1.04,+500,16.67,5.56,1.11,: 
-brandin cooks,WR,NO,NO@BUF,4.8,4600,1.04,+850,10.53,3.09,0.67,: 
-jayden higgins,WR,HOU,TEN@HOU,4.8,4700,1.02,+550,15.38,4.92,1.05,: 
-chris godwin,WR,TB,PHI@TB,6.1,6100,1,+340,22.73,9.74,1.60,Q: Ankle
-isaac teslaa,WR,DET,CLE@DET,4.7,4700,1,+800,11.11,3.26,0.69,: 
-rayray mccloud,WR,ATL,WAS@ATL,4.8,4900,0.98,+550,15.38,4.92,1.00,: 
-mack hollins,WR,NE,CAR@NE,4.4,4500,0.98,+550,15.38,4.92,1.09,: 
-andrei iosivas,WR,CIN,CIN@DEN,4.4,4500,0.98,+950,9.52,2.80,0.62,: 
-jahan dotson,WR,PHI,PHI@TB,4.3,4400,0.98,+900,10.00,2.93,0.67,: 
-deandre hopkins,WR,BAL,BAL@KC,5.3,5500,0.96,+500,16.67,5.56,1.01,: 
-jalen nailor,WR,MIN,MIN@PIT,4.9,5300,0.92,0,0,1.10,0.21,: 
-juju smithschuster,WR,KC,BAL@KC,5.1,5600,0.91,+500,16.67,5.56,0.99,: 
-devontez walker,WR,BAL,BAL@KC,4,4400,0.91,+1500,6.25,2.03,0.46,: 
-adam thielen,WR,MIN,MIN@PIT,4.6,5100,0.9,0,0,1.10,0.22,: 
-dyami brown,WR,JAC,JAC@SF,4.3,4900,0.88,+360,21.74,8.90,1.82,Q: Shoulder
-david moore,WR,CAR,CAR@NE,3.7,4200,0.88,+850,10.53,3.09,0.74,: 
-chimere dike,WR,TEN,TEN@HOU,4,4600,0.87,+700,12.50,3.73,0.81,: 
-elijah moore,WR,BUF,NO@BUF,4,5000,0.8,+1000,9.09,2.68,0.54,: 
-xavier hutchinson,WR,HOU,TEN@HOU,3.8,4800,0.79,+500,16.67,5.56,1.16,: 
-pat bryant,WR,DEN,CIN@DEN,3.2,4200,0.76,+1000,9.09,2.68,0.64,: 
-jordan whittington,WR,LAR,IND@LAR,3.4,4600,0.74,+550,15.38,4.92,1.07,: 
-kalif raymond,WR,DET,CLE@DET,3.1,4400,0.7,+700,12.50,3.73,0.85,: 
-demarcus robinson,WR,SF,JAC@SF,3.3,5100,0.65,+450,18.18,6.40,1.25,: 
-tyler johnson,WR,NYJ,NYJ@MIA,3,4600,0.65,+700,12.50,3.73,0.81,: 
-savion williams,WR,GB,GB@DAL,2.8,4300,0.65,+1100,8.33,2.49,0.58,: 
-tyler lockett,WR,TEN,TEN@HOU,2.9,4800,0.6,+1300,7.14,2.22,0.46,: 
-tutu atwell,WR,LAR,IND@LAR,2.6,4300,0.6,+650,13.33,4.04,0.94,: 
-allen lazard,WR,NYJ,NYJ@MIA,2.6,4500,0.58,+850,10.53,3.09,0.69,: 
-brycen tremayne,WR,CAR,CAR@NE,2.5,4300,0.58,+1200,7.69,2.34,0.54,: 
-arian smith,WR,NYJ,NYJ@MIA,2.4,4200,0.57,+950,9.52,2.80,0.67,: 
-josh reynolds,WR,NYJ,NYJ@MIA,2.4,4400,0.55,+425,19.05,6.95,1.58,: 
-tez johnson,WR,TB,PHI@TB,2.3,4200,0.55,+1100,8.33,2.49,0.59,: 
-ryan flournoy,WR,DAL,GB@DAL,2.2,4400,0.5,+1300,7.14,2.22,0.50,: 
-tre harris,WR,LAC,LAC@NYG,2.1,4300,0.49,+950,9.52,2.80,0.65,: 
-nick westbrookikhine,WR,MIA,NYJ@MIA,2,4500,0.44,+1100,8.33,2.49,0.55,: 
-tim patrick,WR,JAC,JAC@SF,1.9,4300,0.44,+1100,8.33,2.49,0.58,: 
-roman wilson,WR,PIT,MIN@PIT,1.8,4100,0.44,0,0,1.10,0.27,: 
-ryan miller,TE,TB,PHI@TB,1.8,4200,0.43,+1300,7.14,2.22,0.53,: 
-jamari thrash,WR,CLE,CLE@DET,1.8,4200,0.43,+1400,6.67,2.12,0.50,: 
-tylan wallace,WR,BAL,BAL@KC,1.9,4600,0.41,+1200,7.69,2.34,0.51,: 
-kyle williams,WR,NE,CAR@NE,1.7,4100,0.41,+1400,6.67,2.12,0.52,: 
-jaylin noel,WR,HOU,TEN@HOU,1.7,4200,0.4,+800,11.11,3.26,0.78,: 
-van jefferson,WR,TEN,TEN@HOU,1.5,4200,0.36,+2500,3.85,1.61,0.38,: 
-tyrell shavers,WR,BUF,NO@BUF,1.4,4200,0.33,+1300,7.14,2.22,0.53,: 
-trent sherfield sr,WR,DEN,CIN@DEN,1.3,4100,0.32,0,0,1.10,0.27,: 
-jack bech,WR,LV,CHI@LV,1.3,4100,0.32,+1200,7.69,2.34,0.57,: 
-malik heath,WR,GB,GB@DAL,1.3,4200,0.31,+1000,9.09,2.68,0.64,: 
-ashton dulin,WR,IND,IND@LAR,1.2,4000,0.3,+1600,5.88,1.96,0.49,: 
-devaughn vele,WR,NO,NO@BUF,1.3,4700,0.28,+1500,6.25,2.03,0.43,Q: Hip
-marquez valdesscantling,WR,SF,JAC@SF,1.2,4400,0.27,+1600,5.88,1.96,0.45,: 
-mitchell tinsley,WR,CIN,CIN@DEN,0.9,4200,0.21,+1800,5.26,1.85,0.44,: 
-keandre lambertsmith,WR,LAC,LAC@NYG,0.8,4000,0.2,+1400,6.67,2.12,0.53,: 
-jalen royals,WR,KC,BAL@KC,0.8,4300,0.19,+1900,5.00,1.80,0.42,: 
-casey washington,WR,ATL,WAS@ATL,0.7,4000,0.17,+2000,4.76,1.76,0.44,: 
-dee eskridge,WR,MIA,NYJ@MIA,0.7,4100,0.17,+1200,7.69,2.34,0.57,: 
-skyy moore,WR,SF,JAC@SF,0.5,4200,0.12,+1500,6.25,2.03,0.48,: 
-anthony gould,WR,IND,IND@LAR,0.4,4000,0.1,+3000,3.23,1.51,0.38,: 
-john metchie,WR,PHI,PHI@TB,0.3,4200,0.07,+1800,5.26,1.85,0.44,: 
-scotty miller,WR,PIT,MIN@PIT,0.2,4000,0.05,0,0,1.10,0.28,: 
-ben skowronek,WR,PIT,MIN@PIT,0.2,4100,0.05,0,0,1.10,0.27,: 
-brock bowers,TE,LV,CHI@LV,11.2,6700,1.67,+165,37.74,32.61,4.87,: 
-hunter henry,TE,NE,CAR@NE,9.2,5500,1.67,+190,34.48,25.88,4.71,: 
-tucker kraft,TE,GB,GB@DAL,10,6100,1.64,+210,32.26,21.86,3.58,: 
-tyler warren,TE,IND,IND@LAR,9.3,5800,1.6,+250,28.57,16.21,2.79,: 
-zach ertz,TE,WAS,WAS@ATL,8,5000,1.6,+250,28.57,16.21,3.24,: 
-jake ferguson,TE,DAL,GB@DAL,9.5,6200,1.53,+190,34.48,25.88,4.17,: 
-dalton kincaid,TE,BUF,NO@BUF,8.5,5600,1.52,+225,30.77,19.42,3.47,: 
-juwan johnson,TE,NO,NO@BUF,8.5,5700,1.49,+290,25.64,12.61,2.21,: 
-mark andrews,TE,BAL,BAL@KC,7.8,5300,1.47,+205,32.79,22.78,4.30,: 
-tj hockenson,TE,MIN,MIN@PIT,8.2,5700,1.44,0,0,1.10,0.19,: 
-kyle pitts sr,TE,ATL,WAS@ATL,7.5,5200,1.44,0,0,1.10,0.21,: 
-harold fannin,TE,CLE,CLE@DET,6.9,4800,1.44,+425,19.05,6.95,1.45,: 
-sam laporta,TE,DET,CLE@DET,8.6,6000,1.43,+220,31.25,20.18,3.36,: 
-travis kelce,TE,KC,BAL@KC,8.5,6100,1.39,+185,35.09,27.07,4.44,: 
-dallas goedert,TE,PHI,PHI@TB,6.9,5100,1.35,+390,20.41,7.88,1.55,: 
-brenton strange,TE,JAC,JAC@SF,6.8,5100,1.33,+320,23.81,10.73,2.10,: 
-david njoku,TE,CLE,CLE@DET,7,5400,1.3,+330,23.26,10.21,1.89,: 
-chig okonkwo,TE,TEN,TEN@HOU,6.3,4900,1.29,0,0,1.10,0.22,: 
-jonnu smith,TE,PIT,MIN@PIT,6.2,5000,1.24,0,0,1.10,0.22,: 
-dalton schultz,TE,HOU,TEN@HOU,5.7,5000,1.14,+300,25.00,11.92,2.38,: 
-cole kmet,TE,CHI,CHI@LV,5.4,4800,1.13,+295,25.32,12.26,2.55,: 
-cade otton,TE,TB,PHI@TB,5.5,4900,1.12,+380,20.83,8.19,1.67,: 
-jake tonges,TE,SF,JAC@SF,5.2,4800,1.08,+425,19.05,6.95,1.45,: 
-mike gesicki,TE,CIN,CIN@DEN,4.8,4500,1.07,+500,16.67,5.56,1.24,: 
-oronde gadsden,TE,LAC,LAC@NYG,4.2,4000,1.05,+390,20.41,7.88,1.97,: 
-pat freiermuth,TE,PIT,MIN@PIT,5.1,4900,1.04,0,0,1.10,0.22,: 
-theo johnson,TE,NYG,LAC@NYG,4.6,4700,0.98,+750,11.76,3.48,0.74,: 
-mason taylor,TE,NYJ,NYJ@MIA,4.3,4500,0.96,+450,18.18,6.40,1.42,: 
-tommy tremble,TE,CAR,CAR@NE,3.9,4400,0.89,+550,15.38,4.92,1.12,: 
-noah gray,TE,KC,BAL@KC,3.9,4700,0.83,+600,14.29,4.43,0.94,: 
-tyler higbee,TE,LAR,IND@LAR,3.8,4700,0.81,+400,20.00,7.59,1.61,Q: Hip
-austin hooper,TE,NE,CAR@NE,3.4,4400,0.77,+700,12.50,3.73,0.85,: 
-adam trautman,TE,DEN,CIN@DEN,3.4,4400,0.77,+550,15.38,4.92,1.12,: 
-isaiah likely,TE,BAL,BAL@KC,3.6,4800,0.75,+370,21.28,8.53,1.78,Q: Foot
-evan engram,TE,DEN,CIN@DEN,3.6,4800,0.75,+360,21.74,8.90,1.85,: 
-dawson knox,TE,BUF,NO@BUF,3.2,4300,0.74,+600,14.29,4.43,1.03,: 
-gunnar helm,TE,TEN,TEN@HOU,3,4300,0.7,+1500,6.25,2.03,0.47,: 
-mitchell evans,TE,CAR,CAR@NE,2.6,4000,0.65,+1300,7.14,2.22,0.56,: 
-darren waller,TE,MIA,NYJ@MIA,3,4700,0.64,+500,16.67,5.56,1.18,: 
-tyler conklin,TE,LAC,LAC@NYG,3,4700,0.64,+750,11.76,3.48,0.74,: 
-tanner conner,TE,MIA,NYJ@MIA,2.5,4400,0.57,+900,10.00,2.93,0.67,: 
-davis allen,TE,LAR,IND@LAR,2.4,4200,0.57,+900,10.00,2.93,0.70,: 
-lucas krull,TE,DEN,CIN@DEN,2.3,4200,0.55,+850,10.53,3.09,0.74,: 
-luke farrell,TE,SF,JAC@SF,2.4,4500,0.53,+1100,8.33,2.49,0.55,: 
-luke schoonmaker,TE,DAL,GB@DAL,2.1,4400,0.48,+1900,5.00,1.80,0.41,: 
-luke musgrave,TE,GB,GB@DAL,2,4200,0.48,+1200,7.69,2.34,0.56,: 
-jeremy ruckert,TE,NYJ,NYJ@MIA,2,4200,0.48,+900,10.00,2.93,0.70,: 
-drew sample,TE,CIN,CIN@DEN,1.8,4200,0.43,+1100,8.33,2.49,0.59,: 
-hunter long,TE,JAC,JAC@SF,1.7,4200,0.4,+2200,4.35,1.69,0.40,: 
-tanner hudson,TE,CIN,CIN@DEN,1.6,4000,0.4,+2500,3.85,1.61,0.40,: 
-colston loveland,TE,CHI,CHI@LV,1.7,4600,0.37,0,0,1.10,0.24,Q: Hip
-ben sinnott,TE,WAS,WAS@ATL,1.5,4100,0.37,+1400,6.67,2.12,0.52,: 
-brock wright,TE,DET,CLE@DET,1.6,4500,0.36,+1200,7.69,2.34,0.52,: 
-josh oliver,TE,MIN,MIN@PIT,1.6,4500,0.36,0,0,1.10,0.24,: 
-john fitzpatrick,TE,GB,GB@DAL,1.5,4300,0.35,+1400,6.67,2.12,0.49,: 
-harrison bryant,TE,HOU,TEN@HOU,1.4,4100,0.34,+1300,7.14,2.22,0.54,: 
-darnell washington,TE,PIT,MIN@PIT,1.4,4100,0.34,0,0,1.10,0.27,: 
-julian hill,TE,MIA,NYJ@MIA,1.4,4200,0.33,+1700,5.56,1.90,0.45,: 
-colby parkinson,TE,LAR,IND@LAR,1.3,4000,0.33,+1200,7.69,2.34,0.58,Q: Shoulder
-johnny mundt,TE,JAC,JAC@SF,1.3,4000,0.33,+1700,5.56,1.90,0.47,: 
-daniel bellinger,TE,NYG,LAC@NYG,1.3,4100,0.32,+1100,8.33,2.49,0.61,: 
-mo aliecox,TE,IND,IND@LAR,1.3,4200,0.31,+1700,5.56,1.90,0.45,: 
-charlie kolar,TE,BAL,BAL@KC,1.3,4300,0.3,+1900,5.00,1.80,0.42,: 
-durham smythe,TE,CHI,CHI@LV,1.2,4000,0.3,+1100,8.33,2.49,0.62,: 
-ian thomas,TE,LV,CHI@LV,1.1,4000,0.28,+1000,9.09,2.68,0.67,: 
-charlie woerner,TE,ATL,WAS@ATL,1.1,4200,0.26,+2000,4.76,1.76,0.42,: 
-jackson hawes,TE,BUF,NO@BUF,1.1,4500,0.24,+1000,9.09,2.68,0.60,: 
-grant calcaterra,TE,PHI,PHI@TB,1,4100,0.24,+1500,6.25,2.03,0.50,: 
-payne durham,TE,TB,PHI@TB,0.9,4000,0.23,+1900,5.00,1.80,0.45,: 
-cam grandy,TE,CIN,CIN@DEN,0.9,4000,0.23,+2200,4.35,1.69,0.42,: 
-tucker fisk,TE,LAC,LAC@NYG,0.9,4000,0.23,+1900,5.00,1.80,0.45,: 
-kylen granson,TE,PHI,PHI@TB,0.9,4000,0.23,+3500,2.78,1.45,0.36,: 
-nate adkins,TE,DEN,CIN@DEN,0.9,4000,0.23,+1300,7.14,2.22,0.56,: 
-brevyn spannford,TE,DAL,GB@DAL,0.9,4100,0.22,+3500,2.78,1.45,0.35,: 
-jack stoll,TE,NO,NO@BUF,0.9,4100,0.22,+2000,4.76,1.76,0.43,: 
-drew ogletree,TE,IND,IND@LAR,0.8,4000,0.2,0,0,1.10,0.28,: 
-stephen carlson,TE,CHI,CHI@LV,0.8,4000,0.2,+2200,4.35,1.69,0.42,: 
-terrance ferguson,TE,LAR,IND@LAR,0.8,4000,0.2,+1000,9.09,2.68,0.67,: 
-robert tonyan,TE,KC,BAL@KC,0.8,4000,0.2,+3500,2.78,1.45,0.36,: 
-brayden willis,TE,SF,JAC@SF,0.7,4000,0.17,+3000,3.23,1.51,0.38,: 
-colson yankoff,TE,WAS,WAS@ATL,0.7,4000,0.17,+5500,1.79,1.31,0.33,: 
-james mitchell,TE,CAR,CAR@NE,0.6,4000,0.15,+3000,3.23,1.51,0.38,: 
-chris manhertz,TE,NYG,LAC@NYG,0.6,4000,0.15,+2200,4.35,1.69,0.42,: 
-zaire mitchellpaden,TE,BAL,BAL@KC,0.6,4000,0.15,+1800,5.26,1.85,0.46,: 
-stone smartt,TE,NYJ,NYJ@MIA,0.5,4000,0.13,+3000,3.23,1.51,0.38,: 
-albert okwuegbunam,TE,LV,CHI@LV,0.5,4000,0.13,+1200,7.69,2.34,0.58,: 
-treyton welch,TE,NO,NO@BUF,0.5,4000,0.13,0,0,1.10,0.28,: 
-jack westover,TE,NE,CAR@NE,0.4,4000,0.1,+3000,3.23,1.51,0.38,: 
-blake whiteheart,TE,CLE,CLE@DET,0.4,4000,0.1,+3500,2.78,1.45,0.36,: 
-connor heyward,TE,PIT,MIN@PIT,0.3,4000,0.07,0,0,1.10,0.28,: 
-texans,D,HOU,TEN@HOU,9.2,4400,2.09,+500,16.67,5.56,1.26,: 
-chargers,D,LAC,LAC@NYG,7.8,4000,1.95,+550,15.38,4.92,1.23,: 
-broncos,D,DEN,CIN@DEN,9.4,5000,1.88,+500,16.67,5.56,1.11,: 
-lions,D,DET,CLE@DET,8.9,4900,1.82,+500,16.67,5.56,1.13,: 
-dolphins,D,MIA,NYJ@MIA,6.2,3400,1.82,+500,16.67,5.56,1.64,: 
-panthers,D,CAR,CAR@NE,5.8,3200,1.81,+550,15.38,4.92,1.54,: 
-titans,D,TEN,TEN@HOU,6.3,3500,1.8,+550,15.38,4.92,1.41,: 
-bills,D,BUF,NO@BUF,8.9,5000,1.78,+475,17.39,5.95,1.19,: 
-browns,D,CLE,CLE@DET,5.3,3000,1.77,+550,15.38,4.92,1.64,: 
-raiders,D,LV,CHI@LV,5.8,3300,1.76,+550,15.38,4.92,1.49,: 
-falcons,D,ATL,WAS@ATL,5.9,3400,1.74,+500,16.67,5.56,1.64,: 
-giants,D,NYG,LAC@NYG,5.3,3100,1.71,+650,13.33,4.04,1.30,: 
-bears,D,CHI,CHI@LV,6.3,3700,1.7,+550,15.38,4.92,1.33,: 
-buccaneers,D,TB,PHI@TB,5.2,3100,1.68,+550,15.38,4.92,1.59,: 
-vikings,D,MIN,MIN@PIT,7.3,4400,1.66,0,0,1.10,0.25,: 
-eagles,D,PHI,PHI@TB,6.8,4100,1.66,+550,15.38,4.92,1.20,: 
-patriots,D,NE,CAR@NE,7,4300,1.63,+500,16.67,5.56,1.29,: 
-bengals,D,CIN,CIN@DEN,5.2,3200,1.63,+650,13.33,4.04,1.26,: 
-packers,D,GB,GB@DAL,7.6,4900,1.55,+500,16.67,5.56,1.13,: 
-49ers,D,SF,JAC@SF,6.5,4200,1.55,+500,16.67,5.56,1.32,: 
-steelers,D,PIT,MIN@PIT,6.9,4500,1.53,0,0,1.10,0.24,: 
-cowboys,D,DAL,GB@DAL,5,3300,1.52,+550,15.38,4.92,1.49,: 
-jets,D,NYJ,NYJ@MIA,6.2,4100,1.51,+500,16.67,5.56,1.36,: 
-rams,D,LAR,IND@LAR,5.9,3900,1.51,+500,16.67,5.56,1.43,: 
-jaguars,D,JAC,JAC@SF,5.6,3800,1.47,+550,15.38,4.92,1.29,: 
-chiefs,D,KC,BAL@KC,5.2,3600,1.44,+550,15.38,4.92,1.37,: 
-commanders,D,WAS,WAS@ATL,6.1,4600,1.33,+500,16.67,5.56,1.21,: 
-ravens,D,BAL,BAL@KC,5.9,4500,1.31,+500,16.67,5.56,1.24,: 
-saints,D,NO,NO@BUF,3.7,3000,1.23,+700,12.50,3.73,1.24,: 
-colts,D,IND,IND@LAR,5.3,4700,1.13,+550,15.38,4.92,1.05,: 
+patrick mahomes,QB,KC,DET@KC,22.1,7900,2.8,+285,25.97,12.98,1.64,: 
+caleb williams,QB,CHI,CHI@WAS,19.2,7300,2.63,+330,23.26,10.21,1.40,: 
+drake maye,QB,NE,NE@NO,20.1,7800,2.58,+245,28.99,16.78,2.15,: 
+trevor lawrence,QB,JAC,SEA@JAC,17.2,6700,2.57,+360,21.74,8.90,1.33,: 
+jayden daniels,QB,WAS,CHI@WAS,21.4,8400,2.55,+135,42.55,43.91,5.23,: 
+josh allen,QB,BUF,BUF@ATL,23,9100,2.53,−110,52.38,67.66,7.44,: 
+daniel jones,QB,IND,ARI@IND,18.3,7600,2.41,+195,33.90,24.79,3.26,: 
+baker mayfield,QB,TB,SF@TB,19.7,8200,2.4,+475,17.39,5.95,0.73,: 
+dak prescott,QB,DAL,DAL@CAR,18.9,8000,2.36,+600,14.29,4.43,0.55,: 
+matthew stafford,QB,LAR,LAR@BAL,17.9,7700,2.32,+2500,3.85,1.61,0.21,: 
+bryce young,QB,CAR,DAL@CAR,16,7000,2.29,+550,15.38,4.92,0.70,: 
+justin herbert,QB,LAC,LAC@MIA,19.4,8500,2.28,+370,21.28,8.53,1.00,: 
+jordan love,QB,GB,CIN@GB,18.8,8300,2.27,+500,16.67,5.56,0.67,: 
+geno smith,QB,LV,TEN@LV,15.3,6800,2.25,+1000,9.09,2.68,0.39,: 
+sam darnold,QB,SEA,SEA@JAC,16.6,7400,2.24,+750,11.76,3.48,0.47,: 
+michael penix,QB,ATL,BUF@ATL,14.9,6700,2.22,+700,12.50,3.73,0.56,: 
+spencer rattler,QB,NO,NE@NO,14.6,6600,2.21,+650,13.33,4.04,0.61,: 
+mac jones,QB,SF,SF@TB,16.2,7500,2.16,+1000,9.09,2.68,0.36,Q: Knee
+jared goff,QB,DET,DET@KC,16.8,8000,2.1,+1800,5.26,1.85,0.23,: 
+cam ward,QB,TEN,TEN@LV,13.3,6400,2.08,0,0,1.10,0.17,: 
+dillon gabriel,QB,CLE,CLE@PIT,12.9,6400,2.02,+600,14.29,4.43,0.69,: 
+tua tagovailoa,QB,MIA,LAC@MIA,14.3,7100,2.01,+2500,3.85,1.61,0.23,: 
+aaron rodgers,QB,PIT,CLE@PIT,13.8,6900,2,+1900,5.00,1.80,0.26,: 
+joe flacco,QB,CIN,CIN@GB,12.4,6300,1.97,+3500,2.78,1.45,0.23,: 
+cooper rush,QB,BAL,LAR@BAL,11.4,6300,1.81,+1000,9.09,2.68,0.43,: 
+jacoby brissett,QB,ARI,ARI@IND,10.8,6000,1.8,+750,11.76,3.48,0.58,: 
+kyler murray,QB,ARI,ARI@IND,8.7,7300,1.19,0,0,1.10,0.15,Q: Foot
+tyler huntley,QB,BAL,LAR@BAL,0.9,6000,0.15,0,0,1.10,0.18,: 
+jalen milroe,QB,SEA,SEA@JAC,0.8,6000,0.13,0,0,1.10,0.18,: 
+jake browning,QB,CIN,CIN@GB,0.7,6500,0.11,0,0,1.10,0.17,: 
+marcus mariota,QB,WAS,CHI@WAS,0.6,6200,0.1,0,0,1.10,0.18,: 
+anthony richardson sr,QB,IND,ARI@IND,0.6,6000,0.1,0,0,1.10,0.18,: 
+tyler shough,QB,NO,NE@NO,0.5,6000,0.08,0,0,1.10,0.18,: 
+andy dalton,QB,CAR,DAL@CAR,0.5,6000,0.08,0,0,1.10,0.18,: 
+zach wilson,QB,MIA,LAC@MIA,0.5,6000,0.08,0,0,1.10,0.18,: 
+jimmy garoppolo,QB,LAR,LAR@BAL,0.5,6000,0.08,0,0,1.10,0.18,: 
+joe milton,QB,DAL,DAL@CAR,0.5,6000,0.08,0,0,1.10,0.18,: 
+mitchell trubisky,QB,BUF,BUF@ATL,0.5,6000,0.08,0,0,1.10,0.18,: 
+malik willis,QB,GB,CIN@GB,0.5,6000,0.08,0,0,1.10,0.18,: 
+joshua dobbs,QB,NE,NE@NO,0.4,6000,0.07,0,0,1.10,0.18,: 
+tyson bagent,QB,CHI,CHI@WAS,0.4,6000,0.07,0,0,1.10,0.18,: 
+nick mullens,QB,JAC,SEA@JAC,0.3,6000,0.05,0,0,1.10,0.18,: 
+mason rudolph,QB,PIT,CLE@PIT,0.3,6000,0.05,0,0,1.10,0.18,: 
+shedeur sanders,QB,CLE,CLE@PIT,0.3,6000,0.05,0,0,1.10,0.18,: 
+brandon allen,QB,TEN,TEN@LV,0.2,6000,0.03,0,0,1.10,0.18,: 
+kirk cousins,QB,ATL,BUF@ATL,0.2,6000,0.03,0,0,1.10,0.18,: 
+drew lock,QB,SEA,SEA@JAC,0.2,6000,0.03,0,0,1.10,0.18,: 
+gardner minshew,QB,KC,DET@KC,0.1,6000,0.02,0,0,1.10,0.18,: 
+rico dowdle,RB,CAR,DAL@CAR,15,6600,2.27,−125,55.56,74.19,11.24,: 
+christian mccaffrey,RB,SF,SF@TB,19.6,9500,2.06,−165,62.26,84.89,8.94,: 
+rachaad white,RB,TB,SF@TB,14,6800,2.06,−125,55.56,74.19,10.91,: 
+josh jacobs,RB,GB,CIN@GB,17.8,8700,2.05,−260,72.22,93.83,10.79,: 
+jacory croskeymerritt,RB,WAS,CHI@WAS,12.7,6200,2.05,−150,60.00,81.76,13.19,: 
+javonte williams,RB,DAL,DAL@CAR,15.9,7800,2.04,−180,64.29,87.31,11.19,: 
+devon achane,RB,MIA,LAC@MIA,16.3,8100,2.01,−115,53.49,70.04,8.65,: 
+bijan robinson,RB,ATL,BUF@ATL,18.1,9100,1.99,−170,62.96,85.77,9.43,: 
+jonathan taylor,RB,IND,ARI@IND,19.9,10200,1.95,−285,74.03,94.80,9.29,: 
+jaylen warren,RB,PIT,CLE@PIT,11.8,6200,1.9,+115,46.51,53.77,8.67,: 
+ashton jeanty,RB,LV,TEN@LV,15.1,8000,1.89,−130,56.52,75.99,9.50,: 
+dandre swift,RB,CHI,CHI@WAS,12.1,6400,1.89,+120,45.45,51.12,7.99,: 
+quinshon judkins,RB,CLE,CLE@PIT,13.2,7100,1.86,+115,46.51,53.77,7.57,: 
+jahmyr gibbs,RB,DET,DET@KC,16.5,8900,1.85,−140,58.33,79.13,8.89,: 
+james cook,RB,BUF,BUF@ATL,15.9,8600,1.85,−155,60.78,82.89,9.64,: 
+tony pollard,RB,TEN,TEN@LV,11,6000,1.83,+110,47.62,56.51,9.42,: 
+kyren williams,RB,LAR,LAR@BAL,15.1,8400,1.8,−160,61.54,83.94,9.99,: 
+rhamondre stevenson,RB,NE,NE@NO,10,5700,1.75,+115,46.51,53.77,9.43,: 
+travis etienne,RB,JAC,SEA@JAC,12.7,7300,1.74,−120,54.55,72.21,9.89,: 
+michael carter,RB,ARI,ARI@IND,10.4,6100,1.7,+260,27.78,15.16,2.49,: 
+chase brown,RB,CIN,CIN@GB,10.7,6400,1.67,+170,37.04,31.09,4.86,: 
+kenneth walker,RB,SEA,SEA@JAC,11.6,7000,1.66,+125,44.44,48.60,6.94,: 
+derrick henry,RB,BAL,LAR@BAL,12.6,7700,1.64,−115,53.49,70.04,9.10,: 
+kenneth gainwell,RB,PIT,CLE@PIT,8.1,5000,1.62,+250,28.57,16.21,3.24,: 
+david montgomery,RB,DET,DET@KC,10.4,6700,1.55,−105,51.22,65.07,9.71,: 
+treveyon henderson,RB,NE,NE@NO,8.9,5800,1.53,+145,40.82,39.70,6.84,: 
+hassan haskins,RB,LAC,LAC@MIA,8.2,5600,1.46,+170,37.04,31.09,5.55,: 
+zach charbonnet,RB,SEA,SEA@JAC,8.2,5900,1.39,+135,42.55,43.91,7.44,: 
+alvin kamara,RB,NO,NE@NO,9.5,6900,1.38,+150,40.00,37.75,5.47,Q: Ankle
+kareem hunt,RB,KC,DET@KC,7.3,5500,1.33,+155,39.22,35.94,6.53,: 
+kimani vidal,RB,LAC,LAC@MIA,6.6,5400,1.22,+195,33.90,24.79,4.59,: 
+kendre miller,RB,NO,NE@NO,6.4,5300,1.21,+320,23.81,10.73,2.02,: 
+isiah pacheco,RB,KC,DET@KC,7.2,6000,1.2,+265,27.40,14.68,2.45,: 
+blake corum,RB,LAR,LAR@BAL,5.4,4800,1.13,+400,20.00,7.59,1.58,: 
+tyler allgeier,RB,ATL,BUF@ATL,5.8,5200,1.12,+185,35.09,27.07,5.21,: 
+sean tucker,RB,TB,SF@TB,5.1,4900,1.04,+475,17.39,5.95,1.21,: 
+brashard smith,RB,KC,DET@KC,4.9,4800,1.02,+450,18.18,6.40,1.33,: 
+jaydon blue,RB,DAL,DAL@CAR,4.4,4300,1.02,+400,20.00,7.59,1.77,: 
+justice hill,RB,BAL,LAR@BAL,5.1,5200,0.98,+650,13.33,4.04,0.78,: 
+tyjae spears,RB,TEN,TEN@LV,5,5100,0.98,+320,23.81,10.73,2.10,: 
+bhayshul tuten,RB,JAC,SEA@JAC,5.1,5400,0.94,+350,22.22,9.30,1.72,: 
+ollie gordon,RB,MIA,LAC@MIA,4.8,5100,0.94,+390,20.41,7.88,1.55,: 
+emanuel wilson,RB,GB,CIN@GB,3.9,4300,0.91,+500,16.67,5.56,1.29,: 
+jeremy mcnichols,RB,WAS,CHI@WAS,4.2,4700,0.89,+235,29.85,18.02,3.83,: 
+kyle monangai,RB,CHI,CHI@WAS,4.1,4600,0.89,+320,23.81,10.73,2.33,: 
+emari demercado,RB,ARI,ARI@IND,4.7,5500,0.85,+650,13.33,4.04,0.73,: 
+brian robinson,RB,SF,SF@TB,4.1,4800,0.85,+550,15.38,4.92,1.03,: 
+jerome ford,RB,CLE,CLE@PIT,3.9,4900,0.8,+650,13.33,4.04,0.82,: 
+trevor etienne,RB,CAR,DAL@CAR,3.6,4600,0.78,+650,13.33,4.04,0.88,: 
+raheem mostert,RB,LV,TEN@LV,3.6,4600,0.78,+650,13.33,4.04,0.88,: 
+ty johnson,RB,BUF,BUF@ATL,3.5,4500,0.78,+800,11.11,3.26,0.72,: 
+samaje perine,RB,CIN,CIN@GB,3.2,4700,0.68,+1200,7.69,2.34,0.50,: 
+ray davis,RB,BUF,BUF@ATL,3,4500,0.67,+800,11.11,3.26,0.72,: 
+zonovan knight,RB,ARI,ARI@IND,3.5,5600,0.63,+205,32.79,22.78,4.07,: 
+dylan sampson,RB,CLE,CLE@PIT,2.7,4500,0.6,+1600,5.88,1.96,0.44,: 
+keaton mitchell,RB,BAL,LAR@BAL,2.4,4000,0.6,+1500,6.25,2.03,0.51,: 
+chris rodriguez,RB,WAS,CHI@WAS,2.9,5100,0.57,+235,29.85,18.02,3.53,Q: Calf
+dj giddens,RB,IND,ARI@IND,2.1,4300,0.49,+1100,8.33,2.49,0.58,: 
+kyle juszczyk,RB,SF,SF@TB,1.5,4200,0.36,+800,11.11,3.26,0.78,: 
+lequint allen,RB,JAC,SEA@JAC,1.4,4200,0.33,+1500,6.25,2.03,0.48,: 
+kaleb johnson,RB,PIT,CLE@PIT,1.2,4200,0.29,+900,10.00,2.93,0.70,: 
+chris brooks,RB,GB,CIN@GB,1.2,4400,0.27,+1100,8.33,2.49,0.57,: 
+alec ingold,RB,MIA,LAC@MIA,1.1,4100,0.27,+3000,3.23,1.51,0.37,: 
+roschon johnson,RB,CHI,CHI@WAS,1.1,4400,0.25,+1200,7.69,2.34,0.53,: 
+deejay dallas,RB,CAR,DAL@CAR,0.9,4000,0.23,+1500,6.25,2.03,0.51,: 
+julius chestnut,RB,TEN,TEN@LV,0.9,4200,0.21,+2500,3.85,1.61,0.38,: 
+tahj brooks,RB,CIN,CIN@GB,0.9,4500,0.2,+3000,3.23,1.51,0.34,: 
+hunter luepke,RB,DAL,DAL@CAR,0.8,4000,0.2,+2000,4.76,1.76,0.44,: 
+dylan laube,RB,LV,TEN@LV,0.8,4000,0.2,+2000,4.76,1.76,0.44,: 
+isaac guerendo,RB,SF,SF@TB,0.8,4100,0.2,+2500,3.85,1.61,0.39,: 
+george holani,RB,SEA,SEA@JAC,0.8,4200,0.19,+1500,6.25,2.03,0.48,: 
+zamir white,RB,LV,TEN@LV,0.8,4200,0.19,+1100,8.33,2.49,0.59,: 
+jarquez hunter,RB,LAR,LAR@BAL,0.6,4000,0.15,+2500,3.85,1.61,0.40,: 
+craig reynolds,RB,DET,DET@KC,0.6,4000,0.15,+2500,3.85,1.61,0.40,: 
+terrell jennings,RB,NE,NE@NO,0.5,4000,0.13,0,0,1.10,0.28,: 
+reggie gilliam,RB,BUF,BUF@ATL,0.5,4000,0.13,+3000,3.23,1.51,0.38,: 
+donovan edwards,RB,WAS,CHI@WAS,0.5,4000,0.13,0,0,1.10,0.28,: 
+rasheen ali,RB,BAL,LAR@BAL,0.5,4300,0.12,+1800,5.26,1.85,0.43,: 
+jaylen wright,RB,MIA,LAC@MIA,0.5,4700,0.11,+500,16.67,5.56,1.18,: 
+sincere mccormick,RB,SF,SF@TB,0.4,4000,0.1,0,0,1.10,0.28,: 
+elijah mitchell,RB,KC,DET@KC,0.4,4000,0.1,+2500,3.85,1.61,0.40,: 
+amar johnson,RB,LAC,LAC@MIA,0.3,4000,0.07,0,0,1.10,0.28,: 
+stefon diggs,WR,NE,NE@NO,11.7,5900,1.98,+180,35.71,28.31,4.80,: 
+drake london,WR,ATL,BUF@ATL,14.2,7400,1.92,+140,41.67,41.75,5.64,: 
+puka nacua,WR,LAR,LAR@BAL,18.6,9800,1.9,−115,53.49,70.04,7.15,: 
+george pickens,WR,DAL,DAL@CAR,14,7500,1.87,+125,44.44,48.60,6.48,: 
+deebo samuel sr,WR,WAS,CHI@WAS,12.3,6700,1.84,0,0,1.10,0.16,Q: Heel
+keenan allen,WR,LAC,LAC@MIA,11.6,6300,1.84,+130,43.48,46.21,7.33,: 
+tetairoa mcmillan,WR,CAR,DAL@CAR,12.1,6600,1.83,+150,40.00,37.75,5.72,: 
+ladd mcconkey,WR,LAC,LAC@MIA,11.6,6400,1.81,+135,42.55,43.91,6.86,: 
+chris olave,WR,NO,NE@NO,10.6,5900,1.8,+205,32.79,22.78,3.86,: 
+emeka egbuka,WR,TB,SF@TB,14.4,8100,1.78,+100,50.00,62.25,7.69,: 
+jaylen waddle,WR,MIA,LAC@MIA,11.9,6700,1.78,+140,41.67,41.75,6.23,: 
+calvin ridley,WR,TEN,TEN@LV,10.1,5700,1.77,+330,23.26,10.21,1.79,: 
+michael pittman,WR,IND,ARI@IND,10.9,6200,1.76,+190,34.48,25.88,4.17,: 
+jakobi meyers,WR,LV,TEN@LV,10.5,6000,1.75,+180,35.71,28.31,4.72,: 
+davante adams,WR,LAR,LAR@BAL,13.6,7800,1.74,+115,46.51,53.77,6.89,: 
+xavier worthy,WR,KC,DET@KC,12.5,7200,1.74,+145,40.82,39.70,5.51,: 
+khalil shakir,WR,BUF,BUF@ATL,10,5800,1.72,+210,32.26,21.86,3.77,: 
+rome odunze,WR,CHI,CHI@WAS,12.6,7600,1.66,+135,42.55,43.91,5.78,: 
+amonra st brown,WR,DET,DET@KC,15.1,9200,1.64,+110,47.62,56.51,6.14,: 
+jaxon smithnjigba,WR,SEA,SEA@JAC,14.8,9000,1.64,+130,43.48,46.21,5.13,: 
+keon coleman,WR,BUF,BUF@ATL,8.8,5500,1.6,+225,30.77,19.42,3.53,: 
+matthew golden,WR,GB,CIN@GB,9.1,5800,1.57,+205,32.79,22.78,3.93,: 
+cooper kupp,WR,SEA,SEA@JAC,8.6,5500,1.56,+330,23.26,10.21,1.86,: 
+brian thomas,WR,JAC,SEA@JAC,11.4,7400,1.54,+165,37.74,32.61,4.41,: 
+marvin harrison,WR,ARI,ARI@IND,10.6,6900,1.54,+220,31.25,20.18,2.92,: 
+zay flowers,WR,BAL,LAR@BAL,10.5,6800,1.54,+235,29.85,18.02,2.65,Q: Shoulder
+kendrick bourne,WR,SF,SF@TB,8.7,5700,1.53,+230,30.30,18.69,3.28,: 
+romeo doubs,WR,GB,CIN@GB,9.4,6200,1.52,+150,40.00,37.75,6.09,: 
+rashid shaheed,WR,NO,NE@NO,8.8,5800,1.52,+245,28.99,16.78,2.89,: 
+dk metcalf,WR,PIT,CLE@PIT,10.7,7200,1.49,+175,36.36,29.65,4.12,: 
+dj moore,WR,CHI,CHI@WAS,9.2,6200,1.48,+200,33.33,23.74,3.83,: 
+jauan jennings,WR,SF,SF@TB,8.8,6000,1.47,+180,35.71,28.31,4.72,Q: Ankle
+jameson williams,WR,DET,DET@KC,9.5,6600,1.44,+210,32.26,21.86,3.31,: 
+tee higgins,WR,CIN,CIN@GB,8.8,6100,1.44,+280,26.32,13.38,2.19,: 
+jamarr chase,WR,CIN,CIN@GB,12.6,8800,1.43,+190,34.48,25.88,2.94,Q: Illness
+elic ayomanor,WR,TEN,TEN@LV,7.3,5100,1.43,+390,20.41,7.88,1.55,: 
+isaiah bond,WR,CLE,CLE@PIT,6.7,4700,1.43,+450,18.18,6.40,1.36,: 
+tre tucker,WR,LV,TEN@LV,8.6,6100,1.41,+275,26.67,13.79,2.26,: 
+sterling shepard,WR,TB,SF@TB,7.2,5100,1.41,+235,29.85,18.02,3.53,: 
+ryan flournoy,WR,DAL,DAL@CAR,7.3,5200,1.4,+320,23.81,10.73,2.06,: 
+travis hunter,WR,JAC,SEA@JAC,7.5,5400,1.39,+270,27.03,14.22,2.63,: 
+jerry jeudy,WR,CLE,CLE@PIT,7.7,5600,1.38,+330,23.26,10.21,1.82,: 
+josh downs,WR,IND,ARI@IND,7.5,5500,1.36,+360,21.74,8.90,1.62,: 
+jalen tolbert,WR,DAL,DAL@CAR,6.5,4800,1.35,+370,21.28,8.53,1.78,: 
+tory horton,WR,SEA,SEA@JAC,6.3,4700,1.34,+450,18.18,6.40,1.36,: 
+xavier legette,WR,CAR,DAL@CAR,6.4,4900,1.31,+270,27.03,14.22,2.90,: 
+malik washington,WR,MIA,LAC@MIA,6.5,5000,1.3,+450,18.18,6.40,1.28,: 
+dontayvion wicks,WR,GB,CIN@GB,7.2,5600,1.29,+235,29.85,18.02,3.22,: 
+tez johnson,WR,TB,SF@TB,5.4,4200,1.29,+370,21.28,8.53,2.03,: 
+dyami brown,WR,JAC,SEA@JAC,6.2,5000,1.24,+360,21.74,8.90,1.78,: 
+tyquan thornton,WR,KC,DET@KC,6.6,5500,1.2,+320,23.81,10.73,1.95,: 
+kayshon boutte,WR,NE,NE@NO,6.4,5400,1.19,+310,24.39,11.29,2.09,: 
+alec pierce,WR,IND,ARI@IND,6.2,5200,1.19,+330,23.26,10.21,1.96,: 
+luther burden,WR,CHI,CHI@WAS,5.5,4700,1.17,+550,15.38,4.92,1.05,: 
+jaylin lane,WR,WAS,CHI@WAS,5.1,4400,1.16,+550,15.38,4.92,1.12,: 
+demarcus robinson,WR,SF,SF@TB,5.7,5000,1.14,+550,15.38,4.92,0.98,: 
+olamide zaccheaus,WR,CHI,CHI@WAS,5.7,5000,1.14,+380,20.83,8.19,1.64,: 
+rashod bateman,WR,BAL,LAR@BAL,5.7,5100,1.12,+475,17.39,5.95,1.17,: 
+isaac teslaa,WR,DET,DET@KC,5,4500,1.11,+600,14.29,4.43,0.98,: 
+donte thornton,WR,LV,TEN@LV,4.8,4500,1.07,+600,14.29,4.43,0.98,: 
+joshua palmer,WR,BUF,BUF@ATL,5.2,4900,1.06,+475,17.39,5.95,1.21,: 
+juju smithschuster,WR,KC,DET@KC,5.8,5600,1.04,+300,25.00,11.92,2.13,: 
+luke mccaffrey,WR,WAS,CHI@WAS,5.3,5100,1.04,+360,21.74,8.90,1.75,: 
+michael wilson,WR,ARI,ARI@IND,5.2,5000,1.04,+550,15.38,4.92,0.98,: 
+hunter renfrow,WR,CAR,DAL@CAR,4.9,4700,1.04,+425,19.05,6.95,1.48,: 
+jordan whittington,WR,LAR,LAR@BAL,4.6,4500,1.02,+400,20.00,7.59,1.69,: 
+nick westbrookikhine,WR,MIA,LAC@MIA,4.6,4600,1,+850,10.53,3.09,0.67,: 
+parker washington,WR,JAC,SEA@JAC,5,5200,0.96,+500,16.67,5.56,1.07,: 
+chris moore,WR,WAS,CHI@WAS,3.8,4000,0.95,+425,19.05,6.95,1.74,: 
+brandin cooks,WR,NO,NE@NO,4.6,4900,0.94,+800,11.11,3.26,0.67,: 
+andrei iosivas,WR,CIN,CIN@GB,4.5,4800,0.94,+950,9.52,2.80,0.58,: 
+tutu atwell,WR,LAR,LAR@BAL,4.2,4800,0.88,+425,19.05,6.95,1.45,Q: Hamstring
+rayray mccloud,WR,ATL,BUF@ATL,4.1,4700,0.87,+450,18.18,6.40,1.36,: 
+chimere dike,WR,TEN,TEN@LV,3.8,4400,0.86,+600,14.29,4.43,1.01,: 
+deandre hopkins,WR,BAL,LAR@BAL,4.3,5300,0.81,+900,10.00,2.93,0.55,: 
+tre harris,WR,LAC,LAC@MIA,3.3,4100,0.8,+500,16.67,5.56,1.36,: 
+curtis samuel,WR,BUF,BUF@ATL,3.7,4800,0.77,+600,14.29,4.43,0.92,Q: Neck
+jack bech,WR,LV,TEN@LV,3.3,4300,0.77,+750,11.76,3.48,0.81,: 
+demario douglas,WR,NE,NE@NO,3.5,4600,0.76,+700,12.50,3.73,0.81,: 
+casey washington,WR,ATL,BUF@ATL,3.2,4200,0.76,+475,17.39,5.95,1.42,: 
+tyler lockett,WR,TEN,TEN@LV,3.3,4500,0.73,+1100,8.33,2.49,0.55,: 
+mack hollins,WR,NE,NE@NO,3.3,4500,0.73,+700,12.50,3.73,0.83,: 
+greg dortch,WR,ARI,ARI@IND,3.3,4500,0.73,+850,10.53,3.09,0.69,: 
+roman wilson,WR,PIT,CLE@PIT,2.9,4100,0.71,+900,10.00,2.93,0.71,: 
+zay jones,WR,ARI,ARI@IND,3.1,4400,0.7,+750,11.76,3.48,0.79,Q: Knee
+devaughn vele,WR,NO,NE@NO,3.1,4400,0.7,+1200,7.69,2.34,0.53,: 
+jamari thrash,WR,CLE,CLE@PIT,2.9,4200,0.69,+1800,5.26,1.85,0.44,: 
+ashton dulin,WR,IND,ARI@IND,3.1,4600,0.67,+750,11.76,3.48,0.76,: 
+adonai mitchell,WR,IND,ARI@IND,3.1,4700,0.66,+600,14.29,4.43,0.94,: 
+marquez valdesscantling,WR,SF,SF@TB,2.9,4400,0.66,+1300,7.14,2.22,0.50,: 
+brycen tremayne,WR,CAR,DAL@CAR,2.9,4600,0.63,+750,11.76,3.48,0.76,: 
+jimmy horn,WR,CAR,DAL@CAR,2.6,4200,0.62,+475,17.39,5.95,1.42,: 
+savion williams,WR,GB,CIN@GB,2.6,4400,0.59,+850,10.53,3.09,0.70,: 
+keandre lambertsmith,WR,LAC,LAC@MIA,2.3,4000,0.57,+650,13.33,4.04,1.01,: 
+kalif raymond,WR,DET,DET@KC,2.4,4400,0.55,+750,11.76,3.48,0.79,Q: Neck
+ben skowronek,WR,PIT,CLE@PIT,2.3,4200,0.55,+600,14.29,4.43,1.05,: 
+elijah moore,WR,BUF,BUF@ATL,2.6,4800,0.54,+550,15.38,4.92,1.03,: 
+scotty miller,WR,PIT,CLE@PIT,2,4000,0.5,0,0,1.10,0.28,: 
+kyle williams,WR,NE,NE@NO,2,4100,0.49,+2200,4.35,1.69,0.41,: 
+quentin johnston,WR,LAC,LAC@MIA,3.4,7300,0.47,0,0,1.10,0.15,Q: Hamstring
+ryan miller,TE,TB,SF@TB,1.8,4200,0.43,+850,10.53,3.09,0.74,: 
+van jefferson,WR,TEN,TEN@LV,1.5,4200,0.36,+1700,5.56,1.90,0.45,Q: Ankle
+tyrell shavers,WR,BUF,BUF@ATL,1.3,4100,0.32,+1100,8.33,2.49,0.61,: 
+tylan wallace,WR,BAL,LAR@BAL,1.4,4500,0.31,+1600,5.88,1.96,0.44,: 
+tim patrick,WR,JAC,SEA@JAC,1.3,4300,0.3,+1400,6.67,2.12,0.49,: 
+skyy moore,WR,SF,SF@TB,1.1,4200,0.26,+1900,5.00,1.80,0.43,: 
+malik heath,WR,GB,CIN@GB,0.8,4300,0.19,+800,11.11,3.26,0.76,: 
+khadarel hodge,WR,ATL,BUF@ATL,0.7,4100,0.17,+1700,5.56,1.90,0.46,: 
+jalen royals,WR,KC,DET@KC,0.7,4400,0.16,+2000,4.76,1.76,0.40,: 
+malachi corley,WR,CLE,CLE@PIT,0.4,4000,0.1,+2800,3.45,1.54,0.39,: 
+kameron johnson,WR,TB,SF@TB,0.4,4000,0.1,+1100,8.33,2.49,0.62,: 
+david sills v,WR,ATL,BUF@ATL,0.3,4100,0.07,+1100,8.33,2.49,0.61,: 
+dareke young,WR,SEA,SEA@JAC,0.2,4000,0.05,+2500,3.85,1.61,0.40,: 
+mitch tinsley,WR,CIN,CIN@GB,0.2,4400,0.05,0,0,1.10,0.25,: 
+trey mcbride,TE,ARI,ARI@IND,10.9,6400,1.7,+200,33.33,23.74,3.71,: 
+sam laporta,TE,DET,DET@KC,9.1,5700,1.6,+230,30.30,18.69,3.28,: 
+jake ferguson,TE,DAL,DAL@CAR,10.8,7000,1.54,+155,39.22,35.94,5.13,: 
+kyle pitts sr,TE,ATL,BUF@ATL,8,5300,1.51,0,0,1.10,0.21,: 
+hunter henry,TE,NE,NE@NO,8.8,5900,1.49,+190,34.48,25.88,4.39,: 
+tyler warren,TE,IND,ARI@IND,10,6800,1.47,+165,37.74,32.61,4.80,: 
+zach ertz,TE,WAS,CHI@WAS,7.3,5000,1.46,+200,33.33,23.74,4.75,: 
+travis kelce,TE,KC,DET@KC,8.7,6000,1.45,+145,40.82,39.70,6.62,: 
+darren waller,TE,MIA,LAC@MIA,8.6,6000,1.43,+250,28.57,16.21,2.70,: 
+tucker kraft,TE,GB,CIN@GB,9.5,6700,1.42,+180,35.71,28.31,4.23,: 
+dalton kincaid,TE,BUF,BUF@ATL,8.1,5800,1.4,+225,30.77,19.42,3.35,Q: Oblique
+david njoku,TE,CLE,CLE@PIT,7.9,5700,1.39,+475,17.39,5.95,1.04,: 
+jake tonges,TE,SF,SF@TB,7.8,5600,1.39,+275,26.67,13.79,2.46,: 
+juwan johnson,TE,NO,NE@NO,6.9,5200,1.33,+290,25.64,12.61,2.42,: 
+michael mayer,TE,LV,TEN@LV,5.7,4300,1.33,+230,30.30,18.69,4.35,: 
+harold fannin,TE,CLE,CLE@PIT,6.6,5300,1.25,+500,16.67,5.56,1.05,: 
+cade otton,TE,TB,SF@TB,6,4800,1.25,+200,33.33,23.74,4.95,: 
+mark andrews,TE,BAL,LAR@BAL,6.4,5800,1.1,+360,21.74,8.90,1.53,: 
+aj barner,TE,SEA,SEA@JAC,5.8,5500,1.05,+320,23.81,10.73,1.95,: 
+hunter long,TE,JAC,SEA@JAC,4.4,4200,1.05,+400,20.00,7.59,1.81,: 
+jonnu smith,TE,PIT,CLE@PIT,5,5100,0.98,+400,20.00,7.59,1.49,: 
+chig okonkwo,TE,TEN,TEN@LV,4.6,4700,0.98,0,0,1.10,0.23,: 
+tommy tremble,TE,CAR,DAL@CAR,4.4,4600,0.96,+320,23.81,10.73,2.33,: 
+oronde gadsden,TE,LAC,LAC@MIA,4.3,4500,0.96,+360,21.74,8.90,1.98,: 
+cole kmet,TE,CHI,CHI@WAS,4.2,4900,0.86,+330,23.26,10.21,2.08,: 
+colston loveland,TE,CHI,CHI@WAS,3.9,4600,0.85,+330,23.26,10.21,2.22,Q: Hip
+taysom hill,TE,NO,NE@NO,4.2,5000,0.84,+245,28.99,16.78,3.36,: 
+isaiah likely,TE,BAL,LAR@BAL,3.9,4700,0.83,+600,14.29,4.43,0.94,: 
+mike gesicki,TE,CIN,CIN@GB,3.9,4900,0.8,+700,12.50,3.73,0.76,: 
+gunnar helm,TE,TEN,TEN@LV,3.3,4200,0.79,+550,15.38,4.92,1.17,: 
+pat freiermuth,TE,PIT,CLE@PIT,3.8,4900,0.78,+500,16.67,5.56,1.13,: 
+elijah arroyo,TE,SEA,SEA@JAC,3.4,4400,0.77,+650,13.33,4.04,0.92,: 
+austin hooper,TE,NE,NE@NO,3,4400,0.68,+750,11.76,3.48,0.79,: 
+darnell washington,TE,PIT,CLE@PIT,2.8,4100,0.68,+550,15.38,4.92,1.20,: 
+noah gray,TE,KC,DET@KC,3.2,4800,0.67,+600,14.29,4.43,0.92,: 
+noah fant,TE,CIN,CIN@GB,3.3,5000,0.66,+1000,9.09,2.68,0.54,: 
+dawson knox,TE,BUF,BUF@ATL,2.9,4400,0.66,+310,24.39,11.29,2.57,: 
+tyler conklin,TE,LAC,LAC@MIA,2.9,4600,0.63,+550,15.38,4.92,1.07,: 
+davis allen,TE,LAR,LAR@BAL,2.7,4300,0.63,+1000,9.09,2.68,0.62,: 
+tyler higbee,TE,LAR,LAR@BAL,2.9,4700,0.62,+350,22.22,9.30,1.98,: 
+elijah higgins,TE,ARI,ARI@IND,2.6,4200,0.62,+1300,7.14,2.22,0.53,: 
+albert okwuegbunam,TE,LV,TEN@LV,2.4,4000,0.6,0,0,1.10,0.28,: 
+luke schoonmaker,TE,DAL,DAL@CAR,2.5,4300,0.58,+1000,9.09,2.68,0.62,: 
+julian hill,TE,MIA,LAC@MIA,2.3,4100,0.56,+1000,9.09,2.68,0.65,: 
+johnny mundt,TE,JAC,SEA@JAC,2.2,4000,0.55,+1000,9.09,2.68,0.67,: 
+brock wright,TE,DET,DET@KC,2.3,4500,0.51,+1300,7.14,2.22,0.49,: 
+ian thomas,TE,LV,TEN@LV,2,4000,0.5,+850,10.53,3.09,0.77,: 
+luke farrell,TE,SF,SF@TB,2.2,4500,0.49,+950,9.52,2.80,0.62,: 
+luke musgrave,TE,GB,CIN@GB,2.1,4300,0.49,+750,11.76,3.48,0.81,: 
+foster moreau,TE,NO,NE@NO,1.9,4300,0.44,+400,20.00,7.59,1.77,: 
+colby parkinson,TE,LAR,LAR@BAL,1.7,4000,0.42,+800,11.11,3.26,0.81,Q: Concussion
+tanner conner,TE,MIA,LAC@MIA,1.8,4400,0.41,+2000,4.76,1.76,0.40,: 
+jackson hawes,TE,BUF,BUF@ATL,1.7,4200,0.4,+550,15.38,4.92,1.17,: 
+mitchell evans,TE,CAR,DAL@CAR,1.5,4000,0.38,+800,11.11,3.26,0.81,: 
+will dissly,TE,LAC,LAC@MIA,1.5,4200,0.36,+600,14.29,4.43,1.05,: 
+drew sample,TE,CIN,CIN@GB,1.5,4300,0.35,+1700,5.56,1.90,0.44,: 
+charlie kolar,TE,BAL,LAR@BAL,1.4,4100,0.34,+2200,4.35,1.69,0.41,: 
+john bates,TE,WAS,CHI@WAS,1.2,4000,0.3,+1100,8.33,2.49,0.62,: 
+ben sinnott,TE,WAS,CHI@WAS,1.2,4100,0.29,+1000,9.09,2.68,0.65,: 
+john fitzpatrick,TE,GB,CIN@GB,1.2,4100,0.29,+850,10.53,3.09,0.75,: 
+mo aliecox,TE,IND,ARI@IND,1,4100,0.24,+1600,5.88,1.96,0.48,: 
+terrance ferguson,TE,LAR,LAR@BAL,0.9,4000,0.23,+1800,5.26,1.85,0.46,: 
+travis vokolek,TE,ARI,ARI@IND,0.9,4000,0.23,+2800,3.45,1.54,0.39,: 
+charlie woerner,TE,ATL,BUF@ATL,0.9,4100,0.22,+1200,7.69,2.34,0.57,: 
+payne durham,TE,TB,SF@TB,0.9,4100,0.22,+950,9.52,2.80,0.68,: 
+brevyn spannford,TE,DAL,DAL@CAR,0.9,4200,0.21,+2000,4.76,1.76,0.42,: 
+jatavion sanders,TE,CAR,DAL@CAR,0.9,4500,0.2,0,0,1.10,0.24,Q: Ankle
+tucker fisk,TE,LAC,LAC@MIA,0.8,4000,0.2,+3000,3.23,1.51,0.38,: 
+quintin morris,TE,JAC,SEA@JAC,0.8,4000,0.2,+2000,4.76,1.76,0.44,: 
+connor heyward,TE,PIT,CLE@PIT,0.8,4000,0.2,+2500,3.85,1.61,0.40,: 
+durham smythe,TE,CHI,CHI@WAS,0.8,4100,0.2,+1200,7.69,2.34,0.57,: 
+eric saubert,TE,SEA,SEA@JAC,0.7,4000,0.17,+2500,3.85,1.61,0.40,: 
+drew ogletree,TE,IND,ARI@IND,0.7,4000,0.17,0,0,1.10,0.28,: 
+blake whiteheart,TE,CLE,CLE@PIT,0.6,4000,0.15,+4000,2.44,1.40,0.35,: 
+zaire mitchellpaden,TE,BAL,LAR@BAL,0.5,4000,0.13,+2000,4.76,1.76,0.44,: 
+carter runyon,TE,LV,TEN@LV,0.5,4000,0.13,+1900,5.00,1.80,0.45,: 
+ross dwelley,TE,DET,DET@KC,0.5,4000,0.13,+3000,3.23,1.51,0.38,: 
+robert tonyan,TE,KC,DET@KC,0.5,4200,0.12,+2500,3.85,1.61,0.38,: 
+jack stoll,TE,NO,NE@NO,0.5,4200,0.12,+2200,4.35,1.69,0.40,: 
+james mitchell,TE,CAR,DAL@CAR,0.5,4200,0.12,+3000,3.23,1.51,0.36,: 
+colson yankoff,TE,WAS,CHI@WAS,0.5,4100,0.12,+1800,5.26,1.85,0.45,: 
+jack westover,TE,NE,NE@NO,0.4,4000,0.1,+4000,2.44,1.40,0.35,: 
+will mallory,TE,IND,ARI@IND,0.4,4000,0.1,+2500,3.85,1.61,0.40,: 
+tanner hudson,TE,CIN,CIN@GB,0.2,4000,0.05,+2200,4.35,1.69,0.42,: 
+browns,D,CLE,CLE@PIT,7,3500,2,+550,15.38,4.92,1.41,: 
+dolphins,D,MIA,LAC@MIA,5.6,3000,1.87,+550,15.38,4.92,1.64,: 
+packers,D,GB,CIN@GB,9.1,5000,1.82,+500,16.67,5.56,1.11,: 
+raiders,D,LV,TEN@LV,6.9,3800,1.82,+550,15.38,4.92,1.29,: 
+colts,D,IND,ARI@IND,7.4,4200,1.76,+550,15.38,4.92,1.17,: 
+cardinals,D,ARI,ARI@IND,5.8,3300,1.76,+550,15.38,4.92,1.49,: 
+saints,D,NO,NE@NO,5.8,3400,1.71,+550,15.38,4.92,1.45,: 
+buccaneers,D,TB,SF@TB,6.1,3600,1.69,+500,16.67,5.56,1.54,: 
+chiefs,D,KC,DET@KC,5.9,3500,1.69,+550,15.38,4.92,1.41,: 
+rams,D,LAR,LAR@BAL,7.4,4400,1.68,+500,16.67,5.56,1.26,: 
+steelers,D,PIT,CLE@PIT,8,4800,1.67,+500,16.67,5.56,1.16,: 
+cowboys,D,DAL,DAL@CAR,6.1,3700,1.65,+500,16.67,5.56,1.50,: 
+titans,D,TEN,TEN@LV,6.4,3900,1.64,+600,14.29,4.43,1.14,: 
+commanders,D,WAS,CHI@WAS,6.4,3900,1.64,+475,17.39,5.95,1.53,: 
+patriots,D,NE,NE@NO,7,4300,1.63,+750,11.76,3.48,0.81,: 
+jaguars,D,JAC,SEA@JAC,6.2,4000,1.55,+550,15.38,4.92,1.23,: 
+bengals,D,CIN,CIN@GB,4.5,3000,1.5,+500,16.67,5.56,1.85,: 
+chargers,D,LAC,LAC@MIA,6.6,4500,1.47,+500,16.67,5.56,1.24,: 
+ravens,D,BAL,LAR@BAL,4.5,3100,1.45,+550,15.38,4.92,1.59,: 
+panthers,D,CAR,DAL@CAR,4.6,3200,1.44,+550,15.38,4.92,1.54,: 
+seahawks,D,SEA,SEA@JAC,6.6,4700,1.4,+500,16.67,5.56,1.18,: 
+lions,D,DET,DET@KC,6,4300,1.4,+550,15.38,4.92,1.14,: 
+49ers,D,SF,SF@TB,5.7,4100,1.39,+550,15.38,4.92,1.20,: 
+falcons,D,ATL,BUF@ATL,4.6,3300,1.39,+500,16.67,5.56,1.68,: 
+bills,D,BUF,BUF@ATL,6.5,4900,1.33,+500,16.67,5.56,1.13,: 
+bears,D,CHI,CHI@WAS,4.7,3800,1.24,+500,16.67,5.56,1.46,: 
