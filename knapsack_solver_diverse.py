@@ -7,10 +7,10 @@ from itertools import combinations
 
 BUDGET = 60000
 
-QB_SHORTLIST = []
+QB_SHORTLIST = ['dak prescott']
 D_SHORTLIST = []
 
-INCLUDE_LIST = []
+INCLUDE_LIST = ['javonte williams', 'jahmyr gibbs', 'bijan robinson', 'george pickens', 'mason taylor']
 BLOCK_LIST = []
 
 # PROJECTED_PTS_WEIGHTS = [0.95, 0.5, 0.05]
