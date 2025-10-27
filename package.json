@@ -15,6 +15,7 @@
     "fs-extra": "^11.2.0",
     "javascript-lp-solver": "^0.4.24",
     "neat-csv": "^7.0.0",
+    "node-fetch": "^3.3.2",
     "puppeteer": "^22.15.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.6"

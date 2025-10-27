@@ -2,3 +2,6 @@
 .vscode
 ARCHIVE
 node_modules
+venv
+_OLD
+__pycache__

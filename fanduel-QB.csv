@@ -1,36 +1,41 @@
-name,position,team,game,projPts,salary,value,tdOdds,tdProbability,tdProbSigmoid,tdValue,injury
-patrick mahomes,QB,KC,LV@KC,22.5,8000,2.81,+320,23.81,10.73,1.34,: 
-dak prescott,QB,DAL,WAS@DAL,21.3,8300,2.57,+550,15.38,4.92,0.59,: 
-bo nix,QB,DEN,NYG@DEN,18.1,7100,2.55,+275,26.67,13.79,1.94,: 
-jayden daniels,QB,WAS,WAS@DAL,22.1,8700,2.54,+160,38.46,34.21,3.93,: 
-justin herbert,QB,LAC,IND@LAC,18.8,7600,2.47,+390,20.41,7.88,1.04,: 
-jalen hurts,QB,PHI,PHI@MIN,20.6,8400,2.45,−110,52.38,67.66,8.05,: 
-drake maye,QB,NE,NE@TEN,20,8200,2.44,+320,23.81,10.73,1.31,: 
-caleb williams,QB,CHI,NO@CHI,19.1,7900,2.42,+295,25.32,12.26,1.55,: 
-baker mayfield,QB,TB,TB@DET,19.4,8100,2.4,+550,15.38,4.92,0.61,: 
-jared goff,QB,DET,TB@DET,18.5,7700,2.4,+1500,6.25,2.03,0.26,: 
-daniel jones,QB,IND,IND@LAC,17.7,7500,2.36,+265,27.40,14.68,1.96,: 
-jordan love,QB,GB,GB@ARI,18.3,7800,2.35,+1100,8.33,2.49,0.32,: 
-justin fields,QB,NYJ,CAR@NYJ,17.3,7400,2.34,+145,40.82,39.70,5.36,: 
-mac jones,QB,SF,ATL@SF,16.5,7200,2.29,+1500,6.25,2.03,0.28,: 
-spencer rattler,QB,NO,NO@CHI,14.8,6600,2.24,+600,14.29,4.43,0.67,: 
-michael penix,QB,ATL,ATL@SF,14.9,6700,2.22,+700,12.50,3.73,0.56,: 
-cj stroud,QB,HOU,HOU@SEA,15.2,6900,2.2,+900,10.00,2.93,0.42,: 
-jaxson dart,QB,NYG,NYG@DEN,16,7300,2.19,+370,21.28,8.53,1.17,: 
-carson wentz,QB,MIN,PHI@MIN,14.3,6600,2.17,+1000,9.09,2.68,0.41,: 
-sam darnold,QB,SEA,HOU@SEA,15,7300,2.05,+900,10.00,2.93,0.40,: 
-bryce young,QB,CAR,CAR@NYJ,14.7,7200,2.04,+600,14.29,4.43,0.62,: 
-dillon gabriel,QB,CLE,MIA@CLE,13,6500,2,+950,9.52,2.80,0.43,: 
-jacoby brissett,QB,ARI,GB@ARI,13.5,7000,1.93,+950,9.52,2.80,0.40,: 
-geno smith,QB,LV,LV@KC,12.5,6700,1.87,+1200,7.69,2.34,0.35,: 
-cam ward,QB,TEN,NE@TEN,11.8,6400,1.84,0,0,1.10,0.17,: 
-tua tagovailoa,QB,MIA,MIA@CLE,12.2,6900,1.77,+4000,2.44,1.40,0.20,: 
-tyrod taylor,QB,NYJ,CAR@NYJ,0.9,6000,0.15,0,0,1.10,0.18,: 
-marcus mariota,QB,WAS,WAS@DAL,0.8,6200,0.13,0,0,1.10,0.18,: 
-shedeur sanders,QB,CLE,MIA@CLE,0.5,6000,0.08,0,0,1.10,0.18,: 
-jalen milroe,QB,SEA,HOU@SEA,0.5,6000,0.08,0,0,1.10,0.18,: 
-andy dalton,QB,CAR,CAR@NYJ,0.5,6000,0.08,0,0,1.10,0.18,: 
-joe milton,QB,DAL,WAS@DAL,0.5,6000,0.08,0,0,1.10,0.18,: 
-tyler shough,QB,NO,NO@CHI,0.5,6200,0.08,0,0,1.10,0.18,: 
-zach wilson,QB,MIA,MIA@CLE,0.5,6000,0.08,0,0,1.10,0.18,NA: Coach's decision
-russell wilson,QB,NYG,NYG@DEN,0.4,6000,0.07,0,0,1.10,0.18,: 
+name,position,team,game,salary,value,injury,fpProjPts,espnScoreProjection,espnLowScore,espnHighScore,espnOutsideProjection,espnSimulationProjection,consensus,uncertainty,projTeamPts,projOppPts,tdOdds,tdProbability,espnId
+patrick mahomes,QB,KC,WAS@KC,8100,2.91,: ,23.6,20.89,16.43,25.78,21.9,21.87,20.66,2.85,29.5,18,+310,24.39,3139477
+bo nix,QB,DEN,DAL@DEN,7800,2.72,: ,21.2,15.83,8.82,22.73,18.86,15.42,16.28,4.56,27.5,24,0,0,4426338
+daniel jones,QB,IND,TEN@IND,7700,2.56,: ,19.7,13.59,8.46,19.2,18.44,14.24,16.85,3.97,31,16.5,0,0,3917792
+josh allen,QB,BUF,BUF@CAR,9000,2.54,: ,22.9,18.24,11.65,24.8,18.03,18.85,19.08,4.17,27.25,20.25,0,0,3918298
+drake maye,QB,NE,CLE@NE,7600,2.53,: ,19.2,16.93,9.48,24.5,16.15,17.56,17.3,4.44,23.75,16.75,0,0,4431452
+kirk cousins,QB,ATL,MIA@ATL,6000,2.53,: ,15.2,13.05,7.82,18.79,13.01,13.69,13.59,3.25,25.75,18.75,0,0,14880
+jalen hurts,QB,PHI,NYG@PHI,8800,2.5,: ,22,17.32,10.1,23.75,19.47,17.46,18.35,4.35,25.75,18.75,0,0,4040715
+tyler huntley,QB,BAL,CHI@BAL,6000,2.5,: ,15,,,,,,16.2,0,24,21.5,0,0,4035671
+baker mayfield,QB,TB,TB@NO,8300,2.47,: ,20.5,17.38,10.12,23.76,16.3,17.48,16.71,4.16,25.5,21,0,0,3052587
+justin fields,QB,NYJ,NYJ@CIN,6900,2.42,: ,16.7,17.44,10.1,23.82,17.24,17.49,16.27,3.97,19.5,25,0,0,4362887
+caleb williams,QB,CHI,CHI@BAL,7500,2.39,: ,17.9,17.04,9.66,24.67,16.32,17.74,16.36,4.36,21.5,24,0,0,4431611
+jordan love,QB,GB,GB@PIT,7400,2.36,: ,17.5,12.65,7.55,18.28,15.19,13.28,15.21,3.56,24,21.5,+950,9.52,4036378
+spencer rattler,QB,NO,TB@NO,6600,2.36,: ,15.6,12.44,7.35,18.07,13.84,13.07,14.47,3.28,21,25.5,0,0,4426339
+dak prescott,QB,DAL,DAL@DEN,8000,2.34,: ,18.7,16.93,9.48,24.51,16.19,17.56,18.61,4.41,24,27.5,0,0,2577417
+jaxson dart,QB,NYG,NYG@PHI,7400,2.34,: ,17.3,14.78,7.17,21.79,15.8,14.01,15.14,4.36,18.75,25.75,0,0,4689114
+joe flacco,QB,CIN,NYJ@CIN,7300,2.33,: ,17,15,6.81,22.04,13.56,14.87,16.07,4.52,25,19.5,0,0,11252
+aaron rodgers,QB,PIT,GB@PIT,7100,2.31,: ,16.4,15.5,8.76,22.55,14.31,15.3,14.7,4.03,21.5,24,+2800,3.45,8439
+cj stroud,QB,HOU,SF@HOU,7000,2.3,: ,16.1,15.98,8.83,22.77,15.33,15.44,17,4.03,22,19.5,0,0,4432577
+marcus mariota,QB,WAS,WAS@KC,6900,2.29,: ,15.8,15.59,8.76,22.57,14.98,15.31,16.74,4,18,29.5,+380,20.83,2576980
+andy dalton,QB,CAR,BUF@CAR,6200,2.23,: ,13.8,15.39,8.62,24.05,13.85,16.87,15.43,4.62,20.25,27.25,0,0,14012
+mac jones,QB,SF,SF@HOU,7200,2,: ,14.4,11.89,5.28,19.41,11.39,12.31,11.83,4.19,19.5,22,0,0,4241464
+tua tagovailoa,QB,MIA,MIA@ATL,6700,1.97,: ,13.2,9.06,5.31,12.16,10.51,8.89,9.86,2.55,18.75,25.75,0,0,4241479
+cam ward,QB,TEN,TEN@IND,6400,1.94,: ,12.4,13.43,8.33,19.02,11.18,14.08,12.42,3.24,16.5,31,0,0,4688380
+dillon gabriel,QB,CLE,CLE@NE,6500,1.86,: ,12.1,13.37,8.01,19.22,10.63,14.01,12.89,3.44,16.75,23.75,0,0,4427238
+joshua dobbs,QB,NE,CLE@NE,6000,0.12,: ,0.7,,,,,,0.7,0,23.75,16.75,0,0,3044720
+cooper rush,QB,BAL,CHI@BAL,6400,0.11,: ,0.7,,,,,,0.76,0,24,21.5,0,0,2972515
+jake browning,QB,CIN,NYJ@CIN,6000,0.1,: ,0.6,,,,,,0.65,0,25,19.5,0,0,3886812
+russell wilson,QB,NYG,NYG@PHI,6000,0.1,: ,0.6,,,,,,0.6,0,18.75,25.75,0,0,14881
+joe milton,QB,DAL,DAL@DEN,6000,0.08,: ,0.5,,,,,,0.54,0,24,27.5,0,0,4360698
+zach wilson,QB,MIA,MIA@ATL,6200,0.08,: ,0.5,,,,,,0.5,0,18.75,25.75,0,0,4361259
+malik willis,QB,GB,GB@PIT,6000,0.08,: ,0.5,,,,,,0.54,0,24,21.5,0,0,4242512
+tyler shough,QB,NO,TB@NO,6000,0.07,: ,0.4,,,,,,0.43,0,21,25.5,0,0,4360689
+mitchell trubisky,QB,BUF,BUF@CAR,6000,0.07,: ,0.4,,,,,,0.4,0,27.25,20.25,0,0,3039707
+jarrett stidham,QB,DEN,DAL@DEN,6000,0.07,: ,0.4,,,,,,0.38,0,27.5,24,0,0,3892775
+tanner mckee,QB,PHI,NYG@PHI,6000,0.07,: ,0.4,,,,,,0.4,0,25.75,18.75,0,0,4685201
+riley leonard,QB,IND,TEN@IND,6000,0.07,: ,0.4,,,,,,0.43,0,31,16.5,0,0,4683423
+brandon allen,QB,TEN,TEN@IND,6000,0.07,: ,0.4,,,,,,0.38,0,16.5,31,0,0,2574511
+mason rudolph,QB,PIT,GB@PIT,6000,0.07,: ,0.4,,,,,,0.38,0,21.5,24,0,0,3116407
+tyson bagent,QB,CHI,CHI@BAL,6000,0.07,: ,0.4,,,,,,0.38,0,21.5,24,0,0,4434153
+davis mills,QB,HOU,SF@HOU,6300,0.06,: ,0.4,,,,,,0.43,0,22,19.5,0,0,4242546
