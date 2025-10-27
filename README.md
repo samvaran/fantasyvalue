@@ -4,6 +4,41 @@
 
 Built for high-stakes leagues where boom weeks matter more than consistency. Uses Monte Carlo simulation with correlations, position-based optimization, and ceiling-value analysis to maximize your chances of finishing in the money.
 
+## How It Works (Simple Version)
+
+**Phase 1: Data Collection** (`node fetch_data.js`)
+1. Scrapes ESPN projections (including IBM Watson boom/bust predictions)
+2. Scrapes TD odds from sportsbooks and game lines (spreads, totals)
+3. Builds consensus projections from multiple sources (FanDuel + ESPN)
+4. Applies **TD odds boosts** to skill positions (RB/WR/TE only):
+   - 40% TD probability = +20% projection boost
+   - Example: Josh Jacobs (64% TD prob) gets +4.9 pts
+5. Applies **game script adjustments** based on position:
+   - RBs on favored teams: +8% (more rushing in blowouts)
+   - WRs on trailing teams: +10% (more passing when behind)
+   - QBs in shootouts (total > 50): +8%
+   - Defenses vs weak offenses: +25%
+6. Outputs `knapsack.csv` with adjusted projections for each player
+
+**Phase 2: Lineup Optimization** (`python league_optimizer.py`)
+1. Calculates **P90 ceiling values** for each player (90th percentile boom potential)
+   - Runs 1,000 simulations per player using log-normal distribution
+   - Log-normal = right-skewed (long tail for upside, can't go negative)
+2. Generates **500 diverse lineups** using position-based optimization:
+   - QB/RB: Favor studs (80% absolute P90, 20% value per dollar)
+   - WR: Balanced (50% studs, 50% value)
+   - TE: Favor value (30% studs, 70% value per dollar)
+   - DEF: Punt position (20% studs, 80% value per dollar)
+3. Runs **10,000 Monte Carlo simulations** per lineup with correlations:
+   - QB + same-team WR: +0.65 correlation (stack bonus when both boom)
+   - QB + opposing DEF: -0.45 correlation (conflict penalty)
+   - Generates distribution of 10,000 possible scores per lineup
+4. Ranks lineups by **sim_p90** (simulated 90th percentile ceiling)
+   - Optimizes for tournament upside, not average performance
+5. Outputs **top 20 lineups** to `LEAGUE_LINEUPS.csv`
+
+**The Magic:** Position-based optimization finds studs at QB/RB while leveraging high-TD value plays at WR/TE/DEF. Correlations ensure QB-WR stacks that boom together. The result: diverse lineups optimized for ceiling, not chalk.
+
 ---
 
 ## Why This Exists
