@@ -28,8 +28,8 @@ N_SIMS = 10000   # Simulations per lineup
 MIN_PLAYER_DIFF = 2  # Minimum different players between lineups
 
 # Player constraints (edit these lists!)
-INCLUDE_PLAYERS = ['kyle monangai', 'christian mccaffrey', 'jahmyr gibbs']  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
-EXCLUDE_PLAYERS = []  # Never use these players (e.g., ['devon achane', 'chris olave'])
+INCLUDE_PLAYERS = ['matthew stafford', 'kyle monangai', 'christian mccaffrey', 'jahmyr gibbs']  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
+EXCLUDE_PLAYERS = ['stefon diggs']  # Never use these players (e.g., ['devon achane', 'chris olave'])
 
 # Correlation coefficients (from DFS research)
 CORRELATIONS = {
