@@ -1,230 +1,1490 @@
 {
-  "josh jacobs": {
-    "tdOdds": "−180",
-    "tdProbability": "64.29"
-  },
-  "jaylen warren": {
-    "tdOdds": "+120",
-    "tdProbability": "45.45"
-  },
-  "tucker kraft": {
-    "tdOdds": "+130",
-    "tdProbability": "43.48"
-  },
-  "dk metcalf": {
-    "tdOdds": "+165",
-    "tdProbability": "37.74"
-  },
-  "romeo doubs": {
-    "tdOdds": "+215",
-    "tdProbability": "31.75"
-  },
-  "matthew golden": {
-    "tdOdds": "+230",
-    "tdProbability": "30.30"
-  },
-  "jonnu smith": {
-    "tdOdds": "+265",
-    "tdProbability": "27.40"
-  },
-  "darnell washington": {
-    "tdOdds": "+320",
-    "tdProbability": "23.81"
-  },
-  "pat freiermuth": {
-    "tdOdds": "+330",
-    "tdProbability": "23.26"
-  },
-  "kenneth gainwell": {
-    "tdOdds": "+450",
-    "tdProbability": "18.18"
-  },
-  "christian watson": {
+  "jahmyr gibbs": {
     "tdOdds": "+390",
     "tdProbability": "20.41"
   },
-  "calvin austin": {
-    "tdOdds": "+390",
-    "tdProbability": "20.41"
-  },
-  "steelers": {
-    "tdOdds": "+550",
-    "tdProbability": "15.38"
-  },
-  "packers": {
-    "tdOdds": "+550",
-    "tdProbability": "15.38"
-  },
-  "emanuel wilson": {
-    "tdOdds": "+750",
-    "tdProbability": "11.76"
-  },
-  "luke musgrave": {
-    "tdOdds": "+750",
-    "tdProbability": "11.76"
-  },
-  "jordan love": {
-    "tdOdds": "+950",
-    "tdProbability": "9.52"
-  },
-  "malik heath": {
-    "tdOdds": "+1000",
-    "tdProbability": "9.09"
-  },
-  "connor heyward": {
-    "tdOdds": "+1200",
-    "tdProbability": "7.69"
-  },
-  "john fitzpatrick": {
-    "tdOdds": "+1800",
-    "tdProbability": "5.26"
-  },
-  "chris brooks": {
-    "tdOdds": "+1800",
-    "tdProbability": "5.26"
-  },
-  "roman wilson": {
-    "tdOdds": "+1700",
-    "tdProbability": "5.56"
-  },
-  "savion williams": {
-    "tdOdds": "+2200",
-    "tdProbability": "4.35"
-  },
-  "keshawn williams": {
-    "tdOdds": "+2000",
-    "tdProbability": "4.76"
-  },
-  "kaleb johnson": {
-    "tdOdds": "+2200",
-    "tdProbability": "4.35"
-  },
-  "ben skowronek": {
-    "tdOdds": "+2500",
-    "tdProbability": "3.85"
-  },
-  "aaron rodgers": {
-    "tdOdds": "+2800",
-    "tdProbability": "3.45"
-  },
-  "travis kelce": {
-    "tdOdds": "−110",
-    "tdProbability": "52.38"
-  },
-  "rashee rice": {
-    "tdOdds": "−105",
-    "tdProbability": "51.22"
-  },
-  "xavier worthy": {
-    "tdOdds": "+165",
-    "tdProbability": "37.74"
-  },
-  "isiah pacheco": {
-    "tdOdds": "+165",
-    "tdProbability": "37.74"
-  },
-  "jacory croskeymerritt": {
-    "tdOdds": "+195",
-    "tdProbability": "33.90"
-  },
-  "marquise brown": {
-    "tdOdds": "+270",
-    "tdProbability": "27.03"
-  },
-  "brashard smith": {
-    "tdOdds": "+265",
-    "tdProbability": "27.40"
-  },
-  "patrick mahomes": {
-    "tdOdds": "+310",
-    "tdProbability": "24.39"
-  },
-  "kareem hunt": {
-    "tdOdds": "+360",
-    "tdProbability": "21.74"
-  },
-  "noah gray": {
-    "tdOdds": "+380",
-    "tdProbability": "20.83"
-  },
-  "zach ertz": {
-    "tdOdds": "+250",
-    "tdProbability": "28.57"
-  },
-  "terry mclaurin": {
-    "tdOdds": "+290",
-    "tdProbability": "25.64"
-  },
-  "deebo samuel": {
-    "tdOdds": "+255",
-    "tdProbability": "28.17"
-  },
-  "marcus mariota": {
-    "tdOdds": "+380",
-    "tdProbability": "20.83"
-  },
-  "juju smithschuster": {
-    "tdOdds": "+550",
-    "tdProbability": "15.38"
-  },
-  "chiefs": {
-    "tdOdds": "+450",
-    "tdProbability": "18.18"
-  },
-  "commanders": {
+  "david montgomery": {
     "tdOdds": "+500",
     "tdProbability": "16.67"
   },
-  "tyquan thornton": {
-    "tdOdds": "+650",
-    "tdProbability": "13.33"
+  "amonra st brown": {
+    "tdOdds": "+500",
+    "tdProbability": "16.67"
   },
-  "chris rodriguez": {
+  "justin jefferson": {
+    "tdOdds": "+1300",
+    "tdProbability": "7.14"
+  },
+  "sam laporta": {
+    "tdOdds": "+950",
+    "tdProbability": "9.52"
+  },
+  "jameson williams": {
     "tdOdds": "+1100",
     "tdProbability": "8.33"
   },
-  "chris moore": {
-    "tdOdds": "+950",
-    "tdProbability": "9.52"
+  "jordan mason": {
+    "tdOdds": "+1400",
+    "tdProbability": "6.67"
   },
-  "luke mccaffrey": {
-    "tdOdds": "+950",
-    "tdProbability": "9.52"
-  },
-  "jeremy mcnichols": {
-    "tdOdds": "+1000",
-    "tdProbability": "9.09"
-  },
-  "jaylin lane": {
-    "tdOdds": "+1000",
-    "tdProbability": "9.09"
-  },
-  "john bates": {
-    "tdOdds": "+1200",
-    "tdProbability": "7.69"
-  },
-  "ben sinnott": {
+  "jordan addison": {
     "tdOdds": "+1700",
     "tdProbability": "5.56"
   },
-  "colson yankoff": {
+  "aaron jones": {
+    "tdOdds": "+1500",
+    "tdProbability": "6.25"
+  },
+  "tj hockenson": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "lions": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "vikings": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "jalen nailor": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "isaac teslaa": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "jj mccarthy": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "kalif raymond": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "ben sims": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "ben yurosek": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "brock wright": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "jared goff": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "adam thielen": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "nick vannett": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "ross dwelley": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "jacob saylors": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "dominic lovett": {
+    "tdOdds": "+11000",
+    "tdProbability": "0.90"
+  },
+  "tai felton": {
+    "tdOdds": "+12000",
+    "tdProbability": "0.83"
+  },
+  "zavier scott": {
+    "tdOdds": "+11000",
+    "tdProbability": "0.90"
+  },
+  "myles price": {
+    "tdOdds": "+16000",
+    "tdProbability": "0.62"
+  },
+  "jonathan taylor": {
+    "tdOdds": "+300",
+    "tdProbability": "25.00"
+  },
+  "jaylen warren": {
+    "tdOdds": "+700",
+    "tdProbability": "12.50"
+  },
+  "dk metcalf": {
+    "tdOdds": "+1100",
+    "tdProbability": "8.33"
+  },
+  "tyler warren": {
+    "tdOdds": "+900",
+    "tdProbability": "10.00"
+  },
+  "michael pittman": {
+    "tdOdds": "+1100",
+    "tdProbability": "8.33"
+  },
+  "jonnu smith": {
+    "tdOdds": "+1800",
+    "tdProbability": "5.26"
+  },
+  "calvin austin": {
+    "tdOdds": "+1900",
+    "tdProbability": "5.00"
+  },
+  "alec pierce": {
+    "tdOdds": "+1700",
+    "tdProbability": "5.56"
+  },
+  "josh downs": {
+    "tdOdds": "+1700",
+    "tdProbability": "5.56"
+  },
+  "daniel jones": {
+    "tdOdds": "+1600",
+    "tdProbability": "5.88"
+  },
+  "kenneth gainwell": {
     "tdOdds": "+2000",
     "tdProbability": "4.76"
   },
-  "nikko remigio": {
+  "darnell washington": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "pat freiermuth": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "colts": {
     "tdOdds": "+3000",
     "tdProbability": "3.23"
   },
-  "robert tonyan": {
+  "steelers": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "ameer abdullah": {
     "tdOdds": "+3000",
     "tdProbability": "3.23"
   },
-  "jared wiley": {
+  "roman wilson": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "ben skowronek": {
+    "tdOdds": "+6000",
+    "tdProbability": "1.64"
+  },
+  "mo aliecox": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "connor heyward": {
+    "tdOdds": "+6500",
+    "tdProbability": "1.52"
+  },
+  "adonai mitchell": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "andrew ogletree": {
+    "tdOdds": "+6000",
+    "tdProbability": "1.64"
+  },
+  "laquon treadwell": {
+    "tdOdds": "+6000",
+    "tdProbability": "1.64"
+  },
+  "aaron rodgers": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "ashton dulin": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "dj giddens": {
+    "tdOdds": "+6500",
+    "tdProbability": "1.52"
+  },
+  "tyler goodson": {
+    "tdOdds": "+6500",
+    "tdProbability": "1.52"
+  },
+  "kaleb johnson": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "will mallory": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "keshawn williams": {
+    "tdOdds": "+13000",
+    "tdProbability": "0.76"
+  },
+  "kimani vidal": {
+    "tdOdds": "+425",
+    "tdProbability": "19.05"
+  },
+  "ladd mcconkey": {
+    "tdOdds": "+800",
+    "tdProbability": "11.11"
+  },
+  "oronde gadsden": {
+    "tdOdds": "+800",
+    "tdProbability": "11.11"
+  },
+  "keenan allen": {
+    "tdOdds": "+850",
+    "tdProbability": "10.53"
+  },
+  "quentin johnston": {
+    "tdOdds": "+1000",
+    "tdProbability": "9.09"
+  },
+  "tony pollard": {
+    "tdOdds": "+1200",
+    "tdProbability": "7.69"
+  },
+  "tyjae spears": {
+    "tdOdds": "+1400",
+    "tdProbability": "6.67"
+  },
+  "justin herbert": {
+    "tdOdds": "+1500",
+    "tdProbability": "6.25"
+  },
+  "elic ayomanor": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "chimere dike": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "gunnar helm": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "chargers": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "van jefferson": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "chigoziem okonkwo": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "titans": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "jaret patterson": {
     "tdOdds": "+3000",
     "tdProbability": "3.23"
+  },
+  "tre harris": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "amar johnson": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "cameron ward": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "tucker fisk": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "will dissly": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "tyler conklin": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "keandre lambertsmith": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "mason kinsey": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "derius davis": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
+  },
+  "james proche": {
+    "tdOdds": "+11000",
+    "tdProbability": "0.90"
+  },
+  "david martinrobinson": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "julius chestnut": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "bryce oliver": {
+    "tdOdds": "+11000",
+    "tdProbability": "0.90"
+  },
+  "scott matlock": {
+    "tdOdds": "+16000",
+    "tdProbability": "0.62"
+  },
+  "bijan robinson": {
+    "tdOdds": "+550",
+    "tdProbability": "15.38"
+  },
+  "treveyon henderson": {
+    "tdOdds": "+600",
+    "tdProbability": "14.29"
+  },
+  "hunter henry": {
+    "tdOdds": "+850",
+    "tdProbability": "10.53"
+  },
+  "stefon diggs": {
+    "tdOdds": "+900",
+    "tdProbability": "10.00"
+  },
+  "drake london": {
+    "tdOdds": "+1200",
+    "tdProbability": "7.69"
+  },
+  "kayshon boutte": {
+    "tdOdds": "+1200",
+    "tdProbability": "7.69"
+  },
+  "kyle pitts": {
+    "tdOdds": "+1400",
+    "tdProbability": "6.67"
+  },
+  "tyler allgeier": {
+    "tdOdds": "+1400",
+    "tdProbability": "6.67"
+  },
+  "drake maye": {
+    "tdOdds": "+1400",
+    "tdProbability": "6.67"
+  },
+  "darnell mooney": {
+    "tdOdds": "+1600",
+    "tdProbability": "5.88"
+  },
+  "terrell jennings": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "patriots": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "falcons": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "mack hollins": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "demario douglas": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "austin hooper": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "david sills v": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "dernest johnson": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "michael penix": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "khadarel hodge": {
+    "tdOdds": "+5500",
+    "tdProbability": "1.79"
+  },
+  "charlie woerner": {
+    "tdOdds": "+5500",
+    "tdProbability": "1.79"
+  },
+  "efton chism": {
+    "tdOdds": "+6500",
+    "tdProbability": "1.52"
+  },
+  "kyle williams": {
+    "tdOdds": "+6000",
+    "tdProbability": "1.64"
+  },
+  "dylan drummond": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "jamal agnew": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "jack westover": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "teagan quitoriano": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "feleipe franks": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "nathan carter": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "christian mccaffrey": {
+    "tdOdds": "+380",
+    "tdProbability": "20.83"
+  },
+  "tyrone tracy": {
+    "tdOdds": "+650",
+    "tdProbability": "13.33"
+  },
+  "george kittle": {
+    "tdOdds": "+800",
+    "tdProbability": "11.11"
+  },
+  "theo johnson": {
+    "tdOdds": "+1200",
+    "tdProbability": "7.69"
+  },
+  "jaxson dart": {
+    "tdOdds": "+1100",
+    "tdProbability": "8.33"
+  },
+  "wandale robinson": {
+    "tdOdds": "+1200",
+    "tdProbability": "7.69"
+  },
+  "jauan jennings": {
+    "tdOdds": "+1100",
+    "tdProbability": "8.33"
+  },
+  "darius slayton": {
+    "tdOdds": "+1500",
+    "tdProbability": "6.25"
+  },
+  "kendrick bourne": {
+    "tdOdds": "+1900",
+    "tdProbability": "5.00"
+  },
+  "devin singletary": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "chris manhertz": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "giants": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "49ers": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "demarcus robinson": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "kyle juszczyk": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "brian robinson": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "jake tonges": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "rayray mccloud": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "mac jones": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "luke farrell": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "beaux collins": {
+    "tdOdds": "+5500",
+    "tdProbability": "1.79"
+  },
+  "jalin hyatt": {
+    "tdOdds": "+5500",
+    "tdProbability": "1.79"
+  },
+  "gunner olszewski": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "skyy moore": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "thomas fidone": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "isaac guerendo": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "jordan watkins": {
+    "tdOdds": "+11000",
+    "tdProbability": "0.90"
+  },
+  "josh jacobs": {
+    "tdOdds": "+390",
+    "tdProbability": "20.41"
+  },
+  "tucker kraft": {
+    "tdOdds": "+550",
+    "tdProbability": "15.38"
+  },
+  "romeo doubs": {
+    "tdOdds": "+750",
+    "tdProbability": "11.76"
+  },
+  "emanuel wilson": {
+    "tdOdds": "+1000",
+    "tdProbability": "9.09"
+  },
+  "matthew golden": {
+    "tdOdds": "+1000",
+    "tdProbability": "9.09"
+  },
+  "tetairoa mcmillan": {
+    "tdOdds": "+1500",
+    "tdProbability": "6.25"
+  },
+  "rico dowdle": {
+    "tdOdds": "+1400",
+    "tdProbability": "6.67"
+  },
+  "christian watson": {
+    "tdOdds": "+1200",
+    "tdProbability": "7.69"
+  },
+  "xavier legette": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "chuba hubbard": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "packers": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "luke musgrave": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "jalen coker": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "jatavion sanders": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "panthers": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "malik heath": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "jordan love": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "tommy tremble": {
+    "tdOdds": "+5500",
+    "tdProbability": "1.79"
+  },
+  "savion williams": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "john fitzpatrick": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "chris brooks": {
+    "tdOdds": "+5500",
+    "tdProbability": "1.79"
+  },
+  "bryce young": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "hunter renfrow": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "brycen tremayne": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
+  },
+  "mitchell evans": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "james mitchell": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
+  },
+  "jimmy horn": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "trevor etienne": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "nico collins": {
+    "tdOdds": "+800",
+    "tdProbability": "11.11"
+  },
+  "jk dobbins": {
+    "tdOdds": "+700",
+    "tdProbability": "12.50"
+  },
+  "nick chubb": {
+    "tdOdds": "+900",
+    "tdProbability": "10.00"
+  },
+  "woody marks": {
+    "tdOdds": "+1000",
+    "tdProbability": "9.09"
+  },
+  "courtland sutton": {
+    "tdOdds": "+1000",
+    "tdProbability": "9.09"
+  },
+  "troy franklin": {
+    "tdOdds": "+1000",
+    "tdProbability": "9.09"
+  },
+  "dalton schultz": {
+    "tdOdds": "+1400",
+    "tdProbability": "6.67"
+  },
+  "rj harvey": {
+    "tdOdds": "+1500",
+    "tdProbability": "6.25"
+  },
+  "evan engram": {
+    "tdOdds": "+1600",
+    "tdProbability": "5.88"
+  },
+  "christian kirk": {
+    "tdOdds": "+1700",
+    "tdProbability": "5.56"
+  },
+  "pat bryant": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "texans": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "broncos": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "xavier hutchinson": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "bo nix": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "jaylin noel": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "jayden higgins": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "harrison bryant": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "cj stroud": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "adam trautman": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "braxton berrios": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "marcedes lewis": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
+  },
+  "tyler badie": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "trent sherfield": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "jaleel mclaughlin": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "dare ogunbowale": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "dameon pierce": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "adam prentice": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "michael bandy": {
+    "tdOdds": "+12000",
+    "tdProbability": "0.83"
+  },
+  "british brooks": {
+    "tdOdds": "+13000",
+    "tdProbability": "0.76"
+  },
+  "kyle monangai": {
+    "tdOdds": "+500",
+    "tdProbability": "16.67"
+  },
+  "jamarr chase": {
+    "tdOdds": "+700",
+    "tdProbability": "12.50"
+  },
+  "chase brown": {
+    "tdOdds": "+650",
+    "tdProbability": "13.33"
+  },
+  "tee higgins": {
+    "tdOdds": "+950",
+    "tdProbability": "9.52"
+  },
+  "rome odunze": {
+    "tdOdds": "+900",
+    "tdProbability": "10.00"
+  },
+  "dj moore": {
+    "tdOdds": "+1200",
+    "tdProbability": "7.69"
+  },
+  "caleb williams": {
+    "tdOdds": "+1200",
+    "tdProbability": "7.69"
+  },
+  "colston loveland": {
+    "tdOdds": "+1500",
+    "tdProbability": "6.25"
+  },
+  "olamide zaccheaus": {
+    "tdOdds": "+1900",
+    "tdProbability": "5.00"
+  },
+  "noah fant": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "samaje perine": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "cole kmet": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "andrei iosivas": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "bengals": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "bears": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "tanner hudson": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "devin duvernay": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "travis homer": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "durham smythe": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "drew sample": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "cam grandy": {
+    "tdOdds": "+6500",
+    "tdProbability": "1.52"
+  },
+  "brittain brown": {
+    "tdOdds": "+6500",
+    "tdProbability": "1.52"
+  },
+  "joe flacco": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "charlie jones": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
+  },
+  "mitchell tinsley": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "jermaine burton": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "jahdae walker": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "tahj brooks": {
+    "tdOdds": "+14000",
+    "tdProbability": "0.71"
+  },
+  "kyren williams": {
+    "tdOdds": "+380",
+    "tdProbability": "20.83"
+  },
+  "puka nacua": {
+    "tdOdds": "+425",
+    "tdProbability": "19.05"
+  },
+  "davante adams": {
+    "tdOdds": "+475",
+    "tdProbability": "17.39"
+  },
+  "alvin kamara": {
+    "tdOdds": "+1300",
+    "tdProbability": "7.14"
+  },
+  "blake corum": {
+    "tdOdds": "+1300",
+    "tdProbability": "7.14"
+  },
+  "chris olave": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "jordan whittington": {
+    "tdOdds": "+1600",
+    "tdProbability": "5.88"
+  },
+  "tyler higbee": {
+    "tdOdds": "+1600",
+    "tdProbability": "5.88"
+  },
+  "rashid shaheed": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "taysom hill": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "rams": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "juwan johnson": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "saints": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "terrance ferguson": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "davis allen": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "colby parkinson": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "konata mumpfield": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "tyler shough": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "ronnie rivers": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "devin neal": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "jarquez hunter": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "brandin cooks": {
+    "tdOdds": "+6000",
+    "tdProbability": "1.64"
+  },
+  "foster moreau": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "matthew stafford": {
+    "tdOdds": "+5500",
+    "tdProbability": "1.79"
+  },
+  "xavier smith": {
+    "tdOdds": "+6000",
+    "tdProbability": "1.64"
+  },
+  "jack stoll": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "devaughn vele": {
+    "tdOdds": "+11000",
+    "tdProbability": "0.90"
+  },
+  "zaire mitchellpaden": {
+    "tdOdds": "+11000",
+    "tdProbability": "0.90"
+  },
+  "mason tipton": {
+    "tdOdds": "+14000",
+    "tdProbability": "0.71"
+  },
+  "ashton jeanty": {
+    "tdOdds": "+550",
+    "tdProbability": "15.38"
+  },
+  "travis etienne": {
+    "tdOdds": "+600",
+    "tdProbability": "14.29"
+  },
+  "brian thomas": {
+    "tdOdds": "+750",
+    "tdProbability": "11.76"
+  },
+  "brock bowers": {
+    "tdOdds": "+1000",
+    "tdProbability": "9.09"
+  },
+  "dyami brown": {
+    "tdOdds": "+1000",
+    "tdProbability": "9.09"
+  },
+  "jakobi meyers": {
+    "tdOdds": "+1100",
+    "tdProbability": "8.33"
+  },
+  "tre tucker": {
+    "tdOdds": "+1100",
+    "tdProbability": "8.33"
+  },
+  "parker washington": {
+    "tdOdds": "+1100",
+    "tdProbability": "8.33"
+  },
+  "bhayshul tuten": {
+    "tdOdds": "+1600",
+    "tdProbability": "5.88"
+  },
+  "hunter long": {
+    "tdOdds": "+1800",
+    "tdProbability": "5.26"
+  },
+  "trevor lawrence": {
+    "tdOdds": "+1700",
+    "tdProbability": "5.56"
+  },
+  "raiders": {
+    "tdOdds": "+2000",
+    "tdProbability": "4.76"
+  },
+  "jaguars": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "michael mayer": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "johnny mundt": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "jack bech": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "raheem mostert": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "zamir white": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "donte thornton": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "geno smith": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "tyler lockett": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "tim jones": {
+    "tdOdds": "+6000",
+    "tdProbability": "1.64"
+  },
+  "carter runyon": {
+    "tdOdds": "+6000",
+    "tdProbability": "1.64"
+  },
+  "ian thomas": {
+    "tdOdds": "+6000",
+    "tdProbability": "1.64"
+  },
+  "austin trammell": {
+    "tdOdds": "+6500",
+    "tdProbability": "1.52"
+  },
+  "lequint allen": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "dylan laube": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
+  },
+  "cody schrader": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
+  },
+  "alex bachman": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "james cook": {
+    "tdOdds": "+600",
+    "tdProbability": "14.29"
+  },
+  "rashee rice": {
+    "tdOdds": "+700",
+    "tdProbability": "12.50"
+  },
+  "josh allen": {
+    "tdOdds": "+650",
+    "tdProbability": "13.33"
+  },
+  "kareem hunt": {
+    "tdOdds": "+750",
+    "tdProbability": "11.76"
+  },
+  "travis kelce": {
+    "tdOdds": "+850",
+    "tdProbability": "10.53"
+  },
+  "xavier worthy": {
+    "tdOdds": "+1300",
+    "tdProbability": "7.14"
+  },
+  "khalil shakir": {
+    "tdOdds": "+1600",
+    "tdProbability": "5.88"
+  },
+  "dalton kincaid": {
+    "tdOdds": "+1600",
+    "tdProbability": "5.88"
+  },
+  "keon coleman": {
+    "tdOdds": "+1500",
+    "tdProbability": "6.25"
+  },
+  "brashard smith": {
+    "tdOdds": "+1800",
+    "tdProbability": "5.26"
+  },
+  "patrick mahomes": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "marquise brown": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "chiefs": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "dawson knox": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "elijah moore": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "noah gray": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "bills": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "juju smithschuster": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "tyrell shavers": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "jackson hawes": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "curtis samuel": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "ty johnson": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "ray davis": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "tyquan thornton": {
+    "tdOdds": "+6500",
+    "tdProbability": "1.52"
+  },
+  "clyde edwardshelaire": {
+    "tdOdds": "+5500",
+    "tdProbability": "1.79"
+  },
+  "elijah mitchell": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
   },
   "jalen royals": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
+  },
+  "robert tonyan": {
+    "tdOdds": "+13000",
+    "tdProbability": "0.76"
+  },
+  "reggie gilliam": {
+    "tdOdds": "+10000",
+    "tdProbability": "0.99"
+  },
+  "jared wiley": {
+    "tdOdds": "+11000",
+    "tdProbability": "0.90"
+  },
+  "nikko remigio": {
+    "tdOdds": "+15000",
+    "tdProbability": "0.66"
+  },
+  "jaxon smithnjigba": {
+    "tdOdds": "+600",
+    "tdProbability": "14.29"
+  },
+  "zach charbonnet": {
+    "tdOdds": "+700",
+    "tdProbability": "12.50"
+  },
+  "deebo samuel": {
+    "tdOdds": "+950",
+    "tdProbability": "9.52"
+  },
+  "jacory croskeymerritt": {
+    "tdOdds": "+850",
+    "tdProbability": "10.53"
+  },
+  "zach ertz": {
+    "tdOdds": "+950",
+    "tdProbability": "9.52"
+  },
+  "kenneth walker": {
+    "tdOdds": "+950",
+    "tdProbability": "9.52"
+  },
+  "tory horton": {
+    "tdOdds": "+1300",
+    "tdProbability": "7.14"
+  },
+  "aj barner": {
+    "tdOdds": "+1200",
+    "tdProbability": "7.69"
+  },
+  "jayden daniels": {
+    "tdOdds": "+1400",
+    "tdProbability": "6.67"
+  },
+  "elijah arroyo": {
+    "tdOdds": "+1800",
+    "tdProbability": "5.26"
+  },
+  "luke mccaffrey": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "seahawks": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "chris moore": {
     "tdOdds": "+3000",
     "tdProbability": "3.23"
+  },
+  "commanders": {
+    "tdOdds": "+2500",
+    "tdProbability": "3.85"
+  },
+  "jaylin lane": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "jeremy mcnichols": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "sam darnold": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "treylon burks": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "chris rodriguez": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "john bates": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "cody white": {
+    "tdOdds": "+4500",
+    "tdProbability": "2.17"
+  },
+  "nick kallerup": {
+    "tdOdds": "+5000",
+    "tdProbability": "1.96"
+  },
+  "george holani": {
+    "tdOdds": "+6500",
+    "tdProbability": "1.52"
+  },
+  "ricky white": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "ben sinnott": {
+    "tdOdds": "+7500",
+    "tdProbability": "1.32"
+  },
+  "javonte williams": {
+    "tdOdds": "+550",
+    "tdProbability": "15.38"
+  },
+  "ceedee lamb": {
+    "tdOdds": "+850",
+    "tdProbability": "10.53"
+  },
+  "trey mcbride": {
+    "tdOdds": "+900",
+    "tdProbability": "10.00"
+  },
+  "jake ferguson": {
+    "tdOdds": "+950",
+    "tdProbability": "9.52"
+  },
+  "george pickens": {
+    "tdOdds": "+1000",
+    "tdProbability": "9.09"
+  },
+  "marvin harrison": {
+    "tdOdds": "+1100",
+    "tdProbability": "8.33"
+  },
+  "zonovan knight": {
+    "tdOdds": "+1100",
+    "tdProbability": "8.33"
+  },
+  "michael wilson": {
+    "tdOdds": "+1800",
+    "tdProbability": "5.26"
+  },
+  "michael carter": {
+    "tdOdds": "+1700",
+    "tdProbability": "5.56"
+  },
+  "emari demercado": {
+    "tdOdds": "+2200",
+    "tdProbability": "4.35"
+  },
+  "zay jones": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "jacoby brissett": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "kavontae turpin": {
+    "tdOdds": "+2800",
+    "tdProbability": "3.45"
+  },
+  "cowboys": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "cardinals": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "luke schoonmaker": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "jaydon blue": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "greg dortch": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "elijah higgins": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "jalen tolbert": {
+    "tdOdds": "+4000",
+    "tdProbability": "2.44"
+  },
+  "dak prescott": {
+    "tdOdds": "+3000",
+    "tdProbability": "3.23"
+  },
+  "ryan flournoy": {
+    "tdOdds": "+3500",
+    "tdProbability": "2.78"
+  },
+  "brevyn spannford": {
+    "tdOdds": "+5500",
+    "tdProbability": "1.79"
+  },
+  "jonathan mingo": {
+    "tdOdds": "+7000",
+    "tdProbability": "1.41"
+  },
+  "xavier weaver": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "hunter luepke": {
+    "tdOdds": "+8000",
+    "tdProbability": "1.23"
+  },
+  "simi fehoko": {
+    "tdOdds": "+9000",
+    "tdProbability": "1.10"
+  },
+  "josiah deguara": {
+    "tdOdds": "+13000",
+    "tdProbability": "0.76"
   }
 }

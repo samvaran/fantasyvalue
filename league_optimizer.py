@@ -29,7 +29,7 @@ MIN_PLAYER_DIFF = 2  # Minimum different players between lineups
 
 # Player constraints (edit these lists!)
 INCLUDE_PLAYERS = []  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
-EXCLUDE_PLAYERS = ['bijan robinson', 'jaylen warren']  # Never use these players (e.g., ['devon achane', 'chris olave'])
+EXCLUDE_PLAYERS = []  # Never use these players (e.g., ['devon achane', 'chris olave'])
 
 # Correlation coefficients (from DFS research)
 CORRELATIONS = {

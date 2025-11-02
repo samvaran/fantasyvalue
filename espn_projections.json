@@ -1,1158 +1,1200 @@
 {
   "patrick mahomes": {
-    "espnScoreProjection": 23.44081137898491,
-    "espnLowScore": 18.519,
-    "espnHighScore": 28.677,
-    "espnOutsideProjection": 24.46158408,
-    "espnSimulationProjection": 23.598
+    "espnScoreProjection": 19.05950129132313,
+    "espnLowScore": 10.937,
+    "espnHighScore": 27.277,
+    "espnOutsideProjection": 23.22992775,
+    "espnSimulationProjection": 19.107
   },
   "josh allen": {
-    "espnScoreProjection": 20.625955158893003,
-    "espnLowScore": 13.321,
-    "espnHighScore": 27.616,
-    "espnOutsideProjection": 20.25282429,
-    "espnSimulationProjection": 20.465
+    "espnScoreProjection": 20.995041628595907,
+    "espnLowScore": 14.257,
+    "espnHighScore": 27.273,
+    "espnOutsideProjection": 21.49037591,
+    "espnSimulationProjection": 20.968
   },
-  "jonathan taylor": {
-    "espnScoreProjection": 22.89873627234737,
-    "espnLowScore": 12.291,
-    "espnHighScore": 26.078,
-    "espnOutsideProjection": 25.63376694,
-    "espnSimulationProjection": 19.184
-  },
-  "jalen hurts": {
-    "espnScoreProjection": 19.652283213656233,
-    "espnLowScore": 11.644,
-    "espnHighScore": 26.47,
-    "espnOutsideProjection": 21.82697754,
-    "espnSimulationProjection": 19.028
-  },
-  "bijan robinson": {
-    "espnScoreProjection": 24.29678840378198,
-    "espnLowScore": 15.878,
-    "espnHighScore": 26.7,
-    "espnOutsideProjection": 26.7,
-    "espnSimulationProjection": 22.209
-  },
-  "bo nix": {
-    "espnScoreProjection": 18.072526851224197,
-    "espnLowScore": 10.252,
-    "espnHighScore": 25.364,
-    "espnOutsideProjection": 21.15590775,
-    "espnSimulationProjection": 16.913
-  },
-  "baker mayfield": {
-    "espnScoreProjection": 19.71925495767091,
-    "espnLowScore": 11.662,
-    "espnHighScore": 26.487,
-    "espnOutsideProjection": 18.37584532,
-    "espnSimulationProjection": 19.046
-  },
-  "daniel jones": {
-    "espnScoreProjection": 15.696698632230303,
-    "espnLowScore": 9.864,
-    "espnHighScore": 21.529,
-    "espnOutsideProjection": 20.7,
-    "espnSimulationProjection": 15.697
-  },
-  "drake maye": {
-    "espnScoreProjection": 19.237518049650557,
-    "espnLowScore": 10.963,
-    "espnHighScore": 27.291,
-    "espnOutsideProjection": 18.21313554,
-    "espnSimulationProjection": 19.127
-  },
-  "dak prescott": {
-    "espnScoreProjection": 19.239604677294587,
-    "espnLowScore": 10.963,
-    "espnHighScore": 27.292,
-    "espnOutsideProjection": 18.26295331,
-    "espnSimulationProjection": 19.127
+  "justin herbert": {
+    "espnScoreProjection": 16.382237253423085,
+    "espnLowScore": 10.163,
+    "espnHighScore": 22.602,
+    "espnOutsideProjection": 21.63357782,
+    "espnSimulationProjection": 16.382
   },
   "christian mccaffrey": {
-    "espnScoreProjection": 19.54240574656057,
-    "espnLowScore": 12.312,
-    "espnHighScore": 22.878,
-    "espnOutsideProjection": 21.61087599,
-    "espnSimulationProjection": 17.096
+    "espnScoreProjection": 22.476946924904283,
+    "espnLowScore": 11.875,
+    "espnHighScore": 26.065,
+    "espnOutsideProjection": 26.00575013,
+    "espnSimulationProjection": 18.97
+  },
+  "drake maye": {
+    "espnScoreProjection": 20.744063595618755,
+    "espnLowScore": 13.628,
+    "espnHighScore": 27.62,
+    "espnOutsideProjection": 20.45219794,
+    "espnSimulationProjection": 20.621
+  },
+  "jonathan taylor": {
+    "espnScoreProjection": 19.43326432223415,
+    "espnLowScore": 12.306,
+    "espnHighScore": 23.3641213,
+    "espnOutsideProjection": 23.3641213,
+    "espnSimulationProjection": 17.064
+  },
+  "dak prescott": {
+    "espnScoreProjection": 19.227335739919944,
+    "espnLowScore": 10.961,
+    "espnHighScore": 27.291,
+    "espnOutsideProjection": 18.93815197,
+    "espnSimulationProjection": 19.126
+  },
+  "daniel jones": {
+    "espnScoreProjection": 16.420660742420136,
+    "espnLowScore": 10.197,
+    "espnHighScore": 22.644,
+    "espnOutsideProjection": 21.72208497,
+    "espnSimulationProjection": 16.421
+  },
+  "jayden daniels": {
+    "espnScoreProjection": 20.217678844644837,
+    "espnLowScore": 11.869,
+    "espnHighScore": 26.695,
+    "espnOutsideProjection": 19.54092855,
+    "espnSimulationProjection": 19.259
   },
   "caleb williams": {
-    "espnScoreProjection": 19.3533169315543,
-    "espnLowScore": 11.163,
-    "espnHighScore": 27.468,
-    "espnOutsideProjection": 18.39849916,
-    "espnSimulationProjection": 19.315
-  },
-  "jordan love": {
-    "espnScoreProjection": 14.699994908697011,
-    "espnLowScore": 8.868,
-    "espnHighScore": 20.532,
-    "espnOutsideProjection": 17.17723363,
-    "espnSimulationProjection": 14.7
+    "espnScoreProjection": 19.908746331153267,
+    "espnLowScore": 11.818,
+    "espnHighScore": 26.584,
+    "espnOutsideProjection": 19.6322975,
+    "espnSimulationProjection": 19.178
   },
   "jaxson dart": {
-    "espnScoreProjection": 16.96319756083226,
-    "espnLowScore": 8.456,
-    "espnHighScore": 24.337,
-    "espnOutsideProjection": 17.83987699,
-    "espnSimulationProjection": 15.456
+    "espnScoreProjection": 19.592199194274336,
+    "espnLowScore": 11.47,
+    "espnHighScore": 27.596,
+    "espnOutsideProjection": 21.0892825,
+    "espnSimulationProjection": 19.533
   },
-  "joe flacco": {
-    "espnScoreProjection": 17.194746515842397,
-    "espnLowScore": 8.072,
-    "espnHighScore": 24.614,
-    "espnOutsideProjection": 15.4,
-    "espnSimulationProjection": 16.343
+  "matthew stafford": {
+    "espnScoreProjection": 17.076204290383327,
+    "espnLowScore": 8.071,
+    "espnHighScore": 24.625,
+    "espnOutsideProjection": 18.21385684,
+    "espnSimulationProjection": 16.348
   },
-  "devon achane": {
-    "espnScoreProjection": 17.969995664539223,
-    "espnLowScore": 16.934,
-    "espnHighScore": 19.59994842,
-    "espnOutsideProjection": 19.59994842,
-    "espnSimulationProjection": 17.97
-  },
-  "saquon barkley": {
-    "espnScoreProjection": 15.231100137245562,
-    "espnLowScore": 9.763,
-    "espnHighScore": 20.699,
-    "espnOutsideProjection": 16.90038511,
-    "espnSimulationProjection": 15.231
-  },
-  "justin fields": {
-    "espnScoreProjection": 19.777912924888494,
-    "espnLowScore": 11.637,
-    "espnHighScore": 26.55,
-    "espnOutsideProjection": 19.39835645,
-    "espnSimulationProjection": 19.064
-  },
-  "aaron rodgers": {
-    "espnScoreProjection": 17.72058742867445,
-    "espnLowScore": 10.183,
-    "espnHighScore": 25.172,
-    "espnOutsideProjection": 16.21055943,
-    "espnSimulationProjection": 16.79
+  "jordan love": {
+    "espnScoreProjection": 15.026715844883846,
+    "espnLowScore": 9.052,
+    "espnHighScore": 21.001,
+    "espnOutsideProjection": 18.10026356,
+    "espnSimulationProjection": 15.027
   },
   "jamarr chase": {
-    "espnScoreProjection": 19.30077786593953,
-    "espnLowScore": 18.264,
-    "espnHighScore": 20.337,
-    "espnOutsideProjection": 19.70770395,
-    "espnSimulationProjection": 19.301
+    "espnScoreProjection": 23.083657306844216,
+    "espnLowScore": 22.047,
+    "espnHighScore": 24.12,
+    "espnOutsideProjection": 23.18276585,
+    "espnSimulationProjection": 23.084
   },
-  "cj stroud": {
-    "espnScoreProjection": 18.23532445207352,
-    "espnLowScore": 10.265,
-    "espnHighScore": 25.411,
-    "espnOutsideProjection": 17.32208849,
-    "espnSimulationProjection": 16.941
+  "jared goff": {
+    "espnScoreProjection": 13.061039566049722,
+    "espnLowScore": 7.328,
+    "espnHighScore": 18.203,
+    "espnOutsideProjection": 16.70865781,
+    "espnSimulationProjection": 11.784
   },
-  "marcus mariota": {
-    "espnScoreProjection": 17.819856311439246,
-    "espnLowScore": 10.184,
-    "espnHighScore": 25.195,
-    "espnOutsideProjection": 16.94081284,
+  "bijan robinson": {
+    "espnScoreProjection": 19.063599434677805,
+    "espnLowScore": 11.89,
+    "espnHighScore": 22.337,
+    "espnOutsideProjection": 20.20812955,
     "espnSimulationProjection": 16.801
   },
-  "spencer rattler": {
-    "espnScoreProjection": 14.480182688700033,
-    "espnLowScore": 8.658,
-    "espnHighScore": 20.302,
-    "espnOutsideProjection": 15.70058729,
-    "espnSimulationProjection": 14.48
+  "jaxon smithnjigba": {
+    "espnScoreProjection": 24.11159386036639,
+    "espnLowScore": 8.773,
+    "espnHighScore": 24.57129911,
+    "espnOutsideProjection": 24.57129911,
+    "espnSimulationProjection": 15.489
   },
-  "kirk cousins": {
-    "espnScoreProjection": 15.120087005474495,
-    "espnLowScore": 9.162,
-    "espnHighScore": 21.078,
-    "espnOutsideProjection": 14.8,
-    "espnSimulationProjection": 15.12
+  "jacoby brissett": {
+    "espnScoreProjection": "",
+    "espnLowScore": "",
+    "espnHighScore": 11.299,
+    "espnOutsideProjection": "",
+    "espnSimulationProjection": 3.439
   },
-  "josh jacobs": {
-    "espnScoreProjection": 18.189458016024695,
-    "espnLowScore": 10.47,
-    "espnHighScore": 21.349,
-    "espnOutsideProjection": 19.22887941,
-    "espnSimulationProjection": 15.91
+  "jahmyr gibbs": {
+    "espnScoreProjection": 18.129987396125458,
+    "espnLowScore": 10.375,
+    "espnHighScore": 21.225,
+    "espnOutsideProjection": 19.18725106,
+    "espnSimulationProjection": 15.8
   },
-  "rachaad white": {
-    "espnScoreProjection": 15.269289404306686,
-    "espnLowScore": 9.797,
-    "espnHighScore": 20.742,
-    "espnOutsideProjection": 16.89416678,
-    "espnSimulationProjection": 15.269
+  "joe flacco": {
+    "espnScoreProjection": 17.271741101023423,
+    "espnLowScore": 9.92,
+    "espnHighScore": 26.744,
+    "espnOutsideProjection": 17.28685531,
+    "espnSimulationProjection": 18.332
   },
-  "derrick henry": {
-    "espnScoreProjection": 15.46588000866009,
-    "espnLowScore": 10.267,
-    "espnHighScore": 20.664,
-    "espnOutsideProjection": 16.1,
-    "espnSimulationProjection": 15.466
+  "sam darnold": {
+    "espnScoreProjection": 17.343504752373182,
+    "espnLowScore": 9.932,
+    "espnHighScore": 26.75,
+    "espnOutsideProjection": 18.22548757,
+    "espnSimulationProjection": 18.341
   },
-  "james cook": {
-    "espnScoreProjection": 14.45774050681776,
-    "espnLowScore": 9.033,
-    "espnHighScore": 19.883,
-    "espnOutsideProjection": 15.23222399,
-    "espnSimulationProjection": 14.458
+  "puka nacua": {
+    "espnScoreProjection": 18.780735271732215,
+    "espnLowScore": 7.699,
+    "espnHighScore": 22.838,
+    "espnOutsideProjection": 22.15373496,
+    "espnSimulationProjection": 15.268
+  },
+  "trevor lawrence": {
+    "espnScoreProjection": 14.312932003165717,
+    "espnLowScore": 8.279,
+    "espnHighScore": 20.347,
+    "espnOutsideProjection": 16.92702695,
+    "espnSimulationProjection": 14.313
   },
   "mac jones": {
-    "espnScoreProjection": 13.896792547838317,
-    "espnLowScore": 6.409,
-    "espnHighScore": 21.752,
-    "espnOutsideProjection": 13.04141268,
-    "espnSimulationProjection": 13.7
+    "espnScoreProjection": "",
+    "espnLowScore": "",
+    "espnHighScore": 11.299,
+    "espnOutsideProjection": "",
+    "espnSimulationProjection": 3.439
   },
-  "javonte williams": {
-    "espnScoreProjection": 15.461850607865196,
-    "espnLowScore": 10.264,
-    "espnHighScore": 20.66,
-    "espnOutsideProjection": 16.17297221,
-    "espnSimulationProjection": 15.462
+  "aaron rodgers": {
+    "espnScoreProjection": 15.083865476035133,
+    "espnLowScore": 9.1,
+    "espnHighScore": 21.068,
+    "espnOutsideProjection": 17.46902854,
+    "espnSimulationProjection": 15.084
+  },
+  "bo nix": {
+    "espnScoreProjection": 16.21962166637417,
+    "espnLowScore": 10.172,
+    "espnHighScore": 22.267,
+    "espnOutsideProjection": 16.6795345,
+    "espnSimulationProjection": 16.22
+  },
+  "amonra st brown": {
+    "espnScoreProjection": 16.050942892050706,
+    "espnLowScore": 7.013,
+    "espnHighScore": 19.728,
+    "espnOutsideProjection": 19.32532619,
+    "espnSimulationProjection": 12.967
+  },
+  "josh jacobs": {
+    "espnScoreProjection": 15.714669856787083,
+    "espnLowScore": 9.363,
+    "espnHighScore": 19.906,
+    "espnOutsideProjection": 18.72278594,
+    "espnSimulationProjection": 14.634
   },
   "ceedee lamb": {
-    "espnScoreProjection": 17.786332099303618,
-    "espnLowScore": 11.516,
-    "espnHighScore": 23.084,
-    "espnOutsideProjection": 16.85855358,
-    "espnSimulationProjection": 17.3
+    "espnScoreProjection": 20.063224988025883,
+    "espnLowScore": 7.993,
+    "espnHighScore": 21.744,
+    "espnOutsideProjection": 19.16020965,
+    "espnSimulationProjection": 16.951
   },
-  "andy dalton": {
-    "espnScoreProjection": 17.605560357275255,
-    "espnLowScore": 10.039,
-    "espnHighScore": 26.802,
-    "espnOutsideProjection": 15.71099342,
-    "espnSimulationProjection": 18.421
+  "cj stroud": {
+    "espnScoreProjection": 17.063049760997774,
+    "espnLowScore": 9.246,
+    "espnHighScore": 26.163,
+    "espnOutsideProjection": 16.94936083,
+    "espnSimulationProjection": 17.705
   },
-  "emeka egbuka": {
-    "espnScoreProjection": 17.69969493886054,
-    "espnLowScore": 11.47,
-    "espnHighScore": 23.13,
-    "espnOutsideProjection": 16.8593969,
-    "espnSimulationProjection": 17.3
+  "jj mccarthy": {
+    "espnScoreProjection": 12.160142258278622,
+    "espnLowScore": 6.612,
+    "espnHighScore": 16.58,
+    "espnOutsideProjection": 14.35666917,
+    "espnSimulationProjection": 10.891
+  },
+  "kyren williams": {
+    "espnScoreProjection": 12.714084168853834,
+    "espnLowScore": 7.863,
+    "espnHighScore": 17.565,
+    "espnOutsideProjection": 15.84956237,
+    "espnSimulationProjection": 12.714
+  },
+  "javonte williams": {
+    "espnScoreProjection": 15.328729640032524,
+    "espnLowScore": 10.121,
+    "espnHighScore": 20.537,
+    "espnOutsideProjection": 16.11270882,
+    "espnSimulationProjection": 15.329
   },
   "rashee rice": {
-    "espnScoreProjection": 15.176195522652357,
-    "espnLowScore": 7.445,
-    "espnHighScore": 21.299,
-    "espnOutsideProjection": 17.24967624,
-    "espnSimulationProjection": 13.638
-  },
-  "devonta smith": {
-    "espnScoreProjection": 16.968156328304325,
-    "espnLowScore": 7.72,
-    "espnHighScore": 20.707,
-    "espnOutsideProjection": 16.66114582,
-    "espnSimulationProjection": 13.956
-  },
-  "courtland sutton": {
-    "espnScoreProjection": 14.981784856493423,
-    "espnLowScore": 7.622,
-    "espnHighScore": 21.281,
-    "espnOutsideProjection": 13.7,
-    "espnSimulationProjection": 13.807
-  },
-  "breece hall": {
-    "espnScoreProjection": 14.636080086861025,
-    "espnLowScore": 9.173,
-    "espnHighScore": 20.1,
-    "espnOutsideProjection": 18.04707502,
-    "espnSimulationProjection": 14.636
-  },
-  "tua tagovailoa": {
-    "espnScoreProjection": 10.886845862589666,
-    "espnLowScore": 6.437,
-    "espnHighScore": 13.876,
-    "espnOutsideProjection": 12.08970101,
-    "espnSimulationProjection": 10.157
-  },
-  "jaylen warren": {
-    "espnScoreProjection": 13.810267216137067,
-    "espnLowScore": 8.401,
-    "espnHighScore": 19.219,
-    "espnOutsideProjection": 16.27109993,
-    "espnSimulationProjection": 13.81
-  },
-  "quinshon judkins": {
-    "espnScoreProjection": 11.712654494620264,
-    "espnLowScore": 5.075,
-    "espnHighScore": 17.525,
-    "espnOutsideProjection": 12.3616929,
-    "espnSimulationProjection": 10.563
-  },
-  "jk dobbins": {
-    "espnScoreProjection": 12.567119239434469,
-    "espnLowScore": 6.016,
-    "espnHighScore": 19.763,
-    "espnOutsideProjection": 13.41112481,
-    "espnSimulationProjection": 12.89
-  },
-  "cam ward": {
-    "espnScoreProjection": 15.526242129060158,
-    "espnLowScore": 9.718,
-    "espnHighScore": 21.335,
-    "espnOutsideProjection": 12.81606972,
-    "espnSimulationProjection": 15.526
-  },
-  "chris olave": {
-    "espnScoreProjection": 17.9003795157246,
-    "espnLowScore": 11.444,
-    "espnHighScore": 23.156,
-    "espnOutsideProjection": 16.86680989,
-    "espnSimulationProjection": 17.3
-  },
-  "cam skattebo": {
-    "espnScoreProjection": 13.615075551335103,
-    "espnLowScore": 6.859,
-    "espnHighScore": 20.22,
-    "espnOutsideProjection": 14.32152889,
-    "espnSimulationProjection": 12.96
-  },
-  "dk metcalf": {
-    "espnScoreProjection": 12.716859240399595,
-    "espnLowScore": 6.964,
-    "espnHighScore": 18.931,
-    "espnOutsideProjection": 14.69465484,
-    "espnSimulationProjection": 12.068
-  },
-  "george pickens": {
-    "espnScoreProjection": 16.36389127996186,
-    "espnLowScore": 6.88,
-    "espnHighScore": 20.355,
-    "espnOutsideProjection": 14.30393903,
-    "espnSimulationProjection": 13.375
-  },
-  "rome odunze": {
-    "espnScoreProjection": 11.976793879584486,
-    "espnLowScore": 6.953,
-    "espnHighScore": 19.283,
-    "espnOutsideProjection": 13.21767436,
-    "espnSimulationProjection": 12.043
-  },
-  "dillon gabriel": {
-    "espnScoreProjection": 15.460390072836837,
-    "espnLowScore": 9.372,
-    "espnHighScore": 21.549,
-    "espnOutsideProjection": 12.22152398,
-    "espnSimulationProjection": 15.46
-  },
-  "chase brown": {
-    "espnScoreProjection": 11.516686158129437,
-    "espnLowScore": 5.03,
-    "espnHighScore": 17.416,
-    "espnOutsideProjection": 12.3088893,
-    "espnSimulationProjection": 10.489
-  },
-  "tetairoa mcmillan": {
-    "espnScoreProjection": 15.427738070426921,
-    "espnLowScore": 7.099,
-    "espnHighScore": 20.848,
-    "espnOutsideProjection": 13.41358642,
-    "espnSimulationProjection": 13.157
-  },
-  "alvin kamara": {
-    "espnScoreProjection": 13.771388508890908,
-    "espnLowScore": 6.878,
-    "espnHighScore": 20.399,
-    "espnOutsideProjection": 14.32749929,
-    "espnSimulationProjection": 13.639
-  },
-  "dandre swift": {
-    "espnScoreProjection": 12.589438847674128,
-    "espnLowScore": 11.553,
-    "espnHighScore": 14.99985527,
-    "espnOutsideProjection": 14.99985527,
-    "espnSimulationProjection": 12.589
-  },
-  "stefon diggs": {
-    "espnScoreProjection": 14.81858398476299,
-    "espnLowScore": 7.308,
-    "espnHighScore": 21.002,
-    "espnOutsideProjection": 12.83267951,
-    "espnSimulationProjection": 13.401
-  },
-  "tyler warren": {
-    "espnScoreProjection": 11.90942960058884,
-    "espnLowScore": 5.739,
-    "espnHighScore": 13.321,
-    "espnOutsideProjection": 13,
-    "espnSimulationProjection": 9.526
-  },
-  "jaylen waddle": {
-    "espnScoreProjection": 15.60681264120642,
-    "espnLowScore": 7.014,
-    "espnHighScore": 20.756,
-    "espnOutsideProjection": 13.06359885,
-    "espnSimulationProjection": 13.07
-  },
-  "tee higgins": {
-    "espnScoreProjection": 14.160936121200269,
-    "espnLowScore": 7.351,
-    "espnHighScore": 20.793,
-    "espnOutsideProjection": 12.43780471,
-    "espnSimulationProjection": 13.12
-  },
-  "rico dowdle": {
-    "espnScoreProjection": 12.19398882899572,
-    "espnLowScore": 5.782,
-    "espnHighScore": 19.544,
-    "espnOutsideProjection": 12.74837978,
-    "espnSimulationProjection": 12.663
-  },
-  "michael pittman": {
-    "espnScoreProjection": 15.177019608108159,
-    "espnLowScore": 7.489,
-    "espnHighScore": 21.349,
-    "espnOutsideProjection": 13.8,
-    "espnSimulationProjection": 13.747
-  },
-  "xavier worthy": {
-    "espnScoreProjection": 14.829496114293438,
-    "espnLowScore": 7.309,
-    "espnHighScore": 21.008,
-    "espnOutsideProjection": 12.54882019,
-    "espnSimulationProjection": 13.402
-  },
-  "rhamondre stevenson": {
-    "espnScoreProjection": 11.70879957194761,
-    "espnLowScore": 5.899,
-    "espnHighScore": 16.149,
-    "espnOutsideProjection": 12.36441891,
-    "espnSimulationProjection": 10.13
-  },
-  "darnell mooney": {
-    "espnScoreProjection": 14.727761284192342,
-    "espnLowScore": 7.581,
-    "espnHighScore": 20.912,
-    "espnOutsideProjection": 12.2,
-    "espnSimulationProjection": 13.443
-  },
-  "isiah pacheco": {
-    "espnScoreProjection": 10.496804937245447,
-    "espnLowScore": 3.236,
-    "espnHighScore": 17.422,
-    "espnOutsideProjection": 11.42340257,
-    "espnSimulationProjection": 9.671
-  },
-  "romeo doubs": {
-    "espnScoreProjection": 14.051509126767169,
-    "espnLowScore": 7.269,
-    "espnHighScore": 20.664,
-    "espnOutsideProjection": 12.1771376,
-    "espnSimulationProjection": 13.154
-  },
-  "zay flowers": {
-    "espnScoreProjection": 14.15123656582993,
-    "espnLowScore": 7.349,
-    "espnHighScore": 20.791,
-    "espnOutsideProjection": 12.8,
-    "espnSimulationProjection": 13.116
-  },
-  "wandale robinson": {
-    "espnScoreProjection": 13.74994454344728,
-    "espnLowScore": 12.714,
-    "espnHighScore": 14.786,
-    "espnOutsideProjection": 13.17669908,
-    "espnSimulationProjection": 13.75
-  },
-  "tucker kraft": {
-    "espnScoreProjection": 8.870189382257141,
-    "espnLowScore": 4.448,
-    "espnHighScore": 13.261,
-    "espnOutsideProjection": 10.4,
-    "espnSimulationProjection": 8.044
-  },
-  "jacory croskeymerritt": {
-    "espnScoreProjection": 10.956736304538646,
-    "espnLowScore": 4.433,
-    "espnHighScore": 16.744,
-    "espnOutsideProjection": 11.53117042,
-    "espnSimulationProjection": 9.512
-  },
-  "dallas goedert": {
-    "espnScoreProjection": 10.934925249682163,
-    "espnLowScore": 5.201,
-    "espnHighScore": 12.518,
-    "espnOutsideProjection": 12.38600402,
-    "espnSimulationProjection": 9.1
-  },
-  "woody marks": {
-    "espnScoreProjection": 9.983203156243412,
-    "espnLowScore": 2.443,
-    "espnHighScore": 18.009,
-    "espnOutsideProjection": 10.84687772,
-    "espnSimulationProjection": 8.884
-  },
-  "george kittle": {
-    "espnScoreProjection": 10.528727565177519,
-    "espnLowScore": 5.024,
-    "espnHighScore": 12.364,
-    "espnOutsideProjection": 10.76923529,
-    "espnSimulationProjection": 8.865
-  },
-  "chuba hubbard": {
-    "espnScoreProjection": 10.826489311472098,
-    "espnLowScore": 4.398,
-    "espnHighScore": 16.679,
-    "espnOutsideProjection": 11.95102091,
-    "espnSimulationProjection": 9.446
-  },
-  "khalil shakir": {
-    "espnScoreProjection": 13.53553614871158,
-    "espnLowScore": 7.14,
-    "espnHighScore": 20.481,
-    "espnOutsideProjection": 11.7,
-    "espnSimulationProjection": 12.948
-  },
-  "jake ferguson": {
-    "espnScoreProjection": 11.400826084136007,
-    "espnLowScore": 5.419,
-    "espnHighScore": 13.1,
-    "espnOutsideProjection": 13.1,
-    "espnSimulationProjection": 9.22
-  },
-  "tony pollard": {
-    "espnScoreProjection": 9.105686845556153,
-    "espnLowScore": 3.513,
-    "espnHighScore": 15.118,
-    "espnOutsideProjection": 9.73704212,
-    "espnSimulationProjection": 7.975
-  },
-  "kyle pitts sr": {
-    "espnScoreProjection": 9.368380999948979,
-    "espnLowScore": 3.722,
-    "espnHighScore": 11.843,
-    "espnOutsideProjection": 10.8,
-    "espnSimulationProjection": 7.782
-  },
-  "rashid shaheed": {
-    "espnScoreProjection": 14.797595593996077,
-    "espnLowScore": 7.569,
-    "espnHighScore": 20.934,
-    "espnOutsideProjection": 12.16513142,
-    "espnSimulationProjection": 13.435
-  },
-  "terry mclaurin": {
-    "espnScoreProjection": 13.846904746809754,
-    "espnLowScore": 7.239,
-    "espnHighScore": 20.599,
-    "espnOutsideProjection": 11.83524023,
-    "espnSimulationProjection": 13.082
-  },
-  "matthew golden": {
-    "espnScoreProjection": 10.478278158487836,
-    "espnLowScore": 5.317,
-    "espnHighScore": 18.273,
-    "espnOutsideProjection": 10.26634545,
-    "espnSimulationProjection": 10.539
-  },
-  "dalton schultz": {
-    "espnScoreProjection": 7.466031763250134,
-    "espnLowScore": 2.728,
-    "espnHighScore": 11.608,
-    "espnOutsideProjection": 9.67856898,
-    "espnSimulationProjection": 7.168
-  },
-  "travis kelce": {
-    "espnScoreProjection": 10.134415035434591,
-    "espnLowScore": 4.885,
-    "espnHighScore": 12.131,
-    "espnOutsideProjection": 10.92485251,
-    "espnSimulationProjection": 9.154
-  },
-  "tez johnson": {
-    "espnScoreProjection": 11.466646054272449,
-    "espnLowScore": 6.858,
-    "espnHighScore": 19.135,
-    "espnOutsideProjection": 8.91640334,
-    "espnSimulationProjection": 11.845
-  },
-  "jauan jennings": {
-    "espnScoreProjection": 12.19707138846802,
-    "espnLowScore": 6.996,
-    "espnHighScore": 19.432,
-    "espnOutsideProjection": 9.04453336,
-    "espnSimulationProjection": 12.148
-  },
-  "dj moore": {
-    "espnScoreProjection": 9.72369029864612,
-    "espnLowScore": 4.347,
-    "espnHighScore": 17.239,
-    "espnOutsideProjection": 10.34754423,
-    "espnSimulationProjection": 9.169
-  },
-  "dalton kincaid": {
-    "espnScoreProjection": 9.280424723560438,
-    "espnLowScore": 3.775,
-    "espnHighScore": 11.788,
-    "espnOutsideProjection": 9.80256608,
-    "espnSimulationProjection": 7.782
-  },
-  "keon coleman": {
-    "espnScoreProjection": 12.868569488728006,
-    "espnLowScore": 7.109,
-    "espnHighScore": 18.961,
-    "espnOutsideProjection": 10.20384154,
-    "espnSimulationProjection": 12.157
-  },
-  "cade otton": {
-    "espnScoreProjection": 8.728192785261104,
-    "espnLowScore": 4.357,
-    "espnHighScore": 13.162,
-    "espnOutsideProjection": 9.90469329,
-    "espnSimulationProjection": 7.939
-  },
-  "troy franklin": {
-    "espnScoreProjection": 12.599964167649706,
-    "espnLowScore": 6.432,
-    "espnHighScore": 18.444,
-    "espnOutsideProjection": 10.85551836,
-    "espnSimulationProjection": 12.438
-  },
-  "tyler allgeier": {
-    "espnScoreProjection": 9.654771151469234,
-    "espnLowScore": 2.41,
-    "espnHighScore": 17.89,
-    "espnOutsideProjection": 8,
-    "espnSimulationProjection": 8.787
-  },
-  "jerry jeudy": {
-    "espnScoreProjection": 13.289157798698596,
-    "espnLowScore": 7.456,
-    "espnHighScore": 20.168,
-    "espnOutsideProjection": 11.10456031,
-    "espnSimulationProjection": 12.999
-  },
-  "alec pierce": {
-    "espnScoreProjection": 10.227319847944813,
-    "espnLowScore": 5.268,
-    "espnHighScore": 18.265,
-    "espnOutsideProjection": 7.7,
-    "espnSimulationProjection": 10.468
-  },
-  "mason taylor": {
-    "espnScoreProjection": 5.3618663640491775,
-    "espnLowScore": 2.092,
-    "espnHighScore": 11.666,
-    "espnOutsideProjection": 8.89731692,
-    "espnSimulationProjection": 4.688
-  },
-  "josh downs": {
-    "espnScoreProjection": 11.610640577330292,
-    "espnLowScore": 6.873,
-    "espnHighScore": 19.177,
-    "espnOutsideProjection": 10.9,
-    "espnSimulationProjection": 11.891
-  },
-  "hunter henry": {
-    "espnScoreProjection": 8.808285620795482,
-    "espnLowScore": 4.439,
-    "espnHighScore": 13.234,
-    "espnOutsideProjection": 9.37641229,
-    "espnSimulationProjection": 8.023
-  },
-  "harold fannin": {
-    "espnScoreProjection": 9.126957787921812,
-    "espnLowScore": 3.915,
-    "espnHighScore": 11.726,
-    "espnOutsideProjection": 9.62207481,
-    "espnSimulationProjection": 7.82
-  },
-  "marvin mims": {
-    "espnScoreProjection": 11.428579187141574,
-    "espnLowScore": 6.849,
-    "espnHighScore": 19.124,
-    "espnOutsideProjection": 8.7178533,
-    "espnSimulationProjection": 11.829
-  },
-  "kendrick bourne": {
-    "espnScoreProjection": 10.048566542032802,
-    "espnLowScore": 5.23,
-    "espnHighScore": 18.209,
-    "espnOutsideProjection": 8.40033357,
-    "espnSimulationProjection": 10.395
-  },
-  "evan engram": {
-    "espnScoreProjection": 9.126757496833592,
-    "espnLowScore": 3.915,
-    "espnHighScore": 11.726,
-    "espnOutsideProjection": 9.86033932,
-    "espnSimulationProjection": 7.82
-  },
-  "tyjae spears": {
-    "espnScoreProjection": 9.280279923983354,
-    "espnLowScore": 3.411,
-    "espnHighScore": 15.033,
-    "espnOutsideProjection": 9.51311629,
-    "espnSimulationProjection": 7.877
-  },
-  "zach ertz": {
-    "espnScoreProjection": 8.020630379721984,
-    "espnLowScore": 3.716,
-    "espnHighScore": 12.41,
-    "espnOutsideProjection": 9.04897122,
-    "espnSimulationProjection": 8.063
-  },
-  "jaylin noel": {
-    "espnScoreProjection": 12.400331849348651,
-    "espnLowScore": 6.278,
-    "espnHighScore": 18.237,
-    "espnOutsideProjection": 9.87986102,
-    "espnSimulationProjection": 12.258
-  },
-  "elic ayomanor": {
-    "espnScoreProjection": 12.991694152035,
-    "espnLowScore": 7.253,
-    "espnHighScore": 19.108,
-    "espnOutsideProjection": 10.85211076,
-    "espnSimulationProjection": 12.285
-  },
-  "nick chubb": {
-    "espnScoreProjection": 8.917333434717788,
-    "espnLowScore": 3.554,
-    "espnHighScore": 14.87,
-    "espnOutsideProjection": 9.2815322,
-    "espnSimulationProjection": 7.947
-  },
-  "sterling shepard": {
-    "espnScoreProjection": 9.197355043752061,
-    "espnLowScore": 2.344,
-    "espnHighScore": 14.501,
-    "espnOutsideProjection": 7.96531107,
-    "espnSimulationProjection": 8.422
-  },
-  "kayshon boutte": {
-    "espnScoreProjection": 10.800165725924355,
-    "espnLowScore": 6.071,
-    "espnHighScore": 18.776,
-    "espnOutsideProjection": 7.64644147,
-    "espnSimulationProjection": 11.058
+    "espnScoreProjection": 15.953372767421305,
+    "espnLowScore": 7.018,
+    "espnHighScore": 19.752,
+    "espnOutsideProjection": 18.43221037,
+    "espnSimulationProjection": 12.953
+  },
+  "geno smith": {
+    "espnScoreProjection": 11.407432092136442,
+    "espnLowScore": 6.388,
+    "espnHighScore": 16.457,
+    "espnOutsideProjection": 13.00221974,
+    "espnSimulationProjection": 10.646
+  },
+  "trey mcbride": {
+    "espnScoreProjection": 16.272986290317537,
+    "espnLowScore": 5.614,
+    "espnHighScore": 18.68146416,
+    "espnOutsideProjection": 18.68146416,
+    "espnSimulationProjection": 11.138
+  },
+  "james cook": {
+    "espnScoreProjection": 14.747945979350646,
+    "espnLowScore": 9.33,
+    "espnHighScore": 20.166,
+    "espnOutsideProjection": 15.56903988,
+    "espnSimulationProjection": 14.748
+  },
+  "justin jefferson": {
+    "espnScoreProjection": 18.53952291500649,
+    "espnLowScore": 11.447,
+    "espnHighScore": 24.553,
+    "espnOutsideProjection": 17.69271612,
+    "espnSimulationProjection": 18
+  },
+  "michael penix": {
+    "espnScoreProjection": 16.904113744453138,
+    "espnLowScore": 8.451,
+    "espnHighScore": 24.315,
+    "espnOutsideProjection": 14.14471713,
+    "espnSimulationProjection": 15.444
+  },
+  "kimani vidal": {
+    "espnScoreProjection": 14.354996238366347,
+    "espnLowScore": 8.932,
+    "espnHighScore": 19.778,
+    "espnOutsideProjection": 15.63417094,
+    "espnSimulationProjection": 14.355
   },
   "kyle monangai": {
-    "espnScoreProjection": 8.367772275796922,
-    "espnLowScore": 3.349,
-    "espnHighScore": 14.398,
-    "espnOutsideProjection": 8.5346812,
-    "espnSimulationProjection": 7.579
+    "espnScoreProjection": 9.228771877463087,
+    "espnLowScore": 3.405,
+    "espnHighScore": 15.015,
+    "espnOutsideProjection": 9.03044813,
+    "espnSimulationProjection": 7.864
   },
-  "xavier legette": {
-    "espnScoreProjection": 11.44870891325285,
-    "espnLowScore": 6.854,
-    "espnHighScore": 19.13,
-    "espnOutsideProjection": 8.46127224,
-    "espnSimulationProjection": 11.838
+  "davante adams": {
+    "espnScoreProjection": 16.745507527518384,
+    "espnLowScore": 6.963,
+    "espnHighScore": 20.5,
+    "espnOutsideProjection": 16.14524443,
+    "espnSimulationProjection": 13.503
   },
-  "juwan johnson": {
-    "espnScoreProjection": 8.727186956150168,
-    "espnLowScore": 4.357,
-    "espnHighScore": 13.162,
-    "espnOutsideProjection": 9.5890178,
-    "espnSimulationProjection": 7.939
+  "jaylen warren": {
+    "espnScoreProjection": 12.904019089868685,
+    "espnLowScore": 8.057,
+    "espnHighScore": 17.751,
+    "espnOutsideProjection": 15.79442443,
+    "espnSimulationProjection": 12.904
   },
-  "theo johnson": {
-    "espnScoreProjection": 8.859940965669894,
-    "espnLowScore": 4.446,
-    "espnHighScore": 13.257,
-    "espnOutsideProjection": 9.53656502,
-    "espnSimulationProjection": 8.041
+  "rome odunze": {
+    "espnScoreProjection": 11.756035048440054,
+    "espnLowScore": 6.905,
+    "espnHighScore": 19.219,
+    "espnOutsideProjection": 14.61070732,
+    "espnSimulationProjection": 11.951
   },
-  "jayden higgins": {
-    "espnScoreProjection": 8.797303230881202,
-    "espnLowScore": 3.275,
-    "espnHighScore": 13.891,
-    "espnOutsideProjection": 9.0129416,
-    "espnSimulationProjection": 8.583
+  "ashton jeanty": {
+    "espnScoreProjection": 12.39174622731716,
+    "espnLowScore": 5.874,
+    "espnHighScore": 19.647,
+    "espnOutsideProjection": 15.06350379,
+    "espnSimulationProjection": 12.76
   },
-  "malik washington": {
-    "espnScoreProjection": 10.895413152273049,
-    "espnLowScore": 6.501,
-    "espnHighScore": 18.468,
-    "espnOutsideProjection": 8.96284744,
-    "espnSimulationProjection": 11.141
+  "george pickens": {
+    "espnScoreProjection": 16.377617076419604,
+    "espnLowScore": 6.815,
+    "espnHighScore": 20.226,
+    "espnOutsideProjection": 14.42159355,
+    "espnSimulationProjection": 13.267
   },
-  "darius slayton": {
-    "espnScoreProjection": 11.17243026615138,
-    "espnLowScore": 6.616,
-    "espnHighScore": 18.627,
-    "espnOutsideProjection": 8.38422034,
-    "espnSimulationProjection": 11.303
+  "bryce young": {
+    "espnScoreProjection": 15.830872389717744,
+    "espnLowScore": 9.938,
+    "espnHighScore": 21.724,
+    "espnOutsideProjection": 12.41773297,
+    "espnSimulationProjection": 15.831
   },
-  "chimere dike": {
-    "espnScoreProjection": 12.528927939629243,
-    "espnLowScore": 6.383,
-    "espnHighScore": 18.425,
-    "espnOutsideProjection": 9.53871468,
-    "espnSimulationProjection": 12.404
+  "ladd mcconkey": {
+    "espnScoreProjection": 13.68748071503583,
+    "espnLowScore": 7.175,
+    "espnHighScore": 20.523,
+    "espnOutsideProjection": 16.09782442,
+    "espnSimulationProjection": 12.998
   },
-  "calvin austin": {
-    "espnScoreProjection": 11.105436676586967,
-    "espnLowScore": 6.602,
-    "espnHighScore": 18.604,
-    "espnOutsideProjection": 8.20607884,
-    "espnSimulationProjection": 11.276
+  "drake london": {
+    "espnScoreProjection": 15.040691686366642,
+    "espnLowScore": 7.491,
+    "espnHighScore": 21.203,
+    "espnOutsideProjection": 18.10979203,
+    "espnSimulationProjection": 13.674
   },
-  "colston loveland": {
-    "espnScoreProjection": 5.626139264168534,
-    "espnLowScore": 2.149,
-    "espnHighScore": 12.155,
-    "espnOutsideProjection": 6.54282457,
-    "espnSimulationProjection": 4.863
+  "cam ward": {
+    "espnScoreProjection": 15.104111427225192,
+    "espnLowScore": 9.149,
+    "espnHighScore": 21.059,
+    "espnOutsideProjection": 12.61346465,
+    "espnSimulationProjection": 15.104
   },
-  "olamide zaccheaus": {
-    "espnScoreProjection": 7.300671519693269,
-    "espnLowScore": 1.989,
-    "espnHighScore": 11.563,
-    "espnOutsideProjection": 7.92899907,
-    "espnSimulationProjection": 6.776
+  "brian thomas": {
+    "espnScoreProjection": 12.290232131397925,
+    "espnLowScore": 6.978,
+    "espnHighScore": 19.587,
+    "espnOutsideProjection": 13.14628337,
+    "espnSimulationProjection": 12.218
   },
-  "mark andrews": {
-    "espnScoreProjection": 6.377026669008851,
-    "espnLowScore": 2.016,
-    "espnHighScore": 11.156,
-    "espnOutsideProjection": 8.6,
-    "espnSimulationProjection": 6.586
+  "chase brown": {
+    "espnScoreProjection": 11.392620235135574,
+    "espnLowScore": 4.873,
+    "espnHighScore": 18.59,
+    "espnOutsideProjection": 12.97027545,
+    "espnSimulationProjection": 10.202
   },
-  "xavier hutchinson": {
-    "espnScoreProjection": 7.975541532623442,
-    "espnLowScore": 1.861,
-    "espnHighScore": 12.908,
-    "espnOutsideProjection": 8.50765827,
-    "espnSimulationProjection": 7.384
+  "nico collins": {
+    "espnScoreProjection": 14.506007911959307,
+    "espnLowScore": 7.499,
+    "espnHighScore": 20.926,
+    "espnOutsideProjection": 16.51323405,
+    "espnSimulationProjection": 13.306
   },
-  "rj harvey": {
-    "espnScoreProjection": 7.536324963632827,
-    "espnLowScore": 2.553,
-    "espnHighScore": 11.535,
-    "espnOutsideProjection": 7.24885194,
-    "espnSimulationProjection": 5.54
+  "tyler shough": {
+    "espnScoreProjection": 9.70210650473744,
+    "espnLowScore": 5.531,
+    "espnHighScore": 15.899,
+    "espnOutsideProjection": 10.54157246,
+    "espnSimulationProjection": 9.865
   },
-  "jalen coker": {
-    "espnScoreProjection": 9.04169109701052,
-    "espnLowScore": 3.561,
-    "espnHighScore": 13.812,
-    "espnOutsideProjection": 6.59277306,
-    "espnSimulationProjection": 8.686
+  "michael pittman": {
+    "espnScoreProjection": 17.890020909555226,
+    "espnLowScore": 11.41,
+    "espnHighScore": 23.19,
+    "espnOutsideProjection": 16.31496702,
+    "espnSimulationProjection": 17.3
   },
-  "brashard smith": {
-    "espnScoreProjection": 4.908976203744723,
-    "espnLowScore": 1.602,
-    "espnHighScore": 7.749,
-    "espnOutsideProjection": 4.65217265,
-    "espnSimulationProjection": 4.312
+  "dk metcalf": {
+    "espnScoreProjection": 15.966481761481665,
+    "espnLowScore": 7.01,
+    "espnHighScore": 19.715,
+    "espnOutsideProjection": 15.93848172,
+    "espnSimulationProjection": 12.931
   },
-  "van jefferson": {
-    "espnScoreProjection": 10.964261578116943,
-    "espnLowScore": 6.572,
-    "espnHighScore": 18.556,
-    "espnOutsideProjection": 7.61615516,
-    "espnSimulationProjection": 11.218
+  "marvin harrison": {
+    "espnScoreProjection": 15.574312806346521,
+    "espnLowScore": 7.077,
+    "espnHighScore": 20.907,
+    "espnOutsideProjection": 13.06636943,
+    "espnSimulationProjection": 13.192
   },
-  "kenneth gainwell": {
-    "espnScoreProjection": 10.082827437656086,
-    "espnLowScore": 3.099,
-    "espnHighScore": 17.48,
-    "espnOutsideProjection": 10.40167239,
-    "espnSimulationProjection": 9.583
-  },
-  "jonnu smith": {
-    "espnScoreProjection": 8.796404661669394,
-    "espnLowScore": 4.393,
-    "espnHighScore": 13.195,
-    "espnOutsideProjection": 8.1249254,
-    "espnSimulationProjection": 7.995
-  },
-  "rashod bateman": {
-    "espnScoreProjection": 6.4107562962362294,
-    "espnLowScore": 2.114,
-    "espnHighScore": 11.134,
-    "espnOutsideProjection": 6.6,
-    "espnSimulationProjection": 5.264
-  },
-  "isaiah davis": {
-    "espnScoreProjection": 6.629505994273616,
-    "espnLowScore": 1.922,
-    "espnHighScore": 9.975,
-    "espnOutsideProjection": 6.68223786,
-    "espnSimulationProjection": 5.187
-  },
-  "justice hill": {
-    "espnScoreProjection": 8.554245824505571,
-    "espnLowScore": 3.432,
-    "espnHighScore": 14.564,
-    "espnOutsideProjection": 8,
-    "espnSimulationProjection": 7.723
-  },
-  "noah fant": {
-    "espnScoreProjection": 5.513762161258747,
-    "espnLowScore": 2.148,
-    "espnHighScore": 12.137,
-    "espnOutsideProjection": 7.06136688,
-    "espnSimulationProjection": 4.857
-  },
-  "luther burden": {
-    "espnScoreProjection": 7.9403200905633575,
-    "espnLowScore": 1.861,
-    "espnHighScore": 12.867,
-    "espnOutsideProjection": 4.79954484,
-    "espnSimulationProjection": 7.364
-  },
-  "pat freiermuth": {
-    "espnScoreProjection": 6.433067267363325,
-    "espnLowScore": 2.13,
-    "espnHighScore": 11.301,
-    "espnOutsideProjection": 5.1470044,
-    "espnSimulationProjection": 6.716
-  },
-  "isaiah bond": {
-    "espnScoreProjection": 7.11046351943471,
-    "espnLowScore": 1.835,
-    "espnHighScore": 11.482,
-    "espnOutsideProjection": 3.96916436,
-    "espnSimulationProjection": 6.658
-  },
-  "treveyon henderson": {
-    "espnScoreProjection": 8.425827597425434,
-    "espnLowScore": 3.355,
-    "espnHighScore": 14.384,
-    "espnOutsideProjection": 8.28081275,
-    "espnSimulationProjection": 7.581
-  },
-  "andrei iosivas": {
-    "espnScoreProjection": 9.19518231964192,
-    "espnLowScore": 4.273,
-    "espnHighScore": 17.105,
-    "espnOutsideProjection": 5.4,
-    "espnSimulationProjection": 9.081
-  },
-  "demario douglas": {
-    "espnScoreProjection": 6.8973411548268935,
-    "espnLowScore": 2.722,
-    "espnHighScore": 12.232,
-    "espnOutsideProjection": 5.96854819,
-    "espnSimulationProjection": 7.477
-  },
-  "chig okonkwo": {
-    "espnScoreProjection": 7.2526533657517085,
-    "espnLowScore": 2.704,
-    "espnHighScore": 11.53,
-    "espnOutsideProjection": 8.15306037,
-    "espnSimulationProjection": 7.117
-  },
-  "allen lazard": {
-    "espnScoreProjection": 10.197041449505106,
-    "espnLowScore": 5.262,
-    "espnHighScore": 18.256,
-    "espnOutsideProjection": 6.7,
-    "espnSimulationProjection": 10.455
-  },
-  "jahan dotson": {
-    "espnScoreProjection": 10.662026238500102,
-    "espnLowScore": 5.217,
-    "espnHighScore": 18.81,
-    "espnOutsideProjection": 7.9,
-    "espnSimulationProjection": 10.723
-  },
-  "samaje perine": {
-    "espnScoreProjection": 7.161397857209858,
-    "espnLowScore": 2.581,
-    "espnHighScore": 11.375,
-    "espnOutsideProjection": 7.14168359,
-    "espnSimulationProjection": 5.563
+  "tyler warren": {
+    "espnScoreProjection": 12.541431419627557,
+    "espnLowScore": 4.847,
+    "espnHighScore": 13.64671461,
+    "espnOutsideProjection": 13.64671461,
+    "espnSimulationProjection": 8.992
   },
   "tyrone tracy": {
-    "espnScoreProjection": 6.233164906554228,
-    "espnLowScore": 1.87,
-    "espnHighScore": 9.601,
-    "espnOutsideProjection": 5.27784241,
-    "espnSimulationProjection": 5.008
+    "espnScoreProjection": 11.544206333465766,
+    "espnLowScore": 5.032,
+    "espnHighScore": 17.424,
+    "espnOutsideProjection": 14.42318195,
+    "espnSimulationProjection": 10.494
   },
-  "darnell washington": {
-    "espnScoreProjection": 5.334930111677799,
-    "espnLowScore": 2.014,
-    "espnHighScore": 15.341,
-    "espnOutsideProjection": 5.85822702,
-    "espnSimulationProjection": 4.3
+  "travis etienne": {
+    "espnScoreProjection": 10.806448183401123,
+    "espnLowScore": 4.391,
+    "espnHighScore": 16.663,
+    "espnOutsideProjection": 13.14987767,
+    "espnSimulationProjection": 9.432
   },
-  "kavontae turpin": {
-    "espnScoreProjection": 7.567357406869331,
-    "espnLowScore": 1.749,
-    "espnHighScore": 12.982,
-    "espnOutsideProjection": 4.95945564,
-    "espnSimulationProjection": 7.366
+  "stefon diggs": {
+    "espnScoreProjection": 15.460028686942715,
+    "espnLowScore": 7.102,
+    "espnHighScore": 20.861,
+    "espnOutsideProjection": 13.13540034,
+    "espnSimulationProjection": 13.168
   },
-  "isaiah likely": {
-    "espnScoreProjection": 3.4024913632243035,
-    "espnLowScore": 1.891,
-    "espnHighScore": 9.751,
-    "espnOutsideProjection": 4.8,
-    "espnSimulationProjection": 4.023
-  },
-  "david njoku": {
-    "espnScoreProjection": 7.95588712317956,
-    "espnLowScore": 3.72,
-    "espnHighScore": 12.412,
-    "espnOutsideProjection": 10.24238674,
-    "espnSimulationProjection": 8.066
+  "tucker kraft": {
+    "espnScoreProjection": 11.355578028961009,
+    "espnLowScore": 5.573,
+    "espnHighScore": 12.841,
+    "espnOutsideProjection": 11.30610618,
+    "espnSimulationProjection": 9.204
   },
   "kareem hunt": {
-    "espnScoreProjection": 7.246566129095466,
-    "espnLowScore": 2.597,
-    "espnHighScore": 11.233,
-    "espnOutsideProjection": 7.03129136,
-    "espnSimulationProjection": 5.552
+    "espnScoreProjection": 8.961427211590077,
+    "espnLowScore": 3.56,
+    "espnHighScore": 14.885,
+    "espnOutsideProjection": 9.5851385,
+    "espnSimulationProjection": 7.959
   },
-  "sean tucker": {
-    "espnScoreProjection": 5.7678822724572285,
-    "espnLowScore": 1.826,
-    "espnHighScore": 9.207,
-    "espnOutsideProjection": 5.66146457,
-    "espnSimulationProjection": 4.83
+  "chris olave": {
+    "espnScoreProjection": 16.342586075000717,
+    "espnLowScore": 6.883,
+    "espnHighScore": 20.354,
+    "espnOutsideProjection": 14.44549042,
+    "espnSimulationProjection": 13.377
   },
-  "deandre hopkins": {
-    "espnScoreProjection": 5.115634516467068,
-    "espnLowScore": 1.881,
-    "espnHighScore": 11.363,
-    "espnOutsideProjection": 4.7,
-    "espnSimulationProjection": 4.453
+  "tee higgins": {
+    "espnScoreProjection": 14.06828291987495,
+    "espnLowScore": 7.271,
+    "espnHighScore": 20.669,
+    "espnOutsideProjection": 12.91101628,
+    "espnSimulationProjection": 13.16
   },
-  "jeremy mcnichols": {
-    "espnScoreProjection": 5.488934819558133,
-    "espnLowScore": 2.066,
-    "espnHighScore": 8.298,
-    "espnOutsideProjection": 5.57546604,
-    "espnSimulationProjection": 4.813
+  "george kittle": {
+    "espnScoreProjection": 11.357205267766052,
+    "espnLowScore": 5.34,
+    "espnHighScore": 13.75800486,
+    "espnOutsideProjection": 13.75800486,
+    "espnSimulationProjection": 9.155
   },
-  "liljordan humphrey": {
-    "espnScoreProjection": 7.430253169396082,
-    "espnLowScore": 3.9,
-    "espnHighScore": 8.467,
-    "espnOutsideProjection": 3.9,
-    "espnSimulationProjection": 7.43
+  "courtland sutton": {
+    "espnScoreProjection": 14.157777963029393,
+    "espnLowScore": 7.351,
+    "espnHighScore": 20.793,
+    "espnOutsideProjection": 12.95833573,
+    "espnSimulationProjection": 13.119
+  },
+  "rico dowdle": {
+    "espnScoreProjection": 10.533726510922472,
+    "espnLowScore": 3.239,
+    "espnHighScore": 17.432,
+    "espnOutsideProjection": 10.78807464,
+    "espnSimulationProjection": 9.68
+  },
+  "tetairoa mcmillan": {
+    "espnScoreProjection": 14.461327357193339,
+    "espnLowScore": 7.489,
+    "espnHighScore": 20.916,
+    "espnOutsideProjection": 12.87882665,
+    "espnSimulationProjection": 13.287
+  },
+  "treveyon henderson": {
+    "espnScoreProjection": 8.426205084704096,
+    "espnLowScore": 3.356,
+    "espnHighScore": 14.384,
+    "espnOutsideProjection": 8.5585658,
+    "espnSimulationProjection": 7.581
+  },
+  "xavier worthy": {
+    "espnScoreProjection": 14.063655227317554,
+    "espnLowScore": 7.27,
+    "espnHighScore": 20.668,
+    "espnOutsideProjection": 11.9710238,
+    "espnSimulationProjection": 13.158
+  },
+  "keenan allen": {
+    "espnScoreProjection": 11.84796635034338,
+    "espnLowScore": 6.925,
+    "espnHighScore": 19.245,
+    "espnOutsideProjection": 13.96398006,
+    "espnSimulationProjection": 11.99
+  },
+  "david montgomery": {
+    "espnScoreProjection": 9.80442748833292,
+    "espnLowScore": 2.394,
+    "espnHighScore": 17.925,
+    "espnOutsideProjection": 12.73858341,
+    "espnSimulationProjection": 8.761
+  },
+  "wandale robinson": {
+    "espnScoreProjection": 11.925536967939168,
+    "espnLowScore": 10.889,
+    "espnHighScore": 13.12673622,
+    "espnOutsideProjection": 13.12673622,
+    "espnSimulationProjection": 11.926
+  },
+  "khalil shakir": {
+    "espnScoreProjection": 14.327785976371361,
+    "espnLowScore": 7.459,
+    "espnHighScore": 20.873,
+    "espnOutsideProjection": 12.74032438,
+    "espnSimulationProjection": 13.245
+  },
+  "dj moore": {
+    "espnScoreProjection": 10.182234300803048,
+    "espnLowScore": 5.258,
+    "espnHighScore": 18.251,
+    "espnOutsideProjection": 12.41929391,
+    "espnSimulationProjection": 10.449
+  },
+  "romeo doubs": {
+    "espnScoreProjection": 13.295651447246032,
+    "espnLowScore": 7.457,
+    "espnHighScore": 20.169,
+    "espnOutsideProjection": 11.58732961,
+    "espnSimulationProjection": 13.002
+  },
+  "brock bowers": {
+    "espnScoreProjection": 10.774284828223745,
+    "espnLowScore": 5.173,
+    "espnHighScore": 12.65734184,
+    "espnOutsideProjection": 12.65734184,
+    "espnSimulationProjection": 9.033
+  },
+  "jordan addison": {
+    "espnScoreProjection": 13.945018705393787,
+    "espnLowScore": 7.253,
+    "espnHighScore": 20.63,
+    "espnOutsideProjection": 12.57826128,
+    "espnSimulationProjection": 13.117
+  },
+  "oronde gadsden": {
+    "espnScoreProjection": 10.149758434146776,
+    "espnLowScore": 5.014,
+    "espnHighScore": 12.11,
+    "espnOutsideProjection": 11.30167746,
+    "espnSimulationProjection": 9.031
+  },
+  "jk dobbins": {
+    "espnScoreProjection": 10.853545812012745,
+    "espnLowScore": 4.415,
+    "espnHighScore": 16.712,
+    "espnOutsideProjection": 11.33304501,
+    "espnSimulationProjection": 9.475
+  },
+  "kenneth walker": {
+    "espnScoreProjection": 11.919475864121186,
+    "espnLowScore": 5.733,
+    "espnHighScore": 17.43,
+    "espnOutsideProjection": 12.02052556,
+    "espnSimulationProjection": 11.073
+  },
+  "alvin kamara": {
+    "espnScoreProjection": 6.893760186415521,
+    "espnLowScore": 2.461,
+    "espnHighScore": 11.40025855,
+    "espnOutsideProjection": 11.40025855,
+    "espnSimulationProjection": 5.531
+  },
+  "jacory croskeymerritt": {
+    "espnScoreProjection": 10.107479304484846,
+    "espnLowScore": 3.101,
+    "espnHighScore": 17.486,
+    "espnOutsideProjection": 10.22192391,
+    "espnSimulationProjection": 9.589
+  },
+  "zach charbonnet": {
+    "espnScoreProjection": 11.33595138569866,
+    "espnLowScore": 4.936,
+    "espnHighScore": 17.288,
+    "espnOutsideProjection": 11.14767147,
+    "espnSimulationProjection": 10.381
+  },
+  "jauan jennings": {
+    "espnScoreProjection": 15.283339704527808,
+    "espnLowScore": 7.528,
+    "espnHighScore": 21.405,
+    "espnOutsideProjection": 13.34865218,
+    "espnSimulationProjection": 13.819
+  },
+  "jake ferguson": {
+    "espnScoreProjection": 9.987725297259436,
+    "espnLowScore": 4.675,
+    "espnHighScore": 11.998,
+    "espnOutsideProjection": 11.4450524,
+    "espnSimulationProjection": 8.859
+  },
+  "travis kelce": {
+    "espnScoreProjection": 11.756729238268962,
+    "espnLowScore": 5.605,
+    "espnHighScore": 13.135,
+    "espnOutsideProjection": 12.08824335,
+    "espnSimulationProjection": 9.365
+  },
+  "jameson williams": {
+    "espnScoreProjection": 13.967594415122042,
+    "espnLowScore": 7.257,
+    "espnHighScore": 20.637,
+    "espnOutsideProjection": 11.00088117,
+    "espnSimulationProjection": 13.125
+  },
+  "woody marks": {
+    "espnScoreProjection": 8.171677646903158,
+    "espnLowScore": 2.759,
+    "espnHighScore": 12.933,
+    "espnOutsideProjection": 9.7795779,
+    "espnSimulationProjection": 6.55
+  },
+  "aaron jones sr": {
+    "espnScoreProjection": 9.606053903734223,
+    "espnLowScore": 2.419,
+    "espnHighScore": 17.975,
+    "espnOutsideProjection": 10.71603331,
+    "espnSimulationProjection": 8.825
+  },
+  "sam laporta": {
+    "espnScoreProjection": 10.088038261390476,
+    "espnLowScore": 4.814,
+    "espnHighScore": 12.026,
+    "espnOutsideProjection": 11.80371636,
+    "espnSimulationProjection": 8.996
+  },
+  "tony pollard": {
+    "espnScoreProjection": 9.01307063975245,
+    "espnLowScore": 3.518,
+    "espnHighScore": 14.91,
+    "espnOutsideProjection": 9.77863702,
+    "espnSimulationProjection": 7.922
+  },
+  "tyjae spears": {
+    "espnScoreProjection": 9.347378489621033,
+    "espnLowScore": 2.41,
+    "espnHighScore": 17.89,
+    "espnOutsideProjection": 9.55203499,
+    "espnSimulationProjection": 8.787
+  },
+  "quentin johnston": {
+    "espnScoreProjection": 11.053379527265905,
+    "espnLowScore": 6.591,
+    "espnHighScore": 18.586,
+    "espnOutsideProjection": 12.3246131,
+    "espnSimulationProjection": 11.255
+  },
+  "tre tucker": {
+    "espnScoreProjection": 10.898391958682929,
+    "espnLowScore": 6.502,
+    "espnHighScore": 18.469,
+    "espnOutsideProjection": 9.37326635,
+    "espnSimulationProjection": 11.143
+  },
+  "jakobi meyers": {
+    "espnScoreProjection": 12.150557485785656,
+    "espnLowScore": 6.987,
+    "espnHighScore": 19.418,
+    "espnOutsideProjection": 11.47800373,
+    "espnSimulationProjection": 12.129
+  },
+  "kyle pitts sr": {
+    "espnScoreProjection": 9.3572857985569,
+    "espnLowScore": 3.722,
+    "espnHighScore": 11.84,
+    "espnOutsideProjection": 10.92026921,
+    "espnSimulationProjection": 7.781
+  },
+  "rashid shaheed": {
+    "espnScoreProjection": 5.598990956600243,
+    "espnLowScore": 1.708,
+    "espnHighScore": 10.83640086,
+    "espnOutsideProjection": 10.83640086,
+    "espnSimulationProjection": 5.716
+  },
+  "alec pierce": {
+    "espnScoreProjection": 11.78117932037544,
+    "espnLowScore": 6.911,
+    "espnHighScore": 19.226,
+    "espnOutsideProjection": 9.10672014,
+    "espnSimulationProjection": 11.962
+  },
+  "josh downs": {
+    "espnScoreProjection": 10.89749205357201,
+    "espnLowScore": 6.502,
+    "espnHighScore": 18.469,
+    "espnOutsideProjection": 11.07370997,
+    "espnSimulationProjection": 11.142
+  },
+  "troy franklin": {
+    "espnScoreProjection": 12.620161471453063,
+    "espnLowScore": 6.439,
+    "espnHighScore": 18.451,
+    "espnOutsideProjection": 10.55282671,
+    "espnSimulationProjection": 12.445
+  },
+  "kayshon boutte": {
+    "espnScoreProjection": 12.348346258061595,
+    "espnLowScore": 6.248,
+    "espnHighScore": 18.347,
+    "espnOutsideProjection": 9.83362633,
+    "espnSimulationProjection": 12.297
+  },
+  "keon coleman": {
+    "espnScoreProjection": 12.120154787649215,
+    "espnLowScore": 6.983,
+    "espnHighScore": 19.326,
+    "espnOutsideProjection": 9.80533006,
+    "espnSimulationProjection": 12.102
+  },
+  "darius slayton": {
+    "espnScoreProjection": 13.016928786541355,
+    "espnLowScore": 7.146,
+    "espnHighScore": 19.358,
+    "espnOutsideProjection": 10.05235818,
+    "espnSimulationProjection": 12.393
+  },
+  "zach ertz": {
+    "espnScoreProjection": 8.382991436425534,
+    "espnLowScore": 3.811,
+    "espnHighScore": 12.452,
+    "espnOutsideProjection": 9.99358777,
+    "espnSimulationProjection": 8.132
+  },
+  "chimere dike": {
+    "espnScoreProjection": 12.803553081002391,
+    "espnLowScore": 7.47,
+    "espnHighScore": 18.982,
+    "espnOutsideProjection": 10.85038952,
+    "espnSimulationProjection": 12.214
+  },
+  "parker washington": {
+    "espnScoreProjection": 11.296247049856753,
+    "espnLowScore": 6.682,
+    "espnHighScore": 18.622,
+    "espnOutsideProjection": 8.62046706,
+    "espnSimulationProjection": 11.349
+  },
+  "darnell mooney": {
+    "espnScoreProjection": 12.40947508003712,
+    "espnLowScore": 6.281,
+    "espnHighScore": 18.241,
+    "espnOutsideProjection": 9.7261309,
+    "espnSimulationProjection": 12.261
+  },
+  "dalton kincaid": {
+    "espnScoreProjection": 7.653421190229947,
+    "espnLowScore": 3.549,
+    "espnHighScore": 12.687,
+    "espnOutsideProjection": 8.96857573,
+    "espnSimulationProjection": 7.295
+  },
+  "kendrick bourne": {
+    "espnScoreProjection": 9.723994562213036,
+    "espnLowScore": 4.347,
+    "espnHighScore": 17.239,
+    "espnOutsideProjection": 9.91936376,
+    "espnSimulationProjection": 9.169
+  },
+  "theo johnson": {
+    "espnScoreProjection": 9.669913375875176,
+    "espnLowScore": 4.581,
+    "espnHighScore": 11.869,
+    "espnOutsideProjection": 10.03332838,
+    "espnSimulationProjection": 8.565
+  },
+  "jordan mason": {
+    "espnScoreProjection": 6.582900964092386,
+    "espnLowScore": 1.922,
+    "espnHighScore": 9.833,
+    "espnOutsideProjection": 6.31246739,
+    "espnSimulationProjection": 5.138
+  },
+  "christian watson": {
+    "espnScoreProjection": 6.768587274010063,
+    "espnLowScore": 2.121,
+    "espnHighScore": 11.305,
+    "espnOutsideProjection": 8.77091438,
+    "espnSimulationProjection": 5.326
+  },
+  "hunter henry": {
+    "espnScoreProjection": 8.709783873043174,
+    "espnLowScore": 4.263,
+    "espnHighScore": 13.137,
+    "espnOutsideProjection": 9.11901697,
+    "espnSimulationProjection": 7.868
+  },
+  "matthew golden": {
+    "espnScoreProjection": 11.615873677436687,
+    "espnLowScore": 6.875,
+    "espnHighScore": 19.179,
+    "espnOutsideProjection": 8.33419353,
+    "espnSimulationProjection": 11.893
+  },
+  "elic ayomanor": {
+    "espnScoreProjection": 12.205138426019143,
+    "espnLowScore": 7.002,
+    "espnHighScore": 19.549,
+    "espnOutsideProjection": 9.92400191,
+    "espnSimulationProjection": 12.197
+  },
+  "nick chubb": {
+    "espnScoreProjection": 8.039456480378739,
+    "espnLowScore": 2.94,
+    "espnHighScore": 13.062,
+    "espnOutsideProjection": 8.49274728,
+    "espnSimulationProjection": 6.474
+  },
+  "brashard smith": {
+    "espnScoreProjection": 8.375015912500345,
+    "espnLowScore": 3.35,
+    "espnHighScore": 14.4,
+    "espnOutsideProjection": 8.32971325,
+    "espnSimulationProjection": 7.581
+  },
+  "olamide zaccheaus": {
+    "espnScoreProjection": 4.335249661426612,
+    "espnLowScore": 1.009,
+    "espnHighScore": 8.72758402,
+    "espnOutsideProjection": 8.72758402,
+    "espnSimulationProjection": 2.801
+  },
+  "calvin austin": {
+    "espnScoreProjection": 12.545820285751871,
+    "espnLowScore": 6.388,
+    "espnHighScore": 18.432,
+    "espnOutsideProjection": 10.65744932,
+    "espnSimulationProjection": 12.41
+  },
+  "juwan johnson": {
+    "espnScoreProjection": 7.919082049849649,
+    "espnLowScore": 3.105,
+    "espnHighScore": 12.301,
+    "espnOutsideProjection": 8.30062059,
+    "espnSimulationProjection": 7.703
+  },
+  "rj harvey": {
+    "espnScoreProjection": 6.397698786065897,
+    "espnLowScore": 1.91,
+    "espnHighScore": 9.777,
+    "espnOutsideProjection": 6.66897608,
+    "espnSimulationProjection": 5.107
+  },
+  "samaje perine": {
+    "espnScoreProjection": 8.025343226939002,
+    "espnLowScore": 2.939,
+    "espnHighScore": 13.055,
+    "espnOutsideProjection": 8.64232843,
+    "espnSimulationProjection": 6.469
+  },
+  "chuba hubbard": {
+    "espnScoreProjection": 8.245120827628378,
+    "espnLowScore": 2.765,
+    "espnHighScore": 12.9,
+    "espnOutsideProjection": 8.59444574,
+    "espnSimulationProjection": 6.549
+  },
+  "evan engram": {
+    "espnScoreProjection": 7.440541466201172,
+    "espnLowScore": 2.735,
+    "espnHighScore": 11.594,
+    "espnOutsideProjection": 7.83723658,
+    "espnSimulationProjection": 7.165
+  },
+  "dyami brown": {
+    "espnScoreProjection": 6.008562356894473,
+    "espnLowScore": 2.071,
+    "espnHighScore": 11.166,
+    "espnOutsideProjection": 5.30154915,
+    "espnSimulationProjection": 5.372
+  },
+  "colston loveland": {
+    "espnScoreProjection": 5.45806566539985,
+    "espnLowScore": 2.145,
+    "espnHighScore": 12.104,
+    "espnOutsideProjection": 6.04551936,
+    "espnSimulationProjection": 4.846
   },
   "emanuel wilson": {
-    "espnScoreProjection": 4.859618723197748,
-    "espnLowScore": 1.575,
-    "espnHighScore": 7.65,
-    "espnOutsideProjection": 4.62516131,
-    "espnSimulationProjection": 4.253
+    "espnScoreProjection": 7.500338078560777,
+    "espnLowScore": 2.551,
+    "espnHighScore": 11.512,
+    "espnOutsideProjection": 7.18532588,
+    "espnSimulationProjection": 5.53
   },
-  "jaylin lane": {
-    "espnScoreProjection": 3.5209208,
-    "espnLowScore": -0.035,
-    "espnHighScore": 7.076,
-    "espnOutsideProjection": 3.5209208,
-    "espnSimulationProjection": 3.521
+  "xavier legette": {
+    "espnScoreProjection": 5.5787500676264195,
+    "espnLowScore": 1.701,
+    "espnHighScore": 9.718,
+    "espnOutsideProjection": 6.34605091,
+    "espnSimulationProjection": 5.709
   },
-  "taysom hill": {
-    "espnScoreProjection": 4.78056515,
-    "espnLowScore": -1.082,
-    "espnHighScore": 10.644,
-    "espnOutsideProjection": 4.78056515,
-    "espnSimulationProjection": 4.781
+  "tj hockenson": {
+    "espnScoreProjection": 7.80860379969239,
+    "espnLowScore": 3.669,
+    "espnHighScore": 12.39,
+    "espnOutsideProjection": 9.54346891,
+    "espnSimulationProjection": 8.03
   },
-  "gunnar helm": {
-    "espnScoreProjection": 7.115470147324467,
-    "espnLowScore": 2.797,
-    "espnHighScore": 11.086,
-    "espnOutsideProjection": 6.48769301,
-    "espnSimulationProjection": 6.942
+  "jalen coker": {
+    "espnScoreProjection": 8.909159255008053,
+    "espnLowScore": 3.523,
+    "espnHighScore": 13.667,
+    "espnOutsideProjection": 6.24658219,
+    "espnSimulationProjection": 8.595
   },
-  "brian robinson": {
-    "espnScoreProjection": 4.389647870095977,
-    "espnLowScore": 1.09,
-    "espnHighScore": 5.595,
-    "espnOutsideProjection": 3.47054433,
-    "espnSimulationProjection": 3.342
+  "dalton schultz": {
+    "espnScoreProjection": 5.495191501707165,
+    "espnLowScore": 2.147,
+    "espnHighScore": 12.126,
+    "espnOutsideProjection": 8.32460989,
+    "espnSimulationProjection": 4.853
   },
-  "nick westbrookikhine": {
-    "espnScoreProjection": 10.206556045702353,
-    "espnLowScore": 5.264,
-    "espnHighScore": 18.259,
-    "espnOutsideProjection": 6.5143482,
-    "espnSimulationProjection": 10.459
+  "kenneth gainwell": {
+    "espnScoreProjection": 9.207290816402335,
+    "espnLowScore": 3.402,
+    "espnHighScore": 15.008,
+    "espnOutsideProjection": 9.90963368,
+    "espnSimulationProjection": 7.859
   },
-  "juju smithschuster": {
-    "espnScoreProjection": 4.108341594937027,
-    "espnLowScore": 1.661,
-    "espnHighScore": 12.647,
-    "espnOutsideProjection": 3.14209111,
-    "espnSimulationProjection": 3.546
+  "tyler allgeier": {
+    "espnScoreProjection": 4.164394824673559,
+    "espnLowScore": 0.93,
+    "espnHighScore": 5.802,
+    "espnOutsideProjection": 5.39298701,
+    "espnSimulationProjection": 3.366
   },
-  "jatavion sanders": {
-    "espnScoreProjection": 6.175190452996803,
-    "espnLowScore": 5.139,
-    "espnHighScore": 7.212,
-    "espnOutsideProjection": 6.7,
-    "espnSimulationProjection": 6.175
+  "tory horton": {
+    "espnScoreProjection": 10.236908733678826,
+    "espnLowScore": 5.27,
+    "espnHighScore": 18.268,
+    "espnOutsideProjection": 7.1607685,
+    "espnSimulationProjection": 10.471
   },
-  "chris moore": {
-    "espnScoreProjection": 4.03943796,
-    "espnLowScore": 1.795,
-    "espnHighScore": 8.522,
-    "espnOutsideProjection": 4.03943796,
-    "espnSimulationProjection": 4.171
+  "aj barner": {
+    "espnScoreProjection": 7.31964162253615,
+    "espnLowScore": 2.736,
+    "espnHighScore": 11.615,
+    "espnOutsideProjection": 8.38092182,
+    "espnSimulationProjection": 7.176
   },
-  "jerome ford": {
-    "espnScoreProjection": 5.042223936847113,
-    "espnLowScore": 1.615,
-    "espnHighScore": 7.796,
-    "espnOutsideProjection": 4.99094277,
-    "espnSimulationProjection": 4.34
+  "jonnu smith": {
+    "espnScoreProjection": 8.834154178831632,
+    "espnLowScore": 4.443,
+    "espnHighScore": 13.245,
+    "espnOutsideProjection": 8.71905484,
+    "espnSimulationProjection": 8.032
   },
-  "luke mccaffrey": {
-    "espnScoreProjection": 2.10875152,
-    "espnLowScore": 0.785,
-    "espnHighScore": 7.539,
-    "espnOutsideProjection": 2.10875152,
-    "espnSimulationProjection": 2.511
+  "blake corum": {
+    "espnScoreProjection": 5.834295281001969,
+    "espnLowScore": 1.832,
+    "espnHighScore": 9.419,
+    "espnOutsideProjection": 5.24545779,
+    "espnSimulationProjection": 4.909
   },
-  "pat bryant": {
-    "espnScoreProjection": 4.138460198171767,
-    "espnLowScore": 1.662,
-    "espnHighScore": 12.655,
-    "espnOutsideProjection": 3.52212619,
-    "espnSimulationProjection": 3.548
+  "noah fant": {
+    "espnScoreProjection": 5.993966807521494,
+    "espnLowScore": 1.557,
+    "espnHighScore": 10.226,
+    "espnOutsideProjection": 7.03207647,
+    "espnSimulationProjection": 5.892
+  },
+  "christian kirk": {
+    "espnScoreProjection": 11.379582809797636,
+    "espnLowScore": 6.737,
+    "espnHighScore": 18.742,
+    "espnOutsideProjection": 9.095696,
+    "espnSimulationProjection": 11.452
+  },
+  "bhayshul tuten": {
+    "espnScoreProjection": 4.812995418418452,
+    "espnLowScore": 1.428,
+    "espnHighScore": 7.428,
+    "espnOutsideProjection": 4.89504024,
+    "espnSimulationProjection": 4.168
+  },
+  "michael wilson": {
+    "espnScoreProjection": 10.602486560298779,
+    "espnLowScore": 5.206,
+    "espnHighScore": 18.549,
+    "espnOutsideProjection": 7.93295625,
+    "espnSimulationProjection": 10.684
   },
   "mack hollins": {
-    "espnScoreProjection": 8.427033041146775,
-    "espnLowScore": 3.071,
-    "espnHighScore": 13.594,
-    "espnOutsideProjection": 4.5,
-    "espnSimulationProjection": 8.333
+    "espnScoreProjection": 9.943858962011177,
+    "espnLowScore": 4.832,
+    "espnHighScore": 17.517,
+    "espnOutsideProjection": 6.37096854,
+    "espnSimulationProjection": 9.747
   },
-  "brandin cooks": {
-    "espnScoreProjection": 3.7647940694908044,
-    "espnLowScore": 1.736,
-    "espnHighScore": 9.408,
-    "espnOutsideProjection": 2.64252677,
-    "espnSimulationProjection": 4.356
+  "michael carter": {
+    "espnScoreProjection": "",
+    "espnLowScore": "",
+    "espnHighScore": "",
+    "espnOutsideProjection": "",
+    "espnSimulationProjection": ""
   },
-  "tyquan thornton": {
-    "espnScoreProjection": 2.768323014140023,
-    "espnLowScore": -0.868,
-    "espnHighScore": 6.404,
-    "espnOutsideProjection": 1.9171929,
-    "espnSimulationProjection": 2.768
+  "jaylin noel": {
+    "espnScoreProjection": 3.63358249,
+    "espnLowScore": 0.082,
+    "espnHighScore": 7.185,
+    "espnOutsideProjection": 3.63358249,
+    "espnSimulationProjection": 3.634
   },
-  "kameron johnson": {
-    "espnScoreProjection": 8.612743447878255,
-    "espnLowScore": 3.209,
-    "espnHighScore": 13.745,
-    "espnOutsideProjection": 4.47794527,
-    "espnSimulationProjection": 8.477
+  "luke mccaffrey": {
+    "espnScoreProjection": 9.122254388874328,
+    "espnLowScore": 3.477,
+    "espnHighScore": 13.994,
+    "espnOutsideProjection": 5.7962355,
+    "espnSimulationProjection": 8.736
   },
-  "tommy tremble": {
-    "espnScoreProjection": 3.702052152288303,
-    "espnLowScore": -0.261,
-    "espnHighScore": 7.665,
-    "espnOutsideProjection": 3.42616089,
-    "espnSimulationProjection": 3.702
+  "chig okonkwo": {
+    "espnScoreProjection": 3.359049335622627,
+    "espnLowScore": 1.885,
+    "espnHighScore": 9.681,
+    "espnOutsideProjection": 7.97121759,
+    "espnSimulationProjection": 3.999
   },
-  "ollie gordon": {
-    "espnScoreProjection": 4.862003571409934,
-    "espnLowScore": 1.575,
-    "espnHighScore": 7.65,
-    "espnOutsideProjection": 4.56130865,
-    "espnSimulationProjection": 4.253
+  "jeremy mcnichols": {
+    "espnScoreProjection": 6.616395058221521,
+    "espnLowScore": 1.921,
+    "espnHighScore": 9.971,
+    "espnOutsideProjection": 6.6790809,
+    "espnSimulationProjection": 5.185
+  },
+  "andrei iosivas": {
+    "espnScoreProjection": 9.06550014635826,
+    "espnLowScore": 3.565,
+    "espnHighScore": 13.837,
+    "espnOutsideProjection": 5.88165702,
+    "espnSimulationProjection": 8.701
+  },
+  "van jefferson": {
+    "espnScoreProjection": 10.914116988693602,
+    "espnLowScore": 6.505,
+    "espnHighScore": 18.475,
+    "espnOutsideProjection": 7.5,
+    "espnSimulationProjection": 11.149
+  },
+  "demario douglas": {
+    "espnScoreProjection": 7.888477145316642,
+    "espnLowScore": 1.758,
+    "espnHighScore": 12.698,
+    "espnOutsideProjection": 5.45058837,
+    "espnSimulationProjection": 7.228
+  },
+  "jaylin lane": {
+    "espnScoreProjection": 9.443566445071578,
+    "espnLowScore": 4.29,
+    "espnHighScore": 17.013,
+    "espnOutsideProjection": 5.78165128,
+    "espnSimulationProjection": 9.035
+  },
+  "pat freiermuth": {
+    "espnScoreProjection": 7.031250606033436,
+    "espnLowScore": 2.768,
+    "espnHighScore": 11.05,
+    "espnOutsideProjection": 6.73163981,
+    "espnSimulationProjection": 6.909
+  },
+  "gunnar helm": {
+    "espnScoreProjection": 6.238978764408241,
+    "espnLowScore": 1.971,
+    "espnHighScore": 11.112,
+    "espnOutsideProjection": 6.18852685,
+    "espnSimulationProjection": 6.541
+  },
+  "jordan whittington": {
+    "espnScoreProjection": 8.443262136175907,
+    "espnLowScore": 3.123,
+    "espnHighScore": 13.6,
+    "espnOutsideProjection": 5.62700749,
+    "espnSimulationProjection": 8.362
+  },
+  "cooper kupp": {
+    "espnScoreProjection": 8.339588786386095,
+    "espnLowScore": 2.5,
+    "espnHighScore": 13.598,
+    "espnOutsideProjection": 10.66702628,
+    "espnSimulationProjection": 8.049
+  },
+  "devin singletary": {
+    "espnScoreProjection": 4.154818517644813,
+    "espnLowScore": 0.929,
+    "espnHighScore": 5.796,
+    "espnOutsideProjection": 5.5280282,
+    "espnSimulationProjection": 3.363
+  },
+  "chris moore": {
+    "espnScoreProjection": 10.206069172125853,
+    "espnLowScore": 5.263,
+    "espnHighScore": 18.258,
+    "espnOutsideProjection": 6.3386047,
+    "espnSimulationProjection": 10.459
+  },
+  "jaydon blue": {
+    "espnScoreProjection": 5.768914875580299,
+    "espnLowScore": 1.826,
+    "espnHighScore": 9.207,
+    "espnOutsideProjection": 5.18243175,
+    "espnSimulationProjection": 4.83
+  },
+  "roman wilson": {
+    "espnScoreProjection": 2.36564502,
+    "espnLowScore": -0.897,
+    "espnHighScore": 6.897,
+    "espnOutsideProjection": 2.36564502,
+    "espnSimulationProjection": 3
+  },
+  "jayden higgins": {
+    "espnScoreProjection": 8.305546327400908,
+    "espnLowScore": 2.104,
+    "espnHighScore": 13.668,
+    "espnOutsideProjection": 4.58486526,
+    "espnSimulationProjection": 7.886
+  },
+  "xavier hutchinson": {
+    "espnScoreProjection": 5.0134640736220675,
+    "espnLowScore": 1.873,
+    "espnHighScore": 11.272,
+    "espnOutsideProjection": 4.92148599,
+    "espnSimulationProjection": 4.421
+  },
+  "pat bryant": {
+    "espnScoreProjection": 4.02592209,
+    "espnLowScore": 1.658,
+    "espnHighScore": 12.629,
+    "espnOutsideProjection": 4.02592209,
+    "espnSimulationProjection": 3.54
+  },
+  "tyler higbee": {
+    "espnScoreProjection": 3.112486305130547,
+    "espnLowScore": 1.857,
+    "espnHighScore": 9.473,
+    "espnOutsideProjection": 5.63058922,
+    "espnSimulationProjection": 3.922
+  },
+  "brian robinson": {
+    "espnScoreProjection": 5.228918913659599,
+    "espnLowScore": 1.954,
+    "espnHighScore": 8.125,
+    "espnOutsideProjection": 4.68740843,
+    "espnSimulationProjection": 4.674
+  },
+  "devin neal": {
+    "espnScoreProjection": 2.089552434022945,
+    "espnLowScore": -0.554,
+    "espnHighScore": 4.733,
+    "espnOutsideProjection": 2.07595779,
+    "espnSimulationProjection": 2.09
+  },
+  "kavontae turpin": {
+    "espnScoreProjection": 8.383945405864871,
+    "espnLowScore": 2.515,
+    "espnHighScore": 13.633,
+    "espnOutsideProjection": 4.71428055,
+    "espnSimulationProjection": 8.074
+  },
+  "hunter long": {
+    "espnScoreProjection": -0.006005593099700763,
+    "espnLowScore": "",
+    "espnHighScore": 6.566,
+    "espnOutsideProjection": "",
+    "espnSimulationProjection": 2.042
+  },
+  "ty johnson": {
+    "espnScoreProjection": 3.166801658943873,
+    "espnLowScore": 1.722,
+    "espnHighScore": 4.611,
+    "espnOutsideProjection": 2.83969149,
+    "espnSimulationProjection": 3.167
+  },
+  "jalen nailor": {
+    "espnScoreProjection": 6.008130191139394,
+    "espnLowScore": 2.07,
+    "espnHighScore": 11.166,
+    "espnOutsideProjection": 4.9,
+    "espnSimulationProjection": 5.372
   },
   "elijah moore": {
     "espnScoreProjection": "",
@@ -1161,102 +1203,207 @@
     "espnOutsideProjection": "",
     "espnSimulationProjection": 2.35
   },
-  "jaydon blue": {
-    "espnScoreProjection": 4.077433193893986,
-    "espnLowScore": 0.919,
-    "espnHighScore": 5.753,
-    "espnOutsideProjection": 3.26171194,
-    "espnSimulationProjection": 3.336
+  "tre harris": {
+    "espnScoreProjection": 3.89279726649227,
+    "espnLowScore": 2.856,
+    "espnHighScore": 4.929,
+    "espnOutsideProjection": 3.67548529,
+    "espnSimulationProjection": 3.893
   },
-  "dawson knox": {
-    "espnScoreProjection": 3.6889701397693226,
-    "espnLowScore": -0.277,
-    "espnHighScore": 7.655,
-    "espnOutsideProjection": 3.70138818,
-    "espnSimulationProjection": 3.689
+  "elijah arroyo": {
+    "espnScoreProjection": 5.339787812731592,
+    "espnLowScore": 2.091,
+    "espnHighScore": 11.653,
+    "espnOutsideProjection": 5.42342858,
+    "espnSimulationProjection": 4.684
   },
-  "devin neal": {
-    "espnScoreProjection": 4.6706541121149545,
-    "espnLowScore": 1.336,
-    "espnHighScore": 6.986,
-    "espnOutsideProjection": 4.66355872,
-    "espnSimulationProjection": 3.236
+  "juju smithschuster": {
+    "espnScoreProjection": 3.72073495,
+    "espnLowScore": 0.171,
+    "espnHighScore": 7.271,
+    "espnOutsideProjection": 3.72073495,
+    "espnSimulationProjection": 3.721
   },
-  "jalen tolbert": {
-    "espnScoreProjection": 4.26617645,
-    "espnLowScore": 1.738,
-    "espnHighScore": 9.598,
-    "espnOutsideProjection": 4.26617645,
-    "espnSimulationProjection": 3.87
+  "taysom hill": {
+    "espnScoreProjection": 3.0846723,
+    "espnLowScore": 0.869,
+    "espnHighScore": 12.088,
+    "espnOutsideProjection": 3.0846723,
+    "espnSimulationProjection": 4.075
   },
-  "ty johnson": {
-    "espnScoreProjection": 3.1604120925856822,
-    "espnLowScore": 0.679,
-    "espnHighScore": 5.642,
-    "espnOutsideProjection": 2.70234248,
-    "espnSimulationProjection": 3.16
+  "jatavion sanders": {
+    "espnScoreProjection": 5.409509285175842,
+    "espnLowScore": 4.373,
+    "espnHighScore": 6.446,
+    "espnOutsideProjection": 5.7135872,
+    "espnSimulationProjection": 5.41
   },
-  "curtis samuel": {
-    "espnScoreProjection": -0.004611546721057505,
-    "espnLowScore": "",
-    "espnHighScore": 7.547,
-    "espnOutsideProjection": "",
-    "espnSimulationProjection": 2.348
+  "darnell washington": {
+    "espnScoreProjection": 4.4729710496754915,
+    "espnLowScore": 2.003,
+    "espnHighScore": 10.883,
+    "espnOutsideProjection": 4.39789926,
+    "espnSimulationProjection": 4.411
   },
   "demarcus robinson": {
-    "espnScoreProjection": 6.921745059297123,
-    "espnLowScore": 2.73,
-    "espnHighScore": 12.234,
-    "espnOutsideProjection": 4.4,
-    "espnSimulationProjection": 7.482
+    "espnScoreProjection": 6.199052644193582,
+    "espnLowScore": 2.12,
+    "espnHighScore": 11.262,
+    "espnOutsideProjection": 3.19307036,
+    "espnSimulationProjection": 5.461
   },
-  "chris rodriguez": {
-    "espnScoreProjection": 2.566500192136644,
-    "espnLowScore": 0.181,
-    "espnHighScore": 5.571,
-    "espnOutsideProjection": 1.81875146,
-    "espnSimulationProjection": 2.876
+  "isaac teslaa": {
+    "espnScoreProjection": 1.71688171,
+    "espnLowScore": 0.78,
+    "espnHighScore": 7.651,
+    "espnOutsideProjection": 1.71688171,
+    "espnSimulationProjection": 2.521
   },
-  "austin hooper": {
-    "espnScoreProjection": 2.2770656441562096,
-    "espnLowScore": 1.761,
-    "espnHighScore": 8.794,
-    "espnOutsideProjection": 2.1,
-    "espnSimulationProjection": 3.668
+  "jack bech": {
+    "espnScoreProjection": 6.293739943607314,
+    "espnLowScore": 2.143,
+    "espnHighScore": 11.318,
+    "espnOutsideProjection": 3.44939325,
+    "espnSimulationProjection": 5.506
+  },
+  "dawson knox": {
+    "espnScoreProjection": 3.695309816136609,
+    "espnLowScore": -0.269,
+    "espnHighScore": 7.66,
+    "espnOutsideProjection": 3.79757322,
+    "espnSimulationProjection": 3.695
+  },
+  "brandin cooks": {
+    "espnScoreProjection": 3.571736705102637,
+    "espnLowScore": 0.018,
+    "espnHighScore": 7.126,
+    "espnOutsideProjection": 2.6,
+    "espnSimulationProjection": 3.572
   },
   "noah gray": {
-    "espnScoreProjection": 3.191896979327076,
-    "espnLowScore": 1.836,
-    "espnHighScore": 9.22,
-    "espnOutsideProjection": 2.99277824,
-    "espnSimulationProjection": 3.838
+    "espnScoreProjection": 3.540200797215853,
+    "espnLowScore": 1.902,
+    "espnHighScore": 9.879,
+    "espnOutsideProjection": 3.52438809,
+    "espnSimulationProjection": 4.066
   },
-  "jimmy horn": {
-    "espnScoreProjection": 7.1782187440117795,
-    "espnLowScore": 1.875,
-    "espnHighScore": 11.499,
-    "espnOutsideProjection": 3.89859068,
-    "espnSimulationProjection": 6.687
+  "ryan flournoy": {
+    "espnScoreProjection": 2,
+    "espnLowScore": 0.797,
+    "espnHighScore": 7.12,
+    "espnOutsideProjection": 2,
+    "espnSimulationProjection": 2.454
   },
-  "roman wilson": {
-    "espnScoreProjection": 2.625829719911497,
-    "espnLowScore": -0.836,
-    "espnHighScore": 6.836,
-    "espnOutsideProjection": 1.6,
-    "espnSimulationProjection": 3
+  "tyquan thornton": {
+    "espnScoreProjection": 0.61868098,
+    "espnLowScore": 0.61868098,
+    "espnHighScore": 6.458,
+    "espnOutsideProjection": 0.61868098,
+    "espnSimulationProjection": 2.424
   },
-  "dylan sampson": {
-    "espnScoreProjection": 3.336265873042521,
-    "espnLowScore": 0.906,
-    "espnHighScore": 5.767,
-    "espnOutsideProjection": 2.44862984,
-    "espnSimulationProjection": 3.336
+  "austin hooper": {
+    "espnScoreProjection": 2.7909813487120996,
+    "espnLowScore": 1.837,
+    "espnHighScore": 9.316,
+    "espnOutsideProjection": 2.1,
+    "espnSimulationProjection": 3.865
   },
-  "john metchie": {
-    "espnScoreProjection": 0.4,
-    "espnLowScore": 0.4,
-    "espnHighScore": 7.172,
-    "espnOutsideProjection": 0.4,
-    "espnSimulationProjection": 2.503
+  "cole kmet": {
+    "espnScoreProjection": 3.9113311719410686,
+    "espnLowScore": 1.938,
+    "espnHighScore": 10.184,
+    "espnOutsideProjection": 3.9172914,
+    "espnSimulationProjection": 4.174
+  },
+  "emari demercado": {
+    "espnScoreProjection": 3.10047739,
+    "espnLowScore": 0.489,
+    "espnHighScore": 5.626,
+    "espnOutsideProjection": 3.10047739,
+    "espnSimulationProjection": 3.058
+  },
+  "greg dortch": {
+    "espnScoreProjection": 8.484018154310405,
+    "espnLowScore": 2.943,
+    "espnHighScore": 13.746,
+    "espnOutsideProjection": 4.25985366,
+    "espnSimulationProjection": 8.345
+  },
+  "michael mayer": {
+    "espnScoreProjection": 2.97727926729997,
+    "espnLowScore": 1.866,
+    "espnHighScore": 9.557,
+    "espnOutsideProjection": 3.37400517,
+    "espnSimulationProjection": 3.951
+  },
+  "terrance ferguson": {
+    "espnScoreProjection": 1.8445293542060126,
+    "espnLowScore": 1.543,
+    "espnHighScore": 7.976,
+    "espnOutsideProjection": 1.84676213,
+    "espnSimulationProjection": 3.541
+  },
+  "tommy tremble": {
+    "espnScoreProjection": 2.8773916178252463,
+    "espnLowScore": 1.846,
+    "espnHighScore": 9.398,
+    "espnOutsideProjection": 2.93625545,
+    "espnSimulationProjection": 3.894
+  },
+  "raheem mostert": {
+    "espnScoreProjection": 4.277739546667035,
+    "espnLowScore": 0.968,
+    "espnHighScore": 5.877,
+    "espnOutsideProjection": 3.59208153,
+    "espnSimulationProjection": 3.423
+  },
+  "donte thornton": {
+    "espnScoreProjection": 3.40613445,
+    "espnLowScore": 2.37,
+    "espnHighScore": 4.443,
+    "espnOutsideProjection": 3.40613445,
+    "espnSimulationProjection": 3.406
+  },
+  "liljordan humphrey": {
+    "espnScoreProjection": "",
+    "espnLowScore": "",
+    "espnHighScore": 3.885916,
+    "espnOutsideProjection": 3.885916,
+    "espnSimulationProjection": ""
+  },
+  "devaughn vele": {
+    "espnScoreProjection": 1.98698539,
+    "espnLowScore": 0.797,
+    "espnHighScore": 7.12,
+    "espnOutsideProjection": 1.98698539,
+    "espnSimulationProjection": 2.454
+  },
+  "kalif raymond": {
+    "espnScoreProjection": 1.3938119667389275,
+    "espnLowScore": 1.146,
+    "espnHighScore": 8.634,
+    "espnOutsideProjection": 1.4,
+    "espnSimulationProjection": 3.381
+  },
+  "ray davis": {
+    "espnScoreProjection": 3.1729715353739127,
+    "espnLowScore": 1.969,
+    "espnHighScore": 4.377,
+    "espnOutsideProjection": 2.28631582,
+    "espnSimulationProjection": 3.173
+  },
+  "jalen tolbert": {
+    "espnScoreProjection": 1.18438015,
+    "espnLowScore": 1.119,
+    "espnHighScore": 8.95,
+    "espnOutsideProjection": 1.18438015,
+    "espnSimulationProjection": 3.397
+  },
+  "chris rodriguez": {
+    "espnScoreProjection": 2.50966729980388,
+    "espnLowScore": 0.134,
+    "espnHighScore": 5.593,
+    "espnOutsideProjection": 1.59383967,
+    "espnSimulationProjection": 2.863
   }
 }

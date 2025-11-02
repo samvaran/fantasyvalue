@@ -1,41 +1,41 @@
 salary,consensus_total,p90_total,sim_p90,sim_mean,sim_p75,sim_p50,sim_floor,player_1_qb,player_2_rb1,player_3_rb2,player_4_wr1,player_5_wr2,player_6_wr3,player_7_te,player_8_flex,player_9_def
-60000,127.32,168.57,143.19,127.37,134.78,126.63,112.58,marcus mariota,jonathan taylor,isiah pacheco,chris olave,elic ayomanor,terry mclaurin,darnell washington,josh jacobs,colts
-59800,126.95,168.64,142.87,127.13,134.7,126.22,112.45,andy dalton,jonathan taylor,isiah pacheco,chris olave,tetairoa mcmillan,rashid shaheed,darnell washington,josh jacobs,colts
-59900,126.79,166.68,142.55,126.9,134.57,126.23,111.99,marcus mariota,jonathan taylor,isiah pacheco,chris olave,rashid shaheed,terry mclaurin,zach ertz,josh jacobs,giants
-60000,129.01,166.37,142.54,128.89,135.21,128.19,116.14,patrick mahomes,jonathan taylor,rachaad white,chris olave,elic ayomanor,jahan dotson,darnell washington,josh jacobs,colts
-60000,128.5,165.69,142.28,128.68,135.23,128.17,115.94,patrick mahomes,jonathan taylor,isiah pacheco,chris olave,rashid shaheed,chimere dike,travis kelce,josh jacobs,giants
-59800,127.84,164.76,142.06,127.79,134.62,127.13,114.46,cj stroud,jonathan taylor,rachaad white,chris olave,romeo doubs,jaylin noel,travis kelce,josh jacobs,saints
-59800,126.34,167.57,141.95,126.37,133.94,125.66,111.68,marcus mariota,jonathan taylor,isiah pacheco,chris olave,rashid shaheed,terry mclaurin,darnell washington,josh jacobs,falcons
-59700,127.93,167.28,141.91,127.97,134.61,127.42,114.84,andy dalton,jonathan taylor,rachaad white,chris olave,rashid shaheed,elic ayomanor,darnell washington,josh jacobs,patriots
-59900,128.37,166.31,141.88,128.45,135.09,127.99,115.74,cj stroud,jonathan taylor,rachaad white,chris olave,romeo doubs,elic ayomanor,zach ertz,josh jacobs,saints
-60000,128.65,166.71,141.79,128.57,135.42,127.97,115.98,patrick mahomes,jonathan taylor,isiah pacheco,chris olave,terry mclaurin,chimere dike,zach ertz,josh jacobs,saints
-59900,127.69,167.35,141.69,127.59,134.23,126.99,114.34,patrick mahomes,jonathan taylor,isiah pacheco,chris olave,romeo doubs,chimere dike,darnell washington,josh jacobs,falcons
-60000,128.95,164.08,141.65,128.97,135.26,128.6,116.72,patrick mahomes,jonathan taylor,rachaad white,chris olave,jerry jeudy,chimere dike,jonnu smith,josh jacobs,saints
-59900,128.42,165.67,141.55,128.41,134.88,127.77,115.79,patrick mahomes,jonathan taylor,rachaad white,chris olave,romeo doubs,chimere dike,darnell washington,josh jacobs,saints
-59900,127.55,168.34,141.45,127.53,134.46,126.95,114.13,andy dalton,jonathan taylor,isiah pacheco,chris olave,romeo doubs,rashid shaheed,chig okonkwo,josh jacobs,colts
-59400,125.9,165.49,141.42,125.81,133.45,124.96,110.98,andy dalton,jonathan taylor,rachaad white,chris olave,tetairoa mcmillan,jahan dotson,darnell washington,josh jacobs,colts
-59900,126.03,166.39,141.31,126.0,133.31,125.29,111.82,marcus mariota,jonathan taylor,isiah pacheco,chris olave,romeo doubs,terry mclaurin,david njoku,josh jacobs,saints
-59800,125.89,166.63,141.28,126.0,133.24,125.34,111.6,andy dalton,jonathan taylor,isiah pacheco,chris olave,tetairoa mcmillan,romeo doubs,chig okonkwo,josh jacobs,falcons
-59600,128.41,165.46,141.23,128.3,134.49,127.62,116.22,patrick mahomes,jonathan taylor,rachaad white,chris olave,rashid shaheed,elic ayomanor,darnell washington,josh jacobs,saints
-59900,127.25,167.22,141.22,127.31,134.12,126.68,114.17,patrick mahomes,jonathan taylor,isiah pacheco,chris olave,romeo doubs,rashid shaheed,darnell washington,josh jacobs,giants
-59700,127.92,166.55,141.18,127.8,134.32,127.34,114.96,patrick mahomes,jonathan taylor,isiah pacheco,chris olave,romeo doubs,elic ayomanor,jonnu smith,josh jacobs,saints
-59900,126.76,166.13,141.09,127.0,133.82,126.29,113.73,andy dalton,jonathan taylor,saquon barkley,chris olave,jaylin noel,rashid shaheed,darnell washington,josh jacobs,patriots
-59900,126.43,166.56,140.99,126.59,133.53,125.97,112.92,andy dalton,jonathan taylor,rachaad white,chris olave,romeo doubs,terry mclaurin,darnell washington,josh jacobs,giants
-60000,125.53,166.06,140.97,125.56,132.99,124.91,111.09,andy dalton,jonathan taylor,isiah pacheco,chris olave,tetairoa mcmillan,jaylen waddle,zach ertz,josh jacobs,saints
-59800,127.3,166.69,140.93,127.26,133.88,126.66,114.43,patrick mahomes,jonathan taylor,isiah pacheco,chris olave,tetairoa mcmillan,rashid shaheed,darnell washington,josh jacobs,saints
-60000,125.69,164.34,140.9,125.52,132.98,124.85,110.9,marcus mariota,jonathan taylor,jk dobbins,chris olave,terry mclaurin,jahan dotson,zach ertz,josh jacobs,falcons
-59800,125.69,165.41,140.88,125.71,133.12,125.0,111.24,andy dalton,jonathan taylor,saquon barkley,chris olave,tetairoa mcmillan,rashid shaheed,darnell washington,josh jacobs,saints
-59900,127.33,166.33,140.88,127.19,133.94,126.56,114.27,cj stroud,jonathan taylor,rachaad white,chris olave,rashid shaheed,terry mclaurin,darnell washington,josh jacobs,saints
-59900,127.08,165.73,140.88,127.1,133.9,126.59,113.98,andy dalton,jonathan taylor,rachaad white,chris olave,romeo doubs,terry mclaurin,chig okonkwo,josh jacobs,saints
-60000,126.3,168.69,140.8,126.35,133.32,125.68,112.47,dak prescott,jonathan taylor,isiah pacheco,chris olave,romeo doubs,elic ayomanor,darnell washington,josh jacobs,falcons
-59800,124.67,165.93,140.78,124.76,132.52,123.83,109.66,marcus mariota,jonathan taylor,isiah pacheco,chris olave,xavier worthy,terry mclaurin,darnell washington,josh jacobs,saints
-59800,127.11,165.42,140.78,127.21,133.69,126.63,114.42,patrick mahomes,jonathan taylor,rachaad white,chris olave,tetairoa mcmillan,rashid shaheed,darnell washington,isiah pacheco,patriots
-60000,126.89,166.09,140.77,126.94,133.75,126.31,113.7,dak prescott,jonathan taylor,rachaad white,chris olave,rashid shaheed,jerry jeudy,darnell washington,josh jacobs,saints
-60000,127.03,167.01,140.77,126.88,133.73,126.38,113.46,dak prescott,jonathan taylor,rachaad white,chris olave,romeo doubs,elic ayomanor,darnell washington,josh jacobs,saints
-59800,126.25,167.45,140.75,126.16,133.14,125.45,112.46,andy dalton,jonathan taylor,isiah pacheco,chris olave,romeo doubs,terry mclaurin,zach ertz,josh jacobs,jets
-59900,126.75,166.74,140.73,126.83,133.4,126.19,113.65,patrick mahomes,jonathan taylor,isiah pacheco,chris olave,romeo doubs,elic ayomanor,darnell washington,josh jacobs,browns
-59900,127.47,165.25,140.72,127.4,134.15,126.9,114.64,cj stroud,jonathan taylor,rachaad white,chris olave,romeo doubs,rashid shaheed,chig okonkwo,josh jacobs,saints
-60000,126.92,166.18,140.67,126.98,133.65,126.32,114.14,cj stroud,jonathan taylor,rachaad white,chris olave,romeo doubs,rashid shaheed,darnell washington,josh jacobs,jets
-60000,128.2,164.06,140.66,128.16,134.47,127.68,116.11,patrick mahomes,jonathan taylor,rachaad white,chris olave,rashid shaheed,chimere dike,mason taylor,josh jacobs,saints
-60000,126.57,165.12,140.64,126.65,133.42,126.04,113.31,patrick mahomes,jonathan taylor,isiah pacheco,terry mclaurin,chimere dike,jahan dotson,travis kelce,josh jacobs,colts
-59800,127.0,165.77,140.64,126.88,133.63,126.22,113.89,marcus mariota,jonathan taylor,rachaad white,chris olave,romeo doubs,chimere dike,darnell washington,josh jacobs,falcons
+60000,129.12,167.43,143.8,129.26,136.21,128.52,115.7,drake maye,kyle monangai,christian mccaffrey,stefon diggs,chimere dike,elic ayomanor,trey mcbride,jahmyr gibbs,rams
+60000,128.36,164.46,142.2,128.46,135.27,127.95,115.55,drake maye,christian mccaffrey,jahmyr gibbs,stefon diggs,elic ayomanor,van jefferson,kyle pitts sr,kimani vidal,rams
+59900,128.15,165.69,142.13,128.25,135.29,127.65,115.08,jaxson dart,christian mccaffrey,jahmyr gibbs,chimere dike,elic ayomanor,calvin austin,trey mcbride,david montgomery,rams
+60000,128.89,166.67,141.91,128.79,135.46,128.2,116.37,caleb williams,kyle monangai,christian mccaffrey,michael pittman,chimere dike,van jefferson,trey mcbride,jahmyr gibbs,rams
+60000,128.38,165.4,141.58,128.44,134.95,127.98,115.65,caleb williams,christian mccaffrey,jahmyr gibbs,chimere dike,tory horton,van jefferson,trey mcbride,kimani vidal,rams
+60000,127.82,164.18,141.14,127.78,134.4,127.22,115.31,jaxson dart,christian mccaffrey,jaylen warren,jakobi meyers,keon coleman,elic ayomanor,trey mcbride,jahmyr gibbs,rams
+59900,126.25,164.8,140.98,126.4,133.55,125.76,112.47,drake maye,christian mccaffrey,jahmyr gibbs,chimere dike,mack hollins,van jefferson,trey mcbride,ashton jeanty,rams
+60000,128.09,163.94,140.61,128.13,134.34,127.71,116.25,drake maye,christian mccaffrey,jahmyr gibbs,keon coleman,chimere dike,van jefferson,george kittle,kimani vidal,rams
+60000,127.26,164.38,140.54,127.27,133.65,126.66,114.87,drake maye,christian mccaffrey,kyren williams,keon coleman,elic ayomanor,van jefferson,trey mcbride,kimani vidal,rams
+59900,127.33,165.07,140.49,127.31,133.85,126.84,114.58,dak prescott,christian mccaffrey,tyrone tracy,michael pittman,elic ayomanor,van jefferson,trey mcbride,kimani vidal,rams
+60000,127.59,163.37,140.44,127.61,133.84,127.13,115.38,jaxson dart,christian mccaffrey,bijan robinson,chimere dike,elic ayomanor,van jefferson,kyle pitts sr,jahmyr gibbs,rams
+59900,125.78,164.1,140.34,125.72,132.76,124.96,111.86,sam darnold,christian mccaffrey,jahmyr gibbs,keon coleman,tory horton,van jefferson,trey mcbride,kimani vidal,rams
+59900,127.14,164.29,140.26,127.11,133.55,126.62,114.85,drake maye,christian mccaffrey,jaylen warren,michael pittman,chimere dike,van jefferson,trey mcbride,ashton jeanty,rams
+59600,127.65,163.45,140.23,127.74,133.88,127.17,115.69,jaxson dart,christian mccaffrey,jahmyr gibbs,jauan jennings,chimere dike,van jefferson,kyle pitts sr,kimani vidal,rams
+59800,126.98,163.64,139.89,127.04,133.57,126.6,114.65,patrick mahomes,christian mccaffrey,jahmyr gibbs,chimere dike,elic ayomanor,van jefferson,jonnu smith,kimani vidal,rams
+60000,127.17,162.75,139.73,127.25,133.4,126.79,115.4,drake maye,christian mccaffrey,jahmyr gibbs,khalil shakir,elic ayomanor,van jefferson,tj hockenson,kimani vidal,rams
+59900,127.04,163.6,139.68,127.14,133.43,126.67,115.08,dak prescott,christian mccaffrey,jahmyr gibbs,jauan jennings,chimere dike,van jefferson,jonnu smith,kimani vidal,rams
+59900,126.12,164.3,139.63,126.15,132.91,125.58,113.08,jaxson dart,kyle monangai,christian mccaffrey,jaxon smithnjigba,chimere dike,elic ayomanor,jonnu smith,kimani vidal,rams
+60000,127.15,162.64,139.62,127.04,133.15,126.66,114.97,caleb williams,christian mccaffrey,jahmyr gibbs,michael pittman,tory horton,van jefferson,kyle pitts sr,kimani vidal,rams
+60000,125.73,163.15,139.57,125.83,132.5,125.33,112.83,jaxson dart,christian mccaffrey,jonathan taylor,jauan jennings,elic ayomanor,van jefferson,kyle pitts sr,david montgomery,rams
+59900,125.7,164.87,139.51,125.6,132.4,125.16,112.18,patrick mahomes,kyle monangai,christian mccaffrey,michael pittman,elic ayomanor,tory horton,trey mcbride,kimani vidal,rams
+59900,126.55,163.69,139.48,126.63,132.95,126.19,114.15,drake maye,christian mccaffrey,jahmyr gibbs,stefon diggs,jauan jennings,chimere dike,jonnu smith,david montgomery,rams
+60000,124.28,163.33,139.43,124.34,131.6,123.73,110.18,josh allen,christian mccaffrey,ashton jeanty,stefon diggs,keon coleman,elic ayomanor,trey mcbride,david montgomery,rams
+59700,126.64,161.58,139.23,126.63,132.86,126.27,114.58,jaxson dart,christian mccaffrey,jahmyr gibbs,jakobi meyers,chimere dike,elic ayomanor,jonnu smith,kyren williams,rams
+59900,125.8,163.26,139.22,125.73,132.29,125.21,113.2,jaxson dart,christian mccaffrey,jahmyr gibbs,michael pittman,khalil shakir,van jefferson,jonnu smith,david montgomery,rams
+60000,125.23,164.52,139.2,125.18,132.18,124.71,111.72,dak prescott,christian mccaffrey,jahmyr gibbs,darius slayton,darnell mooney,van jefferson,trey mcbride,david montgomery,rams
+59600,125.98,162.96,139.1,126.04,132.48,125.52,113.63,patrick mahomes,christian mccaffrey,jahmyr gibbs,stefon diggs,chimere dike,elic ayomanor,kyle pitts sr,tyrone tracy,rams
+59500,124.57,160.97,139.07,124.73,131.61,124.03,111.23,sam darnold,christian mccaffrey,jahmyr gibbs,stefon diggs,elic ayomanor,tory horton,jonnu smith,kimani vidal,rams
+60000,125.69,164.12,139.05,125.62,132.3,125.22,112.66,cj stroud,christian mccaffrey,ashton jeanty,chris olave,chimere dike,van jefferson,trey mcbride,kimani vidal,rams
+59900,126.73,163.14,139.03,126.6,132.76,126.15,114.44,jaxson dart,christian mccaffrey,jahmyr gibbs,stefon diggs,elic ayomanor,van jefferson,kyle pitts sr,kyren williams,rams
+59800,126.21,161.87,139.03,126.37,132.8,125.89,114.1,caleb williams,christian mccaffrey,jahmyr gibbs,jauan jennings,chimere dike,darnell mooney,kyle pitts sr,ashton jeanty,rams
+59800,125.76,162.55,139.0,125.84,132.19,125.37,113.44,sam darnold,christian mccaffrey,jahmyr gibbs,michael pittman,elic ayomanor,van jefferson,kyle pitts sr,ashton jeanty,rams
+60000,125.84,162.24,138.95,125.82,132.33,125.45,113.17,jaxson dart,christian mccaffrey,jahmyr gibbs,chimere dike,elic ayomanor,darnell mooney,trey mcbride,kimani vidal,giants
+59900,125.57,162.53,138.86,125.62,132.11,125.05,113.13,patrick mahomes,christian mccaffrey,jahmyr gibbs,jakobi meyers,keon coleman,van jefferson,kyle pitts sr,kimani vidal,rams
+60000,125.75,163.12,138.79,125.75,132.23,125.31,113.1,dak prescott,kyle monangai,christian mccaffrey,jauan jennings,chimere dike,elic ayomanor,jonnu smith,jonathan taylor,rams
+60000,125.72,161.94,138.7,125.73,132.1,125.29,113.34,sam darnold,christian mccaffrey,jahmyr gibbs,tetairoa mcmillan,keon coleman,van jefferson,kyle pitts sr,kimani vidal,rams
+59800,125.24,162.1,138.69,125.14,131.59,124.56,112.47,jaxson dart,kyle monangai,christian mccaffrey,jakobi meyers,jauan jennings,elic ayomanor,jonnu smith,jonathan taylor,rams
+60000,125.64,162.59,138.67,125.61,132.11,125.07,112.93,jaxson dart,christian mccaffrey,jonathan taylor,keon coleman,elic ayomanor,van jefferson,kyle pitts sr,ashton jeanty,rams
+59800,125.62,162.11,138.67,125.7,132.12,125.24,113.44,joe flacco,christian mccaffrey,jahmyr gibbs,stefon diggs,calvin austin,van jefferson,kyle pitts sr,kimani vidal,rams
+60000,124.95,164.21,138.66,124.92,131.81,124.36,111.71,jaxson dart,kyle monangai,christian mccaffrey,jaxon smithnjigba,elic ayomanor,van jefferson,gunnar helm,jahmyr gibbs,rams
