@@ -28,7 +28,7 @@ N_SIMS = 10000   # Simulations per lineup
 MIN_PLAYER_DIFF = 2  # Minimum different players between lineups
 
 # Player constraints (edit these lists!)
-INCLUDE_PLAYERS = []  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
+INCLUDE_PLAYERS = ['kyle monangai', 'christian mccaffrey', 'jahmyr gibbs']  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
 EXCLUDE_PLAYERS = []  # Never use these players (e.g., ['devon achane', 'chris olave'])
 
 # Correlation coefficients (from DFS research)
@@ -93,6 +93,10 @@ def calculate_ceiling_values(players_df: pd.DataFrame) -> pd.DataFrame:
 
     result_df = pd.DataFrame(results)
     print(f'✓ Calculated ceiling values for {len(result_df)} players')
+
+    # Save to CSV
+    result_df.to_csv('player_p90_values.csv', index=False)
+    print(f'✓ Saved P90 values to player_p90_values.csv')
 
     # Show top ceiling values
     print('\nTop 10 by P90 Ceiling Value:')

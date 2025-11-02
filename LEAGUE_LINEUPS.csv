@@ -1,41 +1,41 @@
 salary,consensus_total,p90_total,sim_p90,sim_mean,sim_p75,sim_p50,sim_floor,player_1_qb,player_2_rb1,player_3_rb2,player_4_wr1,player_5_wr2,player_6_wr3,player_7_te,player_8_flex,player_9_def
 60000,129.12,167.43,143.8,129.26,136.21,128.52,115.7,drake maye,kyle monangai,christian mccaffrey,stefon diggs,chimere dike,elic ayomanor,trey mcbride,jahmyr gibbs,rams
-60000,128.36,164.46,142.2,128.46,135.27,127.95,115.55,drake maye,christian mccaffrey,jahmyr gibbs,stefon diggs,elic ayomanor,van jefferson,kyle pitts sr,kimani vidal,rams
-59900,128.15,165.69,142.13,128.25,135.29,127.65,115.08,jaxson dart,christian mccaffrey,jahmyr gibbs,chimere dike,elic ayomanor,calvin austin,trey mcbride,david montgomery,rams
-60000,128.89,166.67,141.91,128.79,135.46,128.2,116.37,caleb williams,kyle monangai,christian mccaffrey,michael pittman,chimere dike,van jefferson,trey mcbride,jahmyr gibbs,rams
-60000,128.38,165.4,141.58,128.44,134.95,127.98,115.65,caleb williams,christian mccaffrey,jahmyr gibbs,chimere dike,tory horton,van jefferson,trey mcbride,kimani vidal,rams
-60000,127.82,164.18,141.14,127.78,134.4,127.22,115.31,jaxson dart,christian mccaffrey,jaylen warren,jakobi meyers,keon coleman,elic ayomanor,trey mcbride,jahmyr gibbs,rams
-59900,126.25,164.8,140.98,126.4,133.55,125.76,112.47,drake maye,christian mccaffrey,jahmyr gibbs,chimere dike,mack hollins,van jefferson,trey mcbride,ashton jeanty,rams
-60000,128.09,163.94,140.61,128.13,134.34,127.71,116.25,drake maye,christian mccaffrey,jahmyr gibbs,keon coleman,chimere dike,van jefferson,george kittle,kimani vidal,rams
-60000,127.26,164.38,140.54,127.27,133.65,126.66,114.87,drake maye,christian mccaffrey,kyren williams,keon coleman,elic ayomanor,van jefferson,trey mcbride,kimani vidal,rams
-59900,127.33,165.07,140.49,127.31,133.85,126.84,114.58,dak prescott,christian mccaffrey,tyrone tracy,michael pittman,elic ayomanor,van jefferson,trey mcbride,kimani vidal,rams
-60000,127.59,163.37,140.44,127.61,133.84,127.13,115.38,jaxson dart,christian mccaffrey,bijan robinson,chimere dike,elic ayomanor,van jefferson,kyle pitts sr,jahmyr gibbs,rams
-59900,125.78,164.1,140.34,125.72,132.76,124.96,111.86,sam darnold,christian mccaffrey,jahmyr gibbs,keon coleman,tory horton,van jefferson,trey mcbride,kimani vidal,rams
-59900,127.14,164.29,140.26,127.11,133.55,126.62,114.85,drake maye,christian mccaffrey,jaylen warren,michael pittman,chimere dike,van jefferson,trey mcbride,ashton jeanty,rams
-59600,127.65,163.45,140.23,127.74,133.88,127.17,115.69,jaxson dart,christian mccaffrey,jahmyr gibbs,jauan jennings,chimere dike,van jefferson,kyle pitts sr,kimani vidal,rams
-59800,126.98,163.64,139.89,127.04,133.57,126.6,114.65,patrick mahomes,christian mccaffrey,jahmyr gibbs,chimere dike,elic ayomanor,van jefferson,jonnu smith,kimani vidal,rams
-60000,127.17,162.75,139.73,127.25,133.4,126.79,115.4,drake maye,christian mccaffrey,jahmyr gibbs,khalil shakir,elic ayomanor,van jefferson,tj hockenson,kimani vidal,rams
-59900,127.04,163.6,139.68,127.14,133.43,126.67,115.08,dak prescott,christian mccaffrey,jahmyr gibbs,jauan jennings,chimere dike,van jefferson,jonnu smith,kimani vidal,rams
-59900,126.12,164.3,139.63,126.15,132.91,125.58,113.08,jaxson dart,kyle monangai,christian mccaffrey,jaxon smithnjigba,chimere dike,elic ayomanor,jonnu smith,kimani vidal,rams
-60000,127.15,162.64,139.62,127.04,133.15,126.66,114.97,caleb williams,christian mccaffrey,jahmyr gibbs,michael pittman,tory horton,van jefferson,kyle pitts sr,kimani vidal,rams
-60000,125.73,163.15,139.57,125.83,132.5,125.33,112.83,jaxson dart,christian mccaffrey,jonathan taylor,jauan jennings,elic ayomanor,van jefferson,kyle pitts sr,david montgomery,rams
-59900,125.7,164.87,139.51,125.6,132.4,125.16,112.18,patrick mahomes,kyle monangai,christian mccaffrey,michael pittman,elic ayomanor,tory horton,trey mcbride,kimani vidal,rams
-59900,126.55,163.69,139.48,126.63,132.95,126.19,114.15,drake maye,christian mccaffrey,jahmyr gibbs,stefon diggs,jauan jennings,chimere dike,jonnu smith,david montgomery,rams
-60000,124.28,163.33,139.43,124.34,131.6,123.73,110.18,josh allen,christian mccaffrey,ashton jeanty,stefon diggs,keon coleman,elic ayomanor,trey mcbride,david montgomery,rams
-59700,126.64,161.58,139.23,126.63,132.86,126.27,114.58,jaxson dart,christian mccaffrey,jahmyr gibbs,jakobi meyers,chimere dike,elic ayomanor,jonnu smith,kyren williams,rams
-59900,125.8,163.26,139.22,125.73,132.29,125.21,113.2,jaxson dart,christian mccaffrey,jahmyr gibbs,michael pittman,khalil shakir,van jefferson,jonnu smith,david montgomery,rams
-60000,125.23,164.52,139.2,125.18,132.18,124.71,111.72,dak prescott,christian mccaffrey,jahmyr gibbs,darius slayton,darnell mooney,van jefferson,trey mcbride,david montgomery,rams
-59600,125.98,162.96,139.1,126.04,132.48,125.52,113.63,patrick mahomes,christian mccaffrey,jahmyr gibbs,stefon diggs,chimere dike,elic ayomanor,kyle pitts sr,tyrone tracy,rams
-59500,124.57,160.97,139.07,124.73,131.61,124.03,111.23,sam darnold,christian mccaffrey,jahmyr gibbs,stefon diggs,elic ayomanor,tory horton,jonnu smith,kimani vidal,rams
-60000,125.69,164.12,139.05,125.62,132.3,125.22,112.66,cj stroud,christian mccaffrey,ashton jeanty,chris olave,chimere dike,van jefferson,trey mcbride,kimani vidal,rams
-59900,126.73,163.14,139.03,126.6,132.76,126.15,114.44,jaxson dart,christian mccaffrey,jahmyr gibbs,stefon diggs,elic ayomanor,van jefferson,kyle pitts sr,kyren williams,rams
-59800,126.21,161.87,139.03,126.37,132.8,125.89,114.1,caleb williams,christian mccaffrey,jahmyr gibbs,jauan jennings,chimere dike,darnell mooney,kyle pitts sr,ashton jeanty,rams
-59800,125.76,162.55,139.0,125.84,132.19,125.37,113.44,sam darnold,christian mccaffrey,jahmyr gibbs,michael pittman,elic ayomanor,van jefferson,kyle pitts sr,ashton jeanty,rams
-60000,125.84,162.24,138.95,125.82,132.33,125.45,113.17,jaxson dart,christian mccaffrey,jahmyr gibbs,chimere dike,elic ayomanor,darnell mooney,trey mcbride,kimani vidal,giants
-59900,125.57,162.53,138.86,125.62,132.11,125.05,113.13,patrick mahomes,christian mccaffrey,jahmyr gibbs,jakobi meyers,keon coleman,van jefferson,kyle pitts sr,kimani vidal,rams
-60000,125.75,163.12,138.79,125.75,132.23,125.31,113.1,dak prescott,kyle monangai,christian mccaffrey,jauan jennings,chimere dike,elic ayomanor,jonnu smith,jonathan taylor,rams
-60000,125.72,161.94,138.7,125.73,132.1,125.29,113.34,sam darnold,christian mccaffrey,jahmyr gibbs,tetairoa mcmillan,keon coleman,van jefferson,kyle pitts sr,kimani vidal,rams
-59800,125.24,162.1,138.69,125.14,131.59,124.56,112.47,jaxson dart,kyle monangai,christian mccaffrey,jakobi meyers,jauan jennings,elic ayomanor,jonnu smith,jonathan taylor,rams
-60000,125.64,162.59,138.67,125.61,132.11,125.07,112.93,jaxson dart,christian mccaffrey,jonathan taylor,keon coleman,elic ayomanor,van jefferson,kyle pitts sr,ashton jeanty,rams
-59800,125.62,162.11,138.67,125.7,132.12,125.24,113.44,joe flacco,christian mccaffrey,jahmyr gibbs,stefon diggs,calvin austin,van jefferson,kyle pitts sr,kimani vidal,rams
-60000,124.95,164.21,138.66,124.92,131.81,124.36,111.71,jaxson dart,kyle monangai,christian mccaffrey,jaxon smithnjigba,elic ayomanor,van jefferson,gunnar helm,jahmyr gibbs,rams
+60000,128.89,166.67,142.29,128.96,135.68,128.54,116.04,caleb williams,kyle monangai,christian mccaffrey,michael pittman,chimere dike,van jefferson,trey mcbride,jahmyr gibbs,rams
+60000,128.31,166.92,141.95,128.4,134.84,127.91,115.72,drake maye,kyle monangai,christian mccaffrey,tetairoa mcmillan,chimere dike,van jefferson,trey mcbride,jahmyr gibbs,rams
+60000,128.22,167.02,141.91,128.29,135.01,127.75,115.42,jaxson dart,kyle monangai,christian mccaffrey,marvin harrison,chimere dike,elic ayomanor,trey mcbride,jahmyr gibbs,rams
+59800,127.76,166.07,141.74,127.83,134.59,127.33,114.8,jaxson dart,kyle monangai,christian mccaffrey,stefon diggs,jakobi meyers,chimere dike,trey mcbride,jahmyr gibbs,rams
+60000,127.9,166.74,141.64,127.92,134.58,127.36,114.96,jaxson dart,kyle monangai,christian mccaffrey,michael pittman,keon coleman,van jefferson,trey mcbride,jahmyr gibbs,rams
+60000,127.73,166.36,141.47,127.82,134.44,127.37,114.83,jaxson dart,kyle monangai,christian mccaffrey,stefon diggs,elic ayomanor,darnell mooney,trey mcbride,jahmyr gibbs,rams
+59900,127.83,165.49,141.39,127.9,134.68,127.36,115.12,caleb williams,kyle monangai,christian mccaffrey,stefon diggs,chimere dike,calvin austin,trey mcbride,jahmyr gibbs,rams
+59800,127.12,166.23,141.33,127.09,133.92,126.55,113.75,caleb williams,kyle monangai,christian mccaffrey,stefon diggs,jauan jennings,van jefferson,trey mcbride,jahmyr gibbs,rams
+59900,128.05,166.47,141.32,127.94,134.55,127.34,115.02,drake maye,kyle monangai,christian mccaffrey,keon coleman,jauan jennings,chimere dike,trey mcbride,jahmyr gibbs,rams
+60000,127.74,166.53,141.28,127.77,134.47,127.31,114.81,jaxson dart,kyle monangai,christian mccaffrey,chris olave,chimere dike,van jefferson,trey mcbride,jahmyr gibbs,rams
+59900,127.1,164.52,141.2,127.19,133.8,126.71,113.94,drake maye,kyle monangai,christian mccaffrey,stefon diggs,jauan jennings,chimere dike,george kittle,jahmyr gibbs,rams
+59900,126.94,165.69,141.04,127.05,133.87,126.47,113.9,jaxson dart,kyle monangai,christian mccaffrey,tetairoa mcmillan,calvin austin,van jefferson,trey mcbride,jahmyr gibbs,rams
+59800,127.33,166.22,140.96,127.36,134.18,126.86,114.4,dak prescott,kyle monangai,christian mccaffrey,khalil shakir,chimere dike,elic ayomanor,trey mcbride,jahmyr gibbs,rams
+60000,128.07,164.52,140.86,128.13,134.55,127.68,116.04,drake maye,kyle monangai,christian mccaffrey,michael pittman,jauan jennings,chimere dike,kyle pitts sr,jahmyr gibbs,rams
+60000,126.44,165.35,140.86,126.43,133.68,125.94,112.71,drake maye,kyle monangai,christian mccaffrey,stefon diggs,keon coleman,parker washington,trey mcbride,jahmyr gibbs,rams
+60000,126.82,163.82,140.86,126.93,133.69,126.31,113.69,drake maye,kyle monangai,christian mccaffrey,stefon diggs,chris olave,chimere dike,kyle pitts sr,jahmyr gibbs,rams
+59700,126.95,164.87,140.83,127.01,133.81,126.48,114.12,caleb williams,kyle monangai,christian mccaffrey,stefon diggs,darius slayton,elic ayomanor,trey mcbride,jahmyr gibbs,rams
+60000,127.02,163.66,140.81,126.92,133.79,126.34,113.6,drake maye,kyle monangai,christian mccaffrey,stefon diggs,michael pittman,elic ayomanor,juwan johnson,jahmyr gibbs,rams
+59800,127.1,166.09,140.77,127.1,133.9,126.49,114.01,joe flacco,kyle monangai,christian mccaffrey,michael pittman,elic ayomanor,van jefferson,trey mcbride,jahmyr gibbs,rams
+60000,127.15,165.47,140.73,127.06,133.82,126.52,114.01,caleb williams,kyle monangai,christian mccaffrey,marvin harrison,jakobi meyers,elic ayomanor,trey mcbride,jahmyr gibbs,rams
+59800,127.19,166.85,140.7,127.21,133.86,126.76,114.27,drake maye,kyle monangai,christian mccaffrey,marvin harrison,elic ayomanor,van jefferson,trey mcbride,jahmyr gibbs,rams
+59900,127.24,166.14,140.64,127.08,133.75,126.63,114.11,patrick mahomes,kyle monangai,christian mccaffrey,jakobi meyers,chimere dike,elic ayomanor,trey mcbride,jahmyr gibbs,rams
+60000,125.38,164.48,140.58,125.33,132.69,124.65,110.81,drake maye,kyle monangai,christian mccaffrey,stefon diggs,darnell mooney,mack hollins,trey mcbride,jahmyr gibbs,rams
+59900,126.08,164.66,140.58,126.01,132.89,125.37,112.3,drake maye,kyle monangai,christian mccaffrey,stefon diggs,keon coleman,chimere dike,trey mcbride,jahmyr gibbs,chargers
+60000,126.67,164.98,140.52,126.61,133.47,126.04,113.49,caleb williams,kyle monangai,christian mccaffrey,jakobi meyers,chris olave,van jefferson,trey mcbride,jahmyr gibbs,rams
+59600,127.64,163.93,140.51,127.61,133.94,127.07,115.58,jaxson dart,kyle monangai,christian mccaffrey,michael pittman,chimere dike,elic ayomanor,george kittle,jahmyr gibbs,rams
+59600,126.87,165.11,140.38,126.87,133.5,126.38,114.22,josh allen,kyle monangai,christian mccaffrey,chimere dike,elic ayomanor,van jefferson,trey mcbride,jahmyr gibbs,rams
+60000,126.62,165.84,140.35,126.58,133.56,126.07,113.3,cj stroud,kyle monangai,christian mccaffrey,drake london,chimere dike,van jefferson,trey mcbride,jahmyr gibbs,rams
+60000,126.21,165.61,140.27,126.2,133.01,125.68,113.02,dak prescott,kyle monangai,christian mccaffrey,stefon diggs,jakobi meyers,keon coleman,trey mcbride,jahmyr gibbs,rams
+59600,126.35,164.94,140.27,126.34,133.15,125.64,113.32,jaxson dart,kyle monangai,christian mccaffrey,jakobi meyers,keon coleman,jauan jennings,trey mcbride,jahmyr gibbs,rams
+60000,126.11,165.61,140.24,126.26,133.14,125.71,112.71,jaxson dart,kyle monangai,christian mccaffrey,drake london,tory horton,van jefferson,trey mcbride,jahmyr gibbs,rams
+59900,125.96,163.12,140.23,125.9,132.83,125.17,112.52,jaxson dart,kyle monangai,christian mccaffrey,justin jefferson,darius slayton,van jefferson,kyle pitts sr,jahmyr gibbs,rams
+59900,127.42,164.15,140.2,127.33,133.52,126.86,115.3,drake maye,kyle monangai,christian mccaffrey,michael pittman,jauan jennings,elic ayomanor,jonnu smith,jahmyr gibbs,rams
+60000,126.28,163.8,140.17,126.26,133.05,125.74,113.22,patrick mahomes,kyle monangai,christian mccaffrey,michael pittman,chimere dike,van jefferson,travis kelce,jahmyr gibbs,rams
+60000,126.31,165.74,140.17,126.27,133.09,125.62,113.21,dak prescott,kyle monangai,christian mccaffrey,jakobi meyers,tetairoa mcmillan,van jefferson,trey mcbride,jahmyr gibbs,rams
+60000,125.95,166.54,140.16,125.88,132.92,125.34,112.18,patrick mahomes,kyle monangai,christian mccaffrey,keon coleman,jauan jennings,van jefferson,trey mcbride,jahmyr gibbs,rams
+59900,126.68,165.25,140.15,126.64,133.24,126.14,113.78,jaxson dart,kyle monangai,christian mccaffrey,michael pittman,elic ayomanor,van jefferson,trey mcbride,jahmyr gibbs,chargers
+59500,126.13,165.2,140.14,126.36,133.28,125.85,113.26,drake maye,kyle monangai,christian mccaffrey,khalil shakir,jakobi meyers,van jefferson,trey mcbride,jahmyr gibbs,rams
+59900,126.47,165.9,140.09,126.48,133.16,125.88,113.45,cj stroud,kyle monangai,christian mccaffrey,stefon diggs,khalil shakir,chimere dike,trey mcbride,jahmyr gibbs,rams

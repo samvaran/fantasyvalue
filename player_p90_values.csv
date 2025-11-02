@@ -1,0 +1,346 @@
+name,position,team,salary,consensus,uncertainty,p90,ceiling_value_p90
+patrick mahomes,QB,KC,8500,18.36,4.66,24.66,2.901
+drake maye,QB,NE,7800,18.54,3.64,23.56,3.021
+justin herbert,QB,LAC,8100,16.32,4.15,21.6,2.667
+dak prescott,QB,DAL,7700,17.35,4.25,23.05,2.993
+caleb williams,QB,CHI,7300,17.39,3.74,21.82,2.989
+jaxson dart,QB,NYG,7400,17.65,4.03,22.7,3.067
+josh allen,QB,BUF,8900,19.1,3.61,23.99,2.695
+daniel jones,QB,IND,7900,16.08,3.82,21.51,2.723
+jordan love,QB,GB,7500,14.49,3.5,19.12,2.55
+matthew stafford,QB,LAR,7700,15.44,4.34,21.0,2.727
+jacoby brissett,QB,ARI,7200,10.67,5.77,17.34,2.409
+trevor lawrence,QB,JAC,6900,13.63,3.33,18.1,2.623
+joe flacco,QB,CIN,7200,15.94,4.2,21.41,2.974
+jared goff,QB,DET,7600,12.8,3.7,18.02,2.371
+mac jones,QB,SF,7100,10.33,5.39,17.6,2.478
+sam darnold,QB,SEA,7300,16.04,4.17,21.33,2.921
+aaron rodgers,QB,PIT,7000,14.07,3.15,18.45,2.636
+jayden daniels,QB,WAS,8600,17.49,3.77,22.65,2.633
+cj stroud,QB,HOU,6800,15.26,4.18,20.84,3.065
+jj mccarthy,QB,MIN,6700,11.34,2.97,15.28,2.281
+geno smith,QB,LV,6500,10.86,2.89,14.7,2.262
+michael penix,QB,ATL,6600,13.85,3.96,19.44,2.946
+bo nix,QB,DEN,8000,14.58,3.04,18.45,2.306
+bryce young,QB,CAR,6500,13.26,3.14,17.15,2.639
+cam ward,QB,TEN,6400,12.76,3.07,16.37,2.557
+tyler shough,QB,NO,6400,9.58,2.75,13.36,2.088
+kyler murray,QB,ARI,7200,2.3,0.0,2.3,0.319
+brock purdy,QB,SF,7100,1.7,0.0,1.7,0.239
+marcus mariota,QB,WAS,6900,0.8,0.0,0.8,0.116
+kirk cousins,QB,ATL,6300,0.7,0.0,0.7,0.111
+spencer rattler,QB,NO,6400,0.6,0.0,0.6,0.094
+andy dalton,QB,CAR,6500,0.6,0.0,0.6,0.092
+jalen milroe,QB,SEA,6000,0.5,0.0,0.5,0.083
+jake browning,QB,CIN,6000,0.5,0.0,0.5,0.083
+max brosmer,QB,MIN,6400,0.5,0.0,0.5,0.078
+mitchell trubisky,QB,BUF,6000,0.5,0.0,0.5,0.083
+joe milton,QB,DAL,6000,0.5,0.0,0.5,0.083
+russell wilson,QB,NYG,6000,0.4,0.0,0.4,0.067
+kyle monangai,RB,CHI,5200,9.54,3.66,14.61,2.809
+christian mccaffrey,RB,SF,9500,20.86,4.4,26.86,2.827
+jaylen warren,RB,PIT,6500,12.08,2.66,15.42,2.373
+bijan robinson,RB,ATL,9000,16.33,2.92,20.48,2.276
+jahmyr gibbs,RB,DET,8900,18.16,3.15,22.4,2.516
+treveyon henderson,RB,NE,5300,9.23,3.0,13.19,2.488
+jonathan taylor,RB,IND,11000,21.07,3.65,25.44,2.313
+ashton jeanty,RB,LV,7000,12.72,3.61,17.47,2.495
+tyrone tracy,RB,NYG,6000,11.2,3.3,15.36,2.559
+kareem hunt,RB,KC,5900,8.95,3.08,12.77,2.165
+kyren williams,RB,LAR,8000,14.58,2.91,18.53,2.316
+zonovan knight,RB,ARI,5900,11.15,0.0,11.15,1.89
+kimani vidal,RB,LAC,7700,15.32,2.83,18.99,2.466
+javonte williams,RB,DAL,8500,14.79,2.69,18.26,2.149
+chase brown,RB,CIN,7200,11.24,3.58,16.16,2.245
+josh jacobs,RB,GB,9400,16.71,3.05,20.87,2.22
+james cook,RB,BUF,8400,14.19,2.79,18.02,2.145
+david montgomery,RB,DET,6100,10.83,4.07,15.82,2.593
+travis etienne,RB,JAC,6800,10.55,3.27,14.68,2.159
+rico dowdle,RB,CAR,6400,9.07,3.56,13.36,2.087
+tyjae spears,RB,TEN,5400,8.27,3.85,13.14,2.433
+tony pollard,RB,TEN,5500,7.91,2.86,12.13,2.206
+zach charbonnet,RB,SEA,6100,10.27,3.11,14.48,2.374
+aaron jones sr,RB,MIN,5700,8.23,3.82,13.18,2.312
+woody marks,RB,HOU,5900,7.77,2.72,11.51,1.951
+jacory croskeymerritt,RB,WAS,6500,9.51,3.61,14.54,2.236
+alvin kamara,RB,NO,6700,6.99,2.91,10.73,1.601
+kenneth walker,RB,SEA,6800,10.63,2.94,14.43,2.122
+jk dobbins,RB,DEN,7300,9.96,3.11,14.25,1.952
+samaje perine,RB,CIN,5100,7.05,2.54,10.1,1.979
+nick chubb,RB,HOU,5700,7.33,2.57,10.46,1.835
+brashard smith,RB,KC,5600,7.56,2.76,11.12,1.985
+emanuel wilson,RB,GB,5200,6.94,2.28,9.95,1.913
+jordan mason,RB,MIN,6600,5.54,2.16,8.1,1.227
+rj harvey,RB,DEN,5800,5.74,2.04,8.73,1.505
+blake corum,RB,LAR,5100,5.64,1.92,8.24,1.616
+bhayshul tuten,RB,JAC,5000,4.49,1.58,6.69,1.338
+kenneth gainwell,RB,PIT,5500,7.39,3.01,11.24,2.043
+tyler allgeier,RB,ATL,5600,3.87,1.61,6.05,1.08
+chuba hubbard,RB,CAR,6300,6.58,2.54,9.93,1.577
+michael carter,RB,ARI,5500,5.45,0.0,5.45,0.991
+ty johnson,RB,BUF,4500,3.1,0.83,4.21,0.936
+jaydon blue,RB,DAL,4900,4.83,1.83,7.21,1.472
+jeremy mcnichols,RB,WAS,5600,5.43,2.03,8.49,1.515
+brian robinson,RB,SF,5000,4.49,1.53,6.43,1.286
+devin neal,RB,NO,4900,2.24,1.52,4.23,0.863
+devin singletary,RB,NYG,5300,3.84,1.4,5.84,1.103
+terrell jennings,RB,NE,4200,3.76,0.0,3.76,0.895
+jaret patterson,RB,LAC,4800,3.84,0.0,3.84,0.8
+emari demercado,RB,ARI,4700,2.93,1.27,4.53,0.964
+raheem mostert,RB,LV,4600,3.3,1.25,4.84,1.053
+ray davis,RB,BUF,4700,2.8,0.66,3.69,0.785
+lequint allen,RB,JAC,4200,2.32,0.0,2.32,0.552
+tyler badie,RB,DEN,4200,2.31,0.0,2.31,0.55
+travis homer,RB,CHI,4300,2.33,0.0,2.33,0.542
+kyle juszczyk,RB,SF,4200,1.93,0.0,1.93,0.46
+dernest johnson,RB,NE,4000,1.97,0.0,1.97,0.492
+chris rodriguez,RB,WAS,5700,2.45,1.4,4.27,0.749
+ameer abdullah,RB,IND,4300,2.09,0.0,2.09,0.486
+dare ogunbowale,RB,HOU,4200,1.61,0.0,1.61,0.383
+chris brooks,RB,GB,4800,1.74,0.0,1.74,0.362
+hunter luepke,RB,DAL,4200,1.11,0.0,1.11,0.264
+zavier scott,RB,MIN,4900,1.13,0.0,1.13,0.231
+trevor etienne,RB,CAR,4400,0.95,0.0,0.95,0.216
+elijah mitchell,RB,KC,4000,0.91,0.0,0.91,0.228
+tyler goodson,RB,IND,4100,0.98,0.0,0.98,0.239
+dylan laube,RB,LV,4100,0.91,0.0,0.91,0.222
+brittain brown,RB,CHI,4000,0.81,0.0,0.81,0.202
+kaleb johnson,RB,PIT,4600,0.76,0.0,0.76,0.165
+adam prentice,RB,DEN,4000,0.7,0.0,0.7,0.175
+julius chestnut,RB,TEN,4100,0.66,0.0,0.66,0.161
+tahj brooks,RB,CIN,4200,0.7,0.0,0.7,0.167
+isaac guerendo,RB,SF,4100,0.6,0.0,0.6,0.146
+reggie gilliam,RB,BUF,4000,0.6,0.0,0.6,0.15
+george holani,RB,SEA,4200,0.5,0.0,0.5,0.119
+nathan carter,RB,ATL,4700,0.47,0.0,0.47,0.1
+clyde edwardshelaire,RB,KC,4000,0.4,0.0,0.4,0.1
+dj giddens,RB,IND,4100,0.44,0.0,0.44,0.107
+jarquez hunter,RB,LAR,4000,0.44,0.0,0.44,0.11
+amar johnson,RB,LAC,4000,0.44,0.0,0.44,0.11
+dameon pierce,RB,HOU,4500,0.4,0.0,0.4,0.089
+malik davis,RB,DAL,4200,0.3,0.0,0.3,0.071
+cj ham,RB,MIN,4000,0.28,0.0,0.28,0.07
+roschon johnson,RB,CHI,4400,0.3,0.0,0.3,0.068
+cam akers,RB,MIN,4000,0.19,0.0,0.19,0.048
+dante miller,RB,NYG,4000,0.2,0.0,0.2,0.05
+jacob saylors,RB,DET,4000,0.22,0.0,0.22,0.055
+ronnie rivers,RB,LAR,4000,0.11,0.0,0.11,0.028
+jamarr chase,WR,CIN,9700,21.09,1.14,22.56,2.326
+jaxon smithnjigba,WR,SEA,9600,18.33,5.04,25.18,2.623
+stefon diggs,WR,NE,6200,12.67,3.54,17.52,2.825
+puka nacua,WR,LAR,9500,16.26,4.47,21.79,2.294
+brian thomas,WR,JAC,6900,12.13,3.2,15.92,2.307
+rashee rice,WR,KC,8200,14.07,3.61,19.15,2.336
+george pickens,WR,DAL,7400,13.16,3.48,17.74,2.397
+amonra st brown,WR,DET,9100,14.18,3.88,19.58,2.151
+marvin harrison,WR,ARI,6600,12.66,3.53,17.97,2.722
+wandale robinson,WR,NYG,5900,11.04,0.73,12.0,2.034
+ceedee lamb,WR,DAL,9100,15.92,3.89,21.42,2.354
+rome odunze,WR,CHI,8000,12.25,3.25,16.82,2.103
+drake london,WR,ATL,7700,15.03,3.6,19.51,2.534
+ladd mcconkey,WR,LAC,7800,12.62,3.43,17.13,2.197
+michael pittman,WR,IND,7200,15.17,3.27,19.36,2.688
+khalil shakir,WR,BUF,6100,12.07,3.46,16.82,2.757
+davante adams,WR,LAR,8500,13.61,3.62,17.83,2.097
+justin jefferson,WR,MIN,8700,17.62,3.4,22.07,2.537
+deebo samuel sr,WR,WAS,7200,11.3,0.0,11.3,1.569
+romeo doubs,WR,GB,6300,11.46,3.34,15.57,2.471
+jakobi meyers,WR,LV,5400,10.97,3.3,15.13,2.801
+tetairoa mcmillan,WR,CAR,6700,13.44,3.43,17.87,2.667
+keenan allen,WR,LAC,6600,11.2,3.15,15.78,2.39
+dj moore,WR,CHI,6400,10.34,3.28,15.03,2.349
+tre tucker,WR,LV,5500,10.11,3.17,14.17,2.576
+keon coleman,WR,BUF,5200,10.53,3.38,14.99,2.883
+dk metcalf,WR,PIT,7600,14.22,3.34,18.4,2.42
+nico collins,WR,HOU,7900,13.35,3.45,17.7,2.241
+jauan jennings,WR,SF,6100,12.51,3.72,17.2,2.82
+chris olave,WR,NO,7100,13.76,3.51,18.34,2.584
+xavier worthy,WR,KC,6800,11.98,3.45,16.3,2.397
+tee higgins,WR,CIN,7300,12.33,3.41,17.08,2.34
+chimere dike,WR,TEN,5300,11.78,3.18,15.8,2.981
+parker washington,WR,JAC,5300,10.01,3.33,14.36,2.709
+darius slayton,WR,NYG,5500,10.76,3.39,14.98,2.724
+rashid shaheed,WR,NO,5800,7.31,2.81,10.91,1.881
+kendrick bourne,WR,SF,5300,8.91,3.25,13.6,2.566
+alec pierce,WR,IND,5700,10.31,3.39,14.75,2.588
+elic ayomanor,WR,TEN,5200,11.44,3.5,15.63,3.006
+courtland sutton,WR,DEN,7500,12.33,3.43,16.88,2.25
+jameson williams,WR,DET,6500,11.19,3.61,16.14,2.484
+josh downs,WR,IND,5800,10.14,3.12,14.04,2.42
+troy franklin,WR,DEN,5900,10.69,3.26,15.29,2.592
+kayshon boutte,WR,NE,5900,10.42,3.28,14.87,2.52
+darnell mooney,WR,ATL,5700,11.28,3.28,15.59,2.735
+olamide zaccheaus,WR,CHI,5100,5.1,2.58,8.36,1.639
+jordan addison,WR,MIN,7400,13.05,3.44,17.73,2.396
+christian watson,WR,GB,5700,6.32,2.48,9.61,1.686
+matthew golden,WR,GB,5800,9.8,3.56,14.6,2.518
+tory horton,WR,SEA,4700,8.88,3.72,13.71,2.916
+dyami brown,WR,JAC,5100,5.79,2.34,8.96,1.758
+jalen coker,WR,CAR,4900,7.92,2.67,11.16,2.277
+quentin johnston,WR,LAC,7000,10.25,3.11,14.55,2.078
+xavier legette,WR,CAR,5100,6.04,2.02,8.89,1.743
+calvin austin,WR,PIT,5600,11.3,3.39,15.43,2.754
+mack hollins,WR,NE,4800,8.2,3.63,12.89,2.685
+jaylin noel,WR,HOU,5200,3.73,1.9,6.25,1.202
+christian kirk,WR,HOU,5600,9.64,3.6,14.31,2.556
+van jefferson,WR,TEN,4700,9.86,3.8,14.77,3.144
+michael wilson,WR,ARI,5600,8.94,3.81,13.97,2.495
+andrei iosivas,WR,CIN,4900,7.0,2.89,11.09,2.263
+demario douglas,WR,NE,5000,6.11,2.86,9.7,1.939
+pat bryant,WR,DEN,4800,4.7,2.99,8.26,1.722
+jordan whittington,WR,LAR,5100,6.49,2.92,9.77,1.916
+chris moore,WR,WAS,5000,8.33,3.96,13.91,2.783
+jaylin lane,WR,WAS,5300,7.63,3.68,12.3,2.32
+luke mccaffrey,WR,WAS,5800,7.07,2.93,10.94,1.886
+roman wilson,WR,PIT,5000,3.2,2.04,5.64,1.128
+kavontae turpin,WR,DAL,4900,6.36,3.13,10.36,2.114
+jalen nailor,WR,MIN,4800,5.66,2.34,8.54,1.779
+cooper kupp,WR,SEA,5400,7.13,3.05,11.45,2.12
+zay jones,WR,ARI,5100,4.27,0.0,4.27,0.837
+tre harris,WR,LAC,4800,3.5,0.53,4.22,0.88
+isaac teslaa,WR,DET,4200,2.73,1.93,4.9,1.166
+xavier hutchinson,WR,HOU,5400,4.95,2.42,7.76,1.438
+elijah moore,WR,BUF,4900,4.64,2.22,7.6,1.551
+jayden higgins,WR,HOU,5600,6.27,3.18,10.42,1.861
+juju smithschuster,WR,KC,5300,3.53,1.75,5.71,1.078
+jack bech,WR,LV,4600,4.91,2.55,7.77,1.688
+demarcus robinson,WR,SF,5000,4.9,2.54,7.9,1.581
+ryan flournoy,WR,DAL,4300,2.77,1.71,4.81,1.118
+brandin cooks,WR,NO,4700,3.46,1.77,5.6,1.191
+liljordan humphrey,WR,NYG,4400,2.52,1.35,4.33,0.985
+donte thornton,WR,LV,4500,3.12,0.52,3.82,0.848
+tyquan thornton,WR,KC,4900,2.23,1.8,4.32,0.882
+greg dortch,WR,ARI,4800,6.19,3.31,9.85,2.053
+devaughn vele,WR,NO,4500,2.96,1.69,5.27,1.172
+kalif raymond,WR,DET,4500,2.85,2.22,5.43,1.207
+malik heath,WR,GB,4400,2.44,0.0,2.44,0.555
+savion williams,WR,GB,4300,2.33,0.0,2.33,0.542
+jimmy horn,WR,CAR,4400,2.65,0.0,2.65,0.602
+jalen tolbert,WR,DAL,4800,2.92,2.35,5.1,1.063
+tyrell shavers,WR,BUF,4300,2.32,0.0,2.32,0.54
+curtis samuel,WR,BUF,4500,2.32,0.0,2.32,0.516
+devin duvernay,WR,CHI,4000,1.83,0.0,1.83,0.458
+adam thielen,WR,MIN,4500,2.21,0.0,2.21,0.491
+david sills v,WR,ATL,4600,2.23,0.0,2.23,0.485
+beaux collins,WR,NYG,4500,1.92,0.0,1.92,0.427
+khadarel hodge,WR,ATL,4700,2.11,0.0,2.11,0.449
+ashton dulin,WR,IND,4200,1.61,0.0,1.61,0.383
+trent sherfield sr,WR,DEN,4000,1.4,0.0,1.4,0.35
+kyle williams,WR,NE,4100,1.41,0.0,1.41,0.344
+adonai mitchell,WR,IND,4700,1.41,0.0,1.41,0.3
+jordan watkins,WR,SF,4300,1.31,0.0,1.31,0.305
+konata mumpfield,WR,LAR,4400,1.27,0.0,1.27,0.289
+marvin mims,WR,DEN,5000,1.4,0.0,1.4,0.28
+skyy moore,WR,SF,4200,1.11,0.0,1.11,0.264
+cody white,WR,SEA,4000,1.01,0.0,1.01,0.252
+braxton berrios,WR,HOU,4500,1.01,0.0,1.01,0.224
+rayray mccloud,WR,NYG,4800,0.91,0.0,0.91,0.19
+ben skowronek,WR,PIT,4600,0.67,0.0,0.67,0.146
+austin trammell,WR,JAC,4000,0.5,0.0,0.5,0.125
+robbie chosen,WR,WAS,4600,0.5,0.0,0.5,0.109
+xavier smith,WR,LAR,4300,0.29,0.0,0.29,0.067
+brycen tremayne,WR,CAR,4100,0.22,0.0,0.22,0.054
+trey mcbride,TE,ARI,7000,13.25,3.99,18.17,2.596
+george kittle,TE,SF,6000,10.16,2.53,13.69,2.281
+tucker kraft,TE,GB,6200,9.55,2.17,12.38,1.997
+tyler warren,TE,IND,6700,10.25,2.75,13.54,2.021
+kyle pitts sr,TE,ATL,5100,8.63,2.2,11.85,2.324
+sam laporta,TE,DET,5500,8.56,2.07,11.35,2.064
+travis kelce,TE,KC,5800,9.67,2.11,12.46,2.149
+oronde gadsden,TE,LAC,6400,8.77,2.02,11.55,1.805
+zach ertz,TE,WAS,5300,8.01,2.23,11.17,2.107
+brock bowers,TE,LV,6800,9.47,2.21,12.44,1.83
+dalton kincaid,TE,BUF,5400,7.44,2.3,10.46,1.936
+theo johnson,TE,NYG,5300,8.18,1.92,10.81,2.039
+hunter henry,TE,NE,5300,8.02,2.23,10.83,2.043
+jake ferguson,TE,DAL,6700,8.89,2.09,11.58,1.728
+colston loveland,TE,CHI,4800,5.81,2.58,9.24,1.924
+juwan johnson,TE,NO,5100,7.76,2.28,10.84,2.126
+evan engram,TE,DEN,5000,6.74,2.2,9.4,1.88
+dalton schultz,TE,HOU,4900,6.11,2.64,9.38,1.915
+tj hockenson,TE,MIN,5200,8.04,2.25,10.84,2.084
+jonnu smith,TE,PIT,5100,8.32,2.29,11.65,2.284
+noah fant,TE,CIN,5000,5.65,2.17,8.38,1.677
+aj barner,TE,SEA,5200,6.76,2.25,9.67,1.86
+chig okonkwo,TE,TEN,4700,5.32,2.26,8.14,1.731
+gunnar helm,TE,TEN,4600,6.23,2.31,9.18,1.996
+tyler higbee,TE,LAR,4700,4.28,2.06,6.82,1.451
+hunter long,TE,JAC,4500,3.29,2.41,6.07,1.35
+pat freiermuth,TE,PIT,5200,6.64,2.13,9.41,1.81
+elijah arroyo,TE,SEA,4800,5.14,2.5,8.3,1.73
+jatavion sanders,TE,CAR,4800,5.27,0.7,6.07,1.266
+darnell washington,TE,PIT,4800,5.1,2.35,8.11,1.69
+dawson knox,TE,BUF,4300,3.45,1.95,5.9,1.372
+taysom hill,TE,NO,5000,4.63,3.02,8.37,1.675
+austin hooper,TE,NE,4400,3.6,2.16,6.23,1.415
+tommy tremble,TE,CAR,4500,4.07,2.11,7.05,1.568
+noah gray,TE,KC,4900,4.04,2.17,7.01,1.431
+terrance ferguson,TE,LAR,4600,2.99,1.89,5.58,1.213
+tanner hudson,TE,CIN,4200,2.64,0.0,2.64,0.629
+cole kmet,TE,CHI,4900,4.24,2.24,7.56,1.544
+michael mayer,TE,LV,5000,3.85,2.13,6.61,1.322
+davis allen,TE,LAR,4300,2.34,0.0,2.34,0.544
+elijah higgins,TE,ARI,4400,2.43,0.0,2.43,0.552
+colby parkinson,TE,LAR,4500,2.15,0.0,2.15,0.478
+brock wright,TE,DET,4300,2.04,0.0,2.04,0.474
+johnny mundt,TE,JAC,4300,2.03,0.0,2.03,0.472
+adam trautman,TE,DEN,4200,1.92,0.0,1.92,0.457
+luke schoonmaker,TE,DAL,4300,1.93,0.0,1.93,0.449
+jackson hawes,TE,BUF,4300,1.92,0.0,1.92,0.447
+mo aliecox,TE,IND,4100,1.72,0.0,1.72,0.42
+jake tonges,TE,SF,4700,1.93,0.0,1.93,0.411
+mitchell evans,TE,CAR,4200,1.88,0.0,1.88,0.448
+drew sample,TE,CIN,4300,1.71,0.0,1.71,0.398
+luke musgrave,TE,GB,4600,1.77,0.0,1.77,0.385
+john bates,TE,WAS,4400,1.72,0.0,1.72,0.391
+foster moreau,TE,NO,4100,1.66,0.0,1.66,0.405
+harrison bryant,TE,HOU,4300,1.52,0.0,1.52,0.353
+connor heyward,TE,PIT,4100,1.55,0.0,1.55,0.378
+john fitzpatrick,TE,GB,4500,1.46,0.0,1.46,0.324
+chris manhertz,TE,NYG,4000,1.33,0.0,1.33,0.332
+luke farrell,TE,SF,4100,1.31,0.0,1.31,0.32
+charlie woerner,TE,ATL,4200,1.44,0.0,1.44,0.343
+drew ogletree,TE,IND,4100,1.2,0.0,1.2,0.293
+daniel bellinger,TE,NYG,4600,1.3,0.0,1.3,0.283
+ben sinnott,TE,WAS,4500,1.21,0.0,1.21,0.269
+tyler conklin,TE,LAC,4400,1.16,0.0,1.16,0.264
+thomas fidone,TE,NYG,4000,1.01,0.0,1.01,0.252
+tucker fisk,TE,LAC,4000,0.97,0.0,0.97,0.242
+brevyn spannford,TE,DAL,4100,0.91,0.0,0.91,0.222
+nate adkins,TE,DEN,4200,0.9,0.0,0.9,0.214
+josh oliver,TE,MIN,4300,0.88,0.0,0.88,0.205
+durham smythe,TE,CHI,4000,0.71,0.0,0.71,0.178
+jack stoll,TE,NO,4100,0.77,0.0,0.77,0.188
+ian thomas,TE,LV,4000,0.5,0.0,0.5,0.125
+teagan quitoriano,TE,ATL,4000,0.55,0.0,0.55,0.138
+josiah deguara,TE,ARI,4000,0.5,0.0,0.5,0.125
+will dissly,TE,LAC,4100,0.49,0.0,0.49,0.12
+ben yurosek,TE,MIN,4300,0.56,0.0,0.56,0.13
+david martinrobinson,TE,TEN,4100,0.44,0.0,0.44,0.107
+robert tonyan,TE,KC,4400,0.4,0.0,0.4,0.091
+rams,D,LAR,4900,12.88,0.0,12.88,2.629
+bengals,D,CIN,3000,4.56,0.0,4.56,1.52
+jaguars,D,JAC,4100,7.7,0.0,7.7,1.878
+lions,D,DET,4600,8.6,0.0,8.6,1.87
+giants,D,NYG,3300,6.1,0.0,6.1,1.848
+chargers,D,LAC,4800,10.75,0.0,10.75,2.24
+broncos,D,DEN,4500,7.8,0.0,7.8,1.733
+raiders,D,LV,3400,5.8,0.0,5.8,1.706
+falcons,D,ATL,3600,6.1,0.0,6.1,1.694
+texans,D,HOU,3900,6.5,0.0,6.5,1.667
+titans,D,TEN,3000,4.0,0.0,4.0,1.333
+packers,D,GB,5000,10.0,0.0,10.0,2.0
+commanders,D,WAS,3700,5.9,0.0,5.9,1.595
+vikings,D,MIN,3500,4.4,0.0,4.4,1.257
+saints,D,NO,3200,4.0,0.0,4.0,1.25
+bears,D,CHI,4000,6.2,0.0,6.2,1.55
+cowboys,D,DAL,3800,5.7,0.0,5.7,1.5
+seahawks,D,SEA,4500,6.7,0.0,6.7,1.489
+chiefs,D,KC,3700,5.5,0.0,5.5,1.486
+colts,D,IND,4200,6.2,0.0,6.2,1.476
+cardinals,D,ARI,3400,5.0,0.0,5.0,1.471
+patriots,D,NE,4700,6.8,0.0,6.8,1.447
+bills,D,BUF,3800,4.4,0.0,4.4,1.158
+49ers,D,SF,4400,6.3,0.0,6.3,1.432
+steelers,D,PIT,4300,4.48,0.0,4.48,1.042
+panthers,D,CAR,3100,3.04,0.0,3.04,0.981
