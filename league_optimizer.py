@@ -29,7 +29,7 @@ MIN_PLAYER_DIFF = 2  # Minimum different players between lineups
 
 # Player constraints (edit these lists!)
 INCLUDE_PLAYERS = []  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
-EXCLUDE_PLAYERS = ['stefon diggs']  # Never use these players (e.g., ['devon achane', 'chris olave'])
+EXCLUDE_PLAYERS = []  # Never use these players (e.g., ['devon achane', 'chris olave'])
 
 # Correlation coefficients (from DFS research)
 CORRELATIONS = {
@@ -49,11 +49,11 @@ CORRELATIONS = {
 # ============================================================================
 
 def calculate_ceiling_values(players_df: pd.DataFrame) -> pd.DataFrame:
-    """Calculate P90 ceiling values for all players using log-normal simulation."""
+    """Calculate P90 ceiling values for all players using exact log-normal quantile."""
     print('=' * 80)
-    print('STEP 1: CALCULATING P90 CEILING VALUES')
+    print('STEP 1: CALCULATING P90 CEILING VALUES (EXACT)')
     print('=' * 80)
-    print(f'\nSimulating {len(players_df)} players...')
+    print(f'\nCalculating P90 for {len(players_df)} players...')
 
     results = []
 
@@ -74,10 +74,10 @@ def calculate_ceiling_values(players_df: pd.DataFrame) -> pd.DataFrame:
             mu = np.log(mean) - sigma_squared / 2
             sigma = np.sqrt(sigma_squared)
 
-            # Simulate
-            samples = np.random.lognormal(mu, sigma, 1000)  # Quick 1k sims per player
-            samples = np.maximum(samples, 0)
-            p90 = np.percentile(samples, 90)
+            # Direct calculation: P90 = exp(mu + sigma * z_0.90)
+            # where z_0.90 ≈ 1.2816 (90th percentile of standard normal)
+            z90 = 1.2815515655446004
+            p90 = np.exp(mu + sigma * z90)
             ceiling_value = p90 / (salary / 1000)
 
         results.append({

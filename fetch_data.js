@@ -1263,7 +1263,7 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
       consensus = parseFloat(adjustedConsensus.toFixed(2));
       uncertainty = parseFloat(uncertainty.toFixed(2));
 
-      // Calculate P90 ceiling value using log-normal distribution
+      // Calculate P90 ceiling value using log-normal distribution (exact, no simulation needed)
       let p90 = 0;
       let ceilingValue = 0;
 
@@ -1275,20 +1275,10 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
         const mu = Math.log(mean) - sigmaSquared / 2;
         const sigma = Math.sqrt(sigmaSquared);
 
-        // Quick simulation: generate 1000 samples from log-normal
-        const samples = [];
-        for (let i = 0; i < 1000; i++) {
-          // Box-Muller transform for normal random
-          const u1 = Math.random();
-          const u2 = Math.random();
-          const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-          const logNormalSample = Math.exp(mu + sigma * z);
-          samples.push(Math.max(logNormalSample, 0));
-        }
-
-        // Calculate 90th percentile
-        samples.sort((a, b) => a - b);
-        p90 = parseFloat(samples[Math.floor(samples.length * 0.9)].toFixed(2));
+        // Direct calculation: P90 = exp(mu + sigma * z_0.90)
+        // where z_0.90 ≈ 1.2816 (90th percentile of standard normal)
+        const z90 = 1.2815515655446004; // More precise value
+        p90 = parseFloat(Math.exp(mu + sigma * z90).toFixed(2));
         ceilingValue = parseFloat((p90 / (p.salary / 1000)).toFixed(3));
       }
 
