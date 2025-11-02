@@ -1263,6 +1263,35 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
       consensus = parseFloat(adjustedConsensus.toFixed(2));
       uncertainty = parseFloat(uncertainty.toFixed(2));
 
+      // Calculate P90 ceiling value using log-normal distribution
+      let p90 = 0;
+      let ceilingValue = 0;
+
+      if (consensus > 0 && p.salary > 0) {
+        const mean = consensus;
+        const std = uncertainty;
+        const variance = std * std;
+        const sigmaSquared = Math.log(1 + variance / (mean * mean));
+        const mu = Math.log(mean) - sigmaSquared / 2;
+        const sigma = Math.sqrt(sigmaSquared);
+
+        // Quick simulation: generate 1000 samples from log-normal
+        const samples = [];
+        for (let i = 0; i < 1000; i++) {
+          // Box-Muller transform for normal random
+          const u1 = Math.random();
+          const u2 = Math.random();
+          const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+          const logNormalSample = Math.exp(mu + sigma * z);
+          samples.push(Math.max(logNormalSample, 0));
+        }
+
+        // Calculate 90th percentile
+        samples.sort((a, b) => a - b);
+        p90 = parseFloat(samples[Math.floor(samples.length * 0.9)].toFixed(2));
+        ceilingValue = parseFloat((p90 / (p.salary / 1000)).toFixed(3));
+      }
+
       // Reorder fields to match desired column order
       return {
         name: p.name,
@@ -1280,6 +1309,8 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
         espnSimulationProjection,
         consensus,
         uncertainty,
+        p90,
+        ceilingValue,
         projTeamPts: p.projTeamPts,
         projOppPts: p.projOppPts,
         tdOdds: p.tdOdds,
