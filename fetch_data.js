@@ -1300,22 +1300,22 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
         game: p.game,
         salary: p.salary,
         value: p.value,
-        injury: p.injury,
+        ceilingValue,
+        consensus,
+        p90,
         fpProjPts: p.fpProjPts,
         espnScoreProjection,
         espnLowScore,
         espnHighScore,
         espnOutsideProjection,
         espnSimulationProjection,
-        consensus,
         uncertainty,
-        p90,
-        ceilingValue,
         projTeamPts: p.projTeamPts,
         projOppPts: p.projOppPts,
         tdOdds: p.tdOdds,
         tdProbability: p.tdProbability,
         espnId: p.espnId,
+        injury: p.injury,
       };
     });
   });
@@ -1376,7 +1376,10 @@ async function writeCsvs(players) {
       allData = [...allData, ...data];
     }
 
-    console.log(`Writing ${data.length} ${pos}s to fanduel-${pos}.csv`);
+    // Sort by ceiling value (descending)
+    data.sort((a, b) => (b.ceilingValue || 0) - (a.ceilingValue || 0));
+
+    console.log(`Writing ${data.length} ${pos}s to fanduel-${pos}.csv (sorted by ceiling value)`);
 
     const header = Object.keys(data[0]).map((k) => {
       return { id: k, title: k };
