@@ -154,7 +154,17 @@ async function scrapeFantasyProsTable(url, pos) {
 
   const headers = url.includes("dst.php")
     ? ["rank", "wsis", "name", "opp", "matchup", "grade", "fpProjPts"]
-    : ["rank", "wsis", "name", "opp", "upside", "bust", "matchup", "grade", "fpProjPts"];
+    : [
+        "rank",
+        "wsis",
+        "name",
+        "opp",
+        "upside",
+        "bust",
+        "matchup",
+        "grade",
+        "fpProjPts",
+      ];
 
   let rows = $("#ranking-table > tbody > tr.player-row")
     .toArray()
@@ -194,9 +204,15 @@ async function fetchFantasyProsProjections() {
 
   const positions = {
     QB: { url: "https://www.fantasypros.com/nfl/rankings/qb.php" },
-    RB: { url: "https://www.fantasypros.com/nfl/rankings/half-point-ppr-rb.php" },
-    WR: { url: "https://www.fantasypros.com/nfl/rankings/half-point-ppr-wr.php" },
-    TE: { url: "https://www.fantasypros.com/nfl/rankings/half-point-ppr-te.php" },
+    RB: {
+      url: "https://www.fantasypros.com/nfl/rankings/half-point-ppr-rb.php",
+    },
+    WR: {
+      url: "https://www.fantasypros.com/nfl/rankings/half-point-ppr-wr.php",
+    },
+    TE: {
+      url: "https://www.fantasypros.com/nfl/rankings/half-point-ppr-te.php",
+    },
     D: { url: "https://www.fantasypros.com/nfl/rankings/dst.php" },
   };
 
@@ -282,41 +298,42 @@ async function addFanduelSalaries(players) {
 function getTeamAbbreviation(teamName) {
   // Map normalized team names to NFL abbreviations
   const teamMap = {
-    'cardinals': 'ARI',
-    'falcons': 'ATL',
-    'ravens': 'BAL',
-    'bills': 'BUF',
-    'panthers': 'CAR',
-    'bears': 'CHI',
-    'bengals': 'CIN',
-    'browns': 'CLE',
-    'cowboys': 'DAL',
-    'broncos': 'DEN',
-    'lions': 'DET',
-    'packers': 'GB',
-    'texans': 'HOU',
-    'colts': 'IND',
-    'jaguars': 'JAX',
-    'chiefs': 'KC',
-    'raiders': 'LV',
-    'chargers': 'LAC',
-    'rams': 'LAR',
-    'dolphins': 'MIA',
-    'vikings': 'MIN',
-    'patriots': 'NE',
-    'saints': 'NO',
-    'giants': 'NYG',
-    'jets': 'NYJ',
-    'eagles': 'PHI',
-    'steelers': 'PIT',
-    'seahawks': 'SEA',
-    'ers': 'SF', // 49ers -> ers
-    'buccaneers': 'TB',
-    'titans': 'TEN',
-    'commanders': 'WAS',
+    cardinals: "ARI",
+    falcons: "ATL",
+    ravens: "BAL",
+    bills: "BUF",
+    panthers: "CAR",
+    bears: "CHI",
+    bengals: "CIN",
+    browns: "CLE",
+    cowboys: "DAL",
+    broncos: "DEN",
+    lions: "DET",
+    packers: "GB",
+    texans: "HOU",
+    colts: "IND",
+    jaguars: "JAX",
+    chiefs: "KC",
+    raiders: "LV",
+    chargers: "LAC",
+    rams: "LAR",
+    dolphins: "MIA",
+    vikings: "MIN",
+    patriots: "NE",
+    saints: "NO",
+    giants: "NYG",
+    jets: "NYJ",
+    eagles: "PHI",
+    steelers: "PIT",
+    seahawks: "SEA",
+    "49ers": "SF", // 49ers
+    ers: "SF", // fallback
+    buccaneers: "TB",
+    titans: "TEN",
+    commanders: "WAS",
   };
 
-  return teamMap[teamName] || '';
+  return teamMap[teamName] || "";
 }
 
 function parseTeamName(line) {
@@ -337,33 +354,154 @@ function parseTeamName(line) {
 }
 
 function parseGameLinesText(text) {
-  const lines = text.split("\n").map((l) => l.trim()).filter((l) => l.length > 0);
+  const lines = text
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l.length > 0);
 
   const games = [];
   let i = 0;
   let gamesFound = 0;
+  let inTodaySection = false;
+  let inTomorrowSection = false;
+  let currentGameTime = null;
+
+  // Helper: Check if time is at or after 10:00 AM PT (1:00 PM ET)
+  // Automatically adjusts for local timezone
+  function isValidGameTime(timeStr) {
+    const match = timeStr.match(/^(\d{1,2}):(\d{2})\s+(AM|PM)/);
+    if (!match) return true; // If no time, assume valid
+
+    let hour = parseInt(match[1]);
+    const minute = parseInt(match[2]);
+    const meridiem = match[3];
+
+    // Convert to 24-hour format
+    if (meridiem === "PM" && hour !== 12) hour += 12;
+    if (meridiem === "AM" && hour === 12) hour = 0;
+
+    // Get timezone offset difference (local to PT)
+    const now = new Date();
+    const localOffset = now.getTimezoneOffset(); // minutes from UTC (negative for behind UTC)
+
+    // PT is UTC-8 in PST, UTC-7 in PDT
+    // We'll use a simple heuristic: check if we're in DST
+    const jan = new Date(now.getFullYear(), 0, 1);
+    const jul = new Date(now.getFullYear(), 6, 1);
+    const isDST =
+      now.getTimezoneOffset() <
+      Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+    const ptOffset = isDST ? 420 : 480; // PDT = UTC-7 (420), PST = UTC-8 (480)
+
+    // Convert local time to PT time in minutes from midnight
+    const localMinutes = hour * 60 + minute;
+    const offsetDiff = ptOffset - localOffset; // How many minutes to add to local to get PT
+    const ptMinutes = localMinutes + offsetDiff;
+    const ptHour = Math.floor((ptMinutes % 1440) / 60); // Wrap around day boundary
+    const ptMin = ptMinutes % 60;
+
+    // Check if at or after 10:00 AM PT
+    const afterCutoff = ptHour > 10 || (ptHour === 10 && ptMin >= 0);
+
+    console.log(
+      `  Time check: ${timeStr} → ${ptHour}:${ptMin
+        .toString()
+        .padStart(2, "0")} PT → ${
+        afterCutoff ? "INCLUDE" : "SKIP (before 10 AM PT)"
+      }`
+    );
+    return afterCutoff;
+  }
 
   while (i < lines.length) {
     const line = lines[i];
 
-    if (line === "Today" || line.match(/^\d{1,2}:\d{2}\s+(AM|PM)/)) {
-      // Track we're in the current week section
+    // Track section markers
+    if (line === "Today") {
+      inTodaySection = true;
+      inTomorrowSection = false;
+      console.log(`  Entering TODAY section`);
+      i++;
+      continue;
+    }
+
+    if (line === "Tomorrow") {
+      inTodaySection = false;
+      inTomorrowSection = true;
+      console.log(`  Entering TOMORROW section`);
+      i++;
+      continue;
+    }
+
+    // Capture game time when we see it (format: "Today 10:00 AM" or "Tomorrow 1:00 PM")
+    const timeMatch = line.match(
+      /^(Today|Tomorrow)\s+(\d{1,2}:\d{2}\s+(?:AM|PM))/
+    );
+    if (timeMatch) {
+      currentGameTime = timeMatch[2];
+      // Don't skip - might have section marker
+      if (timeMatch[1] === "Today") {
+        inTodaySection = true;
+        inTomorrowSection = false;
+      } else if (timeMatch[1] === "Tomorrow") {
+        inTodaySection = false;
+        inTomorrowSection = true;
+      }
+      i++;
+      continue;
+    }
+
+    // Also capture standalone time
+    if (line.match(/^\d{1,2}:\d{2}\s+(AM|PM)$/)) {
+      currentGameTime = line;
+      i++;
+      continue;
+    }
+
+    // Stop after processing main slate (when we see future dates)
+    if (line.match(/^[A-Z][a-z]{2}\s+[A-Z][a-z]{2}\s+\d{1,2}(st|nd|rd|th)/)) {
+      console.log(
+        `  Stopping at future date "${line}" after finding ${gamesFound} games`
+      );
+      break;
     }
 
     // Stop conditions
     if (gamesFound > 0) {
-      if (line === "Tomorrow") {
-        console.log(`  Stopping at "Tomorrow" section after finding ${gamesFound} games`);
-        break;
-      }
-      if (gamesFound >= 17) {
-        console.log(`  Stopping after finding ${gamesFound} games (max week limit)`);
-        break;
-      }
       if (line.startsWith("GAME LINES") || line === "LIVE BLITZ ⚡") {
-        console.log(`  Stopping at section "${line}" after finding ${gamesFound} games`);
+        console.log(
+          `  Stopping at section "${line}" after finding ${gamesFound} games`
+        );
         break;
       }
+      // Stop after collecting main slate (usually 12-14 games for a typical Sunday + Monday)
+      // Once we've processed Tomorrow section and found games, stop at the first future date
+      if (inTomorrowSection && gamesFound >= 12) {
+        const nextFewLines = lines.slice(i, i + 5).join(" ");
+        // Check if we're approaching another date section
+        if (
+          nextFewLines.match(
+            /[A-Z][a-z]{2}\s+[A-Z][a-z]{2}\s+\d{1,2}(st|nd|rd|th)/
+          )
+        ) {
+          console.log(
+            `  Stopping after Tomorrow section with ${gamesFound} games (approaching future week)`
+          );
+          break;
+        }
+      }
+      if (gamesFound >= 14) {
+        console.log(
+          `  Stopping after finding ${gamesFound} games (main slate complete)`
+        );
+        break;
+      }
+    }
+
+    // Only process games in Today or Tomorrow sections
+    if (!inTodaySection && !inTomorrowSection) {
+      i++;
+      continue;
     }
 
     // Skip headers
@@ -382,8 +520,8 @@ function parseGameLinesText(text) {
       continue;
     }
 
-    // Look for team names
-    const teamPattern = /^[A-Z]{2,3}\s+[A-Za-z]+/;
+    // Look for team names (including "49ers" which starts with a digit)
+    const teamPattern = /^[A-Z]{2,3}\s+[A-Za-z0-9]+/;
 
     if (teamPattern.test(lines[i])) {
       const team1 = parseTeamName(lines[i]);
@@ -454,8 +592,20 @@ function parseGameLinesText(text) {
         i++;
       }
 
-      // Create game entries
+      // Create game entries (but only if time is valid)
       if (team1Spread !== null && team2Spread !== null && total !== null) {
+        // Skip games before 10 AM PT if in Today section
+        if (
+          inTodaySection &&
+          currentGameTime &&
+          !isValidGameTime(currentGameTime)
+        ) {
+          console.log(
+            `  Skipping ${team1} vs ${team2} (before 10 AM PT cutoff)`
+          );
+          continue;
+        }
+
         const calculateTeamPoints = (total, spread, isFavorite) => {
           const absSpread = Math.abs(spread);
           if (isFavorite) {
@@ -476,7 +626,11 @@ function parseGameLinesText(text) {
           opponent_abbr: team2Abbr,
           spread: team1Spread,
           total: total,
-          projected_pts: calculateTeamPoints(total, team1Spread, team1IsFavorite),
+          projected_pts: calculateTeamPoints(
+            total,
+            team1Spread,
+            team1IsFavorite
+          ),
         });
 
         const team2IsFavorite = team2Spread < 0;
@@ -487,7 +641,11 @@ function parseGameLinesText(text) {
           opponent_abbr: team1Abbr,
           spread: team2Spread,
           total: total,
-          projected_pts: calculateTeamPoints(total, team2Spread, team2IsFavorite),
+          projected_pts: calculateTeamPoints(
+            total,
+            team2Spread,
+            team2IsFavorite
+          ),
         });
 
         gamesFound++;
@@ -506,7 +664,8 @@ async function fetchGameLines(shouldFetch = true) {
   if (shouldFetch) {
     console.log("  Fetching from DraftKings...");
 
-    const url = "https://sportsbook.draftkings.com/leagues/football/nfl?category=game-lines&subcategory=game";
+    const url =
+      "https://sportsbook.draftkings.com/leagues/football/nfl?category=game-lines&subcategory=game";
 
     const browser = await launch({
       headless: true,
@@ -518,29 +677,73 @@ async function fetchGameLines(shouldFetch = true) {
     await page.goto(url, { waitUntil: "load", timeout: 0 });
     await delay(3000);
 
+    console.log("  Scrolling to load all games...");
+
+    // Scroll down multiple times to ensure all games are loaded
+    await page.evaluate(async () => {
+      await new Promise((resolve) => {
+        let totalHeight = 0;
+        const distance = 500;
+        const timer = setInterval(() => {
+          const scrollHeight = document.body.scrollHeight;
+          window.scrollBy(0, distance);
+          totalHeight += distance;
+
+          if (totalHeight >= scrollHeight) {
+            clearInterval(timer);
+            resolve();
+          }
+        }, 200);
+      });
+    });
+
+    await delay(2000); // Wait for lazy-loaded content
+
     console.log("  Extracting text...");
 
     const copiedText = await page.evaluate(() => {
-      const selectors = [
+      // Target the specific class that contains all game lines
+      const element = document.querySelector(".cms-market-selector-content");
+
+      if (element && element.innerText) {
+        console.log(
+          `Found .cms-market-selector-content with ${element.innerText.length} chars`
+        );
+        return element.innerText;
+      }
+
+      // Fallback to old selectors if specific class not found
+      const fallbackSelectors = [
         '[class*="parlay-card"]',
         '[class*="sportsbook-content"]',
         'main [class*="sportsbook"]',
-        '.sportsbook-wrapper__body',
+        ".sportsbook-wrapper__body",
         '[data-testid="event-list"]',
       ];
 
-      for (const selector of selectors) {
-        const element = document.querySelector(selector);
-        if (element && element.innerText.length > 1000) {
-          return element.innerText;
+      for (const selector of fallbackSelectors) {
+        const el = document.querySelector(selector);
+        if (el && el.innerText.length > 1000) {
+          console.log(
+            `Fallback: Found content with selector: ${selector}, length: ${el.innerText.length}`
+          );
+          return el.innerText;
         }
       }
 
+      console.log("Using document.body.innerText as last resort");
       return document.body.innerText;
     });
 
     await browser.close();
     console.log("  CLOSED", url);
+
+    // Debug: Save raw scraped text
+    const fs = await import("fs/promises");
+    await fs.writeFile("./game_lines_raw.txt", copiedText);
+    console.log(
+      `  Saved raw scraped text to game_lines_raw.txt (${copiedText.length} chars)`
+    );
 
     const games = parseGameLinesText(copiedText);
     console.log(`  Found ${games.length / 2} games`);
@@ -579,7 +782,8 @@ async function fetchAndCacheTdOdds(shouldFetch = true) {
   if (shouldFetch) {
     console.log("  Fetching from DraftKings...");
 
-    const url = "https://sportsbook.draftkings.com/leagues/football/nfl?category=td-scorers&subcategory=td-scorer";
+    const url =
+      "https://sportsbook.draftkings.com/leagues/football/nfl?category=td-scorers&subcategory=td-scorer";
 
     const browser = await launch({
       headless: true,
@@ -666,19 +870,22 @@ async function fetchEspnPlayerList() {
    */
   console.log("  Fetching ESPN player list from API...");
 
-  const url = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025/players?scoringPeriodId=0&view=players_wl&platformVersion=6c0d90bbc8abfb789ccf5f8728b6459da4b18c82";
+  const url =
+    "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025/players?scoringPeriodId=0&view=players_wl&platformVersion=6c0d90bbc8abfb789ccf5f8728b6459da4b18c82";
 
   const headers = {
     "X-Fantasy-Filter": '{"filterActive":{"value":true}}',
     "sec-ch-ua-platform": '"macOS"',
-    "Referer": "https://fantasy.espn.com/",
-    "sec-ch-ua": '"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"',
+    Referer: "https://fantasy.espn.com/",
+    "sec-ch-ua":
+      '"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"',
     "X-Fantasy-Platform": "espn-fantasy-web",
     "sec-ch-ua-mobile": "?0",
     "X-Fantasy-Source": "kona",
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
-    "Accept": "application/json",
-    "DNT": "1",
+    "User-Agent":
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+    Accept: "application/json",
+    DNT: "1",
   };
 
   try {
@@ -838,7 +1045,11 @@ async function fetchAndCacheEspnProjections(players, shouldFetch = true) {
       return !isNaN(fpProjPts) && fpProjPts >= 2.5;
     });
 
-    console.log(`  Filtered out ${originalCount - allPlayers.length} players with < 2.5 fpProjPts`);
+    console.log(
+      `  Filtered out ${
+        originalCount - allPlayers.length
+      } players with < 2.5 fpProjPts`
+    );
     console.log(`  Fetching for ${allPlayers.length} players\n`);
 
     allPlayers.sort((a, b) => {
@@ -875,9 +1086,12 @@ async function fetchAndCacheEspnProjections(players, shouldFetch = true) {
 
       // Rate limiting
       if (i < allPlayers.length - 1) {
-        const delayTime = ESPN_MIN_DELAY + Math.random() * (ESPN_MAX_DELAY - ESPN_MIN_DELAY);
+        const delayTime =
+          ESPN_MIN_DELAY + Math.random() * (ESPN_MAX_DELAY - ESPN_MIN_DELAY);
         if ((i + 1) % ESPN_BATCH_SIZE === 0) {
-          console.log(`\n  --- Batch complete. Taking ${ESPN_BATCH_BREAK}s break ---\n`);
+          console.log(
+            `\n  --- Batch complete. Taking ${ESPN_BATCH_BREAK}s break ---\n`
+          );
           await delay(ESPN_BATCH_BREAK * 1000);
         } else {
           await delay(delayTime * 1000);
@@ -885,7 +1099,9 @@ async function fetchAndCacheEspnProjections(players, shouldFetch = true) {
       }
     }
 
-    console.log(`\n  Fetched ESPN projections: ${playersWithEspn}/${allPlayers.length}`);
+    console.log(
+      `\n  Fetched ESPN projections: ${playersWithEspn}/${allPlayers.length}`
+    );
 
     // Cache to JSON
     const fs = await import("fs/promises");
@@ -904,7 +1120,10 @@ async function fetchAndCacheEspnProjections(players, shouldFetch = true) {
 async function addEspnProjections(players, shouldFetch = true) {
   console.log("\n=== STEP 6: ESPN Projections ===\n");
 
-  const projectionsByPlayer = await fetchAndCacheEspnProjections(players, shouldFetch);
+  const projectionsByPlayer = await fetchAndCacheEspnProjections(
+    players,
+    shouldFetch
+  );
 
   // Add projections to players
   Object.keys(players).forEach((pos) => {
@@ -965,7 +1184,8 @@ async function addGameLinesData(players) {
     const teamAbbr = line.team_abbr;
     const oppAbbr = line.opponent_abbr;
     if (gameLinesByTeamAbbr[teamAbbr] && gameLinesByTeamAbbr[oppAbbr]) {
-      gameLinesByTeamAbbr[teamAbbr].projOppPts = gameLinesByTeamAbbr[oppAbbr].projTeamPts;
+      gameLinesByTeamAbbr[teamAbbr].projOppPts =
+        gameLinesByTeamAbbr[oppAbbr].projTeamPts;
     }
   });
 
@@ -1007,7 +1227,8 @@ function addAnalysis(players) {
 
       let value = salary > 0 ? (projPts / (salary / 1000)).toFixed(2) : "0";
       let tdProbSigmoid = (sigmoid(d.tdProbability / 100) * 100).toFixed(2);
-      let tdValue = salary > 0 ? (tdProbSigmoid / (salary / 1000)).toFixed(2) : "0";
+      let tdValue =
+        salary > 0 ? (tdProbSigmoid / (salary / 1000)).toFixed(2) : "0";
 
       return {
         name: d.name,
@@ -1072,20 +1293,20 @@ function linearRegression(xValues, yValues) {
     const predicted = intercept + slope * xValues[i];
     return sum + Math.pow(y - predicted, 2);
   }, 0);
-  const r2 = 1 - (ssResidual / ssTotal);
+  const r2 = 1 - ssResidual / ssTotal;
 
   return { intercept, slope, r2 };
 }
 
 async function loadOrBuildModels(players, shouldBuild = false) {
-  if (!shouldBuild && await pathExists("./regression_models.csv")) {
+  if (!shouldBuild && (await pathExists("./regression_models.csv"))) {
     // Load existing models
     console.log("  Loading models from regression_models.csv...");
     const data = await readFile("./regression_models.csv");
     const modelData = await neatCsv(data);
 
     const models = {};
-    modelData.forEach(row => {
+    modelData.forEach((row) => {
       models[row.model] = {
         intercept: parseFloat(row.intercept),
         slope: parseFloat(row.slope),
@@ -1103,46 +1324,64 @@ async function loadOrBuildModels(players, shouldBuild = false) {
   // Flatten all players with both FP and ESPN data
   let trainingData = [];
   Object.keys(players).forEach((pos) => {
-    if (pos !== 'FLEX') {
-      players[pos].data.forEach(p => {
-        if (p.fpProjPts && p.espnOutsideProjection &&
-            p.espnScoreProjection && p.espnSimulationProjection) {
+    if (pos !== "FLEX") {
+      players[pos].data.forEach((p) => {
+        if (
+          p.fpProjPts &&
+          p.espnOutsideProjection &&
+          p.espnScoreProjection &&
+          p.espnSimulationProjection
+        ) {
           trainingData.push(p);
         }
       });
     }
   });
 
-  console.log(`  Training data: ${trainingData.length} players with both FP and ESPN projections\n`);
+  console.log(
+    `  Training data: ${trainingData.length} players with both FP and ESPN projections\n`
+  );
 
   // Build regression models (apples-to-apples: primary projections only)
   const models = {};
 
   // Model 1: espnOutsideProjection → fpProjPts
   models.espnOutside = linearRegression(
-    trainingData.map(p => p.espnOutsideProjection),
-    trainingData.map(p => p.fpProjPts)
+    trainingData.map((p) => p.espnOutsideProjection),
+    trainingData.map((p) => p.fpProjPts)
   );
   console.log(`  Model: espnOutsideProjection → fpProjPts`);
-  console.log(`    fpProjPts = ${models.espnOutside.intercept.toFixed(3)} + ${models.espnOutside.slope.toFixed(3)} * espnOutside`);
+  console.log(
+    `    fpProjPts = ${models.espnOutside.intercept.toFixed(
+      3
+    )} + ${models.espnOutside.slope.toFixed(3)} * espnOutside`
+  );
   console.log(`    R² = ${models.espnOutside.r2.toFixed(3)}\n`);
 
   // Model 2: espnScoreProjection → fpProjPts
   models.espnScore = linearRegression(
-    trainingData.map(p => p.espnScoreProjection),
-    trainingData.map(p => p.fpProjPts)
+    trainingData.map((p) => p.espnScoreProjection),
+    trainingData.map((p) => p.fpProjPts)
   );
   console.log(`  Model: espnScoreProjection → fpProjPts`);
-  console.log(`    fpProjPts = ${models.espnScore.intercept.toFixed(3)} + ${models.espnScore.slope.toFixed(3)} * espnScore`);
+  console.log(
+    `    fpProjPts = ${models.espnScore.intercept.toFixed(
+      3
+    )} + ${models.espnScore.slope.toFixed(3)} * espnScore`
+  );
   console.log(`    R² = ${models.espnScore.r2.toFixed(3)}\n`);
 
   // Model 3: espnSimulationProjection → fpProjPts
   models.espnSim = linearRegression(
-    trainingData.map(p => p.espnSimulationProjection),
-    trainingData.map(p => p.fpProjPts)
+    trainingData.map((p) => p.espnSimulationProjection),
+    trainingData.map((p) => p.fpProjPts)
   );
   console.log(`  Model: espnSimulationProjection → fpProjPts`);
-  console.log(`    fpProjPts = ${models.espnSim.intercept.toFixed(3)} + ${models.espnSim.slope.toFixed(3)} * espnSim`);
+  console.log(
+    `    fpProjPts = ${models.espnSim.intercept.toFixed(
+      3
+    )} + ${models.espnSim.slope.toFixed(3)} * espnSim`
+  );
   console.log(`    R² = ${models.espnSim.r2.toFixed(3)}\n`);
 
   return models;
@@ -1156,7 +1395,7 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
   // Apply models to convert all ESPN projections to fpProjPts scale
   // REPLACE original ESPN columns with converted versions
   Object.keys(players).forEach((pos) => {
-    if (pos === 'FLEX') return;
+    if (pos === "FLEX") return;
 
     players[pos].data = players[pos].data.map((p) => {
       // Convert ESPN projections using learned models, REPLACING originals
@@ -1168,116 +1407,288 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
 
       if (p.espnOutsideProjection) {
         // Use espnOutside model for Outside, Low, High (same underlying model)
-        espnOutsideProjection = parseFloat((models.espnOutside.intercept + models.espnOutside.slope * p.espnOutsideProjection).toFixed(2));
-        espnLowScore = parseFloat((models.espnOutside.intercept + models.espnOutside.slope * p.espnLowScore).toFixed(2));
-        espnHighScore = parseFloat((models.espnOutside.intercept + models.espnOutside.slope * p.espnHighScore).toFixed(2));
+        espnOutsideProjection = parseFloat(
+          (
+            models.espnOutside.intercept +
+            models.espnOutside.slope * p.espnOutsideProjection
+          ).toFixed(2)
+        );
+        espnLowScore = parseFloat(
+          (
+            models.espnOutside.intercept +
+            models.espnOutside.slope * p.espnLowScore
+          ).toFixed(2)
+        );
+        espnHighScore = parseFloat(
+          (
+            models.espnOutside.intercept +
+            models.espnOutside.slope * p.espnHighScore
+          ).toFixed(2)
+        );
       }
 
       if (p.espnScoreProjection) {
-        espnScoreProjection = parseFloat((models.espnScore.intercept + models.espnScore.slope * p.espnScoreProjection).toFixed(2));
+        espnScoreProjection = parseFloat(
+          (
+            models.espnScore.intercept +
+            models.espnScore.slope * p.espnScoreProjection
+          ).toFixed(2)
+        );
       }
 
       if (p.espnSimulationProjection) {
-        espnSimulationProjection = parseFloat((models.espnSim.intercept + models.espnSim.slope * p.espnSimulationProjection).toFixed(2));
+        espnSimulationProjection = parseFloat(
+          (
+            models.espnSim.intercept +
+            models.espnSim.slope * p.espnSimulationProjection
+          ).toFixed(2)
+        );
       }
 
-      // Calculate consensus and uncertainty (all in fpProjPts scale)
-      const projections_fp_scale = [
-        p.fpProjPts,
-        espnOutsideProjection,
-        espnLowScore,
-        espnHighScore,
-        espnScoreProjection,
-        espnSimulationProjection,
-      ].filter(v => v !== null && v !== "" && !isNaN(v));
+      // ========================================================================
+      // ASYMMETRIC DISTRIBUTION MODELING WITH PLAYER ARCHETYPES
+      // ========================================================================
 
-      let consensus = null;
+      // Step 1: Build weighted consensus from median projections only
+      // (Exclude Low/High as they are bounds, not expectations)
+      const medianProjections = [];
+      const projectionWeights = [];
+
+      if (p.fpProjPts) {
+        medianProjections.push(p.fpProjPts);
+        projectionWeights.push(2.0); // FantasyPros is consensus of experts
+      }
+      if (espnOutsideProjection) {
+        medianProjections.push(espnOutsideProjection);
+        projectionWeights.push(2.0); // IBM Watson AI gets high weight
+      }
+      if (espnScoreProjection) {
+        medianProjections.push(espnScoreProjection);
+        projectionWeights.push(1.0); // ESPN median
+      }
+      if (espnSimulationProjection) {
+        medianProjections.push(espnSimulationProjection);
+        projectionWeights.push(1.0); // ESPN Monte Carlo
+      }
+
+      let baseConsensus = null;
+      if (medianProjections.length > 0) {
+        const weightedSum = medianProjections.reduce(
+          (sum, proj, i) => sum + proj * projectionWeights[i],
+          0
+        );
+        const weightSum = projectionWeights.reduce((sum, w) => sum + w, 0);
+        baseConsensus = parseFloat((weightedSum / weightSum).toFixed(2));
+      }
+
+      // Step 2: Calculate player archetype metrics from ESPN boom/bust data
+      // LOW floorVariance (0.1-0.3) = stable floor, can't bust hard
+      // HIGH floorVariance (0.6-1.0) = risky floor, can bust hard
+      // LOW ceilingVariance (0.3-0.5) = limited upside
+      // HIGH ceilingVariance (1.0-2.0) = explosive upside potential
+      let floorVariance = 0.3; // Default moderate variance
+      let ceilingVariance = 0.7; // Default moderate upside
+
+      if (baseConsensus && espnLowScore && espnHighScore) {
+        const floorDistance = baseConsensus - espnLowScore;
+        const ceilingDistance = espnHighScore - baseConsensus;
+
+        floorVariance = Math.max(
+          0.1,
+          Math.min(1.0, floorDistance / baseConsensus)
+        );
+        ceilingVariance = Math.max(
+          0.3,
+          Math.min(2.0, ceilingDistance / baseConsensus)
+        );
+      }
+
+      // Step 3: Lock consensus projection (factors already baked in)
+      // Only apply minimal conservative adjustments to avoid double-counting
+      let consensus = baseConsensus;
       let uncertainty = null;
 
-      if (projections_fp_scale.length > 0) {
-        consensus = parseFloat((projections_fp_scale.reduce((sum, v) => sum + v, 0) / projections_fp_scale.length).toFixed(2));
-
-        if (projections_fp_scale.length > 1) {
-          const variance = projections_fp_scale.reduce((sum, v) => sum + Math.pow(v - consensus, 2), 0) / projections_fp_scale.length;
-          uncertainty = parseFloat(Math.sqrt(variance).toFixed(2));
-        } else {
-          uncertainty = 0;
-        }
+      // Step 4: Calculate game pace factor (more possessions = higher TD realization)
+      let gamePaceFactor = 1.0;
+      if (p.projTeamPts && p.projOppPts) {
+        const total = Number(p.projTeamPts) + Number(p.projOppPts);  // Force numeric addition
+        // Normalize around 47 (league average total)
+        // High-scoring game (52+) = 1.1x pace, low-scoring (42-) = 0.9x pace
+        gamePaceFactor = 0.85 + (total - 42) * 0.025; // Linear scaling
+        gamePaceFactor = Math.max(0.8, Math.min(1.2, gamePaceFactor));
       }
 
-      // Apply TD odds and game script adjustments to consensus
-      let adjustedConsensus = consensus;
+      // Step 5: Build deterministic FLOOR model
+      // Floor = projection × (1 - floorVariance × gameScriptPenalty × (1 - smallTdBoost))
+      // Low floorVariance (stable) = floor stays close to projection
+      // High floorVariance (risky) = floor can drop significantly in bad game scripts
+      let floor = baseConsensus * (1 - floorVariance); // Start with base floor
 
-      // TD Odds boost - ONLY for skill positions (RB, WR, TE)
-      // Exclude QBs and Defenses
-      if (consensus && p.tdProbability && p.tdProbability > 0) {
-        if (p.position === 'RB' || p.position === 'WR' || p.position === 'TE') {
-          // TD Odds boost: Higher TD probability = higher boost
-          // Scale: 20% TD prob = +10% boost, 40% = +20% boost, 60% = +30% boost
-          const tdBoost = (p.tdProbability / 100) * 0.5; // Max 50% boost at 100% TD prob
-          adjustedConsensus = consensus * (1 + tdBoost);
+      if (p.projTeamPts && p.projOppPts) {
+        const spread = Number(p.projTeamPts) - Number(p.projOppPts);
 
-          // Also increase uncertainty for high TD probability players (more variance)
-          if (uncertainty) {
-            uncertainty = uncertainty * (1 + tdBoost * 0.5);
-          }
-        }
-      }
-
-      // Game script adjustments
-      if (adjustedConsensus && p.projTeamPts && p.projOppPts) {
-        const spread = p.projTeamPts - p.projOppPts;
-        const total = p.projTeamPts + p.projOppPts;
-
-        if (p.position === 'RB') {
-          // RBs benefit from positive game script (team winning = more rush attempts)
-          if (spread > 3) {
-            adjustedConsensus *= 1.08; // +8% boost for RBs on favored teams
-          } else if (spread < -3) {
-            adjustedConsensus *= 0.94; // -6% penalty for RBs on trailing teams
-          }
-        } else if (p.position === 'WR' || p.position === 'TE') {
-          // Pass catchers benefit from negative game script (team trailing = more pass attempts)
+        if (p.position === "RB") {
+          // RBs: game script is critical for floor
+          // Traditional RBs (high variance) lose floor when trailing
           if (spread < -3) {
-            adjustedConsensus *= 1.10; // +10% boost for pass catchers on trailing teams
+            // Trailing: floor drops proportional to variance
+            const floorPenalty = floorVariance * 0.20; // Up to 20% floor drop
+            floor *= 1 - floorPenalty;
+          } else if (spread > 3) {
+            // Favored: stable floors get small boost (guaranteed volume)
+            const floorBoost = (1 - floorVariance) * 0.05; // Up to 5% for stable
+            floor *= 1 + floorBoost;
+          }
+        } else if (p.position === "WR" || p.position === "TE") {
+          // WRs/TEs: trailing helps floor, heavy favorite hurts
+          if (spread < -3) {
+            // Trailing: stable floors get boost (guaranteed targets)
+            const floorBoost = (1 - floorVariance) * 0.08;
+            floor *= 1 + floorBoost;
           } else if (spread > 7) {
-            adjustedConsensus *= 0.96; // -4% penalty when team is heavily favored (run-heavy)
-          }
-        } else if (p.position === 'QB') {
-          // QBs benefit from high-scoring games
-          if (total > 50) {
-            adjustedConsensus *= 1.08; // +8% boost for QBs in shootouts
-          } else if (total < 42) {
-            adjustedConsensus *= 0.95; // -5% penalty for QBs in low-scoring games
-          }
-        } else if (p.position === 'D') {
-          // Defenses benefit from facing weak offenses
-          if (p.projOppPts < 18) {
-            adjustedConsensus *= 1.25; // +25% boost for defenses vs weak offenses
-          } else if (p.projOppPts > 26) {
-            adjustedConsensus *= 0.80; // -20% penalty vs strong offenses
+            // Heavy favorite: risky floors suffer (reduced pass volume)
+            const floorPenalty = floorVariance * 0.12;
+            floor *= 1 - floorPenalty;
           }
         }
       }
 
-      consensus = parseFloat(adjustedConsensus.toFixed(2));
-      uncertainty = parseFloat(uncertainty.toFixed(2));
+      // Small TD boost to floor for skill positions (TDs are bonus, not guaranteed)
+      if (
+        p.tdProbability &&
+        p.tdProbability > 0 &&
+        ["RB", "WR", "TE"].includes(p.position)
+      ) {
+        const tdConfidence = p.tdProbability / 100;
+        // Low variance players benefit more (they're in scoring position reliably)
+        const floorTdBoost = tdConfidence * 0.05 * (1 - floorVariance); // Max 5%
+        floor *= 1 + floorTdBoost;
+      }
 
-      // Calculate P90 ceiling value using log-normal distribution (exact, no simulation needed)
+      // Safety: floor can't go below 40% of consensus
+      floor = Math.max(floor, baseConsensus * 0.4);
+
+      // Step 6: Build deterministic CEILING model
+      // Ceiling = projection × (1 + ceilingVariance × gameScriptBoost × tdOdds × gamePace)
+      // High ceilingVariance (explosive) = ceiling expands significantly in good environments
+      // Low ceilingVariance (limited) = ceiling stays closer to projection
+      let ceiling = baseConsensus * (1 + ceilingVariance); // Start with base ceiling
+
+      if (p.projTeamPts && p.projOppPts) {
+        const spread = Number(p.projTeamPts) - Number(p.projOppPts);
+        const total = Number(p.projTeamPts) + Number(p.projOppPts);
+        const totalDiff = total - 47; // Deviation from neutral
+
+        if (p.position === "RB") {
+          // RBs: favored + high total = ceiling explosion
+          if (spread > 3) {
+            // Favored: volume + goal-line work
+            const ceilingBoost = ceilingVariance * 0.15; // Up to 30% for explosive
+            ceiling *= 1 + ceilingBoost;
+          }
+          // High-scoring games boost explosive backs
+          if (totalDiff > 3) {
+            const shootoutBoost = ceilingVariance * 0.10;
+            ceiling *= 1 + shootoutBoost;
+          }
+        } else if (p.position === "WR" || p.position === "TE") {
+          // WRs/TEs: trailing + high total = ceiling explosion
+          if (spread < -3) {
+            // Trailing: pass volume increases
+            const volumeBoost = ceilingVariance * 0.18; // Up to 36% for explosive
+            ceiling *= 1 + volumeBoost;
+          } else if (spread > 7) {
+            // Heavy favorite: ceiling capped (run-heavy)
+            const ceilingPenalty = ceilingVariance * 0.10;
+            ceiling *= 1 - ceilingPenalty;
+          }
+          // Shootouts are CRITICAL for explosive WRs
+          if (totalDiff > 3) {
+            const shootoutBoost = ceilingVariance * 0.20; // Up to 40% for explosive
+            ceiling *= 1 + shootoutBoost;
+          } else if (totalDiff < -3) {
+            // Low-scoring: explosive players suffer most
+            const lowScoringPenalty = ceilingVariance * 0.15;
+            ceiling *= 1 - lowScoringPenalty;
+          }
+        } else if (p.position === "QB") {
+          // QBs: total-dependent
+          if (total > 50) {
+            ceiling *= 1.12;
+          } else if (total < 42) {
+            ceiling *= 0.92;
+          }
+        } else if (p.position === "D") {
+          // Defenses: inverse of offense
+          if (p.projOppPts < 18) {
+            ceiling *= 1.3;
+            floor *= 1.15;
+          } else if (p.projOppPts > 26) {
+            ceiling *= 0.75;
+            floor *= 0.7;
+          }
+        }
+      }
+
+      // Major TD boost to ceiling for skill positions (TDs create booms)
+      if (
+        p.tdProbability &&
+        p.tdProbability > 0 &&
+        ["RB", "WR", "TE"].includes(p.position)
+      ) {
+        const tdConfidence = p.tdProbability / 100;
+
+        // TD odds scaled by ceiling variance (explosive players capitalize more)
+        // AND by game pace (more possessions = higher chance TD actually happens)
+        const ceilingTdBoost =
+          tdConfidence * 0.50 * (1 + ceilingVariance * 0.4) * gamePaceFactor;
+        ceiling *= 1 + ceilingTdBoost;
+      }
+
+      // Safety: ceiling can't go below 1.2x consensus
+      ceiling = Math.max(ceiling, baseConsensus * 1.2);
+
+      // Step 7: Apply minimal conservative adjustment to consensus
+      // Only adjust for extreme defenses (already accounts for most factors)
+      if (p.position === "D" && p.projOppPts) {
+        if (p.projOppPts < 18) {
+          consensus *= 1.10;
+        } else if (p.projOppPts > 26) {
+          consensus *= 0.90;
+        }
+      }
+
+      // Step 8: Fit log-normal distribution from deterministic floor/consensus/ceiling
+      // Use quantile matching: P10 ≈ floor, P50 = consensus, P90 ≈ ceiling
+      // This deterministic approach is our edge: floor/ceiling move predictably based on
+      // player archetype + game environment, then we fit distribution to those bounds
+
+      // For log-normal: median = exp(mu)
+      const mu = Math.log(Math.max(0.1, consensus));
+
+      // Solve for sigma from ceiling and floor
+      // P90 = exp(mu + 1.2816*sigma) ≈ ceiling
+      // P10 = exp(mu - 1.2816*sigma) ≈ floor
+      const z90 = 1.2815515655446004;
+      const sigma_from_ceiling = (Math.log(Math.max(0.1, ceiling)) - mu) / z90;
+      const sigma_from_floor = (mu - Math.log(Math.max(0.1, floor))) / z90;
+
+      // Weight toward ceiling for upside bias
+      const sigma = Math.max(
+        0.01,
+        sigma_from_ceiling * 0.6 + sigma_from_floor * 0.4
+      );
+
+      // Final outputs
+      consensus = parseFloat(Math.exp(mu).toFixed(2));
+      uncertainty = parseFloat(sigma.toFixed(3));
+
+      // Calculate P90 ceiling value from fitted distribution
       let p90 = 0;
       let ceilingValue = 0;
 
       if (consensus > 0 && p.salary > 0) {
-        const mean = consensus;
-        const std = uncertainty;
-        const variance = std * std;
-        const sigmaSquared = Math.log(1 + variance / (mean * mean));
-        const mu = Math.log(mean) - sigmaSquared / 2;
-        const sigma = Math.sqrt(sigmaSquared);
-
-        // Direct calculation: P90 = exp(mu + sigma * z_0.90)
-        // where z_0.90 ≈ 1.2816 (90th percentile of standard normal)
-        const z90 = 1.2815515655446004; // More precise value
+        // Use already-fitted mu and sigma from quantile matching
         p90 = parseFloat(Math.exp(mu + sigma * z90).toFixed(2));
         ceilingValue = parseFloat((p90 / (p.salary / 1000)).toFixed(3));
       }
@@ -1369,7 +1780,9 @@ async function writeCsvs(players) {
     // Sort by ceiling value (descending)
     data.sort((a, b) => (b.ceilingValue || 0) - (a.ceilingValue || 0));
 
-    console.log(`Writing ${data.length} ${pos}s to fanduel-${pos}.csv (sorted by ceiling value)`);
+    console.log(
+      `Writing ${data.length} ${pos}s to fanduel-${pos}.csv (sorted by ceiling value)`
+    );
 
     const header = Object.keys(data[0]).map((k) => {
       return { id: k, title: k };
@@ -1424,13 +1837,23 @@ async function main() {
   console.log("=".repeat(80));
 
   console.log("\nData Sources:");
-  console.log(`  FantasyPros Projections: ${shouldFetch.fantasypros ? "FETCH" : "CACHE"}`);
+  console.log(
+    `  FantasyPros Projections: ${shouldFetch.fantasypros ? "FETCH" : "CACHE"}`
+  );
   console.log(`  FanDuel Salaries: ALWAYS (local join)`);
-  console.log(`  DraftKings Game Lines: ${shouldFetch.gamelines ? "FETCH" : "CACHE"}`);
+  console.log(
+    `  DraftKings Game Lines: ${shouldFetch.gamelines ? "FETCH" : "CACHE"}`
+  );
   console.log(`  DraftKings TD Odds: ${shouldFetch.odds ? "FETCH" : "CACHE"}`);
-  console.log(`  ESPN Player IDs: ${shouldFetch.espn ? "FETCH from API" : "CACHE"}`);
+  console.log(
+    `  ESPN Player IDs: ${shouldFetch.espn ? "FETCH from API" : "CACHE"}`
+  );
   console.log(`  ESPN Projections: ${shouldFetch.espn ? "FETCH" : "CACHE"}`);
-  console.log(`  Regression Models: ${shouldBuildModels ? "BUILD from data" : "LOAD from cache"}`);
+  console.log(
+    `  Regression Models: ${
+      shouldBuildModels ? "BUILD from data" : "LOAD from cache"
+    }`
+  );
 
   let players;
 
@@ -1443,7 +1866,9 @@ async function main() {
     for (const pos of ["QB", "RB", "WR", "TE", "D"]) {
       const data = await loadExistingData(pos);
       if (!data) {
-        throw new Error(`No existing data found for ${pos}. Run with --fp first.`);
+        throw new Error(
+          `No existing data found for ${pos}. Run with --fp first.`
+        );
       }
       players[pos] = { data };
       console.log(`  Loaded ${data.length} ${pos}s from fanduel-${pos}.csv`);
@@ -1472,7 +1897,8 @@ async function main() {
   players = addAnalysis(players);
 
   // Step 9: Convert Projections to fpProjPts Scale (always run)
-  const { players: convertedPlayers, models } = await convertProjectionsToFpScale(players, shouldBuildModels);
+  const { players: convertedPlayers, models } =
+    await convertProjectionsToFpScale(players, shouldBuildModels);
   players = convertedPlayers;
 
   // Step 10: Add FLEX (always run)
@@ -1490,10 +1916,16 @@ async function main() {
   console.log("COMPLETE!");
   console.log("=".repeat(80));
   console.log("\nOutput files:");
-  console.log("  - knapsack.csv (all players with fpProjPts-scaled projections, consensus, and uncertainty)");
-  console.log("  - fanduel-QB.csv, fanduel-RB.csv, fanduel-WR.csv, fanduel-TE.csv, fanduel-D.csv, fanduel-FLEX.csv");
+  console.log(
+    "  - knapsack.csv (all players with fpProjPts-scaled projections, consensus, and uncertainty)"
+  );
+  console.log(
+    "  - fanduel-QB.csv, fanduel-RB.csv, fanduel-WR.csv, fanduel-TE.csv, fanduel-D.csv, fanduel-FLEX.csv"
+  );
   if (shouldBuildModels) {
-    console.log("  - regression_models.csv (ESPN→FP conversion models with R² values) [REBUILT]");
+    console.log(
+      "  - regression_models.csv (ESPN→FP conversion models with R² values) [REBUILT]"
+    );
   }
   console.log("  - game_lines.csv (spreads, totals, projected points by team)");
   console.log("  - td_odds.json (cached TD odds data)");

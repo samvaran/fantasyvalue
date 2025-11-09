@@ -28,7 +28,7 @@ N_SIMS = 10000   # Simulations per lineup
 MIN_PLAYER_DIFF = 2  # Minimum different players between lineups
 
 # Player constraints (edit these lists!)
-INCLUDE_PLAYERS = []  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
+INCLUDE_PLAYERS = ['panthers']  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
 EXCLUDE_PLAYERS = []  # Never use these players (e.g., ['devon achane', 'chris olave'])
 
 # Correlation coefficients (from DFS research)
@@ -36,12 +36,12 @@ CORRELATIONS = {
     'QB-WR_SAME_TEAM': 0.65,
     'QB-TE_SAME_TEAM': 0.55,
     'QB-RB_SAME_TEAM': 0.20,
-    'QB-DST_OPPOSING': -0.45,
-    'RB-DST_OPPOSING': -0.35,
-    'WR-DST_OPPOSING': -0.30,
-    'TE-DST_OPPOSING': -0.30,
-    'WR-WR_SAME_TEAM': -0.15,
-    'RB-RB_SAME_TEAM': -0.40,
+    'QB-DST_OPPOSING': -0.75,
+    'RB-DST_OPPOSING': -0.45,
+    'WR-DST_OPPOSING': -0.40,
+    'TE-DST_OPPOSING': -0.40,
+    'WR-WR_SAME_TEAM': -0.30,
+    'RB-RB_SAME_TEAM': -0.45,
 }
 
 # ============================================================================
