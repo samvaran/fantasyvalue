@@ -6,204 +6,226 @@ Total
 
 Moneyline
 
-NE Patriots
-7
-AT
-TB Buccaneers
-7
--1.5
-−105
-O
-48.5
-−110
-−130
-+1.5
-−125
-U
-48.5
-−120
-+100
-2nd Quarter13:22
-More Bets
-CLE Browns
-7
-AT
-NY Jets
-14
-+4.5
-−115
-O
-50.5
-−115
-+175
--4.5
-−115
-U
-50.5
-−115
-−230
-1st Quarter0:55
-More Bets
-BAL Ravens
-3
-AT
-MIN Vikings
-10
-+2.5
-−105
-O
-48.5
-−115
-+120
--2.5
-−125
-U
-48.5
-−115
-−154
-2nd Quarter10:56
-More Bets
-NO Saints
-3
-AT
-CAR Panthers
-7
-+6.5
-−115
-O
-37.5
-−115
-+250
--6.5
-−115
-U
-37.5
-−115
-−345
-2nd Quarter11:58
-More Bets
-BUF Bills
-0
+WAS Commanders
+13
 AT
 MIA Dolphins
-13
-+1.5
-−125
+6
+-2.5
+−140
 O
-52.5
+39.5
 −120
-−115
--1.5
-−105
+−188
++2.5
++110
 U
-52.5
+39.5
 −110
-−115
-2nd Quarter13:57
++145
+3rd Quarter6:43
 More Bets
-JAX Jaguars
-10
+GB Packers
 AT
-HOU Texans
-0
--9.5
-−120
-O
-37.5
-−105
-−560
-+9.5
-−110
-U
-37.5
-−125
-+370
-2nd Quarter13:48
-More Bets
 NY Giants
-7
-AT
-CHI Bears
-7
-+3.5
-−120
-O
-45.5
-−115
-+150
--3.5
-−110
-U
-45.5
-−115
-−195
-2nd Quarter13:06
-More Bets
-ARI Cardinals
-AT
-SEA Seahawks
-+7
-−115
-O
-44.5
-−118
-+270
 -7
+−122
+O
+41.5
+−110
+−395
++7
++102
+U
+41.5
+−110
++310
+Today 10:00 AM
+More Bets
+TB Buccaneers
+AT
+BUF Bills
++6
+−108
+O
+46.5
+−108
++230
+-6
+−112
+U
+46.5
+−112
+−285
+Today 10:00 AM
+More Bets
+HOU Texans
+AT
+TEN Titans
+-5.5
+−108
+O
+37.5
+−108
+−265
++5.5
+−112
+U
+37.5
+−112
++215
+Today 10:00 AM
+More Bets
+CIN Bengals
+AT
+PIT Steelers
++5.5
+−108
+O
+48.5
+−108
++200
+-5.5
+−112
+U
+48.5
+−112
+−245
+Today 10:00 AM
+More Bets
+LA Chargers
+AT
+JAX Jaguars
+-3
+−105
+O
+43.5
+−110
+−148
++3
+−115
+U
+43.5
+−110
++124
+Today 10:00 AM
+More Bets
+CAR Panthers
+AT
+ATL Falcons
++3.5
+−102
+O
+41.5
+−110
++170
+-3.5
+−118
+U
+41.5
+−110
+−205
+Today 10:00 AM
+More Bets
+CHI Bears
+AT
+MIN Vikings
++3
+−115
+O
+47.5
+−118
++130
+-3
 −105
 U
-44.5
+47.5
 −102
-−340
+−155
+Today 10:00 AM
+More Bets
+SEA Seahawks
+AT
+LA Rams
++3
++100
+O
+48.5
+−110
++142
+-3
+−120
+U
+48.5
+−110
+−170
 Today 1:05 PM
+More Bets
+SF 49ers
+AT
+ARI Cardinals
+-3.5
+−108
+O
+48.5
+−108
+−192
++3.5
+−112
+U
+48.5
+−112
++160
+Today 1:05 PM
+More Bets
+BAL Ravens
+AT
+CLE Browns
+-7.5
+−108
+O
+38.5
+−108
+−470
++7.5
+−112
+U
+38.5
+−112
++360
+Today 1:25 PM
+More Bets
+KC Chiefs
+AT
+DEN Broncos
+-4.5
+−108
+O
+45.5
+−105
+−230
++4.5
+−112
+U
+45.5
+−115
++190
+Today 1:25 PM
 More Bets
 DET Lions
 AT
-WAS Commanders
--8.5
+PHI Eagles
++2.5
 −105
 O
-49.5
-−108
-−455
-+8.5
-−115
-U
-49.5
-−112
-+350
-Today 1:25 PM
-More Bets
-LA Rams
-AT
-SF 49ers
--5.5
-−115
-O
-49.5
-−110
-−250
-+5.5
-−105
-U
-49.5
-−110
-+205
-Today 1:25 PM
-More Bets
-PIT Steelers
-AT
-LA Chargers
-+3
+46.5
 −118
-O
-45.5
-−105
 +130
--3
-−102
-U
-45.5
+-2.5
 −115
+U
+46.5
+−102
 −155
 Today 5:20 PM
 More Bets
@@ -215,20 +237,282 @@ Total
 
 Moneyline
 
-PHI Eagles
+DAL Cowboys
+AT
+LV Raiders
+-3.5
+−105
+O
+49.5
+−112
+−185
++3.5
+−115
+U
+49.5
+−108
++154
+Tomorrow 5:15 PM
+More Bets
+THU NOV 20th
+
+Spread
+
+Total
+
+Moneyline
+
+BUF Bills
+AT
+HOU Texans
+-3.5
+−110
+O
+44.5
+−108
+−192
++3.5
+−110
+U
+44.5
+−112
++160
+Thu Nov 20th 5:15 PM
+More Bets
+SUN NOV 23rd
+
+Spread
+
+Total
+
+Moneyline
+
+NY Giants
+AT
+DET Lions
++10.5
+−108
+O
+48.5
+−110
++390
+-10.5
+−112
+U
+48.5
+−110
+−520
+Sun Nov 23rd 10:00 AM
+More Bets
+SEA Seahawks
+AT
+TEN Titans
+-12.5
+−105
+O
+43.5
+−110
+−650
++12.5
+−115
+U
+43.5
+−110
++470
+Sun Nov 23rd 10:00 AM
+More Bets
+NY Jets
+AT
+BAL Ravens
++14
+−105
+O
+44.5
+−110
++600
+-14
+−115
+U
+44.5
+−110
+−900
+Sun Nov 23rd 10:00 AM
+More Bets
+NE Patriots
+AT
+CIN Bengals
+-6
+−108
+O
+50.5
+−108
+−270
++6
+−112
+U
+50.5
+−112
++220
+Sun Nov 23rd 10:00 AM
+More Bets
+IND Colts
+AT
+KC Chiefs
++4.5
+−115
+O
+50.5
+−110
++164
+-4.5
+−105
+U
+50.5
+−110
+−198
+Sun Nov 23rd 10:00 AM
+More Bets
+MIN Vikings
 AT
 GB Packers
++6
+−115
+O
+42.5
+−115
++205
+-6
+−105
+U
+42.5
+−105
+−250
+Sun Nov 23rd 10:00 AM
+More Bets
+PIT Steelers
+AT
+CHI Bears
 +1.5
-−118
+−110
 O
 45.5
-−112
-−102
+−105
++105
 -1.5
-−102
+−110
 U
 45.5
+−115
+−125
+Sun Nov 23rd 10:00 AM
+More Bets
+JAX Jaguars
+AT
+ARI Cardinals
+-1.5
 −108
-−118
-Tomorrow 5:15 PM
+O
+45.5
+−110
+−120
++1.5
+−112
+U
+45.5
+−110
++100
+Sun Nov 23rd 1:05 PM
+More Bets
+CLE Browns
+AT
+LV Raiders
++2.5
+−112
+O
+38.5
+−105
++110
+-2.5
+−108
+U
+38.5
+−115
+−130
+Sun Nov 23rd 1:05 PM
+More Bets
+PHI Eagles
+AT
+DAL Cowboys
+-4.5
+−105
+O
+51.5
+−105
+−218
++4.5
+−115
+U
+51.5
+−115
++180
+Sun Nov 23rd 1:25 PM
+More Bets
+ATL Falcons
+AT
+NO Saints
+-3
+−120
+O
+41.5
+−110
+−166
++3
++100
+U
+41.5
+−110
++140
+Sun Nov 23rd 1:25 PM
+More Bets
+TB Buccaneers
+AT
+LA Rams
++6
+−110
+O
+48.5
+−115
++215
+-6
+−110
+U
+48.5
+−105
+−265
+Sun Nov 23rd 5:20 PM
+More Bets
+MON NOV 24th
+
+Spread
+
+Total
+
+Moneyline
+
+CAR Panthers
+AT
+SF 49ers
++6.5
+−108
+O
+45.5
+−110
++250
+-6.5
+−112
+U
+45.5
+−110
+−310
+Mon Nov 24th 5:15 PM
 More Bets

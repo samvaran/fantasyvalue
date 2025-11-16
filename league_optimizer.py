@@ -16,6 +16,7 @@ import pandas as pd
 import pulp
 from typing import List, Dict, Optional
 from collections import defaultdict
+from tqdm import tqdm
 
 # ============================================================================
 # CONFIGURATION
@@ -28,7 +29,7 @@ N_SIMS = 10000   # Simulations per lineup
 MIN_PLAYER_DIFF = 2  # Minimum different players between lineups
 
 # Player constraints (edit these lists!)
-INCLUDE_PLAYERS = ['panthers']  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
+INCLUDE_PLAYERS = []  # Force these players into every lineup (e.g., ['patrick mahomes', 'bijan robinson'])
 EXCLUDE_PLAYERS = []  # Never use these players (e.g., ['devon achane', 'chris olave'])
 
 # Correlation coefficients (from DFS research)
@@ -55,46 +56,49 @@ def calculate_ceiling_values(players_df: pd.DataFrame) -> pd.DataFrame:
     print('=' * 80)
     print(f'\nCalculating P90 for {len(players_df)} players...')
 
-    results = []
+    # Add ceiling_value_p90 column to existing dataframe (preserve all columns)
+    p90_values = []
+    ceiling_values = []
 
     for _, row in players_df.iterrows():
         consensus = row['consensus']
-        uncertainty = row['uncertainty'] if pd.notna(row['uncertainty']) else consensus * 0.3
         salary = row['salary']
 
         if consensus <= 0 or salary <= 0:
             p90 = 0
             ceiling_value = 0
         else:
-            # Log-normal parameters
-            mean = consensus
-            std = uncertainty
-            variance = std ** 2
-            sigma_squared = np.log(1 + variance / (mean ** 2))
-            mu = np.log(mean) - sigma_squared / 2
-            sigma = np.sqrt(sigma_squared)
+            # USE PRE-CALCULATED SPLICED DISTRIBUTION PARAMETERS FROM FETCH_DATA.JS
+            # These already incorporate:
+            # - Player archetypes (floorVariance, ceilingVariance)
+            # - Game environment (spread, total, pace)
+            # - TD probability adjustments
+            # - Position-specific variance characteristics
 
-            # Direct calculation: P90 = exp(mu + sigma * z_0.90)
-            # where z_0.90 ≈ 1.2816 (90th percentile of standard normal)
-            z90 = 1.2815515655446004
-            p90 = np.exp(mu + sigma * z90)
-            ceiling_value = p90 / (salary / 1000)
+            # REQUIRE mu and sigma_upper from JS calculation
+            if pd.notna(row.get('mu')) and pd.notna(row.get('sigma_upper')):
+                mu = row['mu']
+                sigma_upper = row['sigma_upper']
 
-        results.append({
-            'name': row['name'],
-            'position': row['position'],
-            'team': row['team'],
-            'salary': salary,
-            'consensus': consensus,
-            'uncertainty': uncertainty,
-            'p90': round(p90, 2),
-            'ceiling_value_p90': round(ceiling_value, 3)
-        })
+                # Direct calculation: P90 = exp(mu + sigma_upper * z_0.90)
+                z90 = 1.2815515655446004
+                p90 = np.exp(mu + sigma_upper * z90)
+                ceiling_value = p90 / (salary / 1000)
+            else:
+                raise ValueError(f"Player '{row['name']}' missing required distribution parameters (mu, sigma_upper). Please regenerate knapsack.csv with: node fetch_data.js")
 
-    result_df = pd.DataFrame(results)
-    print(f'✓ Calculated ceiling values for {len(result_df)} players')
+        p90_values.append(round(p90, 2))
+        ceiling_values.append(round(ceiling_value, 3))
 
-    # Save to CSV
+    # Add columns to original dataframe (preserves mu, sigma_lower, sigma_upper, etc.)
+    players_df = players_df.copy()
+    players_df['p90'] = p90_values
+    players_df['ceiling_value_p90'] = ceiling_values
+
+    print(f'✓ Calculated ceiling values for {len(players_df)} players')
+
+    # Save subset to CSV for reference
+    result_df = players_df[['name', 'position', 'team', 'salary', 'consensus', 'p90', 'ceiling_value_p90']].copy()
     result_df.to_csv('player_p90_values.csv', index=False)
     print(f'✓ Saved P90 values to player_p90_values.csv')
 
@@ -103,7 +107,7 @@ def calculate_ceiling_values(players_df: pd.DataFrame) -> pd.DataFrame:
     top = result_df.nlargest(10, 'ceiling_value_p90')[['name', 'position', 'salary', 'p90', 'ceiling_value_p90']]
     print(top.to_string(index=False))
 
-    return result_df
+    return players_df  # Return FULL dataframe with all original columns
 
 
 # ============================================================================
@@ -115,21 +119,17 @@ def generate_lineups(players_df: pd.DataFrame, n_lineups: int) -> List[Dict]:
     print('\n' + '=' * 80)
     print('STEP 2: GENERATING LINEUPS (CEILING-VALUE OPTIMIZATION)')
     print('=' * 80)
-    print(f'\nGenerating {n_lineups} diverse lineups...')
 
     lineups = []
     excluded_sets = []
 
-    for i in range(n_lineups):
+    for i in tqdm(range(n_lineups), desc="Generating lineups", unit="lineup"):
         lineup = _optimize_lineup(players_df, excluded_sets)
         if lineup:
             lineups.append(lineup)
             excluded_sets.append(set(lineup['players']))
 
-        if (i + 1) % 100 == 0:
-            print(f'  Generated {i + 1}/{n_lineups}...')
-
-    print(f'✓ Generated {len(lineups)} unique lineups')
+    print(f'✓ Generated {len(lineups)} unique lineups\n')
     return lineups
 
 
@@ -236,18 +236,14 @@ def simulate_lineups(lineups: List[Dict], players_df: pd.DataFrame) -> List[Dict
     print('\n' + '=' * 80)
     print('STEP 3: MONTE CARLO SIMULATION WITH CORRELATIONS')
     print('=' * 80)
-    print(f'\nRunning {N_SIMS:,} simulations per lineup...')
 
     simulated = []
 
-    for i, lineup in enumerate(lineups):
-        if (i + 1) % 100 == 0 or i == 0:
-            print(f'  Simulating lineup {i + 1}/{len(lineups)}...')
-
+    for lineup in tqdm(lineups, desc=f"Simulating lineups ({N_SIMS:,} sims each)", unit="lineup"):
         sim_results = _simulate_lineup(lineup, players_df)
         simulated.append(sim_results)
 
-    print(f'✓ Completed {len(simulated)} lineup simulations')
+    print(f'✓ Completed {len(simulated)} lineup simulations\n')
     return simulated
 
 
@@ -261,20 +257,34 @@ def _simulate_lineup(lineup: Dict, players_df: pd.DataFrame) -> Dict:
 
     for i, (_, player) in enumerate(lineup_players.iterrows()):
         consensus = player['consensus']
-        uncertainty = player['uncertainty']
 
         if consensus <= 0:
             continue
 
-        # Log-normal parameters
-        mean = consensus
-        std = uncertainty
-        variance = std ** 2
-        sigma_squared = np.log(1 + variance / (mean ** 2))
-        mu = np.log(mean) - sigma_squared / 2
-        sigma = np.sqrt(sigma_squared)
+        # USE PRE-CALCULATED SPLICED DISTRIBUTION FROM FETCH_DATA.JS
+        # REQUIRE spliced distribution parameters (sigma_lower, sigma_upper)
+        if not (pd.notna(player.get('mu')) and pd.notna(player.get('sigma_lower')) and pd.notna(player.get('sigma_upper'))):
+            raise ValueError(f"Player '{player['name']}' missing required distribution parameters (mu, sigma_lower, sigma_upper). Please regenerate knapsack.csv with: node fetch_data.js")
 
-        samples = np.random.lognormal(mu, sigma, N_SIMS)
+        # SPLICED LOG-NORMAL: Different sigmas for downside (bust) and upside (boom)
+        mu = player['mu']
+        sigma_lower = player['sigma_lower']  # Controls P0-P50 (floor variance)
+        sigma_upper = player['sigma_upper']  # Controls P50-P100 (ceiling variance)
+
+        # Generate samples from spliced distribution (VECTORIZED for 100x speedup!)
+        # Lower half: consensus - floor distance, controlled by sigma_lower
+        # Upper half: ceiling - consensus distance, controlled by sigma_upper
+        uniform_samples = np.random.uniform(0, 1, N_SIMS)
+
+        # Vectorized: Convert all uniform samples to normal percentiles at once
+        z_scores = stats.norm.ppf(uniform_samples)
+
+        # Vectorized: Use sigma_lower for samples <= 0.5, sigma_upper for samples > 0.5
+        sigmas = np.where(uniform_samples <= 0.5, sigma_lower, sigma_upper)
+
+        # Vectorized: Calculate all samples at once
+        samples = np.exp(mu + z_scores * sigmas)
+
         independent[:, i] = np.maximum(samples, 0)
 
     # Build correlation matrix

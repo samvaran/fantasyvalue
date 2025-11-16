@@ -1392,8 +1392,60 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
 
   const models = await loadOrBuildModels(players, shouldBuildModels);
 
-  // Apply models to convert all ESPN projections to fpProjPts scale
-  // REPLACE original ESPN columns with converted versions
+  // ========================================================================
+  // FIRST PASS: Calculate position-specific variance defaults from ESPN data
+  // ========================================================================
+  console.log("Calculating position-specific variance defaults from ESPN data...");
+
+  const positionVarianceStats = {};
+
+  Object.keys(players).forEach((pos) => {
+    if (pos === "FLEX") return;
+
+    const playersWithEspn = [];
+
+    players[pos].data.forEach((p) => {
+      // Only count players with ESPN Low/High data
+      if (p.espnLowScore && p.espnHighScore && p.fpProjPts) {
+        // Use fpProjPts as consensus for variance calculation
+        const consensus = p.fpProjPts;
+        const floorDistance = consensus - p.espnLowScore;
+        const ceilingDistance = p.espnHighScore - consensus;
+
+        const floorVar = Math.max(0.1, Math.min(1.0, floorDistance / consensus));
+        const ceilingVar = Math.max(0.3, Math.min(2.0, ceilingDistance / consensus));
+
+        playersWithEspn.push({ floorVar, ceilingVar });
+      }
+    });
+
+    if (playersWithEspn.length > 0) {
+      const avgFloor = playersWithEspn.reduce((sum, p) => sum + p.floorVar, 0) / playersWithEspn.length;
+      const avgCeiling = playersWithEspn.reduce((sum, p) => sum + p.ceilingVar, 0) / playersWithEspn.length;
+
+      positionVarianceStats[pos] = {
+        floorVariance: avgFloor,
+        ceilingVariance: avgCeiling,
+        sampleSize: playersWithEspn.length
+      };
+
+      console.log(`  ${pos}: floor=${avgFloor.toFixed(3)}, ceiling=${avgCeiling.toFixed(3)} (n=${playersWithEspn.length})`);
+    } else {
+      console.log(`  ${pos}: No ESPN data available, using global defaults`);
+    }
+  });
+
+  // Global fallback if position has no ESPN data
+  const globalDefaults = {
+    floorVariance: 0.5,
+    ceilingVariance: 0.7
+  };
+
+  console.log(`  Global defaults: floor=${globalDefaults.floorVariance}, ceiling=${globalDefaults.ceilingVariance}\n`);
+
+  // ========================================================================
+  // SECOND PASS: Apply models to convert all ESPN projections to fpProjPts scale
+  // ========================================================================
   Object.keys(players).forEach((pos) => {
     if (pos === "FLEX") return;
 
@@ -1486,8 +1538,12 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
       // HIGH floorVariance (0.6-1.0) = risky floor, can bust hard
       // LOW ceilingVariance (0.3-0.5) = limited upside
       // HIGH ceilingVariance (1.0-2.0) = explosive upside potential
-      let floorVariance = 0.3; // Default moderate variance
-      let ceilingVariance = 0.7; // Default moderate upside
+
+      // Use position-specific defaults calculated from this week's ESPN data
+      const posDefaults = positionVarianceStats[pos] || globalDefaults;
+      let floorVariance = posDefaults.floorVariance;
+      let ceilingVariance = posDefaults.ceilingVariance;
+      let usedEspnVariance = false;  // Track if we used ESPN data or fallback
 
       if (baseConsensus && espnLowScore && espnHighScore) {
         const floorDistance = baseConsensus - espnLowScore;
@@ -1501,6 +1557,7 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
           0.3,
           Math.min(2.0, ceilingDistance / baseConsensus)
         );
+        usedEspnVariance = true;  // ESPN data was available and used
       }
 
       // Step 3: Lock consensus projection (factors already baked in)
@@ -1658,40 +1715,45 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
         }
       }
 
-      // Step 8: Fit log-normal distribution from deterministic floor/consensus/ceiling
-      // Use quantile matching: P10 ≈ floor, P50 = consensus, P90 ≈ ceiling
-      // This deterministic approach is our edge: floor/ceiling move predictably based on
-      // player archetype + game environment, then we fit distribution to those bounds
+      // Step 8: Fit SPLICED log-normal distribution (piecewise at P50)
+      // Use two separate sigmas for downside (bust) and upside (boom)
+      // This captures true asymmetry: tight floors with explosive ceilings, or vice versa
+      //
+      // Lower half (P0-P50): Uses sigma_lower to model bust potential
+      // Upper half (P50-P100): Uses sigma_upper to model boom potential
+      // Join point: P50 (consensus/median)
 
       // For log-normal: median = exp(mu)
       const mu = Math.log(Math.max(0.1, consensus));
 
-      // Solve for sigma from ceiling and floor
-      // P90 = exp(mu + 1.2816*sigma) ≈ ceiling
-      // P10 = exp(mu - 1.2816*sigma) ≈ floor
+      // Solve for sigma from ceiling and floor independently
+      // P90 = exp(mu + 1.2816*sigma_upper) ≈ ceiling
+      // P10 = exp(mu - 1.2816*sigma_lower) ≈ floor
       const z90 = 1.2815515655446004;
-      const sigma_from_ceiling = (Math.log(Math.max(0.1, ceiling)) - mu) / z90;
-      const sigma_from_floor = (mu - Math.log(Math.max(0.1, floor))) / z90;
-
-      // Weight toward ceiling for upside bias
-      const sigma = Math.max(
+      const sigma_upper = Math.max(
         0.01,
-        sigma_from_ceiling * 0.6 + sigma_from_floor * 0.4
+        (Math.log(Math.max(0.1, ceiling)) - mu) / z90
+      );
+      const sigma_lower = Math.max(
+        0.01,
+        (mu - Math.log(Math.max(0.1, floor))) / z90
       );
 
       // Final outputs
       consensus = parseFloat(Math.exp(mu).toFixed(2));
-      uncertainty = parseFloat(sigma.toFixed(3));
 
-      // Calculate P90 ceiling value from fitted distribution
+      // Calculate P90 ceiling value from upper distribution
       let p90 = 0;
       let ceilingValue = 0;
 
       if (consensus > 0 && p.salary > 0) {
-        // Use already-fitted mu and sigma from quantile matching
-        p90 = parseFloat(Math.exp(mu + sigma * z90).toFixed(2));
+        // Use sigma_upper for ceiling (boom potential)
+        p90 = parseFloat(Math.exp(mu + sigma_upper * z90).toFixed(2));
         ceilingValue = parseFloat((p90 / (p.salary / 1000)).toFixed(3));
       }
+
+      // Calculate P10 (floor) from lower distribution
+      const p10 = parseFloat(Math.exp(mu - sigma_lower * z90).toFixed(2));
 
       // Reorder fields to match desired column order
       return {
@@ -1704,13 +1766,19 @@ async function convertProjectionsToFpScale(players, shouldBuildModels = false) {
         ceilingValue,
         consensus,
         p90,
+        p10,  // Floor (P10)
+        mu,   // Log-normal location parameter (shared by both halves)
+        sigma_lower,  // Scale parameter for downside (P0-P50, bust potential)
+        sigma_upper,  // Scale parameter for upside (P50-P100, boom potential)
+        floorVariance,  // Player archetype: floor stability
+        ceilingVariance,  // Player archetype: ceiling explosiveness
+        varianceSource: usedEspnVariance ? 'ESPN' : 'FALLBACK',  // Flag: ESPN data or position fallback
         fpProjPts: p.fpProjPts,
         espnScoreProjection,
         espnLowScore,
         espnHighScore,
         espnOutsideProjection,
         espnSimulationProjection,
-        uncertainty,
         projTeamPts: p.projTeamPts,
         projOppPts: p.projOppPts,
         tdOdds: p.tdOdds,
