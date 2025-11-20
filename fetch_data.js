@@ -123,7 +123,7 @@ async function loadKnapsackData() {
 // STEP 1: FETCH FANTASYPROS PROJECTIONS
 // ============================================================================
 
-async function scrapeFantasyProsTable(url, pos) {
+async function downloadFantasyProsCSV(url, pos) {
   const browser = await launch({
     headless: true,
     args: MINIMAL_ARGS,
@@ -131,70 +131,90 @@ async function scrapeFantasyProsTable(url, pos) {
   console.log("  LAUNCHED", url);
 
   const page = await browser.newPage();
+
   await page.goto(url, { waitUntil: "load", timeout: 0 });
-  await page.$eval(
-    ".everything-but-phone .select-advanced-content__text",
-    (el) => el.click()
-  );
-  await delay(500);
+
+  // Expand the dropdown to show all players
+  try {
+    await page.$eval(
+      ".everything-but-phone .select-advanced-content__text",
+      (el) => el.click()
+    );
+    await delay(500);
+  } catch (e) {
+    // Ignore if dropdown not found
+  }
 
   // Scroll to load all content
   await page.evaluate(() => {
     window.scrollTo(0, document.body.scrollHeight);
   });
   await delay(500);
-  await page.evaluate(() => {
-    window.scrollTo(0, document.body.scrollHeight);
+
+  // Extract data directly from the table using JavaScript
+  const tableData = await page.evaluate(() => {
+    const rows = [];
+    const tableRows = document.querySelectorAll('#ranking-table tbody tr.player-row');
+
+    tableRows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+
+      // Find player name cell (look for the cell with player-cell class or link)
+      let nameCell = row.querySelector('.player-cell a');
+      if (!nameCell) {
+        nameCell = row.querySelector('a[class*="player"]');
+      }
+
+      let playerName = nameCell ? nameCell.textContent.trim() : '';
+
+      // Find the projection points (usually last visible numeric column)
+      let projPts = '';
+
+      // Try to find cell with data-sort-value or the last numeric cell
+      for (let i = cells.length - 1; i >= 0; i--) {
+        const text = cells[i].textContent.trim();
+        if (text && !isNaN(parseFloat(text)) && text !== '-') {
+          projPts = text;
+          break;
+        }
+      }
+
+      if (!projPts || projPts === '-') {
+        projPts = '3';
+      }
+
+      if (playerName) {
+        rows.push({
+          name: playerName,
+          fpProjPts: projPts
+        });
+      }
+    });
+
+    return rows;
   });
 
-  const content = await page.content();
-  const $ = load(content);
-  console.log("  CLOSED", url);
   await browser.close();
+  console.log("  CLOSED", url);
 
-  const headers = url.includes("dst.php")
-    ? ["rank", "wsis", "name", "opp", "matchup", "grade", "fpProjPts"]
-    : [
-        "rank",
-        "wsis",
-        "name",
-        "opp",
-        "upside",
-        "bust",
-        "matchup",
-        "grade",
-        "fpProjPts",
-      ];
+  if (tableData.length === 0) {
+    console.error("  ERROR: No data extracted from table");
+    return [];
+  }
 
-  let rows = $("#ranking-table > tbody > tr.player-row")
-    .toArray()
-    .map((row) => {
-      let rowData = {};
-      $(row)
-        .find("td")
-        .toArray()
-        .forEach((d, i) => {
-          if (headers[i] == "name") {
-            let name = $(d).find(".player-cell a").text().trim();
-            name = removePunc(name);
-            if (pos === "D") {
-              name = name.split(" ").pop();
-            }
-            rowData[headers[i]] = name;
-          } else if (["wsis", "opp", "matchup", "grade"].includes(headers[i])) {
-            // skip
-          } else if (headers[i] == "fpProjPts") {
-            let ppTemp = $(d).text().trim();
-            if (ppTemp == "-") {
-              ppTemp = 3;
-            }
-            rowData[headers[i]] = ppTemp;
-          } else {
-            rowData[headers[i]] = $(d).text().trim();
-          }
-        });
-      return rowData;
-    });
+  // Clean up names
+  const rows = tableData.map(row => {
+    let name = removePunc(row.name);
+    if (pos === "D") {
+      name = name.split(" ").pop();
+    }
+    return {
+      name: name,
+      fpProjPts: row.fpProjPts
+    };
+  }).filter(row => row.name !== '');
+
+  console.log(`  PARSED ${rows.length} ${pos} players`);
 
   return rows;
 }
@@ -221,8 +241,13 @@ async function fetchFantasyProsProjections() {
   for (const [pos, config] of Object.entries(positions)) {
     await delay(500);
     console.log(`Fetching ${pos}...`);
-    const data = await scrapeFantasyProsTable(config.url, pos);
+    const data = await downloadFantasyProsCSV(config.url, pos);
     players[pos] = { data };
+  }
+
+  console.log("\n=== STEP 1 SUMMARY ===");
+  for (const [pos, obj] of Object.entries(players)) {
+    console.log(`  ${pos}: ${obj.data.length} players`);
   }
 
   return players;
@@ -947,11 +972,14 @@ async function addEspnIds(players, fetchFromApi = false) {
     console.log(`  Loaded ${espnPlayers.length} players from CSV`);
   }
 
-  // Build lookup map
+  // Build lookup map (use FIRST match to avoid overwriting with inactive/duplicate players)
   let espnByPlayer = {};
   espnPlayers.forEach((player) => {
     let name = removePunc(player.fullName);
-    espnByPlayer[name] = player.id;
+    // Only set if not already set (prefer first match)
+    if (!espnByPlayer[name]) {
+      espnByPlayer[name] = player.id;
+    }
   });
 
   console.log("\nEXCLUDED ESPN IDs (no match):");
@@ -989,6 +1017,10 @@ async function fetchEspnProjection(espnPlayerId) {
     const response = await fetch(url, { headers, timeout: 10000 });
 
     if (!response.ok) {
+      // Log HTTP errors (404s, etc.) for debugging
+      if (response.status !== 404) {
+        console.error(`    HTTP ${response.status} for ID ${espnPlayerId}`);
+      }
       return null;
     }
 
@@ -1015,6 +1047,10 @@ async function fetchEspnProjection(espnPlayerId) {
       espnSimulationProjection: mostRecent.SIMULATION_PROJECTION || "",
     };
   } catch (error) {
+    // Log the error for debugging (helps identify 404s, timeouts, etc.)
+    if (error.message) {
+      console.error(`    ERROR for ID ${espnPlayerId}: ${error.message}`);
+    }
     return null;
   }
 }
