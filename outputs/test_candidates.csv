@@ -1,0 +1,51 @@
+lineup_id,tier,temperature,player_ids,total_salary,total_projection
+0,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,wandale robinson,michael pittman,tre tucker,hunter henry,chargers",60000,125.30229003628874
+1,1,0.0,"bo nix,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,wandale robinson,michael pittman,kyle pitts sr,chargers",60000,125.16545928252287
+2,1,0.0,"drake maye,devon achane,christian mccaffrey,treveyon henderson,tetairoa mcmillan,michael pittman,tre tucker,kyle pitts sr,titans",60000,125.1148811635974
+3,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,troy franklin,michael pittman,tre tucker,kyle pitts sr,seahawks",60000,125.1065124863423
+4,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,michael pittman,khalil shakir,kyle pitts sr,dolphins",60000,125.08943407825606
+5,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,tre tucker,jayden higgins,kyle pitts sr,seahawks",60000,124.96552245086497
+6,1,0.0,"bo nix,devon achane,christian mccaffrey,treveyon henderson,troy franklin,michael pittman,tre tucker,kyle pitts sr,chargers",60000,124.96380382213121
+7,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,wandale robinson,khalil shakir,tre tucker,kyle pitts sr,chargers",59800,124.9556380298886
+8,1,0.0,"jaxson dart,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,michael pittman,khalil shakir,kyle pitts sr,chargers",60000,124.9475174178627
+9,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,troy franklin,khalil shakir,tre tucker,hunter henry,chargers",59900,124.85597197768097
+10,1,0.0,"bo nix,devon achane,christian mccaffrey,treveyon henderson,tetairoa mcmillan,tre tucker,jayden higgins,kyle pitts sr,chargers",60000,124.82281378665388
+11,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,michael pittman,josh downs,kyle pitts sr,chargers",60000,124.77381120831214
+12,1,0.0,"drake maye,devon achane,christian mccaffrey,treveyon henderson,michael pittman,tre tucker,adonai mitchell,kyle pitts sr,chargers",60000,124.76805537946001
+13,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,wandale robinson,adonai mitchell,kyle pitts sr,chargers",60000,124.74987139173894
+14,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,alec pierce,tre tucker,hunter henry,chargers",60000,124.74380478449
+15,1,0.0,"drake maye,devon achane,christian mccaffrey,tetairoa mcmillan,troy franklin,michael pittman,tre tucker,kyle pitts sr,chargers",60000,124.7408654954247
+16,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,wandale robinson,troy franklin,jayden higgins,hunter henry,chargers",60000,124.72280553166715
+17,1,0.0,"bo nix,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,troy franklin,khalil shakir,kyle pitts sr,chargers",59900,124.7191412239151
+18,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,michael pittman,khalil shakir,jayden higgins,hunter henry,chargers",59900,124.71616636928488
+19,1,0.0,"bo nix,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,michael pittman,tre tucker,hunter henry,seahawks",60000,124.7016425142215
+20,2,0.3,"bo nix,devon achane,christian mccaffrey,treveyon henderson,tetairoa mcmillan,wandale robinson,michael pittman,kyle pitts sr,titans",59900,128.97577267622427
+21,2,0.32666666666666666,"jaxson dart,devon achane,christian mccaffrey,treveyon henderson,michael pittman,alec pierce,tre tucker,hunter henry,chargers",60000,127.79551698891177
+22,2,0.35333333333333333,"jaxson dart,devon achane,christian mccaffrey,kenneth walker,tetairoa mcmillan,khalil shakir,tre tucker,brenton strange,chargers",60000,125.68309436828677
+23,2,0.38,"trevor lawrence,devon achane,christian mccaffrey,treveyon henderson,michael pittman,khalil shakir,jayden higgins,harold fannin,chargers",59900,129.47637008481556
+24,2,0.4066666666666667,"jaxson dart,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,wandale robinson,tre tucker,kyle pitts sr,seahawks",60000,125.84975274522428
+25,2,0.43333333333333335,"bo nix,devon achane,christian mccaffrey,treveyon henderson,troy franklin,michael pittman,khalil shakir,harold fannin,dolphins",59900,130.46982671616178
+26,2,0.46,"tyrod taylor,devon achane,christian mccaffrey,treveyon henderson,tetairoa mcmillan,tre tucker,jayden higgins,hunter henry,chargers",59600,127.99374636409927
+27,2,0.4866666666666667,"josh allen,devon achane,christian mccaffrey,rj harvey,troy franklin,michael pittman,tre tucker,darren waller,seahawks",60000,129.79061823696935
+28,2,0.5133333333333333,"bo nix,devon achane,christian mccaffrey,treveyon henderson,michael pittman,tre tucker,parker washington,hunter henry,chargers",59900,127.97095124878678
+29,2,0.54,"bo nix,devon achane,christian mccaffrey,rj harvey,wandale robinson,troy franklin,courtland sutton,harold fannin,chargers",59800,126.59092797278679
+30,2,0.5666666666666667,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tre tucker,jayden higgins,theo johnson,chargers",60000,128.51072214750306
+31,2,0.5933333333333333,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,wandale robinson,tre tucker,gunnar helm,chargers",60000,127.40909970178677
+32,2,0.6200000000000001,"drake maye,devon achane,christian mccaffrey,treveyon henderson,wandale robinson,troy franklin,tre tucker,kyle pitts sr,saints",60000,130.8501883988266
+33,2,0.6466666666666667,"bo nix,devon achane,christian mccaffrey,treveyon henderson,tetairoa mcmillan,tre tucker,adonai mitchell,hunter henry,chargers",60000,128.56207895603677
+34,2,0.6733333333333333,"jaxson dart,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,troy franklin,alec pierce,kyle pitts sr,seahawks",60000,129.1705240052513
+35,2,0.7,"bo nix,devon achane,christian mccaffrey,treveyon henderson,troy franklin,courtland sutton,khalil shakir,hunter henry,titans",59900,130.55270858125306
+36,2,0.7266666666666667,"jaxson dart,devon achane,christian mccaffrey,treveyon henderson,michael pittman,tre tucker,jayden higgins,harold fannin,seahawks",60000,128.57624453259928
+37,2,0.7533333333333334,"matthew stafford,devon achane,treveyon henderson,rj harvey,tetairoa mcmillan,courtland sutton,michael pittman,harold fannin,chargers",59900,126.66107582759031
+38,2,0.78,"jaxson dart,devon achane,christian mccaffrey,treveyon henderson,courtland sutton,tre tucker,jayden higgins,kyle pitts sr,chargers",59900,129.57688486146932
+39,2,0.8066666666666666,"tyrod taylor,devon achane,christian mccaffrey,treveyon henderson,tetairoa mcmillan,michael pittman,tre tucker,harold fannin,chargers",59900,129.17481472825307
+40,2,0.8333333333333333,"jaxson dart,devon achane,christian mccaffrey,treveyon henderson,wandale robinson,chimere dike,adonai mitchell,harold fannin,seahawks",59900,128.06244656442283
+41,2,0.8599999999999999,"drake maye,devon achane,christian mccaffrey,treveyon henderson,alec pierce,tre tucker,jayden higgins,kyle pitts sr,chargers",59900,130.1381857345638
+42,2,0.8866666666666667,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,tre tucker,adonai mitchell,oronde gadsden,chargers",60000,127.63745473991177
+43,2,0.9133333333333333,"brock purdy,devon achane,christian mccaffrey,treveyon henderson,courtland sutton,tre tucker,jerry jeudy,hunter henry,chargers",59800,127.96762388976903
+44,2,0.9400000000000002,"tyrod taylor,devon achane,christian mccaffrey,treveyon henderson,stefon diggs,michael pittman,tre tucker,kyle pitts sr,chargers",60000,129.1424771512513
+45,2,0.9666666666666668,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,tre tucker,chimere dike,harold fannin,seahawks",60000,131.17689661021757
+46,2,0.9933333333333334,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,troy franklin,michael pittman,dalton schultz,dolphins",60000,131.3832573321263
+47,2,1.02,"bo nix,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,wandale robinson,chimere dike,harold fannin,seahawks",59900,126.4403237819118
+48,2,1.0466666666666666,"bo nix,devon achane,christian mccaffrey,treveyon henderson,khalil shakir,alec pierce,jayden higgins,hunter henry,chargers",60000,127.70952286653677
+49,2,1.0733333333333335,"jaxson dart,devon achane,christian mccaffrey,rj harvey,wandale robinson,courtland sutton,khalil shakir,kyle pitts sr,chargers",60000,128.82176065258156
