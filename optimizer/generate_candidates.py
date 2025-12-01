@@ -23,68 +23,23 @@ def calculate_projection_for_milp(
     temperature: float = 1.0
 ) -> float:
     """
-    Calculate projection for MILP using 50/50 blend.
+    Calculate projection for MILP - now uses pure consensus (expected value).
+
+    Game script info is used for DIVERSIFICATION via temperature sampling,
+    not for the optimization objective.
 
     Args:
         player: Player row with all stats
-        game_script_probs: Dict with game script probabilities
-        temperature: Sampling temperature (0=deterministic, >1=random)
+        game_script_probs: Dict with game script probabilities (unused now)
+        temperature: Sampling temperature (unused now, kept for compatibility)
 
     Returns:
-        Projection value for MILP
+        Consensus projection (fpProjPts) - the true expected value
     """
-    # Sample game script based on temperature
-    if temperature == 0:
-        # Deterministic: use expected value
-        script_probs = [
-            game_script_probs.get('shootout_prob', 0.25),
-            game_script_probs.get('defensive_prob', 0.25),
-            game_script_probs.get('blowout_prob', 0.25),
-            game_script_probs.get('competitive_prob', 0.25)
-        ]
-        # Weighted average across all scripts
-        scripts = ['shootout', 'defensive', 'blowout', 'competitive']
-        weighted_floor = 0
-        weighted_ceiling = 0
-
-        for script, prob in zip(scripts, script_probs):
-            script_key = determine_script_key(script, player['is_favorite'])
-            floor = player[f'floor_{script_key}'] * player['td_odds_floor_mult']
-            ceiling = player[f'ceiling_{script_key}'] * player['td_odds_ceiling_mult']
-            weighted_floor += floor * prob
-            weighted_ceiling += ceiling * prob
-
-        scenario_midpoint = (weighted_floor + weighted_ceiling) / 2
-    else:
-        # Apply temperature to probabilities
-        script_probs = np.array([
-            game_script_probs.get('shootout_prob', 0.25),
-            game_script_probs.get('defensive_prob', 0.25),
-            game_script_probs.get('blowout_prob', 0.25),
-            game_script_probs.get('competitive_prob', 0.25)
-        ])
-
-        # Temperature adjustment: lower temp = more peaked, higher temp = more uniform
-        if temperature != 1.0:
-            script_probs = script_probs ** (1.0 / temperature)
-            script_probs = script_probs / script_probs.sum()
-
-        # Sample a script
-        sampled_script = sample_game_script({
-            'shootout_prob': script_probs[0],
-            'defensive_prob': script_probs[1],
-            'blowout_prob': script_probs[2],
-            'competitive_prob': script_probs[3]
-        })
-
-        script_key = determine_script_key(sampled_script, player['is_favorite'])
-        floor = player[f'floor_{script_key}'] * player['td_odds_floor_mult']
-        ceiling = player[f'ceiling_{script_key}'] * player['td_odds_ceiling_mult']
-        scenario_midpoint = (floor + ceiling) / 2
-
-    # 50/50 blend with consensus
-    consensus = player['fpProjPts']
-    return (scenario_midpoint + consensus) / 2
+    # Use consensus projection as MILP objective
+    # This is mathematically sound: consensus IS the expected value
+    # Game scripts are accounted for in Monte Carlo evaluation, not MILP optimization
+    return player['fpProjPts']
 
 
 def generate_candidates(
@@ -148,15 +103,8 @@ def generate_candidates(
 
     tier1_count = min(20, n_lineups)
 
-    # Calculate deterministic projections (temperature=0)
-    players_df['projection'] = players_df.apply(
-        lambda p: calculate_projection_for_milp(
-            p,
-            game_script_lookup.get(p['game_id'], {}),
-            temperature=0.0
-        ),
-        axis=1
-    )
+    # Set projections to consensus (same for all tiers now)
+    players_df['projection'] = players_df['fpProjPts']
 
     for i in range(tier1_count):
         if verbose and (i + 1) % 5 == 0:
@@ -202,16 +150,8 @@ def generate_candidates(
             if verbose and (i + 1) % 20 == 0:
                 print(f"  Generating lineup {tier2_start + i + 1}/{tier2_start + tier2_count} (temp={temperature:.2f})...")
 
-            # Recalculate projections with temperature
-            players_df['projection'] = players_df.apply(
-                lambda p: calculate_projection_for_milp(
-                    p,
-                    game_script_lookup.get(p['game_id'], {}),
-                    temperature=temperature
-                ),
-                axis=1
-            )
-
+            # Projections already set to consensus
+            # Diversity comes from max_overlap constraint
             lineup = create_lineup_milp(
                 players_df,
                 salary_cap=salary_cap,
@@ -250,16 +190,8 @@ def generate_candidates(
             if verbose and (i + 1) % 100 == 0:
                 print(f"  Generating lineup {tier3_start + i + 1}/{tier3_start + tier3_count}...")
 
-            # Recalculate projections with random temperature
-            players_df['projection'] = players_df.apply(
-                lambda p: calculate_projection_for_milp(
-                    p,
-                    game_script_lookup.get(p['game_id'], {}),
-                    temperature=temperature
-                ),
-                axis=1
-            )
-
+            # Projections already set to consensus
+            # Diversity comes from stricter max_overlap constraint
             lineup = create_lineup_milp(
                 players_df,
                 salary_cap=salary_cap,

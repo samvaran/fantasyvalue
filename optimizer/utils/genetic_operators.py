@@ -11,6 +11,23 @@ import random
 
 
 # ============================================================================
+# HELPER FUNCTIONS
+# ============================================================================
+
+def get_player_id_column(players_df: pd.DataFrame) -> str:
+    """
+    Determine which column to use as player identifier.
+    Prefers 'id' if it exists, otherwise uses 'name'.
+    """
+    if 'id' in players_df.columns:
+        return 'id'
+    elif 'name' in players_df.columns:
+        return 'name'
+    else:
+        raise ValueError("Players dataframe must have either 'id' or 'name' column")
+
+
+# ============================================================================
 # SELECTION
 # ============================================================================
 
@@ -79,9 +96,16 @@ def crossover(
     def get_player_positions(player_ids):
         positions = {}
         for pid in player_ids:
-            player = players_df[players_df['id'] == pid]
-            if len(player) == 0:
+            # Try to find player by id if id column exists, otherwise by name
+            if 'id' in players_df.columns:
+                player = players_df[players_df['id'] == pid]
+            else:
                 player = players_df[players_df['name'] == pid]
+
+            # Fallback to name if id lookup failed
+            if len(player) == 0 and 'name' in players_df.columns:
+                player = players_df[players_df['name'] == pid]
+
             if len(player) > 0:
                 pos = player.iloc[0]['position']
                 if pos not in positions:
@@ -111,16 +135,26 @@ def crossover(
             child1_ids.extend(p2_players)
             child2_ids.extend(p1_players)
 
-    # Create child dicts
+    # Create child dicts - preserve metadata from parents where applicable
     child1 = {
         'player_ids': ','.join(child1_ids) if isinstance(parent1['player_ids'], str) else child1_ids,
-        'lineupid': f"child_{random.randint(100000, 999999)}"
+        'lineup_id': f"child_{random.randint(100000, 999999)}"
     }
+
+    # Preserve metadata fields if they exist in parents (use parent1 as default)
+    for field in ['tier', 'temperature', 'milp_projection', 'total_salary']:
+        if field in parent1:
+            child1[field] = parent1[field]
 
     child2 = {
         'player_ids': ','.join(child2_ids) if isinstance(parent2['player_ids'], str) else child2_ids,
         'lineup_id': f"child_{random.randint(100000, 999999)}"
     }
+
+    # Preserve metadata fields if they exist in parents (use parent2 as default)
+    for field in ['tier', 'temperature', 'milp_projection', 'total_salary']:
+        if field in parent2:
+            child2[field] = parent2[field]
 
     return child1, child2
 
@@ -133,7 +167,8 @@ def mutate(
     lineup: Dict,
     players_df: pd.DataFrame,
     mutation_rate: float = 0.3,
-    salary_tolerance: float = 500
+    salary_tolerance: float = 500,
+    aggressive: bool = False
 ) -> Dict:
     """
     Mutate a lineup by swapping 1-2 players with similar salary.
@@ -143,6 +178,7 @@ def mutate(
         players_df: DataFrame with player data
         mutation_rate: Probability of mutation
         salary_tolerance: Max salary difference for swaps (default $500)
+        aggressive: If True, swap 2-4 players with wider salary tolerance for more diversity
 
     Returns:
         Mutated lineup dict
@@ -154,8 +190,13 @@ def mutate(
     # Parse player IDs
     player_ids = lineup['player_ids'].split(',') if isinstance(lineup['player_ids'], str) else lineup['player_ids']
 
-    # Choose 1-2 players to swap
-    n_swaps = random.randint(1, 2)
+    # Choose 1-2 players to swap (or 2-4 if aggressive)
+    if aggressive:
+        n_swaps = random.randint(2, 4)
+        # Wider salary tolerance for more diversity
+        salary_tolerance = salary_tolerance * 2
+    else:
+        n_swaps = random.randint(1, 2)
 
     mutated_ids = player_ids.copy()
 
@@ -167,24 +208,28 @@ def mutate(
         idx_to_replace = random.randint(0, len(mutated_ids) - 1)
         old_player_id = mutated_ids[idx_to_replace]
 
+        # Get player ID column name
+        id_col = get_player_id_column(players_df)
+
         # Get old player info
-        old_player = players_df[players_df['id'] == old_player_id]
-        if len(old_player) == 0:
-            old_player = players_df[players_df['name'] == old_player_id]
+        old_player = players_df[players_df[id_col] == old_player_id]
 
         if len(old_player) == 0:
             continue
 
         old_player = old_player.iloc[0]
-        old_salary = old_player['fdSalary']
+
+        # Get salary column (try 'salary' first, fallback to 'fdSalary')
+        salary_col = 'salary' if 'salary' in players_df.columns else 'fdSalary'
+        old_salary = old_player[salary_col]
         old_position = old_player['position']
 
         # Find candidates: same position, similar salary, not already in lineup
         candidates = players_df[
             (players_df['position'] == old_position) &
-            (players_df['fdSalary'] >= old_salary - salary_tolerance) &
-            (players_df['fdSalary'] <= old_salary + salary_tolerance) &
-            (~players_df['id'].isin(mutated_ids))
+            (players_df[salary_col] >= old_salary - salary_tolerance) &
+            (players_df[salary_col] <= old_salary + salary_tolerance) &
+            (~players_df[id_col].isin(mutated_ids))
         ]
 
         if len(candidates) == 0:
@@ -192,13 +237,20 @@ def mutate(
 
         # Pick a random candidate
         new_player = candidates.sample(1).iloc[0]
-        mutated_ids[idx_to_replace] = new_player['id']
+        mutated_ids[idx_to_replace] = new_player[id_col]
 
-    # Create mutated dict
-    return {
+    # Create mutated dict - preserve metadata from original lineup
+    mutated_lineup = {
         'player_ids': ','.join(mutated_ids) if isinstance(lineup['player_ids'], str) else mutated_ids,
         'lineup_id': f"mutated_{random.randint(100000, 999999)}"
     }
+
+    # Preserve metadata fields if they exist in original lineup
+    for field in ['tier', 'temperature', 'milp_projection', 'total_salary']:
+        if field in lineup:
+            mutated_lineup[field] = lineup[field]
+
+    return mutated_lineup
 
 
 # ============================================================================

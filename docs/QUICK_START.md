@@ -5,8 +5,7 @@ The optimizer is ready to use! Here's how to get started:
 ## 1. Test Run (2-3 minutes)
 
 ```bash
-cd _V4
-python3 run_optimizer.py --quick-test
+python3 3_run_optimizer.py --quick-test
 ```
 
 This runs a quick test with:
@@ -19,7 +18,6 @@ This runs a quick test with:
 While the optimizer is running, open a new terminal and run:
 
 ```bash
-cd _V4
 python3 view_progress.py
 ```
 
@@ -34,7 +32,7 @@ This shows real-time progress including:
 Once the test run completes successfully:
 
 ```bash
-python3 run_optimizer.py --candidates 1000 --sims 10000
+python3 3_run_optimizer.py --candidates 1000 --sims 10000
 ```
 
 This runs the full optimizer:
@@ -55,7 +53,7 @@ This file contains the top 10 lineups found across all iterations, with:
 - Player IDs and names
 - Salary usage
 - Projected scores (mean, median, P10, P90)
-- Risk metrics (std, sharpe)
+- Risk metrics (std, skewness)
 - Fitness score
 
 ## 5. Resume Interrupted Run
@@ -95,16 +93,16 @@ Choose different strategies with `--fitness`:
 
 ```bash
 # Conservative (high floor, low risk)
-python3 run_optimizer.py --fitness conservative
+python3 3_run_optimizer.py --fitness conservative
 
 # Balanced (solid expected value) - DEFAULT
-python3 run_optimizer.py --fitness balanced
+python3 3_run_optimizer.py --fitness balanced
 
 # Aggressive (boom/bust potential)
-python3 run_optimizer.py --fitness aggressive
+python3 3_run_optimizer.py --fitness aggressive
 
 # Tournament (pure upside, swing for fences)
-python3 run_optimizer.py --fitness tournament
+python3 3_run_optimizer.py --fitness tournament
 ```
 
 ## Troubleshooting

@@ -104,7 +104,7 @@ def evaluate_candidates(
             'p10': result['p10'],
             'p90': result['p90'],
             'std': result['std'],
-            'sharpe': result['sharpe']
+            'skewness': result['skewness']
         })
 
     evaluations_df = pd.DataFrame(evaluations)

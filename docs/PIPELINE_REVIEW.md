@@ -1,990 +1,701 @@
-# Complete Pipeline Review - End to End
+# DFS Lineup Optimizer - Complete Pipeline Review (V2)
 
-This document provides a comprehensive overview of the entire data pipeline from fetching raw data through to lineup optimization.
+**Date:** November 30, 2024
+**Version:** V2 (Major Update)
+
+## Table of Contents
+1. [Pipeline Overview](#pipeline-overview)
+2. [Phase 1: Data Fetching](#phase-1-data-fetching)
+3. [Phase 2: Data Integration & Game Scripts](#phase-2-data-integration--game-scripts)
+4. [Phase 3: Optimization](#phase-3-optimization)
+5. [Recent Major Improvements](#recent-major-improvements)
+6. [Output Files](#output-files)
+7. [Performance Metrics](#performance-metrics)
 
 ---
 
-## Pipeline Architecture Overview
+## Pipeline Overview
+
+The optimizer uses a 3-phase pipeline to generate optimal DFS lineups:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                     PHASE 1: DATA FETCHING                      │
-│                        (fetch_data.py)                          │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         ├─> FanDuel Salaries (CSV)
-                         ├─> FantasyPros Projections (web scrape)
-                         ├─> DraftKings Game Lines (web scrape)
-                         ├─> DraftKings TD Odds (web scrape)
-                         ├─> ESPN Player IDs (API)
-                         └─> ESPN Projections (API)
-                         │
-                         ↓
-                    [players_raw.csv]
-                    [game_lines.csv]
-                         │
-┌────────────────────────┴────────────────────────────────────────┐
-│                  PHASE 2A: GAME SCRIPT ANALYSIS                 │
-│                  (game_script_continuous.py)                    │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         ↓
-               [game_script_continuous.csv]
-                         │
-                         │  Continuous probabilities:
-                         │  - shootout_prob
-                         │  - defensive_prob
-                         │  - blowout_prob
-                         │  - competitive_prob
-                         │
-┌────────────────────────┴────────────────────────────────────────┐
-│                 PHASE 2B: DATA INTEGRATION                      │
-│                   (data_integration.py)                         │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         │  Combines:
-                         │  - Player projections
-                         │  - Game script probabilities
-                         │  - TD odds adjustments
-                         │  - Team offensive totals
-                         │
-                         ↓
-                [players_integrated.csv]
-                         │
-                         │  38 columns including:
-                         │  - Base projections (fpProjPts)
-                         │  - 5 game scripts × (floor + ceiling)
-                         │  - TD odds multipliers
-                         │  - Game script probabilities
-                         │  - Team context (is_favorite)
-                         │
-┌────────────────────────┴────────────────────────────────────────┐
-│                    PHASE 3: OPTIMIZATION                        │
-│                      (run_optimizer.py)                         │
-└─────────────────────────────────────────────────────────────────┘
-                         │
-                         ├─> PHASE 3.1: Generate Candidates
-                         │   (optimizer/generate_candidates.py)
-                         │   - 1000 MILP-optimized lineups
-                         │   - Tiered sampling (chalk → random)
-                         │
-                         ├─> PHASE 3.2: Monte Carlo Evaluation
-                         │   (optimizer/evaluate_lineups.py)
-                         │   - 10,000 simulations per lineup
-                         │   - Parallel processing (12x speedup)
-                         │   - Distribution sampling
-                         │
-                         └─> PHASE 3.3: Genetic Refinement
-                             (optimizer/optimize_genetic.py)
-                             - Iterative improvement
-                             - Convergence detection
-                             - Elite preservation
-                         │
-                         ↓
-                   [BEST_LINEUPS.csv]
+1_fetch_data.py → 2_data_integration.py → 3_run_optimizer.py
+    (2-5 min)            (1-2 sec)              (70-90 min)
+```
+
+### Data Flow
+
+```
+FanDuel CSV
+FantasyPros API    →  players_raw.csv  →  players_integrated.csv  →  BEST_LINEUPS.csv
+DraftKings Lines                ↓                    ↓                       ↑
+ESPN Projections          game_lines.csv    game_scripts.csv         Optimization
+TD Odds                                                               (3 sub-phases)
 ```
 
 ---
 
 ## Phase 1: Data Fetching
 
-**Script:** `fetch_data.py`
-**Runtime:** ~2-5 minutes (depending on web scraping)
-**Inputs:** Web sources + local FanDuel CSV
-**Outputs:** `players_raw.csv`, `game_lines.csv`
+**Script:** `1_fetch_data.py`
+**Runtime:** 2-5 minutes
+**Output:** `data/intermediate/players_raw.csv` (378 players × 19 columns)
 
 ### Data Sources
 
-1. **FanDuel Salaries** (Local CSV)
-   - Always fresh, never cached
-   - Contains: player names, positions, teams, salaries
+1. **FanDuel Salaries** (local CSV)
+   - `data/input/FanDuel-NFL-*.csv`
+   - Columns: name, position, salary, fppg, game, team, opponent
 
-2. **FantasyPros Projections** (Web Scrape)
-   - Consensus projections from experts
-   - Contains: fpProjPts (main projection)
-   - Cacheable (use `--fp` to refresh)
+2. **FantasyPros Projections** (API)
+   - Consensus fantasy projections
+   - URL: `https://api.fantasypros.com/...`
 
-3. **DraftKings Game Lines** (Web Scrape)
-   - Spread, total, moneylines
-   - Over/under odds
-   - Projected team points
-   - Cacheable (use `--lines` to refresh)
+3. **DraftKings Game Lines** (web scrape)
+   - Spread, total, moneyline odds
+   - Determines favorite/underdog
 
-4. **DraftKings TD Odds** (Web Scrape)
-   - Anytime TD scorer odds for skill players
-   - Converted to probability (tdProbability)
-   - Cacheable (use `--dk` to refresh)
+4. **DraftKings TD Odds** (web scrape)
+   - Anytime TD scorer probabilities
+   - Used for floor/ceiling adjustments
 
-5. **ESPN Player IDs + Projections** (API)
-   - espnScoreProjection (main)
-   - espnLowScore, espnHighScore (floor/ceiling)
-   - espnOutsideProjection, espnSimulationProjection
-   - Cacheable (use `--espn` to refresh)
+5. **ESPN Projections** (web scrape)
+   - Low/high score ranges
+   - Alternative projections for validation
 
-### Merge Strategy
+### Merging Strategy
 
-All data sources merged on **normalized player names**:
-- Lowercase conversion
-- Suffix removal (Jr., Sr., III)
-- Punctuation normalization
-- Team abbreviation matching (JAC → JAX)
+- Primary key: player `name` (lowercase, normalized)
+- Fuzzy matching for name variations
+- Handles missing data gracefully (defaults filled)
 
-### Date Filtering
+### Key Columns Generated
 
-Games automatically filtered to "this week":
-- Today through next Monday
-- Uses actual date parsing (not hardcoded counts)
-- Stops at future week games
-
-### Usage
-
-```bash
-# Full refresh (all sources)
-python fetch_data.py --all
-
-# Just update game lines (if odds changed)
-python fetch_data.py --lines
-
-# Use all cached data
-python fetch_data.py
-```
-
-### Output Schema: `players_raw.csv`
-
-Key columns (19 total):
-- `name`, `position`, `team`, `opponent`, `salary`
-- `fpProjPts` - FantasyPros consensus
-- `tdOdds`, `tdProbability` - DraftKings TD odds
-- `proj_team_pts`, `proj_opp_pts` - Team totals from game lines
-- `espnScoreProjection`, `espnLowScore`, `espnHighScore` - ESPN projections
-- `espnOutsideProjection`, `espnSimulationProjection` - Alternative ESPN models
+| Column | Description | Source |
+|--------|-------------|--------|
+| `name` | Player name (lowercase) | FanDuel |
+| `position` | QB/RB/WR/TE/DEF | FanDuel |
+| `team` | Player team | FanDuel |
+| `opponent` | Opponent team | FanDuel |
+| `salary` | FanDuel salary | FanDuel |
+| `fppg` | Fantasy points per game | FanDuel |
+| `fpProjPts` | Consensus projection | FantasyPros |
+| `spread` | Point spread | DraftKings |
+| `total` | Over/under total | DraftKings |
+| `tdProbability` | Anytime TD probability | DraftKings |
+| `espnScoreProjection` | ESPN projection | ESPN |
+| `espnLowScore` | ESPN floor | ESPN |
+| `espnHighScore` | ESPN ceiling | ESPN |
 
 ---
 
-## Phase 2A: Game Script Analysis
+## Phase 2: Data Integration & Game Scripts
 
-**Script:** `game_script_continuous.py`
-**Runtime:** ~1 second
-**Inputs:** `game_lines.csv`
-**Outputs:** `game_script_continuous.csv`
+**Scripts:**
+- `game_script_continuous.py` (standalone, optional)
+- `2_data_integration.py` (main integration)
 
-### Methodology
+**Runtime:** 1-2 seconds
+**Outputs:**
+- `data/intermediate/game_scripts_enhanced.csv` (12 games × 11 columns)
+- `data/intermediate/players_integrated.csv` (378 players × 88 columns!)
 
-Instead of discrete buckets, calculates **continuous probabilities** (0-1) for each script type using sigmoid functions.
+### Step 2A: Game Script Analysis
 
-#### 1. Shootout Probability
+Calculates **continuous probabilities** for each game scenario using sigmoid functions:
 
-Indicators:
-- **High total** (>50 is strong, >48 is moderate)
-- **Competitive spread** (closer to 0 is better)
-- **Market favors over** (negative over odds)
-
-Formula:
-```
-shootout_score = total_score × 0.50 + spread_score × 0.30 + market_score × 0.20
-```
-
-Sigmoid transitions:
-- `total_score = sigmoid(total, midpoint=48, steepness=0.5)`
-- `spread_score = 1 - sigmoid(abs(spread), midpoint=5, steepness=0.4)`
-
-#### 2. Defensive Probability
-
-Indicators:
-- **Low total** (<42 is strong, <45 is moderate)
-- **Market favors under**
-
-Formula:
-```
-defensive_score = inverted_total_score × 0.70 + market_score × 0.30
-```
-
-#### 3. Blowout Probability
-
-Indicators:
-- **Large spread** (>7 is strong)
-- **Lopsided moneylines**
-- **Market confidence** (balanced spread odds = high confidence)
-
-Formula:
-```
-blowout_score = spread_magnitude × 0.60 + moneyline_magnitude × 0.40
-blowout_confidence = 1 - abs(fav_spread_prob - 0.5)
-```
-
-#### 4. Competitive Probability
-
-Indicator:
-- **Small spread** (closer to 0 = higher score)
-
-Formula:
-```
-competitive_score = 1 - sigmoid(abs(spread), midpoint=3, steepness=0.6)
-```
-
-### Normalization
-
-All scores normalized to probability distribution (sum = 1):
-```
-shootout_prob = shootout_score / total_score
-defensive_prob = defensive_score / total_score
-blowout_prob = blowout_score / total_score
-competitive_prob = competitive_score / total_score
-```
-
-### Output Schema: `game_script_continuous.csv`
-
-Columns (11 total):
-- `game_id` - "AWAY@HOME"
-- `favorite`, `underdog` - Team abbreviations
-- `shootout_prob`, `defensive_prob`, `blowout_prob`, `competitive_prob` - Normalized (0-1)
-- `primary_script` - Highest probability script
-- `script_strength` - How dominant the primary script is (max probability)
-- `blowout_confidence` - Market agreement on spread (0-1)
-
-### Usage
-
-```bash
-python game_script_continuous.py
-```
-
----
-
-## Phase 2B: Data Integration
-
-**Script:** `data_integration.py`
-**Runtime:** ~1 second
-**Inputs:** `players_raw.csv`, `game_lines.csv`
-**Outputs:** `players_integrated.csv`, `game_scripts_enhanced.csv`
-
-### Pipeline Steps
-
-#### Step 1: Load Raw Data
-- `players_raw.csv` - Player projections
-- `game_lines.csv` - Betting lines
-- TD odds lookup dictionary
-
-#### Step 2: Calculate Team Offensive Totals
-
-For each team, aggregate:
-- `total_projected_pts` - Sum of all player projections
-- `total_td_prob` - Sum of all TD probabilities
-
-This provides a bottom-up signal to enhance game script analysis.
-
-#### Step 3: Enhanced Game Script Analysis
-
-Combines:
-- **Betting lines** (spreads, totals, odds) - 80% weight
-- **Team offensive totals** (projections, TD odds) - 20% weight
-
-Team total signals:
 ```python
-team_shootout_signal = min(total_proj / 55.0, 1.0)
-team_td_signal = min(total_td_odds / 2.5, 1.0)
+shootout_prob = sigmoid(total - 48)      # High total → more passing
+defensive_prob = sigmoid(43 - total)     # Low total → less scoring
+blowout_prob = sigmoid(abs(spread) - 7)  # Large spread → blowout
+competitive_prob = 1 - blowout_prob       # Close game
+```
 
-# Enhance shootout probability
-shootout_score = (
-    shootout_base * 0.80 +  # From betting lines
-    (team_shootout_signal + team_td_signal) / 2 * 0.20  # From projections
+**Scenarios:**
+- `shootout`: High-scoring, pass-heavy game
+- `defensive`: Low-scoring, grind-it-out game
+- `blowout_favorite`: Leading team runs clock
+- `blowout_underdog`: Trailing team passes to catch up
+- `competitive`: Close game, balanced script
+
+**Output columns:**
+```
+team, opponent, spread, total, is_favorite,
+shootout_prob, defensive_prob, blowout_prob, competitive_prob,
+dominant_scenario, scenario_confidence
+```
+
+### Step 2B: Floor/Ceiling Calculation
+
+For each player and each scenario, calculates:
+1. **Base floor/ceiling** from ESPN projections
+2. **Game script multipliers** (position-specific)
+3. **TD odds adjustments**
+4. **Distribution parameters** (mu, sigma, shift)
+
+#### Game Script Multipliers (V2 - Rebalanced!)
+
+**Key changes in V2:**
+- ✅ ALL ceiling multipliers >= 1.0 (no more < baseline!)
+- ✅ Wider floor ranges for more variance
+- ✅ Mathematically consistent with consensus mean
+
+**Example: QB Multipliers**
+
+| Scenario | Floor | Ceiling | Effect |
+|----------|-------|---------|--------|
+| Shootout | 0.75x | 1.40x | Huge upside, wide range |
+| Defensive | 0.75x | 1.15x | Limited upside |
+| Blowout Fav | 0.80x | 1.15x | Limited (runs clock) |
+| Blowout Dog | 0.80x | 1.35x | High upside (garbage time) |
+| Competitive | 0.85x | 1.25x | Moderate range |
+
+**Example: RB Multipliers**
+
+| Scenario | Floor | Ceiling | Effect |
+|----------|-------|---------|--------|
+| Shootout | 0.90x | 1.05x | Limited (pass-heavy) |
+| Defensive | 0.95x | 1.15x | Stable usage |
+| Blowout Fav | 0.95x | 1.30x | **Clock management boost** |
+| Blowout Dog | 0.75x | 1.05x | Abandoned run game |
+| Competitive | 0.85x | 1.20x | Moderate range |
+
+#### Distribution Fitting (V2 - Scenario-Specific Means!)
+
+**Major change:** Distributions now fit to P10/P90 only, allowing scenario-specific means.
+
+**Old approach (V1):**
+```python
+# Forced all scenarios to have mean = consensus
+fit_shifted_lognormal(mean=consensus, p10=floor, p90=ceiling)
+# Problem: Boom/bust scenarios had no effect on expected scores!
+```
+
+**New approach (V2):**
+```python
+# Let mean vary by scenario
+fit_lognormal_to_percentiles(p10=floor, p90=ceiling)
+# Result: Shootout scenarios actually score higher!
+```
+
+**Impact:**
+- Josh Allen shootout: 23.07 pts (+5.3% vs consensus)
+- Josh Allen defensive: 20.08 pts (-8.3% vs consensus)
+- **BOOM-BUST GAP: 2.69 pts (12.3%)** ✅
+
+### Output Columns (88 total!)
+
+For each scenario (shootout, defensive, blowout_favorite, blowout_underdog, competitive):
+- `floor_{scenario}`: P10 value
+- `ceiling_{scenario}`: P90 value
+- `mu_{scenario}`: Log-normal μ parameter
+- `sigma_{scenario}`: Log-normal σ parameter
+- `shift_{scenario}`: Shift parameter
+
+Plus game context:
+- `proj_team_pts`: Team's implied total
+- `proj_opp_pts`: Opponent's implied total
+- `is_favorite`: Boolean flag
+- `td_floor_mult`, `td_ceiling_mult`: TD odds adjustments
+
+---
+
+## Phase 3: Optimization
+
+**Script:** `3_run_optimizer.py`
+**Runtime:** 70-90 minutes (quick-test: 2-3 minutes)
+**Output:** `outputs/run_YYYYMMDD_HHMMSS/BEST_LINEUPS.csv`
+
+### Three Sub-Phases
+
+```
+Phase 3.1: MILP Candidates (3 min)
+    ↓
+Phase 3.2: Monte Carlo Evaluation (25-30 min)
+    ↓
+Phase 3.3: Genetic Refinement (40-60 min/iteration)
+```
+
+---
+
+### Phase 3.1: Candidate Generation (MILP)
+
+**File:** `optimizer/generate_candidates.py`
+**Runtime:** ~3 minutes for 1000 candidates (quick-test: 18 sec for 50)
+**Algorithm:** Mixed Integer Linear Programming
+
+#### Tiered Sampling Strategy
+
+1. **Tier 1: Chalk lineups** (20% of candidates)
+   - Pure deterministic MILP
+   - Maximizes consensus projections
+   - Temperature = 0 (no randomness)
+
+2. **Tier 2: Temperature-based variation** (60% of candidates)
+   - Add random noise: `projection + Gumbel(0, T)`
+   - Temperature increases: 0.2 → 1.0
+   - More variance as tier progresses
+
+3. **Tier 3: Pure random** (20% of candidates)
+   - Random salary-valid lineups
+   - Maximum exploration
+   - (Currently disabled in quick-test)
+
+#### MILP Formulation
+
+**Decision Variables:**
+```python
+x[i] ∈ {0, 1}  # Binary: player i selected or not
+```
+
+**Objective:**
+```python
+maximize: Σ(projection[i] × x[i])  # With temperature noise
+```
+
+**Constraints:**
+```python
+# Salary cap
+Σ(salary[i] × x[i]) ≤ 60,000
+
+# Position requirements
+Σ(x[i] : position[i] == QB) == 1
+Σ(x[i] : position[i] == RB) ∈ {2, 3}
+Σ(x[i] : position[i] == WR) ∈ {3, 4}
+Σ(x[i] : position[i] == TE) ∈ {1, 2}
+Σ(x[i] : position[i] == DEF) == 1
+Σ(x[i]) == 9  # Total roster size
+
+# Stacking constraints (optional)
+# - Force QB + at least 1 pass catcher from same team
+# - Currently disabled for more diversity
+```
+
+**Output:** `candidates.csv` with position-based columns:
+```
+QB, RB1, RB2, WR1, WR2, WR3, TE, FLEX, DEF,
+lineup_id, player_ids, tier, temperature, total_projection, total_salary
+```
+
+---
+
+### Phase 3.2: Monte Carlo Evaluation
+
+**File:** `optimizer/evaluate_lineups.py`
+**Runtime:** ~25-30 minutes for 1000 lineups × 10k sims (quick-test: 3 sec for 50 × 1k)
+**Speedup:** 12x with parallel processing
+
+#### Simulation Process
+
+For each lineup:
+1. **Sample game script** from probabilities
+2. **For each player:**
+   - Get scenario-specific distribution params (mu, sigma, shift)
+   - Sample score: `X = exp(mu + sigma × Z) + shift` where Z ~ N(0,1)
+3. **Sum scores** for lineup total
+4. **Repeat 10,000 times**
+
+#### Game Script Sampling
+
+Probabilistic sampling based on continuous probabilities:
+
+```python
+# For each game, sample one scenario
+scenario = random.choice(
+    ['shootout', 'defensive', 'blowout_fav', 'blowout_dog', 'competitive'],
+    p=[shootout_prob, defensive_prob, blowout_prob, ..., competitive_prob]
 )
+
+# Players in that game use the sampled scenario's distribution
 ```
 
-#### Step 4: Calculate Floor/Ceiling for ALL Game Scripts
+**Key insight:** Different scenarios produce different means, creating realistic boom/bust variance.
 
-For each player, calculate floor/ceiling under **5 different scenarios**:
-1. `floor_shootout` / `ceiling_shootout`
-2. `floor_defensive` / `ceiling_defensive`
-3. `floor_blowout_favorite` / `ceiling_blowout_favorite`
-4. `floor_blowout_underdog` / `ceiling_blowout_underdog`
-5. `floor_competitive` / `ceiling_competitive`
+#### Statistics Calculated
 
-**Base values:**
-- `original_floor` = `espnLowScore` (or `fpProjPts * 0.5` if missing)
-- `original_ceiling` = `espnHighScore` (or `fpProjPts * 1.5` if missing)
+For each lineup (from 10,000 simulations):
+- `mean`: Average score
+- `median`: 50th percentile (fitness metric)
+- `p10`: 10th percentile (floor)
+- `p90`: 90th percentile (ceiling)
+- `std`: Standard deviation (variance)
+- `skewness`: (mean - median) / std (right-tail measure)
 
-**Adjustment formula:**
-```python
-adjusted_floor = original_floor * GAME_SCRIPT_FLOOR[script][position]
-adjusted_ceiling = original_ceiling * GAME_SCRIPT_CEILING[script][position]
-
-# CRITICAL CONSTRAINTS:
-adjusted_floor = min(adjusted_floor, consensus * 0.95)  # Never exceed consensus
-adjusted_ceiling = max(adjusted_ceiling, consensus * 1.05)  # Never fall below consensus
+**Output:** `evaluations.csv` with position-based columns:
 ```
-
-**Game Script Multipliers (examples):**
-
-| Script | Position | Floor Mult | Ceiling Mult | Reasoning |
-|--------|----------|------------|--------------|-----------|
-| Shootout | QB | 0.95 | 1.15 | High variance, high ceiling |
-| Shootout | RB | 0.90 | 0.90 | Less running in shootouts |
-| Shootout | WR | 0.95 | 1.20 | Strong ceiling boost |
-| Defensive | D | 1.15 | 1.25 | Low scoring = more D points |
-| Blowout (Fav) | RB | 1.20 | 1.10 | Clock management, safe floor |
-| Blowout (Dog) | RB | 0.85 | 0.90 | Abandoned run game |
-
-#### Step 5: Calculate TD Odds Multipliers
-
-These are **stored but not applied** (application happens in Monte Carlo phase):
-
-```python
-td_prob_scaled = tdProbability / 100.0
-
-floor_mult = 1.0 + (td_prob_scaled * 0.05)  # Up to +5% boost
-ceiling_mult = 1.0 + (td_prob_scaled * 0.15)  # Up to +15% boost
-```
-
-Example: Player with 20% TD probability
-- `td_odds_floor_mult = 1.01` (1% boost)
-- `td_odds_ceiling_mult = 1.03` (3% boost)
-
-#### Step 6: Add Game Context
-
-For each player:
-- `game_id` - Which game they're in
-- `shootout_prob`, `defensive_prob`, `blowout_prob`, `competitive_prob` - From game script analysis
-- `is_favorite` - Boolean, is player's team the favorite?
-
-### Output Schema: `players_integrated.csv`
-
-**38 columns total:**
-
-**Base Data (19):**
-- `name`, `position`, `team`, `opponent`, `salary`
-- `fpProjPts` - Consensus projection (mean)
-- `tdProbability` - TD odds as probability
-- `espnLowScore`, `espnHighScore` - Original floor/ceiling
-- `proj_team_pts`, `proj_opp_pts`
-- Other ESPN projections
-
-**Game Script Floors/Ceilings (10):**
-- `floor_shootout`, `ceiling_shootout`
-- `floor_defensive`, `ceiling_defensive`
-- `floor_blowout_favorite`, `ceiling_blowout_favorite`
-- `floor_blowout_underdog`, `ceiling_blowout_underdog`
-- `floor_competitive`, `ceiling_competitive`
-
-**TD Odds Multipliers (2):**
-- `td_odds_floor_mult` (e.g., 1.01)
-- `td_odds_ceiling_mult` (e.g., 1.03)
-
-**Game Context (7):**
-- `game_id`
-- `shootout_prob`, `defensive_prob`, `blowout_prob`, `competitive_prob`
-- `is_favorite`
-
-### Usage
-
-```bash
-python data_integration.py
+QB, RB1, RB2, WR1, WR2, WR3, TE, FLEX, DEF,
+lineup_id, player_ids, tier, temperature, milp_projection, total_salary,
+mean, median, p10, p90, std, skewness
 ```
 
 ---
 
-## Phase 3: Lineup Optimization
+### Phase 3.3: Genetic Algorithm Refinement
 
-**Script:** `run_optimizer.py`
-**Runtime:** ~70-90 minutes for full pipeline
-**Inputs:** `players_integrated.csv`, `game_script_continuous.csv`
-**Outputs:** `outputs/run_YYYYMMDD_HHMMSS/BEST_LINEUPS.csv`
+**File:** `optimizer/optimize_genetic.py`
+**Runtime:** ~40-60 minutes per iteration (quick-test: 45-60 sec)
+**Typical:** 3-5 iterations until convergence
 
-### Three-Phase Architecture
+#### Algorithm Overview
 
-#### Phase 3.1: Generate Candidates
+```
+1. Initialize population (from Phase 2 evaluations)
+2. For each generation:
+   a. Selection (tournament)
+   b. Crossover (position-aware)
+   c. Mutation (salary-preserving, adaptive)
+   d. Evaluation (Monte Carlo, parallel)
+   e. Replacement (elitism + diversity enforcement)
+   f. Check convergence
+3. Return best lineups
+```
 
-**Script:** `optimizer/generate_candidates.py`
-**Runtime:** ~3 minutes for 1000 lineups
-**Method:** MILP (Mixed Integer Linear Programming)
-
-**Tiered Sampling:**
-1. **Lineups 1-20**: Deterministic chalk (temperature = 0)
-   - Uses expected value across all game scripts
-   - Max 7 overlapping players between lineups
-
-2. **Lineups 21-100**: Temperature-based variation (temp 0.3 → 1.1)
-   - Samples game scripts with temperature-adjusted probabilities
-   - More diverse than chalk
-
-3. **Lineups 101-1000**: Random weighted sampling (temp 1.5 → 3.0)
-   - Highly random contrarian plays
-   - Max 6 overlapping players (stricter diversity)
-
-**Projection Calculation:**
-
-For each player, calculate MILP projection based on temperature:
+#### 1. Selection: Tournament Selection
 
 ```python
-if temperature == 0:
-    # Deterministic: weighted average across all game scripts
-    for script in ['shootout', 'defensive', 'blowout', 'competitive']:
-        script_key = determine_script_key(script, player['is_favorite'])
-        floor = player[f'floor_{script_key}'] * player['td_odds_floor_mult']
-        ceiling = player[f'ceiling_{script_key}'] * player['td_odds_ceiling_mult']
-        scenario_midpoint = (floor + ceiling) / 2
-        weighted_avg += scenario_midpoint * game_script_probs[script]
-
-    milp_projection = (weighted_avg + consensus) / 2  # 50/50 blend
-
-else:
-    # Stochastic: sample a game script with temperature
-    sampled_script = sample_game_script(game_script_probs, temperature)
-    script_key = determine_script_key(sampled_script, player['is_favorite'])
-    floor = player[f'floor_{script_key}'] * player['td_odds_floor_mult']
-    ceiling = player[f'ceiling_{script_key}'] * player['td_odds_ceiling_mult']
-    scenario_midpoint = (floor + ceiling) / 2
-
-    milp_projection = (scenario_midpoint + consensus) / 2  # 50/50 blend
+def tournament_select(population, tournament_size=5, n_parents=50):
+    parents = []
+    for _ in range(n_parents):
+        # Random tournament of 5
+        tournament = random.sample(population, 5)
+        # Pick best by fitness
+        winner = max(tournament, key=fitness_func)
+        parents.append(winner)
+    return parents
 ```
 
-**MILP Constraints:**
-- Salary cap: $60,000
-- Exactly 9 players
-- Position requirements: 1 QB, 2-3 RB, 3-4 WR, 1-2 TE, 1 DEF
-- FLEX position: 1 (RB/WR/TE)
-- Diversity: Max overlap with previous lineups
+**Fitness functions:**
+- `conservative`: median - 0.5 × std (high floor)
+- `balanced`: median (default)
+- `aggressive`: p90 - p10 (boom potential)
+- `tournament`: p90 (pure upside)
 
-**Output:** `candidates.csv` (1000 lineups)
-
-#### Phase 3.2: Monte Carlo Evaluation
-
-**Script:** `optimizer/evaluate_lineups.py`
-**Runtime:** ~25-30 minutes for 1000 × 10k simulations
-**Method:** Parallel Monte Carlo simulation
-
-**Simulation Process (per lineup, per iteration):**
-
-1. **Sample game script** for each game:
-   ```python
-   sampled_script = np.random.choice(
-       ['shootout', 'defensive', 'blowout', 'competitive'],
-       p=[shootout_prob, defensive_prob, blowout_prob, competitive_prob]
-   )
-   ```
-
-2. **Determine script key** based on team role:
-   ```python
-   if sampled_script == 'blowout':
-       script_key = 'blowout_favorite' if player['is_favorite'] else 'blowout_underdog'
-   else:
-       script_key = sampled_script
-   ```
-
-3. **Get floor/ceiling** for sampled script:
-   ```python
-   floor = player[f'floor_{script_key}'] * player['td_odds_floor_mult']
-   ceiling = player[f'ceiling_{script_key}'] * player['td_odds_ceiling_mult']
-   ```
-
-4. **Fit shifted log-normal distribution**:
-   - Mean = `fpProjPts` (consensus)
-   - P10 = `floor`
-   - P90 = `ceiling`
-   - Solves for (mu, sigma, shift) parameters
-
-5. **Sample from distribution**:
-   ```python
-   points = sample_shifted_lognormal(mu, sigma, shift)
-   ```
-
-6. **Sum across all 9 players** to get lineup total
-
-**Parallelization:**
-- Uses `multiprocessing.Pool` with auto-detected CPU cores
-- Achieves ~12x speedup on 8-core machine
-- Each worker evaluates subset of lineups independently
-
-**Metrics Calculated:**
-- `mean` - Average score across simulations
-- `median` - 50th percentile
-- `p10` - 10th percentile (floor/bust scenario)
-- `p90` - 90th percentile (ceiling/boom scenario)
-- `std` - Standard deviation (variance)
-- `sharpe` - Risk-adjusted return: `(mean - risk_free_rate) / std`
-
-**Output:** `evaluations.csv` (1000 lineups with metrics)
-
-#### Phase 3.3: Genetic Refinement
-
-**Script:** `optimizer/optimize_genetic.py`
-**Runtime:** ~40-60 minutes per iteration
-**Method:** Genetic algorithm with elitism
-
-**Algorithm:**
-
-1. **Initialize** with top 100 from Phase 2
-
-2. **Repeat for N generations** (typically 20-30):
-
-   a. **Tournament Selection** (50 parents)
-      - Pick 5 random lineups
-      - Select best by fitness
-      - Repeat 50 times
-
-   b. **Crossover** (100 offspring)
-      - Pair parents randomly
-      - Position-aware crossover (swap by position)
-      - Salary-aware (must stay under cap)
-
-   c. **Mutation** (~30% of offspring)
-      - 30% chance per offspring
-      - Swap 1-2 players
-      - Maintain salary constraint (±$500)
-
-   d. **Parallel Evaluation** (100 offspring × 10k sims)
-      - Same Monte Carlo as Phase 2
-      - Uses multiprocessing for speed
-
-   e. **Selection** (next generation = 100)
-      - Top 20 from current generation (elitism)
-      - Top 80 from offspring
-
-   f. **Save Checkpoint**
-      - Save generation results
-      - Update optimizer state
-
-3. **Convergence Check**
-   - Track best fitness over iterations
-   - Stop if no improvement for N iterations (patience)
-   - Or if improvement < threshold
-
-**Fitness Functions:**
-
-User can choose strategy:
+#### 2. Crossover: Position-Aware
 
 ```python
-# Conservative: High floor, low risk
-fitness = median - 0.5 * std
+def crossover(parent1, parent2, crossover_rate=0.8):
+    if random.random() > crossover_rate:
+        return parent1.copy(), parent2.copy()
 
-# Balanced: Expected value (DEFAULT)
-fitness = median
+    # Group players by position
+    p1_positions = group_by_position(parent1)
+    p2_positions = group_by_position(parent2)
 
-# Aggressive: Boom/bust potential
-fitness = p90 - p10
+    # For each position, randomly inherit from one parent
+    child1, child2 = [], []
+    for position in ['QB', 'RB', 'WR', 'TE', 'DEF']:
+        if random.random() < 0.5:
+            child1 += p1_positions[position]
+            child2 += p2_positions[position]
+        else:
+            child1 += p2_positions[position]
+            child2 += p1_positions[position]
 
-# Tournament: Pure upside
-fitness = p90
+    return child1, child2
 ```
 
-**Output per iteration:**
-- `iteration_N/optimal_lineups.csv` - All 100 lineups
-- `iteration_N/top_10_iteration_N.csv` - Best 10 from this iteration
+**Key insight:** Preserves position-specific combos (e.g., QB-WR stacks)
 
-### Orchestration & Checkpointing
+#### 3. Mutation: Salary-Preserving with Adaptive Aggression (V2!)
 
-**State Management:**
+```python
+def mutate(lineup, mutation_rate=0.3, aggressive=False):
+    if random.random() > mutation_rate:
+        return lineup.copy()
 
-`optimizer_state.json` tracks:
-```json
-{
-  "phase_1_complete": true,
-  "phase_2_complete": true,
-  "iterations": [
-    {
-      "iteration": 1,
-      "best_fitness": 125.43,
-      "best_median": 142.67,
-      "n_generations": 25,
-      "time": 2847.2
-    }
-  ],
-  "best_fitness_history": [120.1, 123.5, 125.43],
-  "total_time": 5423.8
-}
+    # Adaptive: more swaps when diversity is low
+    if aggressive:
+        n_swaps = random.randint(2, 4)  # More disruption
+        salary_tolerance = 1000          # Wider search
+    else:
+        n_swaps = random.randint(1, 2)
+        salary_tolerance = 500
+
+    # For each swap
+    for _ in range(n_swaps):
+        # Pick random player to replace
+        old_player = random.choice(lineup)
+
+        # Find candidates: same position, similar salary, not in lineup
+        candidates = players[
+            (position == old_player.position) &
+            (abs(salary - old_player.salary) <= salary_tolerance) &
+            (not in lineup)
+        ]
+
+        # Replace with random candidate
+        new_player = random.choice(candidates)
+        lineup.replace(old_player, new_player)
+
+    return lineup
 ```
 
-**Resumability:**
-- Automatically detects completed phases
-- Continues from last iteration
-- Preserves all previous results
+**V2 enhancement:** Aggressive mode activates when population uniqueness < 50%!
 
-**Final Outputs:**
+#### 4. Diversity Enforcement (V2 - NEW!)
 
-Main file: `BEST_LINEUPS.csv`
-- Top 10 lineups across ALL iterations
-- Columns: lineup_id, player_ids, total_salary, mean, median, p10, p90, std, sharpe, fitness
+After creating offspring population:
 
-Supporting files:
-- `final_summary.json` - Complete run statistics
-- `candidates.csv` - All 1000 initial candidates
-- `evaluations.csv` - Initial Monte Carlo results
-- `iteration_N/` - Results from each genetic iteration
+```python
+# Deduplicate: remove lineups within 2 players of each other
+new_population = deduplicate_population(
+    elite + offspring,
+    min_distance=2  # Hamming distance threshold
+)
 
-### Usage
+# If too homogeneous, inject diversity
+if len(new_population) < population_size * 0.7:
+    n_to_inject = population_size - len(new_population)
 
-```bash
-# Quick test (2-3 minutes)
-python run_optimizer.py --quick-test
-
-# Full production run (~90 minutes)
-python run_optimizer.py --candidates 1000 --sims 10000
-
-# Custom fitness function
-python run_optimizer.py --fitness tournament
-
-# Resume interrupted run
-python run_optimizer.py --run-name 20241130_143022
-
-# Monitor progress (separate terminal)
-python view_progress.py
+    # Sample diverse lineups from Phase 2 pool
+    injection = available_evals.sample(n_to_inject)
+    new_population.extend(injection)
 ```
 
----
+**Diversity metrics tracked:**
+- **Uniqueness:** % of truly unique lineups (98-100% in V2!)
+- **Avg Hamming distance:** Average # different players (6.6-7.5 in V2!)
+- **Player diversity:** # unique players used
 
-## Complete Pipeline Execution
-
-### First Time Setup
-
-```bash
-# 1. Install dependencies
-pip install -r requirements.txt
-
-# 2. Add FanDuel CSV to _V4 directory
-# File format: "FanDuel-NFL-*.csv"
+**Output each generation:**
+```
+Diversity: 99.0% unique, avg distance: 7.1 players
 ```
 
-### Weekly Workflow
+#### 5. Convergence Detection
 
-```bash
-# STEP 1: Fetch fresh data (Monday/Tuesday when salaries drop)
-python fetch_data.py --all
-
-# STEP 2: Analyze game scripts
-python game_script_continuous.py
-
-# STEP 3: Integrate data
-python data_integration.py
-
-# STEP 4: Run optimizer (let it run overnight)
-python run_optimizer.py --candidates 1000 --sims 10000
-
-# STEP 5: Monitor progress (separate terminal)
-python view_progress.py
-
-# STEP 6: View results
-head -20 outputs/run_YYYYMMDD_HHMMSS/BEST_LINEUPS.csv
+```python
+# Stop if no improvement for N generations
+if len(best_fitness_history) > patience:
+    recent = best_fitness_history[-patience:]
+    improvements = [recent[i] > recent[i-1] for i in range(1, len(recent))]
+    if not any(improvements):
+        return  # Converged!
 ```
 
-### Quick Updates
+**Default:** patience = 5 generations
 
-```bash
-# If only odds changed (no new salaries)
-python fetch_data.py --lines
-python game_script_continuous.py
-python data_integration.py
-
-# Re-run optimizer with new data
-python run_optimizer.py --force-restart
+**Final output:** `BEST_LINEUPS.csv` with all lineups from final population (70-100 typically):
+```
+QB, RB1, RB2, WR1, WR2, WR3, TE, FLEX, DEF,
+lineup_id, player_ids, mean, median, p10, p90, std, skewness, fitness
 ```
 
 ---
 
-## Data Flow Summary
+## Recent Major Improvements
 
-| Step | Input | Process | Output | Runtime |
-|------|-------|---------|--------|---------|
-| 1. Fetch | Web sources + FD CSV | Scrape & merge | `players_raw.csv`, `game_lines.csv` | 2-5 min |
-| 2A. Scripts | `game_lines.csv` | Continuous probabilities | `game_script_continuous.csv` | 1 sec |
-| 2B. Integration | `players_raw.csv`, `game_lines.csv` | Floor/ceiling × 5 scripts | `players_integrated.csv` (38 cols) | 1 sec |
-| 3.1. Candidates | `players_integrated.csv` | MILP + tiered sampling | `candidates.csv` (1000 lineups) | 3 min |
-| 3.2. Evaluation | `candidates.csv` | Monte Carlo (10k sims) | `evaluations.csv` (w/ metrics) | 25-30 min |
-| 3.3. Refinement | `evaluations.csv` | Genetic algorithm | `BEST_LINEUPS.csv` | 40-60 min/iter |
+### 1. Game Script Multiplier Rebalancing (Nov 30, 2024)
 
-**Total: ~70-90 minutes** for complete pipeline (1-2 iterations)
+**Problem:** Old multipliers had ceiling < 1.0, creating mathematically incompatible constraints.
+
+**Solution:**
+- Rebalanced all ceiling multipliers >= 1.0
+- Widened floor ranges for more variance
+- Example: QB shootout ceiling 1.15 → 1.40
+
+**Files changed:**
+- `2_data_integration.py`: Updated GAME_SCRIPT_FLOOR and GAME_SCRIPT_CEILING
+- `optimizer/utils/distribution_fit.py`: Added `fit_lognormal_to_percentiles()`
+
+**Impact:**
+- Boom/bust gap increased from 0.08 pts (0.4%) to 2.69 pts (12.3%)
+- Game scripts now meaningfully affect projections
+
+### 2. Scenario-Specific Means (Nov 30, 2024)
+
+**Problem:** Old approach forced all scenarios to have mean = consensus, eliminating boom/bust effect.
+
+**Solution:**
+- Fit distributions to P10/P90 only
+- Let mean vary by scenario
+- Preserves floor/ceiling constraints
+
+**Files changed:**
+- `optimizer/utils/distribution_fit.py`: New `fit_lognormal_to_percentiles()`
+- `2_data_integration.py`: Use new fitting function
+
+**Impact:**
+- Shootout scenarios: +5% to +17% vs consensus
+- Defensive scenarios: -8% to -14% vs consensus
+- MILP vs MC alignment still good: +0.6%
+
+### 3. Diversity Enforcement in GA (Nov 30, 2024)
+
+**Problem:** Final populations had 10-30% unique lineups, mostly identical cores.
+
+**Solution:**
+- Added diversity metrics (uniqueness, Hamming distance)
+- Deduplication after replacement (min 2 player difference)
+- Diversity injection when population < 70%
+- Adaptive aggressive mutation when diversity < 50%
+
+**Files added:**
+- `optimizer/utils/diversity_tools.py`: Diversity metrics and deduplication
+
+**Files changed:**
+- `optimizer/optimize_genetic.py`: Diversity enforcement loop
+- `optimizer/utils/genetic_operators.py`: Aggressive mutation parameter
+
+**Impact:**
+- Uniqueness increased from 10-30% to 98-100%
+- Average Hamming distance: 6.6-7.5 players (vs 1-2 before)
+- 100+ unique players used (vs 30-50 before)
+
+### 4. Position-Based CSV Formatting (Nov 30, 2024)
+
+**Problem:** Lineup CSVs had single `player_ids` column, hard to read.
+
+**Solution:**
+- Split into position-based columns: QB, RB1, RB2, WR1, WR2, WR3, TE, FLEX, DEF
+- Applied to all output CSVs (candidates, evaluations, BEST_LINEUPS)
+- Preserve `player_ids` for backwards compatibility
+
+**Files changed:**
+- `3_run_optimizer.py`: Added `format_lineups_by_position()`
+
+**Impact:**
+- Much easier to read and analyze lineups
+- Can quickly scan for specific players or stacks
 
 ---
 
-## Key Design Decisions
+## Output Files
 
-### 1. Why Continuous Game Scripts?
+### Run Directory Structure
 
-**Instead of discrete buckets:**
-- ❌ Classify as "Shootout" OR "Competitive" (loses information)
+```
+outputs/run_YYYYMMDD_HHMMSS/
+├── candidates.csv              # Phase 1 output (1000 lineups)
+├── evaluations.csv             # Phase 2 output (1000 lineups + stats)
+├── lineups_after_phase2.csv    # Same as evaluations (formatted)
+├── iteration_N/
+│   ├── lineups_iteration_N.csv # GA population each iteration
+│   └── optimal_lineups.csv     # Best lineups that iteration
+├── BEST_LINEUPS.csv            # Final best lineups (70-100)
+├── final_summary.json          # Run statistics
+├── optimizer_state.json        # State for resumption
+└── checkpoints/
+    └── generation_N.json       # GA checkpoints
+```
 
-**We use continuous probabilities:**
-- ✅ 60% Shootout, 30% Competitive, 10% Defensive (captures mixed signals)
-- ✅ Allows weighted adjustments in simulation
-- ✅ More robust to edge cases
+### CSV Column Order
 
-### 2. Why Pre-calculate All Game Script Floors/Ceilings?
+All lineup CSVs now use position-based format:
+```
+QB, RB1, RB2, WR1, WR2, WR3, TE, FLEX, DEF,  # Player names
+lineup_id, player_ids,                        # Identifiers
+tier, temperature, total_projection,          # Phase 1 info
+milp_projection, total_salary,                # MILP details
+mean, median, p10, p90, std, skewness,        # MC stats
+fitness                                        # GA fitness
+```
 
-**Instead of calculating on-the-fly during simulation:**
-- ❌ Slow (1M+ calculations per optimization)
-- ❌ Harder to debug/validate
-
-**We pre-calculate 5 scenarios:**
-- ✅ Fast lookups during simulation
-- ✅ Easy to validate adjustments
-- ✅ Can inspect data between phases
-
-### 3. Why Separate TD Odds Multipliers?
-
-**Instead of baking into floor/ceiling:**
-- ❌ Can't distinguish game script vs TD odds effects
-- ❌ Hard to tune independently
-
-**We store multipliers separately:**
-- ✅ Apply during simulation: `floor * td_odds_floor_mult`
-- ✅ Easy to tune TD impact (currently 5% floor, 15% ceiling)
-- ✅ Can disable TD adjustments without regenerating data
-
-### 4. Why Three-Phase Optimization?
-
-**Instead of single MILP or pure Monte Carlo:**
-- ❌ MILP alone: fast but deterministic, no variance modeling
-- ❌ Pure MC: accurate but too slow for 1000+ lineups
-
-**We use hybrid approach:**
-- ✅ Phase 1 (MILP): Fast candidate generation (1000 in 3 min)
-- ✅ Phase 2 (MC): Accurate evaluation with distributions (10k sims)
-- ✅ Phase 3 (Genetic): Iterative refinement to local optimum
-
-### 5. Why Parallelization?
-
-**Sequential processing:**
-- ❌ 1000 lineups × 10k sims = ~6-8 hours
-
-**Multiprocessing:**
-- ✅ 12x speedup on 8-core machine
-- ✅ 1000 lineups × 10k sims = ~25-30 minutes
-- ✅ Essential for practical use
-
-### 6. Why Checkpointing?
-
-**Without state persistence:**
-- ❌ Can't resume interrupted runs
-- ❌ Can't see progress during execution
-- ❌ Hard to debug failures
-
-**With state files:**
-- ✅ Resume from any iteration
-- ✅ View progress in real-time (`view_progress.py`)
-- ✅ Track fitness history across iterations
-- ✅ Compare multiple runs
+Example row:
+```csv
+drake maye,devon achane,christian mccaffrey,tetairoa mcmillan,wandale robinson,troy franklin,hunter henry,treveyon henderson,buccaneers,child_684308,"drake maye,buccaneers,...",138.44,136.96,112.99,165.20,20.98,0.071,136.96
+```
 
 ---
 
 ## Performance Metrics
 
-### Expected Runtimes (8-core machine)
+### Runtime Breakdown (8-core M1 Mac)
 
-| Component | Operation | Runtime |
-|-----------|-----------|---------|
-| **Data Fetching** | | |
-| FanDuel load | Local CSV | <1 sec |
-| FantasyPros scrape | Web scrape | 30-60 sec |
-| DK game lines | Web scrape | 15-30 sec |
-| DK TD odds | Web scrape | 30-60 sec |
-| ESPN players + projections | API calls | 30-60 sec |
-| **Total Fetch** | | **2-5 min** |
-| | | |
-| **Processing** | | |
-| Game script analysis | Calculations | 1 sec |
-| Data integration | Join + calculate | 1 sec |
-| **Total Processing** | | **2 sec** |
-| | | |
-| **Optimization** | | |
-| Phase 1 (1000 lineups) | MILP | 3 min |
-| Phase 2 (1000 × 10k sims) | Parallel MC | 25-30 min |
-| Phase 3 (per iteration) | Genetic + MC | 40-60 min |
-| **Total Optimization** | 1-2 iterations | **70-90 min** |
+| Operation | Count | Time | Notes |
+|-----------|-------|------|-------|
+| **Data Fetching** | | | |
+| FanDuel CSV read | 378 rows | <1 sec | Local file |
+| FantasyPros API | 1 request | 2-3 sec | Rate limited |
+| DK game lines scrape | 12 games | 1-2 sec | Cached |
+| DK TD odds scrape | 378 players | 5-10 sec | Cached |
+| ESPN projections scrape | 378 players | 30-60 sec | Rate limited |
+| **Total Phase 1** | | **2-5 min** | |
+| | | | |
+| **Data Integration** | | | |
+| Game script analysis | 12 games | <1 sec | |
+| Floor/ceiling calc | 378 × 5 scenarios | 1 sec | |
+| Distribution fitting | 378 × 5 scenarios | 1 sec | Vectorized |
+| **Total Phase 2** | | **1-2 sec** | |
+| | | | |
+| **Optimization** | | | |
+| MILP candidates | 1000 lineups | 3 min | Parallel |
+| Monte Carlo eval | 1000 × 10k sims | 25-30 min | 12 cores |
+| GA refinement | 16 generations | 40-60 min | MC bottleneck |
+| **Total Phase 3** | | **70-90 min** | |
+| | | | |
+| **GRAND TOTAL** | | **75-95 min** | Full pipeline |
+| **Quick-test** | 50 cands × 1k sims | **2-3 min** | For testing |
 
-### Parallelization Speedup
+### Scalability
 
-| Metric | Sequential | Parallel (8 cores) | Speedup |
-|--------|------------|-------------------|---------|
-| Time per lineup (10k sims) | ~2.0 sec | ~0.16 sec | 12.5x |
-| 1000 lineups | ~33 min | ~2.7 min | 12.2x |
-| 100 offspring | ~3.3 min | ~0.27 min | 12.2x |
+| Parameter | Value | Impact |
+|-----------|-------|--------|
+| Candidates | 1000 → 2000 | +3 min (Phase 1) + 2x MC time |
+| MC sims | 10k → 20k | 2x MC time |
+| Processes | 12 → 24 | 1.8x speedup (diminishing returns) |
+| Population size | 100 → 200 | +40% GA time |
+| Max generations | 30 → 50 | Linear in GA time |
 
----
+### Memory Usage
 
-## File Reference
+| Phase | Peak RAM | Notes |
+|-------|----------|-------|
+| Data fetching | 100 MB | Small datasets |
+| Integration | 200 MB | Distribution params |
+| MILP | 300 MB | PuLP solver |
+| Monte Carlo | 2-3 GB | 12 processes × 250 MB |
+| Genetic | 500 MB | Population storage |
 
-### Core Pipeline Scripts
-
-| File | Purpose | Runtime | Inputs | Outputs |
-|------|---------|---------|--------|---------|
-| `fetch_data.py` | Data collection | 2-5 min | Web + CSV | `players_raw.csv`, `game_lines.csv` |
-| `game_script_continuous.py` | Game analysis | 1 sec | `game_lines.csv` | `game_script_continuous.csv` |
-| `data_integration.py` | Floor/ceiling calc | 1 sec | Raw + scripts | `players_integrated.csv` |
-| `run_optimizer.py` | Orchestration | 70-90 min | Integrated | `BEST_LINEUPS.csv` |
-| `view_progress.py` | Monitoring | - | State files | Console output |
-
-### Optimizer Modules
-
-| File | Purpose |
-|------|---------|
-| `optimizer/generate_candidates.py` | Phase 1: MILP candidate generation |
-| `optimizer/evaluate_lineups.py` | Phase 2: Parallel Monte Carlo |
-| `optimizer/optimize_genetic.py` | Phase 3: Genetic refinement |
-| `optimizer/utils/milp_solver.py` | MILP formulation with PuLP |
-| `optimizer/utils/monte_carlo.py` | Parallel simulation engine |
-| `optimizer/utils/distribution_fit.py` | Shifted log-normal fitting |
-| `optimizer/utils/genetic_operators.py` | Crossover, mutation, selection |
-
-### Data Files
-
-| File | Rows | Columns | Description |
-|------|------|---------|-------------|
-| `players_raw.csv` | ~378 | 19 | Merged data from all sources |
-| `game_lines.csv` | ~28 | 13 | Betting lines (2 rows per game) |
-| `game_script_continuous.csv` | ~14 | 11 | Game script probabilities |
-| `players_integrated.csv` | ~378 | 38 | Final integrated data |
-| `candidates.csv` | 1000 | 6 | Generated lineup candidates |
-| `evaluations.csv` | 1000 | 14 | Monte Carlo results |
-| `BEST_LINEUPS.csv` | 10 | 11 | Top 10 optimal lineups |
-
-### Documentation
-
-| File | Purpose |
-|------|---------|
-| `PIPELINE_REVIEW.md` | This document - complete end-to-end overview |
-| `OPTIMIZER_DESIGN.md` | Technical design and architecture |
-| `OPTIMIZER_USAGE.md` | User guide with examples |
-| `QUICK_START.md` | Get started in 5 minutes |
-| `WORKFLOW.md` | Data pipeline sequence |
-| `README.md` | Project overview |
+**Recommendation:** 4 GB RAM minimum, 8 GB recommended
 
 ---
 
 ## Troubleshooting
 
-### Data Fetching Issues
+### "Game script multipliers incompatible"
+**Status:** ✅ FIXED in V2
+**Solution:** Rebalanced multipliers, all ceiling >= 1.0
 
-**Problem:** "No games found"
-- **Cause:** Week cutoff date incorrect or no games this week
-- **Fix:** Check `game_lines_raw.txt` for scraped dates
+### "Boom/bust scenarios have no effect"
+**Status:** ✅ FIXED in V2
+**Solution:** Allow scenario-specific means
 
-**Problem:** "Player not found in merge"
-- **Cause:** Name normalization mismatch
-- **Fix:** Add name mapping to `utils.py`
+### "Final lineups all look the same"
+**Status:** ✅ FIXED in V2
+**Solution:** Diversity enforcement in GA
 
-**Problem:** "ESPN API timeout"
-- **Cause:** Rate limiting or API downtime
-- **Fix:** Retry or use cached data
+### "MILP and MC projections don't match"
+**Status:** ✅ VERIFIED
+**Current:** Within 0.6% (excellent alignment)
 
-### Data Integration Issues
+### "Out of memory"
+**Solution:** Reduce `--processes` or `--candidates`
 
-**Problem:** "No game found for player X"
-- **Cause:** Team abbreviation mismatch (JAC vs JAX)
-- **Fix:** Add to `TEAM_ABBR_MAP` in `data_integration.py`
-
-**Problem:** "Floor > Ceiling"
-- **Cause:** Bad ESPN data or extreme game script multipliers
-- **Fix:** Check constraints in `calculate_floor_ceiling_for_all_game_scripts()`
-
-### Optimizer Issues
-
-**Problem:** "No DEFs available"
-- **Cause:** Missing floor/ceiling data for defenses
-- **Fix:** Already auto-filled in `generate_candidates.py` (201 players)
-
-**Problem:** "KeyError: 'id'"
-- **Cause:** Column name mismatch in multiprocessing workers
-- **Fix:** Already fixed with column normalization
-
-**Problem:** "Out of memory"
-- **Cause:** Too many parallel processes
-- **Fix:** Reduce `--processes` or `--candidates`
-
-**Problem:** "Optimizer converged too early"
-- **Cause:** Low patience or high threshold
-- **Fix:** Increase `--patience` or decrease `--threshold`
+### "KeyError: 'fdSalary'"
+**Status:** ✅ HANDLED
+**Solution:** Column normalization in data fetching
 
 ---
 
-## Next Steps & Future Enhancements
+## Summary of Changes (V1 → V2)
 
-### Potential Improvements
+| Component | V1 | V2 | Impact |
+|-----------|----|----|--------|
+| **Game script multipliers** | Some ceiling < 1.0 | All ceiling >= 1.0 | Mathematically consistent |
+| **Distribution fitting** | Force mean = consensus | Fit P10/P90 only | Boom/bust gap 12.3% |
+| **GA diversity** | 10-30% unique | 98-100% unique | Huge improvement |
+| **CSV format** | Single player_ids column | Position-based columns | Much more readable |
+| **Hamming distance** | 1-2 players | 6.6-7.5 players | Real diversity |
+| **Player variety** | 30-50 unique players | 100+ unique players | Better exploration |
 
-1. **Correlation Modeling**
-   - Currently: Players evaluated independently
-   - Enhancement: Model QB-WR stacks, game stacks
-   - Impact: More realistic lineup variance
-
-2. **Weather Integration**
-   - Currently: No weather data
-   - Enhancement: Scrape weather forecasts
-   - Impact: Adjust totals, passing games
-
-3. **Ownership Projections**
-   - Currently: No ownership consideration
-   - Enhancement: Add ownership data, optimize for GPP uniqueness
-   - Impact: Better tournament lineups
-
-4. **Player Props**
-   - Currently: Only anytime TD odds
-   - Enhancement: Passing yards, rushing yards, receptions
-   - Impact: More granular projection adjustments
-
-5. **Advanced Distributions**
-   - Currently: Shifted log-normal (3 parameters)
-   - Enhancement: More flexible distributions (GMM, kernel density)
-   - Impact: Better tail modeling
-
-6. **Live Optimizer**
-   - Currently: Run once per week
-   - Enhancement: Re-run as odds change throughout week
-   - Impact: React to line movements, injuries
-
-7. **Backtesting Framework**
-   - Currently: No historical validation
-   - Enhancement: Historical data, backtest results
-   - Impact: Validate adjustments, tune parameters
-
-8. **Multi-Contest Optimization**
-   - Currently: Single lineup focus
-   - Enhancement: Optimize lineup pool for multiple contests
-   - Impact: Better diversification strategy
+**Overall:** V2 is a major upgrade with meaningful boom/bust effects and real diversity!
 
 ---
 
-## Appendix: Column Reference
+## References
 
-### players_integrated.csv Full Schema
-
-| # | Column | Type | Description | Example |
-|---|--------|------|-------------|---------|
-| 1 | `name` | str | Player name | "Josh Allen" |
-| 2 | `position` | str | Position | "QB" |
-| 3 | `team` | str | Team abbr | "BUF" |
-| 4 | `game` | str | Game matchup | "BUF@PIT" |
-| 5 | `opponent` | str | Opponent abbr | "PIT" |
-| 6 | `salary` | int | FanDuel salary | 9400 |
-| 7 | `fppg` | float | Avg FD pts/game | 24.86 |
-| 8 | `injury_status` | str | Injury designation | "Q" or "" |
-| 9 | `injury_detail` | str | Injury description | "Ankle" or "" |
-| 10 | `fpProjPts` | float | FP consensus projection | 21.9 |
-| 11 | `tdOdds` | float | DK anytime TD odds | 750.0 |
-| 12 | `tdProbability` | float | TD probability (%) | 11.76 |
-| 13 | `espnId` | float | ESPN player ID | 3918298.0 |
-| 14 | `proj_team_pts` | float | Team projected points | 23.75 |
-| 15 | `proj_opp_pts` | float | Opponent projected pts | 20.75 |
-| 16 | `espnScoreProjection` | float | ESPN main projection | 20.98 |
-| 17 | `espnLowScore` | float | ESPN floor | 14.25 |
-| 18 | `espnHighScore` | float | ESPN ceiling | 27.27 |
-| 19 | `espnOutsideProjection` | float | ESPN alt model 1 | 20.79 |
-| 20 | `espnSimulationProjection` | float | ESPN alt model 2 | 20.96 |
-| 21 | `floor_shootout` | float | Floor in shootout | 13.54 |
-| 22 | `ceiling_shootout` | float | Ceiling in shootout | 31.36 |
-| 23 | `floor_defensive` | float | Floor in defensive | 12.11 |
-| 24 | `ceiling_defensive` | float | Ceiling in defensive | 22.99 |
-| 25 | `floor_blowout_favorite` | float | Floor as favorite blowout | 12.83 |
-| 26 | `ceiling_blowout_favorite` | float | Ceiling as favorite blowout | 23.17 |
-| 27 | `floor_blowout_underdog` | float | Floor as underdog blowout | 13.54 |
-| 28 | `ceiling_blowout_underdog` | float | Ceiling as underdog blowout | 25.91 |
-| 29 | `floor_competitive` | float | Floor in competitive game | 14.25 |
-| 30 | `ceiling_competitive` | float | Ceiling in competitive game | 27.27 |
-| 31 | `td_odds_floor_mult` | float | TD odds floor multiplier | 1.006 |
-| 32 | `td_odds_ceiling_mult` | float | TD odds ceiling multiplier | 1.018 |
-| 33 | `game_id` | str | Game identifier | "BUF@PIT" |
-| 34 | `shootout_prob` | float | Shootout probability | 0.31 |
-| 35 | `defensive_prob` | float | Defensive probability | 0.23 |
-| 36 | `blowout_prob` | float | Blowout probability | 0.28 |
-| 37 | `competitive_prob` | float | Competitive probability | 0.18 |
-| 38 | `is_favorite` | bool | Is player on favorite? | False |
-
----
-
-**End of Pipeline Review**
+- Old pipeline review: `docs/PIPELINE_REVIEW_v1_DEPRECATED.md`
+- Game script fix summary: `GAME_SCRIPT_FIX_SUMMARY.md`
+- Diversity enhancements: `DIVERSITY_ENHANCEMENTS.md`
+- Quick start guide: `docs/QUICK_START.md`

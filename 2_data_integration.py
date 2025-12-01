@@ -10,7 +10,8 @@ Pipeline:
 3. Enhanced game script analysis (using team totals as additional signals)
 4. Adjust floor/ceiling based on game script (weighted average by probability)
 5. Adjust floor/ceiling based on TD odds
-6. Output integrated player data
+6. Pre-compute distribution parameters for all scenarios
+7. Output integrated player data
 
 Output: players_integrated.csv
 """
@@ -19,6 +20,9 @@ import numpy as np
 from pathlib import Path
 from typing import Dict, List, Tuple
 import json
+
+# Import distribution fitting function
+from optimizer.utils.distribution_fit import fit_shifted_lognormal
 
 
 # ============================================================================
@@ -42,78 +46,78 @@ def normalize_team_abbr(team: str) -> str:
 # Game Script Floor Adjustments (multipliers)
 GAME_SCRIPT_FLOOR = {
     'shootout': {
-        'QB': 0.95,   # Slight floor reduction (more variance)
+        'QB': 0.75,   # Wide range for high variance in shootouts
         'RB': 0.90,   # Reduced floor (less running in shootouts)
-        'WR': 0.95,   # Slight floor reduction
-        'TE': 0.95,   # Slight floor reduction
-        'D': 0.85,    # Reduced floor (high scoring = fewer points for D)
+        'WR': 0.75,   # Wide range for high variance
+        'TE': 0.75,   # Wide range for high variance
+        'D': 0.70,    # Low floor (high scoring = fewer points for D)
     },
     'defensive': {
-        'QB': 0.85,   # Reduced floor (low scoring)
-        'RB': 1.05,   # Slight floor boost (more conservative)
-        'WR': 0.85,   # Reduced floor
-        'TE': 0.85,   # Reduced floor
-        'D': 1.15,    # Floor boost (low scoring = more points for D)
+        'QB': 0.75,   # Lower floor but ceiling will compensate
+        'RB': 0.95,   # Stable floor (more conservative)
+        'WR': 0.75,   # Lower floor
+        'TE': 0.75,   # Lower floor
+        'D': 1.00,    # Stable floor (low scoring = more points for D)
     },
     'blowout_favorite': {
-        'QB': 0.90,   # Reduced floor (may sit in 4th quarter)
-        'RB': 1.20,   # Strong floor boost (clock management)
-        'WR': 0.90,   # Reduced floor
-        'TE': 0.90,   # Reduced floor
-        'D': 1.10,    # Moderate boost (potential for turnovers/sacks)
+        'QB': 0.80,   # Lower floor (may sit in 4th quarter)
+        'RB': 0.95,   # Stable floor (clock management)
+        'WR': 0.80,   # Lower floor
+        'TE': 0.80,   # Lower floor
+        'D': 1.00,    # Stable floor
     },
     'blowout_underdog': {
-        'QB': 0.95,   # Slight floor reduction (garbage time variability)
-        'RB': 0.85,   # Reduced floor (abandoned run game)
-        'WR': 0.95,   # Slight floor reduction
-        'TE': 0.95,   # Slight floor reduction
-        'D': 0.90,    # Slight reduction (garbage time scores)
+        'QB': 0.80,   # Lower floor for variance
+        'RB': 0.75,   # Much lower - game script dependent
+        'WR': 0.85,   # Decent floor
+        'TE': 0.80,   # Lower floor
+        'D': 0.75,    # Low floor (garbage time scores)
     },
     'competitive': {
-        'QB': 1.00,   # No change (balanced)
-        'RB': 1.00,   # No change
-        'WR': 1.00,   # No change
-        'TE': 1.00,   # No change
-        'D': 1.00,    # No change
+        'QB': 0.85,   # Moderate baseline floor
+        'RB': 0.85,   # Moderate baseline floor
+        'WR': 0.85,   # Moderate baseline floor
+        'TE': 0.85,   # Moderate baseline floor
+        'D': 0.85,    # Moderate baseline floor
     }
 }
 
 # Game Script Ceiling Adjustments (multipliers)
 GAME_SCRIPT_CEILING = {
     'shootout': {
-        'QB': 1.15,   # Boost ceiling (high scoring)
-        'RB': 0.90,   # Reduced ceiling (less running)
-        'WR': 1.20,   # Strong ceiling boost
-        'TE': 1.15,   # Ceiling boost
-        'D': 0.80,    # Reduced ceiling (high scoring = fewer D points)
+        'QB': 1.40,   # Massive upside (high scoring)
+        'RB': 1.05,   # Modest ceiling (less running)
+        'WR': 1.45,   # Huge upside
+        'TE': 1.40,   # Huge upside
+        'D': 1.05,    # Modest ceiling (high scoring = fewer D points)
     },
     'defensive': {
-        'QB': 0.80,   # Reduced ceiling (low scoring)
-        'RB': 0.90,   # Reduced ceiling
-        'WR': 0.75,   # Strong ceiling reduction
-        'TE': 0.80,   # Reduced ceiling
-        'D': 1.25,    # Strong ceiling boost (sacks, turnovers, TDs)
+        'QB': 1.15,   # Limited upside (low scoring)
+        'RB': 1.15,   # Modest upside
+        'WR': 1.10,   # Limited upside
+        'TE': 1.15,   # Limited upside
+        'D': 1.40,    # High ceiling (sacks, turnovers, TDs)
     },
     'blowout_favorite': {
-        'QB': 0.85,   # Reduced ceiling (conservative play)
-        'RB': 1.10,   # Ceiling boost
-        'WR': 0.85,   # Reduced ceiling
-        'TE': 0.85,   # Reduced ceiling
-        'D': 1.15,    # Ceiling boost (turnovers, sacks)
+        'QB': 1.15,   # Limited upside (conservative play)
+        'RB': 1.30,   # Good upside
+        'WR': 1.10,   # Limited upside
+        'TE': 1.15,   # Limited upside
+        'D': 1.30,    # Good ceiling (turnovers, sacks)
     },
     'blowout_underdog': {
-        'QB': 1.10,   # Ceiling boost (garbage time)
-        'RB': 0.80,   # Reduced ceiling
-        'WR': 1.15,   # Ceiling boost (passing attack)
-        'TE': 1.10,   # Ceiling boost
-        'D': 0.85,    # Reduced ceiling (garbage time scores)
+        'QB': 1.35,   # Big upside when trailing
+        'RB': 1.05,   # Modest ceiling
+        'WR': 1.35,   # Big upside (passing attack)
+        'TE': 1.30,   # Good upside
+        'D': 1.05,    # Modest ceiling (garbage time scores)
     },
     'competitive': {
-        'QB': 1.00,   # No change
-        'RB': 1.00,   # No change
-        'WR': 1.00,   # No change
-        'TE': 1.00,   # No change
-        'D': 1.00,    # No change
+        'QB': 1.25,   # Moderate ceiling
+        'RB': 1.20,   # Moderate ceiling
+        'WR': 1.25,   # Moderate ceiling
+        'TE': 1.25,   # Moderate ceiling
+        'D': 1.20,    # Moderate ceiling
     }
 }
 
@@ -345,6 +349,56 @@ def calculate_floor_ceiling_for_all_game_scripts(
     return results
 
 
+def calculate_distribution_params_for_all_scenarios(
+    consensus: float,
+    script_floors_ceilings: Dict[str, float],
+    td_floor_mult: float,
+    td_ceiling_mult: float
+) -> Dict[str, float]:
+    """
+    Pre-compute distribution parameters (mu, sigma, shift) for all game script scenarios.
+
+    This avoids recomputing distributions millions of times during Monte Carlo simulation.
+
+    Args:
+        consensus: Player's consensus projection (mean)
+        script_floors_ceilings: Dict with floor_X and ceiling_X for each script
+        td_floor_mult: TD odds floor multiplier
+        td_ceiling_mult: TD odds ceiling multiplier
+
+    Returns:
+        Dict with mu_X, sigma_X, shift_X for each script scenario
+    """
+    scripts = ['shootout', 'defensive', 'blowout_favorite', 'blowout_underdog', 'competitive']
+
+    results = {}
+    for script in scripts:
+        # Get base floor/ceiling for this script
+        floor = script_floors_ceilings[f'floor_{script}']
+        ceiling = script_floors_ceilings[f'ceiling_{script}']
+
+        # Apply TD odds multipliers (same as done in monte_carlo.py)
+        floor_adjusted = floor * td_floor_mult
+        ceiling_adjusted = ceiling * td_ceiling_mult
+
+        # Fit to floor/ceiling only - let mean vary by scenario
+        # This allows boom/bust scenarios to actually affect player scores
+        try:
+            from optimizer.utils.distribution_fit import fit_lognormal_to_percentiles
+            mu, sigma, shift = fit_lognormal_to_percentiles(floor_adjusted, ceiling_adjusted)
+            results[f'mu_{script}'] = mu
+            results[f'sigma_{script}'] = sigma
+            results[f'shift_{script}'] = shift
+        except (ValueError, Exception) as e:
+            # Fallback to simple parameters if fitting fails
+            std = (ceiling_adjusted - floor_adjusted) / 5
+            results[f'mu_{script}'] = np.log(consensus) if consensus > 0 else 0
+            results[f'sigma_{script}'] = std / consensus if consensus > 0 else 0.2
+            results[f'shift_{script}'] = 0.0
+
+    return results
+
+
 def calculate_td_odds_multipliers(player: pd.Series) -> Tuple[float, float]:
     """
     Calculate TD odds adjustment multipliers (NOT applied, just stored).
@@ -424,6 +478,15 @@ def main():
         # Step 4b: Calculate TD odds multipliers (not applied yet)
         td_floor_mult, td_ceiling_mult = calculate_td_odds_multipliers(player)
 
+        # Step 4c: Pre-compute distribution parameters for all scenarios
+        consensus = player.get('fpProjPts', 0)
+        dist_params = calculate_distribution_params_for_all_scenarios(
+            consensus,
+            script_floors_ceilings,
+            td_floor_mult,
+            td_ceiling_mult
+        )
+
         # Create integrated player row
         integrated_player = player.copy()
 
@@ -434,6 +497,10 @@ def main():
         # Add TD odds multipliers
         integrated_player['td_odds_floor_mult'] = td_floor_mult
         integrated_player['td_odds_ceiling_mult'] = td_ceiling_mult
+
+        # Add pre-computed distribution parameters
+        for key, value in dist_params.items():
+            integrated_player[key] = value
 
         # Add game script probabilities
         integrated_player['game_id'] = game_script['game_id']

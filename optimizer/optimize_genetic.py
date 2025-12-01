@@ -22,6 +22,11 @@ from utils.genetic_operators import (
     FITNESS_FUNCTIONS
 )
 from utils.monte_carlo import evaluate_lineups_parallel
+from utils.diversity_tools import (
+    calculate_uniqueness, calculate_player_diversity,
+    calculate_avg_distance, deduplicate_population,
+    get_diversity_report
+)
 
 
 def save_checkpoint(
@@ -67,7 +72,10 @@ def optimize_genetic(
     convergence_patience: int = 5,
     output_path: str = 'outputs/lineups_optimal.csv',
     resume_from: Optional[str] = None,
-    verbose: bool = True
+    verbose: bool = True,
+    enforce_diversity: bool = True,
+    min_hamming_distance: int = 2,
+    diversity_injection_rate: float = 0.1
 ) -> pd.DataFrame:
     """
     Optimize lineups using genetic algorithm with parallel evaluation.
@@ -88,6 +96,9 @@ def optimize_genetic(
         output_path: Where to save optimal lineups
         resume_from: Path to checkpoint to resume from
         verbose: Print progress
+        enforce_diversity: Apply diversity-preserving mechanisms
+        min_hamming_distance: Minimum player difference for unique lineups
+        diversity_injection_rate: Fraction of population to replace with random lineups
 
     Returns:
         DataFrame with top lineups
@@ -174,19 +185,25 @@ def optimize_genetic(
             print(f"  Created {len(offspring)} offspring via crossover")
 
         # 3. Mutation
+        # Check diversity - use aggressive mutation if diversity is low
+        current_uniqueness = calculate_uniqueness(population) if enforce_diversity else 1.0
+        use_aggressive = enforce_diversity and current_uniqueness < 0.5
+
         mutated_count = 0
         for i, child in enumerate(offspring):
             mutated = mutate(
                 child,
                 players_df,
-                mutation_rate=mutation_rate
+                mutation_rate=mutation_rate,
+                aggressive=use_aggressive
             )
             if mutated['player_ids'] != child['player_ids']:
                 mutated_count += 1
                 offspring[i] = mutated
 
         if verbose:
-            print(f"  Mutated {mutated_count} offspring")
+            print(f"  Mutated {mutated_count} offspring"
+                  + (f" (aggressive mode - diversity at {current_uniqueness:.1%})" if use_aggressive else ""))
 
         # 4. Evaluate offspring (PARALLEL)
         if verbose:
@@ -225,6 +242,33 @@ def optimize_genetic(
         offspring_sorted = sorted(offspring, key=lambda x: x['fitness'], reverse=True)
         new_population = elite + offspring_sorted[:population_size - 20]
 
+        # DIVERSITY ENFORCEMENT
+        if enforce_diversity:
+            # Deduplicate to remove near-identical lineups
+            new_population = deduplicate_population(new_population, min_distance=min_hamming_distance)
+
+            # If population got too small from deduplication, inject diversity
+            if len(new_population) < population_size * 0.7:
+                # Need to inject new lineups
+                n_to_inject = population_size - len(new_population)
+
+                if verbose:
+                    print(f"  Population too homogeneous ({len(new_population)} unique)")
+                    print(f"  Injecting {n_to_inject} diverse lineups from Phase 2 pool")
+
+                # Get diverse lineups from original evaluations (not yet in population)
+                available_evals = evaluations_df[
+                    ~evaluations_df['player_ids'].isin([l['player_ids'] for l in new_population])
+                ]
+
+                if len(available_evals) > 0:
+                    # Sample diverse lineups
+                    injection = available_evals.sample(min(n_to_inject, len(available_evals))).to_dict('records')
+                    # Add fitness to injected lineups
+                    for lineup in injection:
+                        lineup['fitness'] = fitness_func(lineup)
+                    new_population.extend(injection)
+
         population = new_population
 
         # Track best
@@ -245,6 +289,12 @@ def optimize_genetic(
             print(f"  Overall best fitness: {best_overall['fitness']:.2f}")
             print(f"  Generation time: {gen_time / 60:.1f} minutes")
 
+            # Diversity metrics
+            if enforce_diversity:
+                uniqueness = calculate_uniqueness(population)
+                avg_dist = calculate_avg_distance(population[:min(50, len(population))])  # Sample for speed
+                print(f"  Diversity: {uniqueness:.1%} unique, avg distance: {avg_dist:.1f} players")
+
         # 6. Save checkpoint
         save_checkpoint(generation, population, best_overall)
 
@@ -252,10 +302,12 @@ def optimize_genetic(
             print(f"  Checkpoint saved: generation_{generation}.json")
 
         # 7. Check convergence
-        if len(best_fitness_history) >= convergence_patience:
+        if len(best_fitness_history) > convergence_patience:
+            # Check if there was improvement in the last N generations
+            recent_fitnesses = best_fitness_history[-convergence_patience:]
             recent_improvements = [
-                best_fitness_history[i] > best_fitness_history[i - 1]
-                for i in range(-convergence_patience, 0)
+                recent_fitnesses[i] > recent_fitnesses[i - 1]
+                for i in range(1, len(recent_fitnesses))
             ]
             if not any(recent_improvements):
                 if verbose:
@@ -268,21 +320,20 @@ def optimize_genetic(
         print(f"  Total generations: {generation + 1}")
         print(f"  Best fitness: {best_overall['fitness']:.2f}")
 
-    # Get top 10 lineups
+    # Get all lineups from final population, sorted by fitness
     final_population_sorted = sorted(population, key=lambda x: x['fitness'], reverse=True)
-    top_lineups = final_population_sorted[:10]
 
     # Convert to DataFrame
-    top_lineups_df = pd.DataFrame(top_lineups)
+    all_lineups_df = pd.DataFrame(final_population_sorted)
 
     # Save
     output_file = Path(output_path)
     output_file.parent.mkdir(parents=True, exist_ok=True)
-    top_lineups_df.to_csv(output_file, index=False)
+    all_lineups_df.to_csv(output_file, index=False)
 
     if verbose:
         print(f"\nTop 10 lineups:")
-        for i, lineup in enumerate(top_lineups):
+        for i, lineup in enumerate(final_population_sorted[:10]):
             print(f"  {i + 1}. Fitness: {lineup['fitness']:6.2f}, "
                   f"Median: {lineup['median']:6.2f}, "
                   f"P90: {lineup['p90']:6.2f}, "
@@ -290,7 +341,7 @@ def optimize_genetic(
         print(f"\n  Saved to: {output_file}")
         print("=" * 80)
 
-    return top_lineups_df
+    return all_lineups_df
 
 
 def main():

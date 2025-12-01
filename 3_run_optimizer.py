@@ -18,6 +18,38 @@ import time
 from datetime import datetime
 import sys
 
+# Import configuration
+try:
+    from config import *
+except ImportError:
+    # Try 0_config.py if config.py doesn't exist
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("config", "0_config.py")
+        config_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(config_module)
+        # Import all config variables into global namespace
+        for name in dir(config_module):
+            if not name.startswith('_'):
+                globals()[name] = getattr(config_module, name)
+    except Exception as e:
+        print(f"Warning: Could not load config file: {e}")
+        print("Using fallback defaults...")
+        # Fallback defaults
+        PLAYERS_INTEGRATED = 'data/intermediate/players_integrated.csv'
+        GAME_SCRIPTS = 'data/intermediate/game_script_continuous.csv'
+        OUTPUTS_DIR = 'outputs'
+        DEFAULT_CANDIDATES = 1000
+        QUICK_TEST_CANDIDATES = 50
+        DEFAULT_SIMS = 10000
+        QUICK_TEST_SIMS = 1000
+        DEFAULT_MAX_GENERATIONS = 50
+        QUICK_TEST_MAX_GENERATIONS = 30
+        DEFAULT_CONVERGENCE_PATIENCE = 5
+        DEFAULT_CONVERGENCE_THRESHOLD = 0.01
+        DEFAULT_FITNESS = 'balanced'
+        DEFAULT_PROCESSES = None
+
 # Add optimizer to path
 sys.path.insert(0, str(Path(__file__).parent / 'optimizer'))
 
@@ -31,14 +63,15 @@ class OptimizerOrchestrator:
 
     def __init__(
         self,
-        players_path: str = 'players_integrated.csv',
-        game_scripts_path: str = 'game_script_continuous.csv',
-        output_dir: str = 'outputs',
+        players_path: str = None,
+        game_scripts_path: str = None,
+        output_dir: str = None,
         run_name: str = None
     ):
-        self.players_path = players_path
-        self.game_scripts_path = game_scripts_path
-        self.output_dir = Path(output_dir)
+        # Use config defaults if not specified
+        self.players_path = players_path or PLAYERS_INTEGRATED
+        self.game_scripts_path = game_scripts_path or GAME_SCRIPTS
+        self.output_dir = Path(output_dir or OUTPUTS_DIR)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
         # Create run-specific directory
@@ -94,14 +127,23 @@ class OptimizerOrchestrator:
         players_df = pd.read_csv(self.players_path)
         game_scripts_df = pd.read_csv(self.game_scripts_path)
 
-        # Generate candidates
+        # Generate candidates (saves to temporary location first)
+        temp_candidates_file = self.run_dir / 'candidates_temp.csv'
         candidates_df = generate_candidates(
             players_df=players_df,
             game_scripts_df=game_scripts_df,
             n_lineups=n_candidates,
-            output_path=str(candidates_file),
+            output_path=str(temp_candidates_file),
             verbose=True
         )
+
+        # Format with position-based columns and save
+        candidates_formatted = self.format_lineups_by_position(candidates_df)
+        candidates_formatted.to_csv(candidates_file, index=False)
+
+        # Clean up temp file
+        if temp_candidates_file.exists():
+            temp_candidates_file.unlink()
 
         elapsed = time.time() - start_time
         self.state['phase_1_complete'] = True
@@ -128,16 +170,25 @@ class OptimizerOrchestrator:
 
         start_time = time.time()
 
-        # Evaluate candidates
+        # Evaluate candidates (saves to temporary location first)
+        temp_evaluations_file = self.run_dir / 'evaluations_temp.csv'
         evaluations_df = evaluate_candidates(
             candidates_path=str(candidates_file),
             players_path=self.players_path,
             game_scripts_path=self.game_scripts_path,
             n_sims=n_sims,
             n_processes=n_processes,
-            output_path=str(evaluations_file),
+            output_path=str(temp_evaluations_file),
             verbose=True
         )
+
+        # Format with position-based columns and save
+        evaluations_formatted = self.format_lineups_by_position(evaluations_df)
+        evaluations_formatted.to_csv(evaluations_file, index=False)
+
+        # Clean up temp file
+        if temp_evaluations_file.exists():
+            temp_evaluations_file.unlink()
 
         elapsed = time.time() - start_time
         self.state['phase_2_complete'] = True
@@ -145,12 +196,11 @@ class OptimizerOrchestrator:
         self.state['n_simulations'] = n_sims
         self.save_state()
 
-        # Save top 10 snapshot
-        top_10 = evaluations_df.head(10)
-        top_10.to_csv(self.run_dir / 'top_10_after_phase2.csv', index=False)
+        # Also save to lineups_after_phase2.csv for backwards compatibility
+        evaluations_formatted.to_csv(self.run_dir / 'lineups_after_phase2.csv', index=False)
 
         print(f"\nPhase 2 complete in {elapsed / 60:.1f} minutes")
-        print(f"Top 10 saved to: {self.run_dir / 'top_10_after_phase2.csv'}")
+        print(f"All {len(evaluations_df)} lineups saved to: {evaluations_file}")
 
         return evaluations_df
 
@@ -208,14 +258,14 @@ class OptimizerOrchestrator:
         self.state['best_fitness_history'].append(iteration_result['best_fitness'])
         self.save_state()
 
-        # Save top 10 from this iteration
-        top_10 = optimal_df.head(10)
-        top_10.to_csv(iteration_dir / f'top_10_iteration_{iteration}.csv', index=False)
+        # Save all lineups from this iteration with position-based formatting
+        all_lineups_formatted = self.format_lineups_by_position(optimal_df)
+        all_lineups_formatted.to_csv(iteration_dir / f'lineups_iteration_{iteration}.csv', index=False)
 
         print(f"\nIteration {iteration} complete in {elapsed / 60:.1f} minutes")
         print(f"  Best fitness: {iteration_result['best_fitness']:.2f}")
         print(f"  Best median: {iteration_result['best_median']:.2f}")
-        print(f"  Top 10 saved to: {iteration_dir / f'top_10_iteration_{iteration}.csv'}")
+        print(f"  All {len(optimal_df)} lineups saved to: {iteration_dir / f'lineups_iteration_{iteration}.csv'}")
 
         return optimal_df, iteration_result
 
@@ -240,19 +290,108 @@ class OptimizerOrchestrator:
 
         return self.state['convergence_count'] >= patience
 
+    def format_lineups_by_position(self, lineups_df: pd.DataFrame) -> pd.DataFrame:
+        """Reformat lineups to have separate columns for each position.
+
+        Order: QB, RB, RB, WR, WR, WR, TE, FLEX, DEF
+        """
+        # Load player data to get positions
+        players_df = pd.read_csv(self.players_path)
+        player_positions = dict(zip(players_df['name'].str.lower(), players_df['position']))
+
+        formatted_rows = []
+
+        for _, row in lineups_df.iterrows():
+            # Parse player_ids (comma-separated)
+            player_names = [p.strip() for p in row['player_ids'].split(',')]
+
+            # Group players by position
+            qbs = []
+            rbs = []
+            wrs = []
+            tes = []
+            defs = []
+
+            for player in player_names:
+                pos = player_positions.get(player.lower(), 'UNKNOWN')
+                if pos == 'QB':
+                    qbs.append(player)
+                elif pos == 'RB':
+                    rbs.append(player)
+                elif pos == 'WR':
+                    wrs.append(player)
+                elif pos == 'TE':
+                    tes.append(player)
+                elif pos in ('DEF', 'D'):  # Handle both 'DEF' and 'D'
+                    defs.append(player)
+
+            # Build row in specified order: QB, RB, RB, WR, WR, WR, TE, FLEX, DEF
+            formatted_row = {
+                'QB': qbs[0] if len(qbs) > 0 else '',
+                'RB1': rbs[0] if len(rbs) > 0 else '',
+                'RB2': rbs[1] if len(rbs) > 1 else '',
+                'WR1': wrs[0] if len(wrs) > 0 else '',
+                'WR2': wrs[1] if len(wrs) > 1 else '',
+                'WR3': wrs[2] if len(wrs) > 2 else '',
+                'TE': tes[0] if len(tes) > 0 else '',
+                'DEF': defs[0] if len(defs) > 0 else '',
+            }
+
+            # Determine FLEX (extra RB, WR, or TE)
+            flex = ''
+            if len(rbs) > 2:
+                flex = rbs[2]
+            elif len(wrs) > 3:
+                flex = wrs[3]
+            elif len(tes) > 1:
+                flex = tes[1]
+            formatted_row['FLEX'] = flex
+
+            # Add ALL other columns from the original row (preserves everything)
+            for col in lineups_df.columns:
+                if col not in ['player_ids'] and col not in formatted_row:
+                    formatted_row[col] = row[col]
+
+            # Also keep player_ids for backwards compatibility
+            if 'player_ids' in row:
+                formatted_row['player_ids'] = row['player_ids']
+
+            formatted_rows.append(formatted_row)
+
+        # Create new dataframe with position columns first, then stats
+        position_cols = ['QB', 'RB1', 'RB2', 'WR1', 'WR2', 'WR3', 'TE', 'FLEX', 'DEF']
+        priority_stats = ['lineup_id', 'player_ids', 'tier', 'temperature', 'total_projection',
+                         'milp_projection', 'total_salary',
+                         'mean', 'median', 'p10', 'p90', 'std', 'skewness', 'fitness']
+
+        formatted_df = pd.DataFrame(formatted_rows)
+
+        # Build column order: positions first, then priority stats, then any remaining columns
+        column_order = position_cols.copy()
+        for col in priority_stats:
+            if col in formatted_df.columns and col not in column_order:
+                column_order.append(col)
+
+        # Add any remaining columns not in the priority list
+        for col in formatted_df.columns:
+            if col not in column_order:
+                column_order.append(col)
+
+        return formatted_df[column_order]
+
     def run_full_pipeline(
         self,
         n_candidates: int = 1000,
         n_sims_phase2: int = 10000,
         n_sims_phase3: int = 10000,
         fitness_function: str = 'balanced',
-        max_iterations: int = 10,
-        convergence_patience: int = 3,
+        max_generations: int = 50,
+        convergence_patience: int = 5,
         convergence_threshold: float = 0.01,
         n_processes: int = None,
         force_restart: bool = False
     ):
-        """Run complete optimization pipeline with iterative refinement."""
+        """Run complete optimization pipeline with single genetic algorithm run."""
         self.print_header("DFS LINEUP OPTIMIZER - FULL PIPELINE")
 
         print(f"Configuration:")
@@ -260,7 +399,7 @@ class OptimizerOrchestrator:
         print(f"  Phase 2 simulations: {n_sims_phase2}")
         print(f"  Phase 3 simulations: {n_sims_phase3}")
         print(f"  Fitness function: {fitness_function}")
-        print(f"  Max iterations: {max_iterations}")
+        print(f"  Max generations: {max_generations}")
         print(f"  Convergence patience: {convergence_patience}")
         print(f"  Convergence threshold: {convergence_threshold * 100}%")
         print(f"  Parallel processes: {n_processes or 'auto'}")
@@ -280,47 +419,17 @@ class OptimizerOrchestrator:
             force=force_restart
         )
 
-        # Phase 3: Iterative refinement
-        iteration = len(self.state['iterations']) + 1
+        # Phase 3: Genetic optimization (single run with early stopping)
+        optimal_df, _ = self.run_phase_3_iteration(
+            iteration=1,
+            evaluations_df=evaluations_df,
+            fitness_function=fitness_function,
+            n_sims=n_sims_phase3,
+            n_processes=n_processes,
+            n_generations=max_generations
+        )
 
-        while iteration <= max_iterations:
-            # Run iteration
-            optimal_df, iteration_result = self.run_phase_3_iteration(
-                iteration=iteration,
-                evaluations_df=evaluations_df,
-                fitness_function=fitness_function,
-                n_sims=n_sims_phase3,
-                n_processes=n_processes
-            )
-
-            # Update evaluations with new lineups
-            # Merge optimal lineups back into evaluation pool for next iteration
-            evaluations_df = pd.concat([
-                evaluations_df.head(900),  # Keep top 900 from previous
-                optimal_df.head(100)  # Add top 100 from this iteration
-            ]).sort_values('median', ascending=False).reset_index(drop=True)
-
-            # Check convergence
-            converged = self.check_convergence(
-                patience=convergence_patience,
-                threshold=convergence_threshold
-            )
-
-            if converged:
-                print(f"\n{'='*80}")
-                print("CONVERGENCE REACHED!".center(80))
-                print(f"{'='*80}")
-                print(f"No significant improvement in last {convergence_patience} iterations")
-                print(f"Stopping optimization.")
-                break
-
-            iteration += 1
-
-            # Progress update
-            print(f"\n{'='*80}")
-            print(f"Progress: Iteration {iteration - 1}/{max_iterations}")
-            print(f"Best fitness so far: {max(self.state['best_fitness_history']):.2f}")
-            print(f"{'='*80}")
+        # Results already stored by run_phase_3_iteration()
 
         # Final summary
         pipeline_elapsed = time.time() - pipeline_start
@@ -349,10 +458,12 @@ class OptimizerOrchestrator:
         # Copy best lineups to main outputs
         best_iteration = max(self.state['iterations'], key=lambda x: x['best_fitness'])
         best_iteration_dir = self.run_dir / f"iteration_{best_iteration['iteration']}"
-        best_lineups_file = best_iteration_dir / f"top_10_iteration_{best_iteration['iteration']}.csv"
+        best_lineups_file = best_iteration_dir / f"lineups_iteration_{best_iteration['iteration']}.csv"
 
         if best_lineups_file.exists():
             best_lineups = pd.read_csv(best_lineups_file)
+
+            # File is already formatted, just copy it to BEST_LINEUPS.csv
             best_lineups.to_csv(self.run_dir / 'BEST_LINEUPS.csv', index=False)
             print(f"\nBest lineups saved to: {self.run_dir / 'BEST_LINEUPS.csv'}")
 
@@ -364,8 +475,9 @@ class OptimizerOrchestrator:
         print(f"\nAll results saved in: {self.run_dir}")
         print(f"  - candidates.csv: All generated candidates")
         print(f"  - evaluations.csv: Monte Carlo evaluations")
+        print(f"  - lineups_after_phase2.csv: All lineups after Phase 2")
         print(f"  - iteration_N/: Results from each iteration")
-        print(f"  - BEST_LINEUPS.csv: Top 10 best lineups found")
+        print(f"  - BEST_LINEUPS.csv: All best lineups from best iteration")
         print(f"  - final_summary.json: Complete run statistics")
         print(f"  - optimizer_state.json: State for resumption")
 
@@ -376,14 +488,14 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Quick test run (100 candidates, 1000 sims)
+  # Quick test run (50 candidates, 1000 sims, 30 generations)
   python run_optimizer.py --quick-test
 
-  # Full production run (1000 candidates, 10k sims)
+  # Full production run (1000 candidates, 10k sims, 50 generations)
   python run_optimizer.py --candidates 1000 --sims 10000
 
-  # Resume from previous run
-  python run_optimizer.py --run-name 20241130_143022
+  # Custom generations with early stopping
+  python run_optimizer.py --max-generations 100 --patience 5
 
   # Aggressive fitness (high upside)
   python run_optimizer.py --fitness tournament
@@ -395,21 +507,21 @@ Examples:
                         help='Number of candidate lineups to generate (default: 1000)')
     parser.add_argument('--sims', type=int, default=10000,
                         help='Number of Monte Carlo simulations (default: 10000)')
-    parser.add_argument('--iterations', type=int, default=10,
-                        help='Maximum number of refinement iterations (default: 10)')
+    parser.add_argument('--max-generations', type=int, default=DEFAULT_MAX_GENERATIONS,
+                        help=f'Maximum generations for genetic algorithm (default: {DEFAULT_MAX_GENERATIONS})')
     parser.add_argument('--fitness', default='balanced',
                         choices=['conservative', 'balanced', 'aggressive', 'tournament'],
                         help='Fitness function (default: balanced)')
 
     # Convergence settings
-    parser.add_argument('--patience', type=int, default=3,
-                        help='Convergence patience (default: 3)')
+    parser.add_argument('--patience', type=int, default=DEFAULT_CONVERGENCE_PATIENCE,
+                        help=f'Convergence patience for early stopping (default: {DEFAULT_CONVERGENCE_PATIENCE})')
     parser.add_argument('--threshold', type=float, default=0.01,
                         help='Convergence threshold in %% (default: 0.01 = 1%%)')
 
     # Performance
-    parser.add_argument('--processes', type=int, default=None,
-                        help='Number of parallel processes (default: auto)')
+    parser.add_argument('--processes', type=int, default=DEFAULT_PROCESSES,
+                        help=f'Number of parallel processes (default: auto-detect)')
 
     # Run management
     parser.add_argument('--run-name', type=str, default=None,
@@ -419,15 +531,15 @@ Examples:
 
     # Convenience flags
     parser.add_argument('--quick-test', action='store_true',
-                        help='Quick test: 50 candidates, 1000 sims, 2 iterations')
+                        help=f'Quick test: {QUICK_TEST_CANDIDATES} candidates, {QUICK_TEST_SIMS} sims, {QUICK_TEST_MAX_GENERATIONS} generations')
 
     args = parser.parse_args()
 
     # Quick test mode
     if args.quick_test:
-        args.candidates = 50
-        args.sims = 1000
-        args.iterations = 2
+        args.candidates = QUICK_TEST_CANDIDATES
+        args.sims = QUICK_TEST_SIMS
+        args.max_generations = QUICK_TEST_MAX_GENERATIONS
         print("QUICK TEST MODE")
 
     # Create orchestrator
@@ -441,7 +553,7 @@ Examples:
         n_sims_phase2=args.sims,
         n_sims_phase3=args.sims,
         fitness_function=args.fitness,
-        max_iterations=args.iterations,
+        max_generations=args.max_generations,
         convergence_patience=args.patience,
         convergence_threshold=args.threshold,
         n_processes=args.processes,

@@ -6,18 +6,15 @@ A sophisticated DFS (Daily Fantasy Sports) lineup optimizer that uses Monte Carl
 
 ```bash
 # 1. Fetch latest data
-python fetch_data.py --all
+python 1_fetch_data.py --all
 
-# 2. Analyze game scripts
-python game_script_continuous.py
+# 2. Integrate data (includes game script analysis)
+python 2_data_integration.py
 
-# 3. Integrate data
-python data_integration.py
+# 3. Run optimizer
+python 3_run_optimizer.py --quick-test
 
-# 4. Run optimizer
-python run_optimizer.py --quick-test
-
-# 5. View results
+# 4. View results
 python view_progress.py
 ```
 
@@ -62,10 +59,10 @@ _V4/
 ├── cache/                         # Web scrape cache (not in git)
 │
 ├── Core Scripts
-│   ├── fetch_data.py             # Data fetching orchestration
-│   ├── game_script_continuous.py # Game script analysis
-│   ├── data_integration.py       # Data integration pipeline
-│   ├── run_optimizer.py          # Main optimizer orchestrator
+│   ├── 1_fetch_data.py           # Phase 1: Data fetching
+│   ├── 2_data_integration.py    # Phase 2: Data integration & game scripts
+│   ├── 3_run_optimizer.py       # Phase 3: Optimization
+│   ├── game_script_continuous.py # Game script analysis (standalone)
 │   ├── view_progress.py          # Progress monitoring
 │   ├── scrapers.py               # Web scrapers
 │   ├── utils.py                  # Helper functions
@@ -148,12 +145,11 @@ pip install -r requirements.txt
 
 ```bash
 # Monday/Tuesday - Fetch fresh data when salaries drop
-python fetch_data.py --all
-python game_script_continuous.py
-python data_integration.py
+python 1_fetch_data.py --all
+python 2_data_integration.py
 
 # Tuesday/Wednesday - Run optimizer overnight
-python run_optimizer.py --candidates 1000 --sims 10000
+python 3_run_optimizer.py --candidates 1000 --sims 10000
 
 # Monitor progress in separate terminal
 python view_progress.py
@@ -163,29 +159,29 @@ python view_progress.py
 
 ```bash
 # Test optimizer with small dataset (2-3 minutes)
-python run_optimizer.py --quick-test
+python 3_run_optimizer.py --quick-test
 ```
 
 ### Different Strategies
 
 ```bash
 # Conservative: High floor, low risk
-python run_optimizer.py --fitness conservative
+python 3_run_optimizer.py --fitness conservative
 
 # Balanced: Expected value (default)
-python run_optimizer.py --fitness balanced
+python 3_run_optimizer.py --fitness balanced
 
 # Aggressive: Boom/bust potential
-python run_optimizer.py --fitness aggressive
+python 3_run_optimizer.py --fitness aggressive
 
 # Tournament: Pure upside
-python run_optimizer.py --fitness tournament
+python 3_run_optimizer.py --fitness tournament
 ```
 
 ### Resume Interrupted Run
 
 ```bash
-python run_optimizer.py --run-name 20241130_143022
+python 3_run_optimizer.py --run-name 20241130_143022
 ```
 
 ## Key Features

@@ -11,7 +11,11 @@ from multiprocessing import Pool, cpu_count
 from functools import partial
 import warnings
 
-from .distribution_fit import fit_shifted_lognormal, sample_shifted_lognormal
+from .distribution_fit import sample_shifted_lognormal
+
+# Note: Distribution parameters (mu, sigma, shift) are now pre-computed during
+# data integration and stored in the player CSV. No need to fit distributions
+# during Monte Carlo simulation.
 
 
 def sample_game_script(game_probs: Dict[str, float]) -> str:
@@ -65,28 +69,20 @@ def simulate_player_score(
     Simulate a single player's score for a given game script.
 
     Args:
-        player: Player dict with all stats and floor/ceiling for each script
+        player: Player dict with all stats and pre-computed distribution params
         game_script: Sampled game script
         is_favorite: Whether player's team is favorite
 
     Returns:
         Simulated fantasy points
     """
-    # Get scenario-specific floor/ceiling
+    # Get scenario-specific distribution parameters (pre-computed in data integration)
     script_key = determine_script_key(game_script, is_favorite)
 
-    floor = player[f'floor_{script_key}'] * player['td_odds_floor_mult']
-    ceiling = player[f'ceiling_{script_key}'] * player['td_odds_ceiling_mult']
-    consensus = player['fpProjPts']
-
-    # Fit shifted log-normal distribution
-    try:
-        mu, sigma, shift = fit_shifted_lognormal(consensus, floor, ceiling)
-    except (ValueError, Warning) as e:
-        # Fallback: use simple normal distribution
-        warnings.warn(f"Distribution fitting failed for {player.get('name', 'Unknown')}: {e}. Using normal distribution.")
-        std = (ceiling - floor) / 5  # Rough approximation
-        return max(0, np.random.normal(consensus, std))
+    # Read pre-computed distribution parameters from player data
+    mu = player[f'mu_{script_key}']
+    sigma = player[f'sigma_{script_key}']
+    shift = player[f'shift_{script_key}']
 
     # Sample from distribution
     score = sample_shifted_lognormal(mu, sigma, shift, size=1)[0]
@@ -160,7 +156,7 @@ def simulate_lineup(
         'p10': float(np.percentile(scores, 10)),
         'p90': float(np.percentile(scores, 90)),
         'std': float(np.std(scores)),
-        'sharpe': float((np.mean(scores) - np.median(scores)) / np.std(scores)) if np.std(scores) > 0 else 0.0
+        'skewness': float((np.mean(scores) - np.median(scores)) / np.std(scores)) if np.std(scores) > 0 else 0.0
     }
 
 
