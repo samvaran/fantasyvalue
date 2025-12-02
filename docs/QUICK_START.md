@@ -1,126 +1,233 @@
 # Quick Start Guide
 
-The optimizer is ready to use! Here's how to get started:
+Get your DFS lineup optimizer running in minutes!
 
-## 1. Test Run (2-3 minutes)
+## Prerequisites
 
-```bash
-python3 3_run_optimizer.py --quick-test
-```
+- Python 3.8+
+- pip package manager
 
-This runs a quick test with:
-- 50 candidate lineups
-- 1,000 simulations per lineup
-- 2 refinement iterations
-
-## 2. Monitor Progress
-
-While the optimizer is running, open a new terminal and run:
+## 1. Installation
 
 ```bash
-python3 view_progress.py
+# Clone the repository
+cd fantasyvalue
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
 ```
 
-This shows real-time progress including:
-- Phase completion status
-- Iteration history
-- Best lineups found so far
-- Fitness progression
+## 2. Get FanDuel Salaries
 
-## 3. Production Run (~90 minutes)
+Download the current week's player salaries from FanDuel:
 
-Once the test run completes successfully:
+1. Go to FanDuel NFL contests
+2. Export the player list (usually named `FanDuel-NFL-YYYY-MM-DD-players-list.csv`)
+3. Save it to your current week directory:
 
 ```bash
-python3 3_run_optimizer.py --candidates 1000 --sims 10000
+# Create week directory (Sunday's date in YYYY_MM_DD format)
+mkdir -p data/2025_12_08/inputs
+
+# Copy FanDuel CSV
+cp ~/Downloads/FanDuel-NFL-*.csv data/2025_12_08/inputs/fanduel_salaries.csv
 ```
 
-This runs the full optimizer:
-- 1,000 candidate lineups (~3 min)
-- 10,000 simulations per lineup (~25-30 min)
-- Genetic refinement iterations (~40-60 min each)
-- Automatically stops when converged (typically 3-5 iterations)
+## 3. Run the Full Pipeline
 
-## 4. View Results
-
-After completion, your best lineups are in:
+The easiest way is to use the orchestration script:
 
 ```bash
-outputs/run_YYYYMMDD_HHMMSS/BEST_LINEUPS.csv
+# Run current week (auto-detects this Sunday)
+python run_week.py
+
+# Or specify a week explicitly
+python run_week.py --week 2025-12-08
 ```
 
-This file contains the top 10 lineups found across all iterations, with:
-- Player IDs and names
+This runs all 4 steps automatically:
+1. **Fetch** - Download projections and odds from FantasyPros and DraftKings
+2. **Integrate** - Merge all data sources and calculate game scripts
+3. **Optimize** - Generate and evaluate lineups using genetic algorithm
+4. **Backtest** (optional) - Score lineups against actual results if available
+
+### Quick Test Mode
+
+To verify everything works before running the full optimization:
+
+```bash
+python run_week.py --quick-test
+```
+
+This runs a faster version (50 candidates, 1000 simulations) in ~2 minutes.
+
+## 4. Run Individual Steps
+
+You can also run each step independently:
+
+### Step 1: Fetch Data
+
+```bash
+python code/1_fetch_data.py --week-dir data/2025_12_08
+```
+
+Downloads and converts to CSV:
+- FantasyPros projections → `fantasypros_projections.csv`
+- DraftKings game lines → `game_lines.csv`
+- DraftKings TD odds → `td_odds.csv`
+
+### Step 2: Data Integration
+
+```bash
+python code/2_data_integration.py --week-dir data/2025_12_08
+```
+
+Merges all data sources and outputs:
+- `1_players.csv` - All players with integrated projections
+- `2_game_scripts.csv` - Game script probabilities (shootout, defensive, etc.)
+
+### Step 3: Run Optimizer
+
+```bash
+# Full optimization (takes ~1-2 hours)
+python code/3_run_optimizer.py --week-dir data/2025_12_08
+
+# Quick test (~2 minutes)
+python code/3_run_optimizer.py --week-dir data/2025_12_08 --quick-test
+```
+
+Outputs to `data/2025_12_08/outputs/run_YYYYMMDD_HHMMSS/`:
+- `0_config.json` - Run configuration
+- `1_candidates.csv` - Initial candidate lineups
+- `2_simulations.csv` - Monte Carlo evaluation results
+- `3_lineups.csv` - **Best lineups** (this is what you want!)
+- `4_summary.json` - Run statistics
+
+### Step 4: Backtest (Optional)
+
+After the slate finishes, download actual results from FanDuel and run:
+
+```bash
+python code/4_backtest.py --week-dir data/2025_12_08 --run-dir run_YYYYMMDD_HHMMSS
+```
+
+Outputs:
+- `5_scored_lineups.csv` - All lineups scored with actual results
+- `6_backtest_games.csv` - Game script analysis
+- `7_backtest_summary.json` - Performance metrics
+
+## 5. View Results
+
+The best lineups are in:
+```
+data/YYYY_MM_DD/outputs/run_YYYYMMDD_HHMMSS/3_lineups.csv
+```
+
+This file contains the top lineups with:
+- Player names and positions
 - Salary usage
 - Projected scores (mean, median, P10, P90)
 - Risk metrics (std, skewness)
-- Fitness score
+- Fitness scores
 
-## 5. Resume Interrupted Run
+## 6. Resume Interrupted Run
 
 If the optimizer is interrupted, resume with:
 
 ```bash
-python3 run_optimizer.py --run-name YYYYMMDD_HHMMSS
+python code/3_run_optimizer.py --week-dir data/2025_12_08 --run-name run_YYYYMMDD_HHMMSS
 ```
 
-The optimizer automatically:
-- Detects completed phases
-- Continues from last iteration
-- Preserves all previous results
+## Common Workflows
 
-## Expected Performance (8-core machine)
-
-- **Phase 1** (Candidate Generation): ~3 minutes
-- **Phase 2** (Monte Carlo Evaluation): ~25-30 minutes
-- **Phase 3** (Genetic Refinement): ~40-60 minutes per iteration
-- **Total**: ~70-90 minutes for first 2 iterations, typically converges in 3-5 iterations
-
-## Files Created
-
-Each run creates a timestamped directory with:
-
-- **BEST_LINEUPS.csv** - Top 10 lineups (use these!)
-- **final_summary.json** - Complete run statistics
-- **optimizer_state.json** - State for resumption
-- **candidates.csv** - All generated candidates
-- **evaluations.csv** - Monte Carlo results
-- **iteration_N/** - Results from each genetic refinement
-
-## Fitness Functions
-
-Choose different strategies with `--fitness`:
+### Current Week Optimization
 
 ```bash
-# Conservative (high floor, low risk)
-python3 3_run_optimizer.py --fitness conservative
+# 1. Download FanDuel salaries to data/YYYY_MM_DD/inputs/
 
-# Balanced (solid expected value) - DEFAULT
-python3 3_run_optimizer.py --fitness balanced
+# 2. Run everything
+python run_week.py
 
-# Aggressive (boom/bust potential)
-python3 3_run_optimizer.py --fitness aggressive
+# 3. Get best lineups from:
+#    data/YYYY_MM_DD/outputs/run_*/3_lineups.csv
+```
 
-# Tournament (pure upside, swing for fences)
-python3 3_run_optimizer.py --fitness tournament
+### Historical Analysis
+
+```bash
+# 1. Ensure historical data exists in data/YYYY_MM_DD/
+
+# 2. Run pipeline for that week
+python run_week.py --week 2025-11-30
+
+# 3. Backtest results
+python code/4_backtest.py --week-dir data/2025_11_30 --run-dir run_*
+```
+
+### Multiple Optimization Runs
+
+```bash
+# Run multiple iterations to explore different parameter spaces
+python code/3_run_optimizer.py --week-dir data/2025_12_08 --iterations 3
+```
+
+## Directory Structure
+
+After running, you'll have:
+
+```
+data/
+└── 2025_12_08/              # Week directory (Sunday date)
+    ├── inputs/              # Raw data sources (CSV)
+    │   ├── fanduel_salaries.csv
+    │   ├── fantasypros_projections.csv
+    │   ├── game_lines.csv
+    │   └── td_odds.csv
+    ├── intermediate/        # Processed data
+    │   ├── 1_players.csv
+    │   └── 2_game_scripts.csv
+    └── outputs/             # Optimization results
+        └── run_20251208_143022/
+            ├── 0_config.json
+            ├── 1_candidates.csv
+            ├── 2_simulations.csv
+            ├── 3_lineups.csv      ← YOUR BEST LINEUPS
+            ├── 4_summary.json
+            ├── 5_scored_lineups.csv   (after backtest)
+            ├── 6_backtest_games.csv   (after backtest)
+            └── 7_backtest_summary.json (after backtest)
 ```
 
 ## Troubleshooting
 
-**"No DEFs available"** - Your data is missing defense projections. The optimizer automatically fills these with defaults.
+### Missing FanDuel CSV
+```
+Error: FanDuel salaries not found
+```
+Download from FanDuel and save to `data/YYYY_MM_DD/inputs/fanduel_salaries.csv`
 
-**"KeyError: 'id'"** - Column name mismatch. The optimizer auto-normalizes columns, but if you see this, check your input CSV structure.
+### No Lineups Generated
+```
+Warning: Failed to generate lineup
+```
+Check that you have enough players at each position. May need to adjust `--max-overlap` parameter.
 
-**Optimizer is slow** - Reduce `--candidates` (try 500) or `--sims` (try 5000) for faster testing.
+### Slow Performance
+```
+Evaluation taking too long
+```
+Use `--quick-test` flag for faster results, or reduce `--candidates` and `--simulations`.
 
-**Out of memory** - Reduce `--processes` or `--candidates`.
+## Next Steps
 
-## More Information
-
-- **OPTIMIZER_USAGE.md** - Complete usage guide with all options
-- **OPTIMIZER_DESIGN.md** - Technical design and architecture
-- **WORKFLOW.md** - Data pipeline overview
+- **WORKFLOW.md** - Understand the complete data pipeline
+- **OPTIMIZER_USAGE.md** - Advanced usage and parameter tuning
+- **ARCHITECTURE_REFACTOR.md** - Technical architecture details
 
 ---
 
-**You're all set!** Run the quick test first to verify everything works, then let it run the full pipeline overnight for best results.
+**Ready to go!** Start with `python run_week.py --quick-test` to verify everything works.

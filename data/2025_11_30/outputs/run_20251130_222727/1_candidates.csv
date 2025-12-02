@@ -1,0 +1,101 @@
+lineup_id,tier,temperature,player_ids,total_salary,total_projection
+0,1,0.0,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,michael pittman,kyle pitts sr,chargers",60000,120.7
+1,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,kyle pitts sr,titans",60000,120.6
+2,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,troy franklin,kyle pitts sr,dolphins",60000,120.5
+3,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,hunter henry,titans",60000,120.39999999999999
+4,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,wandale robinson,kyle pitts sr,titans",59900,120.2
+5,1,0.0,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,wandale robinson,kyle pitts sr,dolphins",60000,120.10000000000001
+6,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,kyle pitts sr,raiders",59900,120.0
+7,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,wandale robinson,troy franklin,michael pittman,kyle pitts sr,chargers",60000,120.0
+8,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,alec pierce,kyle pitts sr,dolphins",60000,119.9
+9,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,troy franklin,hunter henry,titans",59900,119.89999999999999
+10,1,0.0,"bo nix,devon achane,christian mccaffrey,treveyon henderson,jaylen waddle,troy franklin,michael pittman,kyle pitts sr,titans",59900,119.9
+11,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,tre tucker,kyle pitts sr,chargers",60000,119.89999999999999
+12,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,troy franklin,kyle pitts sr,saints",60000,119.89999999999999
+13,1,0.0,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,michael pittman,kyle pitts sr,cardinals",59900,119.8
+14,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,michael pittman,khalil shakir,kyle pitts sr,dolphins",59900,119.80000000000001
+15,1,0.0,"cj stroud,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,kyle pitts sr,chargers",60000,119.8
+16,1,0.0,"bo nix,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,wandale robinson,troy franklin,kyle pitts sr,chargers",60000,119.8
+17,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,troy franklin,hunter henry,saints",60000,119.69999999999999
+18,1,0.0,"drake maye,devon achane,treveyon henderson,rj harvey,jaylen waddle,troy franklin,michael pittman,kyle pitts sr,chargers",60000,119.7
+19,1,0.0,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,michael pittman,kyle pitts sr,vikings",60000,119.7
+20,2,0.3,"trevor lawrence,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,troy franklin,kyle pitts sr,chargers",60000,119.7
+21,2,0.31,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,alec pierce,hunter henry,dolphins",60000,119.6
+22,2,0.32,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,alec pierce,hunter henry,chargers",59900,119.6
+23,2,0.32999999999999996,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,michael pittman,hunter henry,cardinals",59900,119.6
+24,2,0.33999999999999997,"matthew stafford,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,troy franklin,alec pierce,kyle pitts sr,chargers",60000,119.6
+25,2,0.35,"matthew stafford,devon achane,christian mccaffrey,ashton jeanty,jaylen waddle,troy franklin,michael pittman,kyle pitts sr,titans",59900,119.5
+26,2,0.36,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,alec pierce,kyle pitts sr,falcons",60000,119.5
+27,2,0.37,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,courtland sutton,kyle pitts sr,titans",60000,119.5
+28,2,0.38,"matthew stafford,devon achane,treveyon henderson,rj harvey,jaylen waddle,troy franklin,michael pittman,hunter henry,chargers",60000,119.5
+29,2,0.39,"matthew stafford,devon achane,treveyon henderson,rj harvey,jaylen waddle,wandale robinson,troy franklin,kyle pitts sr,chargers",59900,119.5
+30,2,0.4,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,tre tucker,kyle pitts sr,chargers",60000,119.5
+31,2,0.41000000000000003,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,troy franklin,hunter henry,falcons",60000,119.5
+32,2,0.42,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,michael pittman,hunter henry,raiders",59900,119.5
+33,2,0.43,"drake maye,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,troy franklin,michael pittman,kyle pitts sr,dolphins",59900,119.5
+34,2,0.43999999999999995,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,khalil shakir,kyle pitts sr,giants",59900,119.4
+35,2,0.45,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,courtland sutton,kyle pitts sr,cardinals",60000,119.39999999999999
+36,2,0.46,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,hunter henry,cardinals",59900,119.39999999999999
+37,2,0.47,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,michael pittman,kyle pitts sr,cardinals",59800,119.4
+38,2,0.48,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,alec pierce,kyle pitts sr,dolphins",59900,119.4
+39,2,0.49,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,michael pittman,hunter henry,giants",60000,119.4
+40,2,0.5,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,michael pittman,brenton strange,titans",60000,119.4
+41,2,0.51,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,alec pierce,kyle pitts sr,chargers",59800,119.4
+42,2,0.52,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,michael pittman,kyle pitts sr,browns",60000,119.4
+43,2,0.53,"bo nix,devon achane,christian mccaffrey,ashton jeanty,jaylen waddle,troy franklin,michael pittman,kyle pitts sr,dolphins",60000,119.4
+44,2,0.54,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,michael pittman,oronde gadsden,titans",59900,119.3
+45,2,0.55,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,michael pittman,jayden higgins,kyle pitts sr,chargers",60000,119.30000000000001
+46,2,0.56,"bo nix,devon achane,christian mccaffrey,ashton jeanty,jaylen waddle,tetairoa mcmillan,troy franklin,kyle pitts sr,titans",59900,119.3
+47,2,0.5700000000000001,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,alec pierce,hunter henry,titans",59900,119.3
+48,2,0.58,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,michael pittman,kyle pitts sr,raiders",59800,119.30000000000001
+49,2,0.59,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,courtland sutton,hunter henry,titans",60000,119.3
+50,2,0.6000000000000001,"bo nix,devon achane,treveyon henderson,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,hunter henry,chargers",60000,119.3
+51,2,0.6100000000000001,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,wandale robinson,hunter henry,saints",60000,119.3
+52,2,0.6200000000000001,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,alec pierce,kyle pitts sr,saints",60000,119.3
+53,2,0.63,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,michael pittman,brenton strange,dolphins",60000,119.30000000000001
+54,2,0.64,"jaxson dart,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,kyle pitts sr,dolphins",59900,119.3
+55,2,0.65,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,courtland sutton,kyle pitts sr,raiders",60000,119.3
+56,2,0.66,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,alec pierce,hunter henry,falcons",60000,119.3
+57,2,0.67,"matthew stafford,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,troy franklin,michael pittman,hunter henry,dolphins",59900,119.3
+58,2,0.6799999999999999,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,michael pittman,khalil shakir,hunter henry,titans",59800,119.2
+59,2,0.69,"justin herbert,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,michael pittman,kyle pitts sr,titans",60000,119.2
+60,2,0.7,"matthew stafford,devon achane,christian mccaffrey,treveyon henderson,wandale robinson,troy franklin,michael pittman,kyle pitts sr,titans",59900,119.2
+61,2,0.71,"matthew stafford,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,troy franklin,michael pittman,kyle pitts sr,falcons",59900,119.2
+62,2,0.72,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,kyle pitts sr,browns",60000,119.2
+63,2,0.73,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,alec pierce,hunter henry,dolphins",59900,119.2
+64,2,0.74,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,michael pittman,dalton schultz,dolphins",59900,119.2
+65,2,0.75,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,michael pittman,oronde gadsden,dolphins",60000,119.2
+66,2,0.76,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,michael pittman,khalil shakir,kyle pitts sr,saints",59900,119.2
+67,2,0.77,"drake maye,devon achane,christian mccaffrey,rj harvey,wandale robinson,troy franklin,alec pierce,kyle pitts sr,chargers",59900,119.1
+68,2,0.78,"matthew stafford,devon achane,christian mccaffrey,treveyon henderson,jaylen waddle,troy franklin,tre tucker,kyle pitts sr,titans",59900,119.1
+69,2,0.79,"bo nix,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,michael pittman,khalil shakir,kyle pitts sr,chargers",59900,119.10000000000001
+70,2,0.8,"bo nix,devon achane,treveyon henderson,rj harvey,jaylen waddle,tetairoa mcmillan,wandale robinson,kyle pitts sr,chargers",59900,119.10000000000001
+71,2,0.81,"drake maye,devon achane,christian mccaffrey,tyjae spears,jaylen waddle,tetairoa mcmillan,troy franklin,kyle pitts sr,chargers",59900,119.10000000000001
+72,2,0.8200000000000001,"drake maye,devon achane,ashton jeanty,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,kyle pitts sr,chargers",60000,119.1
+73,2,0.8300000000000001,"matthew stafford,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,wandale robinson,michael pittman,kyle pitts sr,dolphins",59800,119.10000000000001
+74,2,0.8400000000000001,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,alec pierce,kyle pitts sr,falcons",59900,119.10000000000001
+75,2,0.8500000000000001,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,stefon diggs,troy franklin,kyle pitts sr,titans",59800,119.1
+76,2,0.8599999999999999,"cj stroud,devon achane,christian mccaffrey,rj harvey,davante adams,jaylen waddle,troy franklin,kyle pitts sr,titans",59900,119.1
+77,2,0.8700000000000001,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,alec pierce,hunter henry,saints",60000,119.1
+78,2,0.8799999999999999,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,courtland sutton,hunter henry,raiders",60000,119.1
+79,2,0.8900000000000001,"bo nix,devon achane,christian mccaffrey,rj harvey,davante adams,troy franklin,michael pittman,hunter henry,titans",60000,119.1
+80,2,0.9000000000000001,"matthew stafford,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,michael pittman,hunter henry,raiders",59800,119.10000000000001
+81,2,0.9099999999999999,"bo nix,devon achane,christian mccaffrey,rj harvey,davante adams,wandale robinson,troy franklin,kyle pitts sr,titans",59900,119.1
+82,2,0.9200000000000002,"cj stroud,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,troy franklin,hunter henry,chargers",59900,119.1
+83,2,0.9299999999999999,"drake maye,devon achane,christian mccaffrey,rj harvey,troy franklin,michael pittman,alec pierce,hunter henry,chargers",60000,119.1
+84,2,0.9400000000000002,"bo nix,devon achane,christian mccaffrey,treveyon henderson,wandale robinson,troy franklin,michael pittman,kyle pitts sr,dolphins",60000,119.10000000000001
+85,2,0.95,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,wandale robinson,michael pittman,hunter henry,dolphins",59700,119.10000000000001
+86,2,0.96,"drake maye,devon achane,treveyon henderson,rj harvey,jaylen waddle,tetairoa mcmillan,wandale robinson,kyle pitts sr,dolphins",60000,119.10000000000001
+87,2,0.97,"bo nix,devon achane,christian mccaffrey,rj harvey,wandale robinson,troy franklin,michael pittman,kyle pitts sr,seahawks",59900,119.1
+88,2,0.98,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,quentin johnston,kyle pitts sr,dolphins",59900,119.1
+89,2,0.99,"matthew stafford,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,troy franklin,courtland sutton,kyle pitts sr,dolphins",60000,119.1
+90,2,1.0,"cj stroud,devon achane,christian mccaffrey,treveyon henderson,jaylen waddle,troy franklin,michael pittman,kyle pitts sr,dolphins",60000,119.10000000000001
+91,2,1.01,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,courtland sutton,hunter henry,dolphins",59900,119.1
+92,2,1.02,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,oronde gadsden,titans",59900,119.1
+93,2,1.03,"cj stroud,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,michael pittman,kyle pitts sr,seahawks",59900,119.1
+94,2,1.04,"trevor lawrence,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,alec pierce,kyle pitts sr,chargers",60000,119.10000000000001
+95,2,1.05,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,khalil shakir,hunter henry,giants",59900,119.1
+96,2,1.06,"drake maye,devon achane,christian mccaffrey,rj harvey,jaylen waddle,troy franklin,adonai mitchell,kyle pitts sr,chargers",60000,119.1
+97,2,1.07,"bo nix,devon achane,christian mccaffrey,rj harvey,tetairoa mcmillan,troy franklin,michael pittman,kyle pitts sr,rams",59900,119.0
+98,2,1.08,"bo nix,devon achane,christian mccaffrey,rj harvey,jaylen waddle,tetairoa mcmillan,troy franklin,brenton strange,dolphins",59800,119.0
+99,2,1.09,"bo nix,devon achane,christian mccaffrey,treveyon henderson,jaylen waddle,troy franklin,tre tucker,kyle pitts sr,dolphins",60000,119.0

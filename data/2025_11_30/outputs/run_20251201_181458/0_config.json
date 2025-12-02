@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-12-01T18:14:58.862474",
+  "week": "2025_11_30",
+  "optimizer": {
+    "candidates": 50,
+    "simulations": 1000,
+    "fitness": "balanced",
+    "max_generations": 30,
+    "convergence_patience": 5,
+    "convergence_threshold": 0.01,
+    "processes": "auto"
+  },
+  "data_sources": {
+    "players": "data/2025_11_30/intermediate/1_players.csv",
+    "game_scripts": "data/2025_11_30/intermediate/2_game_scripts.csv"
+  },
+  "completed": true,
+  "phases_completed": [
+    "candidates",
+    "simulations",
+    "genetic_1"
+  ],
+  "total_time_minutes": 1.0079931298891702,
+  "best_fitness": 129.62306820875176
+}

@@ -1,0 +1,20 @@
+{
+  "run_name": "run_20251130_230205",
+  "total_time_minutes": 1.2465922514597574,
+  "total_iterations": 1,
+  "best_fitness": 136.62185664779847,
+  "fitness_history": [
+    136.62185664779847
+  ],
+  "iterations": [
+    {
+      "iteration": 1,
+      "time": 52.959298849105835,
+      "best_fitness": 136.62185664779847,
+      "best_median": 136.62185664779847,
+      "best_p90": 169.27681762209403,
+      "n_generations": 30,
+      "timestamp": "2025-11-30T23:03:20.062826"
+    }
+  ]
+}

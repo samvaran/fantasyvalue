@@ -1,236 +1,267 @@
-# Fantasy DFS Lineup Optimizer - V4
+# Fantasy DFS Lineup Optimizer
 
 A sophisticated DFS (Daily Fantasy Sports) lineup optimizer that uses Monte Carlo simulation, game script analysis, and genetic algorithms to generate optimal NFL lineups for FanDuel.
+
+## Features
+
+- **Self-Contained Week Architecture** - Each week's data lives in its own directory for easy historical analysis
+- **4-Step Modular Pipeline** - Fetch → Integrate → Optimize → Backtest
+- **Monte Carlo Simulation** - 10,000+ simulations per lineup for accurate distribution estimates
+- **Game Script Analysis** - Continuous probability distributions for shootout/defensive/blowout scenarios
+- **Genetic Algorithm** - Tournament selection with position-aware crossover and mutation
+- **Multiple Fitness Functions** - Optimized strategies for cash games, GPPs, or balanced play
+- **Parallel Processing** - 12x speedup using multiprocessing
+- **Automatic Checkpointing** - Resume interrupted runs from any point
 
 ## Quick Start
 
 ```bash
-# 1. Fetch latest data
-python 1_fetch_data.py --all
+# 1. Install dependencies
+pip install -r requirements.txt
 
-# 2. Integrate data (includes game script analysis)
-python 2_data_integration.py
+# 2. Download FanDuel salaries CSV and place in:
+mkdir -p data/2025_12_08/inputs
+cp ~/Downloads/FanDuel-NFL-*.csv data/2025_12_08/inputs/fanduel_salaries.csv
 
-# 3. Run optimizer
-python 3_run_optimizer.py --quick-test
+# 3. Run complete pipeline
+python run_week.py
 
-# 4. View results
-python view_progress.py
+# 4. Get best lineups from:
+# data/2025_12_08/outputs/run_*/3_lineups.csv
 ```
+
+For detailed setup instructions, see [docs/QUICK_START.md](docs/QUICK_START.md)
+
+## Architecture
+
+### Self-Contained Week Directories
+
+Each week's data is completely independent, enabling historical replay and backtesting:
+
+```
+data/
+└── YYYY_MM_DD/              # Week directory (Sunday date)
+    ├── inputs/              # Raw data sources (CSV)
+    │   ├── fanduel_salaries.csv
+    │   ├── fantasypros_projections.csv
+    │   ├── game_lines.csv
+    │   ├── td_odds.csv
+    │   └── fanduel_results.json  (for backtest)
+    │
+    ├── intermediate/        # Integrated data
+    │   ├── 1_players.csv         (merged player data)
+    │   └── 2_game_scripts.csv    (game probabilities)
+    │
+    └── outputs/             # Optimization results
+        └── run_YYYYMMDD_HHMMSS/
+            ├── 0_config.json         # Run configuration
+            ├── 1_candidates.csv      # Initial lineups
+            ├── 2_simulations.csv     # MC evaluations
+            ├── 3_lineups.csv         # ⭐ BEST LINEUPS
+            ├── 4_summary.json        # Stats
+            ├── 5_scored_lineups.csv  # Backtest scores
+            ├── 6_backtest_games.csv  # Game analysis
+            └── 7_backtest_summary.json # Performance metrics
+```
+
+### 4-Step Pipeline
+
+```
+┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐
+│  1. FETCH    │ → │ 2. INTEGRATE │ → │ 3. OPTIMIZE  │ → │ 4. BACKTEST  │
+│              │   │              │   │              │   │              │
+│ • FanDuel    │   │ • Merge      │   │ • Generate   │   │ • Score      │
+│ • FantasyPros│   │   players    │   │   candidates │   │   lineups    │
+│ • DraftKings │   │ • Calculate  │   │ • Monte Carlo│   │ • Analyze    │
+│   lines/odds │   │   game       │   │   simulation │   │   accuracy   │
+│              │   │   scripts    │   │ • Genetic    │   │ • Calibrate  │
+│              │   │              │   │   algorithm  │   │   ranges     │
+└──────────────┘   └──────────────┘   └──────────────┘   └──────────────┘
+```
+
+## Usage
+
+### Orchestrated Pipeline (Recommended)
+
+```bash
+# Run current week (auto-detects next Sunday)
+python run_week.py
+
+# Run specific week
+python run_week.py --week 2025-12-08
+
+# Quick test (~2 minutes)
+python run_week.py --quick-test
+
+# Historical backtest
+python run_week.py --week 2025-11-30 --backtest-only
+```
+
+### Individual Steps
+
+```bash
+# Step 1: Fetch data from external sources
+python code/1_fetch_data.py --week-dir data/2025_12_08
+
+# Step 2: Integrate and calculate game scripts
+python code/2_data_integration.py --week-dir data/2025_12_08
+
+# Step 3: Optimize lineups (full run ~1-2 hours)
+python code/3_run_optimizer.py --week-dir data/2025_12_08
+
+# Step 3 (quick test ~2 minutes)
+python code/3_run_optimizer.py --week-dir data/2025_12_08 --quick-test
+
+# Step 4: Backtest against actual results
+python code/4_backtest.py --week-dir data/2025_12_08 --run-dir run_YYYYMMDD_HHMMSS
+```
+
+### Contest Strategies
+
+```bash
+# Cash games (50/50, Double-Up)
+python code/3_run_optimizer.py --week-dir data/2025_12_08 --fitness median
+
+# Balanced (default - good for small GPPs)
+python code/3_run_optimizer.py --week-dir data/2025_12_08 --fitness balanced
+
+# Large GPPs (Milly Maker)
+python code/3_run_optimizer.py --week-dir data/2025_12_08 --fitness upside
+
+# Conservative / safe cash
+python code/3_run_optimizer.py --week-dir data/2025_12_08 --fitness safe
+```
+
+## Optimizer Details
+
+### Phase 1: Candidate Generation (MILP)
+
+Uses mixed-integer linear programming to generate diverse lineups:
+
+- **Tier 1 (1-20)**: Deterministic chalk - max consensus projections
+- **Tier 2 (21-100)**: Temperature-based variation
+- **Tier 3 (101-1000)**: Random weighted sampling for contrarian plays
+
+### Phase 2: Monte Carlo Evaluation
+
+Simulates each lineup 10,000 times to estimate score distribution:
+
+- Samples from player-specific distributions
+- Applies game script adjustments (shootout/defensive/blowout)
+- Models negative correlation (QB/DEF on same team, RB/QB on same team)
+- Calculates P10, median, P90, mean, std, skewness
+
+### Phase 3: Genetic Algorithm Refinement
+
+Evolves population toward optimal fitness:
+
+- **Selection**: Tournament selection (best of 3)
+- **Crossover**: Position-aware (preserves valid lineups)
+- **Mutation**: Swap players while maintaining salary cap
+- **Elitism**: Keep best 100 lineups each generation
+- **Convergence**: Stops after 5 generations without improvement
+
+## Performance
+
+**Default Settings** (1000 candidates, 10k sims, 8-core machine):
+- Phase 1: 1-2 minutes
+- Phase 2: 20-40 minutes (parallelized)
+- Phase 3: 30-60 minutes
+- **Total**: ~1-2 hours
+
+**Quick Test** (50 candidates, 1k sims):
+- **Total**: ~2 minutes
 
 ## Project Structure
 
 ```
-_V4/
-├── docs/                          # Documentation
-│   ├── README.md                 # Project overview
-│   ├── QUICK_START.md            # 5-minute getting started guide
-│   ├── WORKFLOW.md               # Data pipeline workflow
-│   ├── OPTIMIZER_USAGE.md        # Complete optimizer usage guide
-│   ├── OPTIMIZER_DESIGN.md       # Technical design document
-│   ├── PIPELINE_REVIEW.md        # End-to-end pipeline review
-│   └── PIPELINE_SUMMARY.txt      # ASCII art summary
+fantasyvalue/
+├── run_week.py                # Main entry point - orchestrates full pipeline
 │
-├── data/                          # Data files (not in git)
-│   ├── input/                    # Input CSVs (FanDuel salaries)
-│   └── intermediate/             # Generated intermediate files
-│       ├── players_raw.csv       # Merged player data
-│       ├── players_integrated.csv # Final integrated data (38 columns)
-│       ├── game_lines.csv        # Betting lines
-│       ├── game_script_continuous.csv # Game script analysis
-│       └── ...
+├── code/                      # All Python code
+│   ├── 1_fetch_data.py        # Step 1: Data fetching
+│   ├── 2_data_integration.py # Step 2: Data merging & game scripts
+│   ├── 3_run_optimizer.py    # Step 3: Optimization
+│   ├── 4_backtest.py          # Step 4: Performance analysis
+│   │
+│   ├── models.py              # Data models
+│   ├── scrapers.py            # Web scrapers
+│   ├── utils.py               # Helper functions
+│   │
+│   └── optimizer/             # Optimizer modules
+│       ├── generate_candidates.py # Phase 1: MILP generation
+│       ├── evaluate_lineups.py    # Phase 2: Monte Carlo
+│       ├── optimize_genetic.py    # Phase 3: Genetic algorithm
+│       └── utils/
+│           ├── milp_solver.py
+│           ├── monte_carlo.py
+│           └── genetic_operators.py
 │
-├── optimizer/                     # Optimizer modules
-│   ├── generate_candidates.py   # Phase 1: MILP candidate generation
-│   ├── evaluate_lineups.py      # Phase 2: Monte Carlo evaluation
-│   ├── optimize_genetic.py      # Phase 3: Genetic refinement
-│   └── utils/
-│       ├── milp_solver.py       # MILP formulation
-│       ├── monte_carlo.py       # Parallel simulation engine
-│       ├── distribution_fit.py  # Distribution fitting
-│       └── genetic_operators.py # Genetic algorithm
+├── data/                      # Week directories (not in git)
+│   └── YYYY_MM_DD/
+│       ├── inputs/
+│       ├── intermediate/
+│       └── outputs/
 │
-├── outputs/                       # Optimizer results (not in git)
-│   └── run_YYYYMMDD_HHMMSS/
-│       ├── BEST_LINEUPS.csv     # Top 10 lineups
-│       ├── final_summary.json   # Run statistics
-│       └── ...
+├── docs/                      # Documentation
+│   ├── QUICK_START.md         # 5-minute setup guide
+│   ├── WORKFLOW.md            # Complete pipeline walkthrough
+│   ├── OPTIMIZER_USAGE.md     # Advanced usage & tuning
+│   └── ARCHITECTURE_REFACTOR.md # Technical architecture
 │
-├── cache/                         # Web scrape cache (not in git)
-│
-├── Core Scripts
-│   ├── 1_fetch_data.py           # Phase 1: Data fetching
-│   ├── 2_data_integration.py    # Phase 2: Data integration & game scripts
-│   ├── 3_run_optimizer.py       # Phase 3: Optimization
-│   ├── game_script_continuous.py # Game script analysis (standalone)
-│   ├── view_progress.py          # Progress monitoring
-│   ├── scrapers.py               # Web scrapers
-│   ├── utils.py                  # Helper functions
-│   └── models.py                 # Data classes
-│
-├── requirements.txt               # Python dependencies
-└── .gitignore                     # Git ignore rules
+├── requirements.txt
+└── README.md
 ```
 
-## Core Pipeline
+## Migration from Old Structure
 
-### Phase 1: Data Fetching (2-5 minutes)
-
-Fetches and merges data from multiple sources:
-- FanDuel salaries (local CSV)
-- FantasyPros projections
-- DraftKings game lines (spread, total, odds)
-- DraftKings TD odds
-- ESPN projections (low/high scores)
-
-**Output:** `data/intermediate/players_raw.csv` (378 players × 19 columns)
-
-### Phase 2A: Game Script Analysis (1 second)
-
-Calculates continuous probabilities for each game:
-- Shootout probability
-- Defensive probability
-- Blowout probability
-- Competitive probability
-
-Uses sigmoid functions for smooth transitions instead of discrete buckets.
-
-**Output:** `data/intermediate/game_script_continuous.csv` (14 games × 11 columns)
-
-### Phase 2B: Data Integration (1 second)
-
-Calculates floor/ceiling for 5 game script scenarios:
-- Shootout, Defensive, Competitive
-- Blowout (favorite), Blowout (underdog)
-
-Position-specific adjustments (e.g., RBs boosted in blowouts, WRs boosted in shootouts).
-
-**Output:** `data/intermediate/players_integrated.csv` (378 players × 38 columns)
-
-### Phase 3: Optimization (70-90 minutes)
-
-Three-phase hybrid optimization:
-
-**Phase 3.1: Candidate Generation (3 min)**
-- MILP-based lineup generation
-- Tiered sampling (chalk → moderate → contrarian)
-- 1000 diverse candidates
-
-**Phase 3.2: Monte Carlo Evaluation (25-30 min)**
-- 10,000 simulations per lineup
-- Parallel processing (12x speedup)
-- Shifted log-normal distributions
-
-**Phase 3.3: Genetic Refinement (40-60 min/iteration)**
-- Tournament selection
-- Position-aware crossover
-- Salary-preserving mutation
-- Converges in 3-5 iterations typically
-
-**Output:** `outputs/run_YYYYMMDD_HHMMSS/BEST_LINEUPS.csv` (Top 10 lineups)
-
-## Installation
+If you have data in the old structure (data/input/, cache/, outputs/), use the migration script:
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
+# Auto-detect week and migrate
+python migrate_to_new_structure.py --auto
 
-# Add FanDuel CSV to data/input/
-# File format: FanDuel-NFL-*.csv
+# Specify week explicitly
+python migrate_to_new_structure.py --week 2025-11-30
+
+# Dry run (preview without changes)
+python migrate_to_new_structure.py --week 2025-11-30 --dry-run
 ```
-
-## Usage Examples
-
-### Full Weekly Workflow
-
-```bash
-# Monday/Tuesday - Fetch fresh data when salaries drop
-python 1_fetch_data.py --all
-python 2_data_integration.py
-
-# Tuesday/Wednesday - Run optimizer overnight
-python 3_run_optimizer.py --candidates 1000 --sims 10000
-
-# Monitor progress in separate terminal
-python view_progress.py
-```
-
-### Quick Test
-
-```bash
-# Test optimizer with small dataset (2-3 minutes)
-python 3_run_optimizer.py --quick-test
-```
-
-### Different Strategies
-
-```bash
-# Conservative: High floor, low risk
-python 3_run_optimizer.py --fitness conservative
-
-# Balanced: Expected value (default)
-python 3_run_optimizer.py --fitness balanced
-
-# Aggressive: Boom/bust potential
-python 3_run_optimizer.py --fitness aggressive
-
-# Tournament: Pure upside
-python 3_run_optimizer.py --fitness tournament
-```
-
-### Resume Interrupted Run
-
-```bash
-python 3_run_optimizer.py --run-name 20241130_143022
-```
-
-## Key Features
-
-✅ **Continuous Game Scripts** - Uses probabilities (0-1) instead of discrete buckets to capture mixed signals
-
-✅ **Pre-calculated Scenarios** - All 5 game script floor/ceiling values calculated upfront for fast simulation
-
-✅ **Parallel Processing** - 12x speedup using multiprocessing for Monte Carlo simulations
-
-✅ **Checkpointing** - Resume interrupted runs from any iteration, view progress in real-time
-
-✅ **Multiple Fitness Functions** - Choose strategy: conservative, balanced, aggressive, or tournament
-
-✅ **Robust Error Handling** - Handles missing data, column name variations, auto-fills defaults
-
-## Performance (8-core machine)
-
-| Phase | Operation | Runtime |
-|-------|-----------|---------|
-| Data Fetching | Web scraping + merge | 2-5 min |
-| Game Scripts | Continuous analysis | 1 sec |
-| Integration | Floor/ceiling calc | 1 sec |
-| Phase 1 | 1000 candidates (MILP) | 3 min |
-| Phase 2 | 1000 × 10k sims (MC) | 25-30 min |
-| Phase 3 | Genetic refinement | 40-60 min/iter |
-| **Total** | **1-2 iterations** | **70-90 min** |
-| **Typical** | **3-5 iterations** | **3-4 hours** |
 
 ## Documentation
 
-- **[docs/QUICK_START.md](docs/QUICK_START.md)** - Dead-simple guide to running the pipeline
-- **[docs/PIPELINE_REVIEW.md](docs/PIPELINE_REVIEW.md)** - Complete end-to-end technical overview
-
-Additional documentation available in `_ARCHIVE/docs/`
+- **[docs/QUICK_START.md](docs/QUICK_START.md)** - Get up and running in 5 minutes
+- **[docs/WORKFLOW.md](docs/WORKFLOW.md)** - Detailed pipeline walkthrough with examples
+- **[docs/OPTIMIZER_USAGE.md](docs/OPTIMIZER_USAGE.md)** - Advanced usage, parameter tuning, strategies
+- **[docs/ARCHITECTURE_REFACTOR.md](docs/ARCHITECTURE_REFACTOR.md)** - Technical architecture and design decisions
 
 ## Troubleshooting
 
-**"No DEFs available"**
-- Already fixed: Auto-fills missing floor/ceiling for 201 players (including all defenses)
+### No lineups generated
+```
+Generated 0 chalk lineups
+```
+**Fix**: Check that DEF players exist in integrated data:
+```bash
+python -c "import pandas as pd; print(pd.read_csv('data/WEEK/intermediate/1_players.csv')['position'].value_counts())"
+```
+Should show 'D' or 'DEF' position. If not, re-run data integration.
 
-**"KeyError: 'id' or 'fdSalary'"**
-- Already fixed: Column normalization handles both naming conventions
+### Slow performance
+**Fix**: Reduce workload or increase parallelization:
+```bash
+python code/3_run_optimizer.py --week-dir data/WEEK --candidates 500 --simulations 5000
+# or
+python code/3_run_optimizer.py --week-dir data/WEEK --processes 16
+```
 
-**"Out of memory"**
-- Reduce `--processes` or `--candidates`
+### Out of memory
+**Fix**: Reduce parallel processes:
+```bash
+python code/3_run_optimizer.py --week-dir data/WEEK --processes 4
+```
 
-**"Optimizer converged too early"**
-- Increase `--patience` (default: 3) or decrease `--threshold` (default: 0.01)
+See [docs/OPTIMIZER_USAGE.md](docs/OPTIMIZER_USAGE.md) for more troubleshooting tips.
 
 ## License
 
