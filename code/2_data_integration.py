@@ -251,7 +251,7 @@ def calculate_game_scripts(game_lines_df: pd.DataFrame) -> pd.DataFrame:
         game_id, favorite, underdog, shootout_prob, defensive_prob,
         blowout_prob, competitive_prob, primary_script
     """
-    from game_script_continuous import (
+    from game_script import (
         calculate_shootout_score,
         calculate_defensive_score,
         calculate_blowout_score,

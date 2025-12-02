@@ -6,8 +6,16 @@ Used in Phase 3 for iterative lineup refinement.
 
 import numpy as np
 import pandas as pd
-from typing import List, Dict, Tuple, Callable
+from typing import List, Dict, Tuple, Callable, Set
 import random
+import sys
+from pathlib import Path
+
+# Import config values (add parent dir to path temporarily)
+_parent_dir = str(Path(__file__).parent.parent.parent)
+if _parent_dir not in sys.path:
+    sys.path.insert(0, _parent_dir)
+from config import GENETIC_TOURNAMENT_SIZE, GENETIC_NUM_PARENTS, SALARY_CAP
 
 
 # ============================================================================
@@ -27,18 +35,115 @@ def get_player_id_column(players_df: pd.DataFrame) -> str:
         raise ValueError("Players dataframe must have either 'id' or 'name' column")
 
 
+def get_player_ids(lineup: Dict) -> List[str]:
+    """Extract player IDs as a list from lineup dict."""
+    player_ids = lineup.get('player_ids', '')
+    if isinstance(player_ids, str):
+        return player_ids.split(',') if player_ids else []
+    return list(player_ids)
+
+
+def calculate_lineup_salary(lineup: Dict, players_df: pd.DataFrame) -> float:
+    """
+    Calculate total salary for a lineup.
+
+    Args:
+        lineup: Lineup dict with 'player_ids' key
+        players_df: DataFrame with player data including salary
+
+    Returns:
+        Total salary of all players in lineup
+    """
+    player_ids = get_player_ids(lineup)
+    id_col = get_player_id_column(players_df)
+    salary_col = 'salary' if 'salary' in players_df.columns else 'fdSalary'
+
+    total_salary = 0
+    for pid in player_ids:
+        player = players_df[players_df[id_col] == pid]
+        if len(player) > 0:
+            total_salary += player.iloc[0][salary_col]
+
+    return total_salary
+
+
+def calculate_hamming_distance(lineup1: Dict, lineup2: Dict) -> int:
+    """
+    Calculate Hamming distance (number of different players) between two lineups.
+    """
+    ids1 = set(get_player_ids(lineup1))
+    ids2 = set(get_player_ids(lineup2))
+    return len(ids1.symmetric_difference(ids2))
+
+
+def get_lineup_key(lineup: Dict) -> str:
+    """Get a unique key for a lineup based on sorted player IDs."""
+    player_ids = get_player_ids(lineup)
+    return ','.join(sorted(player_ids))
+
+
 # ============================================================================
 # SELECTION
 # ============================================================================
 
+def tournament_select_without_replacement(
+    population: List[Dict],
+    fitness_func: Callable[[Dict], float],
+    tournament_size: int = GENETIC_TOURNAMENT_SIZE,
+    n_parents: int = GENETIC_NUM_PARENTS
+) -> Tuple[List[Dict], List[Dict]]:
+    """
+    Tournament selection WITHOUT replacement.
+
+    Selects n_parents from population, returns both selected parents
+    and the remaining non-parents.
+
+    Args:
+        population: List of lineup dicts with simulation results
+        fitness_func: Function to calculate fitness from lineup dict
+        tournament_size: Number of individuals per tournament (k)
+        n_parents: Number of parents to select
+
+    Returns:
+        Tuple of (parents, non_parents) - both sorted by fitness descending
+    """
+    # Work with indices to track what's been selected
+    available_indices = list(range(len(population)))
+    parent_indices = []
+
+    for _ in range(min(n_parents, len(population))):
+        if len(available_indices) < tournament_size:
+            # Not enough left for full tournament, just take best remaining
+            if available_indices:
+                best_idx = max(available_indices, key=lambda i: fitness_func(population[i]))
+                parent_indices.append(best_idx)
+                available_indices.remove(best_idx)
+        else:
+            # Run tournament
+            tournament_indices = random.sample(available_indices, tournament_size)
+            best_idx = max(tournament_indices, key=lambda i: fitness_func(population[i]))
+            parent_indices.append(best_idx)
+            available_indices.remove(best_idx)
+
+    # Build parent and non-parent lists
+    parents = [population[i] for i in parent_indices]
+    non_parents = [population[i] for i in available_indices]
+
+    # Sort both by fitness descending
+    parents.sort(key=fitness_func, reverse=True)
+    non_parents.sort(key=fitness_func, reverse=True)
+
+    return parents, non_parents
+
+
 def tournament_select(
     population: List[Dict],
     fitness_func: Callable[[Dict], float],
-    tournament_size: int = 5,
-    n_parents: int = 50
+    tournament_size: int = GENETIC_TOURNAMENT_SIZE,
+    n_parents: int = GENETIC_NUM_PARENTS
 ) -> List[Dict]:
     """
-    Tournament selection: randomly select k individuals, pick the best.
+    Tournament selection WITH replacement (legacy behavior).
 
     Args:
         population: List of lineup dicts with simulation results
@@ -157,6 +262,131 @@ def crossover(
             child2[field] = parent2[field]
 
     return child1, child2
+
+
+# ============================================================================
+# PAIRING STRATEGIES
+# ============================================================================
+
+def pair_strength_matched(parents: List[Dict]) -> List[Tuple[Dict, Dict]]:
+    """
+    Pair parents by rank: 1st with 2nd, 3rd with 4th, etc.
+    Assumes parents are already sorted by fitness descending.
+    """
+    pairs = []
+    for i in range(0, len(parents) - 1, 2):
+        pairs.append((parents[i], parents[i + 1]))
+    return pairs
+
+
+def pair_inverse_matched(parents: List[Dict]) -> List[Tuple[Dict, Dict]]:
+    """
+    Pair parents by inverse rank: 1st with last, 2nd with 2nd-last, etc.
+    Assumes parents are already sorted by fitness descending.
+    """
+    pairs = []
+    n = len(parents)
+    for i in range(n // 2):
+        pairs.append((parents[i], parents[n - 1 - i]))
+    return pairs
+
+
+def pair_random(parents: List[Dict]) -> List[Tuple[Dict, Dict]]:
+    """
+    Pair parents randomly.
+    """
+    shuffled = parents.copy()
+    random.shuffle(shuffled)
+    pairs = []
+    for i in range(0, len(shuffled) - 1, 2):
+        pairs.append((shuffled[i], shuffled[i + 1]))
+    return pairs
+
+
+def pair_dissimilar(parents: List[Dict]) -> List[Tuple[Dict, Dict]]:
+    """
+    Pair parents to maximize player difference (Hamming distance).
+    Uses greedy matching: for each unpaired parent, find the most dissimilar
+    unpaired partner.
+    """
+    if len(parents) < 2:
+        return []
+
+    pairs = []
+    remaining = list(range(len(parents)))
+
+    while len(remaining) >= 2:
+        # Take the first remaining parent
+        idx1 = remaining.pop(0)
+        parent1 = parents[idx1]
+
+        # Find the most dissimilar remaining parent
+        best_idx = None
+        best_distance = -1
+
+        for idx2 in remaining:
+            parent2 = parents[idx2]
+            distance = calculate_hamming_distance(parent1, parent2)
+            if distance > best_distance:
+                best_distance = distance
+                best_idx = idx2
+
+        if best_idx is not None:
+            remaining.remove(best_idx)
+            pairs.append((parent1, parents[best_idx]))
+
+    return pairs
+
+
+def crossover_with_strategy(
+    parents: List[Dict],
+    players_df: pd.DataFrame,
+    strategy: str = 'random',
+    n_offspring: int = 25,
+    crossover_rate: float = 1.0
+) -> List[Dict]:
+    """
+    Produce offspring using a specific pairing strategy.
+
+    Args:
+        parents: List of parent lineups (sorted by fitness descending)
+        players_df: DataFrame with player data
+        strategy: One of 'strength', 'inverse', 'random', 'dissimilar'
+        n_offspring: Number of offspring to produce
+        crossover_rate: Probability of crossover per pair
+
+    Returns:
+        List of offspring lineups
+    """
+    # Get pairs based on strategy
+    if strategy == 'strength':
+        pairs = pair_strength_matched(parents)
+    elif strategy == 'inverse':
+        pairs = pair_inverse_matched(parents)
+    elif strategy == 'random':
+        pairs = pair_random(parents)
+    elif strategy == 'dissimilar':
+        pairs = pair_dissimilar(parents)
+    else:
+        raise ValueError(f"Unknown pairing strategy: {strategy}")
+
+    # Generate offspring from pairs
+    offspring = []
+    pair_idx = 0
+
+    while len(offspring) < n_offspring and pairs:
+        parent1, parent2 = pairs[pair_idx % len(pairs)]
+        child1, child2 = crossover(parent1, parent2, players_df, crossover_rate)
+        offspring.append(child1)
+        if len(offspring) < n_offspring:
+            offspring.append(child2)
+        pair_idx += 1
+
+        # If we've used all pairs once and still need more, cycle through again
+        if pair_idx >= len(pairs) and len(offspring) < n_offspring:
+            pair_idx = 0
+
+    return offspring[:n_offspring]
 
 
 # ============================================================================

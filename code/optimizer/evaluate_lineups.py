@@ -11,16 +11,23 @@ from pathlib import Path
 import argparse
 from typing import List, Dict
 import time
+import sys
 
 from utils.monte_carlo import evaluate_lineups_parallel
+
+# Import config values (add parent dir to path temporarily)
+_parent_dir = str(Path(__file__).parent.parent)
+if _parent_dir not in sys.path:
+    sys.path.insert(0, _parent_dir)
+from config import DEFAULT_SIMS, DEFAULT_PROCESSES
 
 
 def evaluate_candidates(
     candidates_path: str = 'outputs/lineups_candidates.csv',
     players_path: str = 'players_integrated.csv',
-    game_scripts_path: str = 'game_script_continuous.csv',
-    n_sims: int = 10000,
-    n_processes: int = None,
+    game_scripts_path: str = 'game_script.csv',
+    n_sims: int = DEFAULT_SIMS,
+    n_processes: int = DEFAULT_PROCESSES,
     output_path: str = 'outputs/lineup_evaluations.csv',
     verbose: bool = True
 ) -> pd.DataFrame:
@@ -137,10 +144,10 @@ def main():
     parser = argparse.ArgumentParser(description="Phase 2: Evaluate lineup candidates")
     parser.add_argument('--input', default='outputs/lineups_candidates.csv', help='Input candidates CSV')
     parser.add_argument('--players', default='data/intermediate/players_integrated.csv', help='Players CSV')
-    parser.add_argument('--game-scripts', default='data/intermediate/game_script_continuous.csv', help='Game scripts CSV')
+    parser.add_argument('--game-scripts', default='data/intermediate/game_script.csv', help='Game scripts CSV')
     parser.add_argument('--output', default='outputs/lineup_evaluations.csv', help='Output evaluations CSV')
-    parser.add_argument('--sims', type=int, default=10000, help='Number of simulations per lineup')
-    parser.add_argument('--processes', type=int, default=None, help='Number of parallel processes')
+    parser.add_argument('--sims', type=int, default=DEFAULT_SIMS, help=f'Number of simulations per lineup (default: {DEFAULT_SIMS})')
+    parser.add_argument('--processes', type=int, default=DEFAULT_PROCESSES, help='Number of parallel processes (default: auto)')
     parser.add_argument('--quiet', action='store_true', help='Suppress output')
 
     args = parser.parse_args()

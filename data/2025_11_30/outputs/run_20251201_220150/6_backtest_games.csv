@@ -1,0 +1,17 @@
+game_id,away_team,home_team,away_score,home_score,total_points,point_differential,status,actual_script
+fixture:354414,CHI,PHI,24,15,39,9,FINAL,defensive
+fixture:355249,ATL,NYJ,24,27,51,3,FINAL,shootout
+fixture:355291,MIN,SEA,0,26,26,26,FINAL,defensive
+fixture:355264,KC,DAL,28,31,59,3,FINAL,shootout
+fixture:356041,GB,DET,31,24,55,7,FINAL,shootout
+fixture:354991,DEN,WAS,27,26,53,1,FINAL,shootout
+fixture:354628,ARI,TB,17,20,37,3,FINAL,defensive
+fixture:354813,LV,LAC,14,31,45,17,FINAL,blowout_favorite
+fixture:355752,LAR,CAR,28,31,59,3,FINAL,shootout
+fixture:355728,NO,MIA,17,21,38,4,FINAL,defensive
+fixture:354350,JAC,TEN,25,3,28,22,FINAL,defensive
+fixture:355181,NYG,NE,15,33,48,18,FINAL,blowout_favorite
+fixture:354635,BUF,PIT,26,7,33,19,FINAL,defensive
+fixture:355526,CIN,BAL,32,14,46,18,FINAL,blowout_favorite
+fixture:355923,HOU,IND,20,16,36,4,FINAL,defensive
+fixture:354410,SF,CLE,26,8,34,18,FINAL,defensive

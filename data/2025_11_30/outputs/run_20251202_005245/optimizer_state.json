@@ -1,0 +1,24 @@
+{
+  "phase_1_complete": true,
+  "phase_2_complete": true,
+  "iterations": [
+    {
+      "iteration": 1,
+      "time": 110.77078008651733,
+      "best_fitness": 70.46193733978397,
+      "best_median": 121.55885190006305,
+      "best_p90": 163.57902886043178,
+      "n_generations": 50,
+      "timestamp": "2025-12-02T00:58:03.009462"
+    }
+  ],
+  "best_fitness_history": [
+    70.46193733978397
+  ],
+  "convergence_count": 0,
+  "total_time": 317.69051003456116,
+  "phase_1_time": 164.02717185020447,
+  "n_candidates": 200,
+  "phase_2_time": 42.88123106956482,
+  "n_simulations": 5000
+}

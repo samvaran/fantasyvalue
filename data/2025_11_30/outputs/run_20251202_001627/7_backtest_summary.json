@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-12-02T00:21:59.918321",
+  "lineups": {
+    "total": 100,
+    "avg_actual_only": 0.0,
+    "avg_actual_with_consensus": 0.0,
+    "max_actual_with_consensus": 0.0,
+    "min_actual_with_consensus": 0.0,
+    "std_actual_with_consensus": 0.0
+  },
+  "player_matching": {
+    "avg_players_actual": 0.0,
+    "avg_players_consensus": 0.0,
+    "avg_players_missing": 0.0
+  },
+  "games": {
+    "total": 16,
+    "avg_total_points": 42.9375,
+    "script_distribution": {
+      "defensive": 8,
+      "shootout": 5,
+      "blowout_favorite": 3
+    }
+  },
+  "projections": {
+    "avg_projected_mean": 124.25714283224517,
+    "avg_error_vs_mean": -124.25714283224517,
+    "rmse_vs_mean": 124.26735076129295,
+    "correlation_mean": NaN
+  },
+  "calibration": {
+    "within_p10_p90_pct": 0.0,
+    "above_p90_pct": 0.0,
+    "below_p10_pct": 100.0
+  },
+  "top_lineup": {
+    "lineup_id": "child_435436",
+    "actual_only": 0.0,
+    "actual_with_consensus": 0.0,
+    "projected_mean": 125.94291932303298,
+    "projected_median": 122.32131311084576,
+    "players_actual": 0,
+    "players_consensus": 0,
+    "players_missing": 0
+  }
+}

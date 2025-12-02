@@ -4,18 +4,20 @@ Orchestration script to run the full DFS optimizer pipeline.
 This script coordinates all 4 pipeline steps for current or historical weeks:
 1. 1_fetch_data.py - Download current week data (skipped if data exists or for historical weeks)
 2. 2_data_integration.py - Merge and normalize data sources (skipped if already done)
-3. 3_run_optimizer.py - Generate and optimize lineups (always runs)
+3. 3_run_optimizer.py - Generate and optimize lineups (skipped if results already exist)
 4. 4_backtest.py - Score lineups against actual results (if fanduel_results.json exists)
 
 Current Week Behavior:
     - If no data exists: Fetches all data sources from scratch
     - If data exists: Uses existing data (use --fetch to re-download)
     - Skips Step 2 if intermediate/1_players.csv already exists
+    - Skips Step 3 if fanduel_results.json exists (games already complete)
 
 Historical Week Behavior:
     - Always uses existing data (cannot re-fetch historical data)
     - Skips Step 2 if intermediate/1_players.csv already exists
-    - Runs optimizer and backtest (if results available)
+    - Skips Step 3 if fanduel_results.json exists
+    - Runs backtest if results available
 
 Usage:
     # Analyze current week (auto-fetches if needed)
@@ -27,11 +29,15 @@ Usage:
     # Analyze historical week (uses existing data)
     python run_week.py --week 2025-12-01
 
+    # Re-run integration and optimizer (even if outputs exist)
+    python run_week.py --week 2025-12-01 --rerun
+
     # Run with optimizer options
     python run_week.py --candidates 1000 --sims 10000 --fitness balanced
 
-    # Quick test mode
-    python run_week.py --quick-test
+    # Re-run backtest only (skip steps 1-3)
+    python run_week.py --week 2025-12-01 --backtest-only
+
 """
 
 import argparse
@@ -82,21 +88,26 @@ def get_current_week() -> str:
     return sunday.strftime('%Y_%m_%d')
 
 
-def validate_week_format(week: str) -> bool:
+def normalize_week_format(week: str) -> str:
     """
-    Validate week directory name format (YYYY_MM_DD).
+    Normalize week format to YYYY_MM_DD.
+
+    Accepts both underscore (2025_12_01) and hyphen (2025-12-01) formats.
 
     Args:
-        week: Week directory name
+        week: Week directory name in either format
 
     Returns:
-        True if valid format, False otherwise
+        Normalized week string (YYYY_MM_DD) or None if invalid
     """
+    # Normalize hyphens to underscores
+    normalized = week.replace('-', '_')
+
     try:
-        datetime.strptime(week, '%Y_%m_%d')
-        return True
+        datetime.strptime(normalized, '%Y_%m_%d')
+        return normalized
     except ValueError:
-        return False
+        return None
 
 
 # ============================================================================
@@ -153,9 +164,6 @@ Examples:
   # Re-fetch data for existing week
   python run_week.py --week 2025-12-01 --fetch
 
-  # Quick test mode
-  python run_week.py --quick-test
-
   # Full production run with custom settings
   python run_week.py --candidates 1000 --sims 10000 --fitness balanced
         """
@@ -171,33 +179,32 @@ Examples:
         action='store_true',
         help='Force re-fetch data for current week (ignored for historical weeks)'
     )
+    parser.add_argument(
+        '--rerun',
+        action='store_true',
+        help='Force re-run steps 2 (integration) and 3 (optimizer) even if outputs exist'
+    )
 
     # Optimizer options (passed through to 3_run_optimizer.py)
     parser.add_argument(
         '--candidates',
         type=int,
-        help='Number of candidate lineups (default: 1000, quick-test: 50)'
+        help='Number of candidate lineups (uses config.py default)'
     )
     parser.add_argument(
         '--sims',
         type=int,
-        help='Simulations per lineup (default: 10000, quick-test: 1000)'
+        help='Simulations per lineup (uses config.py default)'
     )
     parser.add_argument(
         '--fitness',
-        default='balanced',
         choices=['conservative', 'balanced', 'aggressive', 'tournament'],
-        help='Fitness function for optimization (default: balanced)'
+        help='Fitness function for optimization (uses config.py default)'
     )
     parser.add_argument(
         '--iterations',
         type=int,
-        help='Max genetic refinement iterations (default: 5, quick-test: 2)'
-    )
-    parser.add_argument(
-        '--quick-test',
-        action='store_true',
-        help='Quick test mode (50 candidates, 1000 sims, 2 iterations)'
+        help='Max genetic refinement iterations (uses config.py default)'
     )
     parser.add_argument(
         '--processes',
@@ -211,6 +218,13 @@ Examples:
         help='Resume specific run (e.g., run_20251201_143022)'
     )
 
+    # Backtest only mode
+    parser.add_argument(
+        '--backtest-only',
+        action='store_true',
+        help='Skip steps 1-3 and only run backtest (step 4)'
+    )
+
     args = parser.parse_args()
 
     # ========================================================================
@@ -218,11 +232,11 @@ Examples:
     # ========================================================================
 
     if args.week:
-        if not validate_week_format(args.week):
+        week = normalize_week_format(args.week)
+        if week is None:
             print(f"❌ Invalid week format: {args.week}")
-            print("   Expected format: YYYY_MM_DD (e.g., 2025_12_01)")
+            print("   Expected format: YYYY_MM_DD or YYYY-MM-DD (e.g., 2025_12_01 or 2025-12-01)")
             sys.exit(1)
-        week = args.week
         is_current = False
     else:
         week = get_current_week()
@@ -230,6 +244,7 @@ Examples:
 
     week_dir = Path('data') / week
     inputs_dir = week_dir / 'inputs'
+    intermediate_dir = week_dir / 'intermediate'
 
     print(f"\n{'='*80}")
     print(f"NFL DFS OPTIMIZER PIPELINE")
@@ -238,10 +253,69 @@ Examples:
     print(f"Type: {'Current week (will fetch fresh data)' if is_current else 'Historical week (using existing data)'}")
     print(f"Directory: {week_dir}")
 
-    if args.quick_test:
-        print(f"Mode: Quick test (50 candidates, 1000 sims, 2 iterations)")
-    else:
-        print(f"Mode: Production")
+    print(f"Mode: Production")
+
+    if args.rerun:
+        print(f"Rerun: Yes (forcing steps 2 and 3 to re-run)")
+
+    if args.backtest_only:
+        print(f"Mode: Backtest only (skipping steps 1-3)")
+
+    # ========================================================================
+    # CHECK FOR ACTUAL RESULTS (needed for both modes)
+    # ========================================================================
+
+    actual_players_csv = intermediate_dir / '4_actual_players.csv'
+    results_json = inputs_dir / 'fanduel_results.json'
+    has_actual_results = actual_players_csv.exists() or results_json.exists()
+    outputs_dir = week_dir / 'outputs'
+
+    # ========================================================================
+    # BACKTEST ONLY MODE - Skip to step 4
+    # ========================================================================
+
+    if args.backtest_only:
+        if not has_actual_results:
+            print(f"\n❌ Cannot run backtest: no actual results found")
+            print(f"   Expected: {actual_players_csv} or {results_json}")
+            sys.exit(1)
+
+        # Find run directory
+        if not outputs_dir.exists() or not list(outputs_dir.glob('run_*')):
+            print(f"\n❌ No previous optimizer runs found in {outputs_dir}")
+            print(f"   Cannot run backtest without lineups.")
+            sys.exit(1)
+
+        runs = sorted(outputs_dir.glob('run_*'))
+        latest_run = runs[-1]
+        lineups_file = latest_run / '3_lineups.csv'
+
+        if not lineups_file.exists():
+            print(f"\n❌ No lineups found in {latest_run}")
+            sys.exit(1)
+
+        print(f"\n📂 Using run: {latest_run.name}")
+
+        # Jump directly to backtest
+        print_step_header(4, "BACKTEST")
+
+        backtest_args = [
+            '--week-dir', str(week_dir),
+            '--run-dir', latest_run.name
+        ]
+
+        run_step('code/4_backtest.py', backtest_args, 'Backtest', optional=True)
+
+        # Quick completion message
+        print(f"\n{'='*80}")
+        print("✅ BACKTEST COMPLETE!")
+        print(f"{'='*80}\n")
+
+        backtest_summary = latest_run / '7_backtest_summary.json'
+        if backtest_summary.exists():
+            print(f"📈 Results: {backtest_summary}")
+
+        sys.exit(0)
 
     # ========================================================================
     # STEP 1: FETCH DATA (conditional)
@@ -266,10 +340,10 @@ Examples:
             # Data exists - use it
             print(f"\n📂 Current week ({week}) - Using existing data from {inputs_dir}")
             print(f"   ℹ️  To fetch fresh data, use: python run_week.py --fetch")
-            print(f"   ℹ️  For granular control: python code/1_fetch_data.py --week-dir {week}")
+            print(f"   ℹ️  For granular control: python code/1_fetch_data.py --week-dir {week_dir}")
 
-            # Check if integration has already been done
-            if (intermediate_dir / '1_players.csv').exists():
+            # Check if integration has already been done (skip unless --rerun)
+            if (intermediate_dir / '1_players.csv').exists() and not args.rerun:
                 print(f"\n✓ Data integration already complete - will skip Step 2")
                 should_skip_integration = True
 
@@ -287,15 +361,15 @@ Examples:
 
         print(f"\n📂 Historical week ({week}) - Using existing data from {inputs_dir}")
 
-        # Check if integration has already been done
-        if (intermediate_dir / '1_players.csv').exists():
+        # Check if integration has already been done (skip unless --rerun)
+        if (intermediate_dir / '1_players.csv').exists() and not args.rerun:
             print(f"✓ Data integration already complete - will skip Step 2")
             should_skip_integration = True
 
     # Execute fetch if needed
     if should_fetch:
         print_step_header(1, "FETCH DATA")
-        fetch_args = ['--week-dir', str(week)]
+        fetch_args = ['--week-dir', str(week_dir)]
         if args.fetch:
             fetch_args.append('--force')
         run_step('code/1_fetch_data.py', fetch_args, 'Data fetch')
@@ -316,11 +390,10 @@ Examples:
         print(f"\n⏭️  Skipping Step 2 (data already integrated)")
     else:
         print_step_header(2, "DATA INTEGRATION")
-        integration_args = ['--week-dir', str(week)]
+        integration_args = ['--week-dir', str(week_dir)]
         run_step('code/2_data_integration.py', integration_args, 'Data integration')
 
     # Verify intermediate files exist
-    intermediate_dir = week_dir / 'intermediate'
     players_file = intermediate_dir / '1_players.csv'
 
     if not players_file.exists():
@@ -328,63 +401,83 @@ Examples:
         sys.exit(1)
 
     # ========================================================================
-    # STEP 3: RUN OPTIMIZER
+    # STEP 3: RUN OPTIMIZER (skip if results already exist)
     # ========================================================================
 
-    print_step_header(3, "RUN OPTIMIZER")
+    # Note: actual_players_csv, results_json, has_actual_results, outputs_dir
+    # are already defined above in the "CHECK FOR ACTUAL RESULTS" section
 
-    optimizer_args = ['--week-dir', str(week)]
+    if has_actual_results and not args.rerun:
+        # Results exist - skip optimizer and just find existing run for backtest
+        print(f"\n⏭️  Skipping Step 3 (actual results already exist)")
+        print(f"   Games are complete - no need to generate new lineups")
+        print(f"   To re-run optimizer anyway: python run_week.py --week {week} --rerun")
 
-    # Add optimizer options
-    if args.quick_test:
-        optimizer_args.append('--quick-test')
+        # Find latest run directory for backtest
+        if not outputs_dir.exists() or not list(outputs_dir.glob('run_*')):
+            print(f"\n❌ No previous optimizer runs found in {outputs_dir}")
+            print(f"   Cannot run backtest without lineups.")
+            print(f"   Run optimizer first: python code/3_run_optimizer.py --week-dir {week_dir}")
+            sys.exit(1)
+
+        runs = sorted(outputs_dir.glob('run_*'))
+        latest_run = runs[-1]
+        lineups_file = latest_run / '3_lineups.csv'
+
+        if not lineups_file.exists():
+            print(f"\n❌ No lineups found in {latest_run}")
+            sys.exit(1)
+
+        print(f"   Using existing run: {latest_run.name}")
     else:
+        # No results yet - run optimizer
+        print_step_header(3, "RUN OPTIMIZER")
+
+        optimizer_args = ['--week-dir', str(week_dir)]
+
+        # Add optimizer options (only if explicitly provided, otherwise use config.py defaults)
         if args.candidates:
             optimizer_args.extend(['--candidates', str(args.candidates)])
         if args.sims:
             optimizer_args.extend(['--sims', str(args.sims)])
         if args.iterations:
             optimizer_args.extend(['--iterations', str(args.iterations)])
+        if args.fitness:
+            optimizer_args.extend(['--fitness', args.fitness])
+        if args.processes:
+            optimizer_args.extend(['--processes', str(args.processes)])
 
-    optimizer_args.extend(['--fitness', args.fitness])
+        if args.run_name:
+            optimizer_args.extend(['--run-name', args.run_name])
 
-    if args.processes:
-        optimizer_args.extend(['--processes', str(args.processes)])
+        run_step('code/3_run_optimizer.py', optimizer_args, 'Optimizer')
 
-    if args.run_name:
-        optimizer_args.extend(['--run-name', args.run_name])
+        # Find latest run directory
+        if not outputs_dir.exists():
+            print(f"\n❌ No outputs directory found: {outputs_dir}")
+            sys.exit(1)
 
-    run_step('code/3_run_optimizer.py', optimizer_args, 'Optimizer')
+        runs = sorted(outputs_dir.glob('run_*'))
+        if not runs:
+            print(f"\n❌ No run directories found in {outputs_dir}")
+            sys.exit(1)
 
-    # Find latest run directory
-    outputs_dir = week_dir / 'outputs'
-    if not outputs_dir.exists():
-        print(f"\n❌ No outputs directory found: {outputs_dir}")
-        sys.exit(1)
+        latest_run = runs[-1]
+        lineups_file = latest_run / '3_lineups.csv'
 
-    runs = sorted(outputs_dir.glob('run_*'))
-    if not runs:
-        print(f"\n❌ No run directories found in {outputs_dir}")
-        sys.exit(1)
-
-    latest_run = runs[-1]
-    lineups_file = latest_run / '3_lineups.csv'
-
-    if not lineups_file.exists():
-        print(f"\n❌ Optimizer did not produce expected output: {lineups_file}")
-        sys.exit(1)
+        if not lineups_file.exists():
+            print(f"\n❌ Optimizer did not produce expected output: {lineups_file}")
+            sys.exit(1)
 
     # ========================================================================
-    # STEP 4: BACKTEST (optional, only if results available)
+    # STEP 4: BACKTEST (only if results available)
     # ========================================================================
 
-    results_file = inputs_dir / 'fanduel_results.json'
-
-    if results_file.exists():
+    if has_actual_results:
         print_step_header(4, "BACKTEST")
 
         backtest_args = [
-            '--week-dir', str(week),
+            '--week-dir', str(week_dir),
             '--run-dir', latest_run.name
         ]
 
@@ -398,8 +491,8 @@ Examples:
         print(f"   4. Scroll down the player list to load all players")
         print(f"   5. Find the latest 'graphql' request in the Network tab")
         print(f"   6. Right-click → Copy → Copy Response")
-        print(f"   7. Save response to: {results_file}")
-        print(f"   8. Run: python code/4_backtest.py --week-dir {week} --run-dir {latest_run.name}")
+        print(f"   7. Save response to: {results_json}")
+        print(f"   8. Run: python code/4_backtest.py --week-dir {week_dir} --run-dir {latest_run.name}")
 
     # ========================================================================
     # COMPLETION
@@ -412,7 +505,7 @@ Examples:
     print(f"📊 Results location:")
     print(f"   {lineups_file}\n")
 
-    if results_file.exists():
+    if has_actual_results:
         backtest_summary = latest_run / '7_backtest_summary.json'
         if backtest_summary.exists():
             print(f"📈 Backtest results:")
@@ -420,7 +513,7 @@ Examples:
 
     print(f"💡 Next steps:")
     if is_current:
-        if not results_file.exists():
+        if not has_actual_results:
             print(f"   1. Review optimized lineups in {lineups_file}")
             print(f"   2. Submit lineups to FanDuel")
             print(f"   3. After games complete, download results (see instructions above)")
@@ -431,9 +524,9 @@ Examples:
             print(f"   3. Use insights to refine future lineups")
     else:
         # Historical week
-        if not results_file.exists():
-            print(f"   1. Add FanDuel results to: {results_file}")
-            print(f"   2. Run: python code/4_backtest.py --week-dir {week} --run-dir {latest_run.name}")
+        if not has_actual_results:
+            print(f"   1. Add FanDuel results to: {results_json}")
+            print(f"   2. Run: python code/4_backtest.py --week-dir {week_dir} --run-dir {latest_run.name}")
         else:
             print(f"   1. Review backtest analysis in {latest_run / '7_backtest_summary.json'}")
             print(f"   2. Compare projection accuracy and calibration")

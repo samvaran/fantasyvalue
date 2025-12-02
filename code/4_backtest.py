@@ -89,14 +89,18 @@ def normalize_player_name(name: str) -> str:
 # PARSE FANDUEL RESULTS
 # ============================================================================
 
-def parse_fanduel_json(json_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
+def convert_fanduel_json_to_csv(json_path: Path, output_dir: Path) -> Tuple[Path, Path]:
     """
-    Parse FanDuel results JSON to extract player stats and game info.
+    Convert FanDuel results JSON to simplified CSV files.
+
+    Creates:
+        - 4_actual_players.csv: name, position, team, salary, actual_points
+        - 4_actual_games.csv: game_id, away_team, home_team, away_score, home_score, total_points
 
     Returns:
-        (players_df, games_df): DataFrames with actual fantasy points and game scores
+        (players_csv_path, games_csv_path)
     """
-    print(f"Loading FanDuel results from: {json_path}")
+    print(f"Converting FanDuel JSON to CSV...")
 
     with open(json_path, 'r') as f:
         data = json.load(f)
@@ -104,36 +108,30 @@ def parse_fanduel_json(json_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
     players = []
     games = {}
 
-    # Parse leaders (top performers with actual stats)
     if 'data' in data and 'leaders' in data['data']:
         for leader in data['data']['leaders']:
-            player_info = {
-                'player_id': leader['player']['id'],
-                'first_name': leader['player']['firstNames'],
-                'last_name': leader['player']['lastName'],
+            # Extract player info
+            full_name = f"{leader['player']['firstNames']} {leader['player']['lastName']}"
+            team = leader['player']['associations'][0]['team']['code'] if leader['player']['associations'] else None
+
+            players.append({
+                'name': full_name,
                 'position': leader['position'],
+                'team': team,
                 'salary': leader['salary'],
-                'actual_points': leader['stats']['fantasyPoints'],
-                'team': leader['player']['associations'][0]['team']['code'] if leader['player']['associations'] else None
-            }
+                'actual_points': leader['stats']['fantasyPoints']
+            })
 
-            # Add full name for matching (normalize to match our other data sources)
-            full_name = f"{player_info['first_name']} {player_info['last_name']}"
-            player_info['name'] = normalize_player_name(full_name)
-
-            players.append(player_info)
-
-            # Extract game info
-            if 'fixture' in leader:
+            # Extract game info (deduplicated by game_id)
+            if 'fixture' in leader and 'boxscore' in leader:
                 fixture = leader['fixture']
                 game_id = fixture['id']
 
-                if game_id not in games and 'boxscore' in leader:
+                if game_id not in games:
                     boxscore = leader['boxscore']['stats']['stats']
-
-                    # Extract scores
                     away_score = None
                     home_score = None
+
                     for stat in boxscore:
                         if stat['type'] == 'AWAY_TEAM_TOTAL_SCORE':
                             away_score = int(stat['value'])
@@ -147,16 +145,65 @@ def parse_fanduel_json(json_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
                             'home_team': fixture['homeTeam']['code'],
                             'away_score': away_score,
                             'home_score': home_score,
-                            'total_points': away_score + home_score,
-                            'point_differential': abs(away_score - home_score),
-                            'status': fixture['status']
+                            'total_points': away_score + home_score
                         }
 
+    # Save CSVs
     players_df = pd.DataFrame(players)
     games_df = pd.DataFrame(list(games.values()))
 
-    print(f"  Found {len(players_df)} players with actual results")
-    print(f"  Found {len(games_df)} completed games")
+    players_csv = output_dir / '4_actual_players.csv'
+    games_csv = output_dir / '4_actual_games.csv'
+
+    players_df.to_csv(players_csv, index=False)
+    games_df.to_csv(games_csv, index=False)
+
+    print(f"  Created {players_csv} ({len(players_df)} players)")
+    print(f"  Created {games_csv} ({len(games_df)} games)")
+
+    return players_csv, games_csv
+
+
+def load_actual_results(week_path: Path) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Load actual results from CSV files (preferred) or JSON (fallback).
+
+    If JSON exists but CSVs don't, converts JSON to CSV first.
+
+    Returns:
+        (players_df, games_df): DataFrames with actual fantasy points and game scores
+    """
+    intermediate_dir = week_path / 'intermediate'
+    inputs_dir = week_path / 'inputs'
+
+    players_csv = intermediate_dir / '4_actual_players.csv'
+    games_csv = intermediate_dir / '4_actual_games.csv'
+    json_path = inputs_dir / 'fanduel_results.json'
+
+    # Check if CSVs exist
+    if players_csv.exists() and games_csv.exists():
+        print(f"Loading actual results from CSV files...")
+        players_df = pd.read_csv(players_csv)
+        games_df = pd.read_csv(games_csv)
+        print(f"  Loaded {len(players_df)} players, {len(games_df)} games")
+    elif json_path.exists():
+        # Convert JSON to CSV
+        intermediate_dir.mkdir(parents=True, exist_ok=True)
+        players_csv, games_csv = convert_fanduel_json_to_csv(json_path, intermediate_dir)
+        players_df = pd.read_csv(players_csv)
+        games_df = pd.read_csv(games_csv)
+    else:
+        raise FileNotFoundError(
+            f"No actual results found. Expected either:\n"
+            f"  - {players_csv} and {games_csv}\n"
+            f"  - {json_path}"
+        )
+
+    # Normalize player names for matching
+    players_df['name'] = players_df['name'].apply(normalize_player_name)
+
+    # Add derived columns to games
+    games_df['point_differential'] = abs(games_df['away_score'] - games_df['home_score'])
 
     return players_df, games_df
 
@@ -169,7 +216,7 @@ def classify_actual_game_script(total_points: float, point_diff: float) -> str:
     """
     Classify actual game script based on final score.
 
-    Uses same logic as game_script_continuous.py for consistency.
+    Uses same logic as game_script.py for consistency.
     """
     # Shootout: High scoring (total > 50)
     if total_points > 50:
@@ -235,44 +282,41 @@ def analyze_game_scripts(games_df: pd.DataFrame, game_scripts_path: str = None) 
 # SCORE LINEUPS
 # ============================================================================
 
-def match_player(player_name: str, players_df: pd.DataFrame, points_column: str = 'actual_points') -> float:
+def build_player_lookup(players_df: pd.DataFrame, points_column: str) -> Dict[str, float]:
     """
-    Match player to results and return fantasy points.
+    Build a dictionary mapping normalized player names to points.
 
     Args:
-        player_name: Player name to match
         players_df: DataFrame with player data
         points_column: Column name containing points ('actual_points' or 'fpProjPts')
 
     Returns:
-        Fantasy points if found, None if not found
+        Dict mapping normalized name -> points
     """
-    norm_name = normalize_player_name(player_name)
+    lookup = {}
 
-    # Determine name columns to check
+    # Determine name column
     if 'name' in players_df.columns:
         name_col = 'name'
     elif 'playerName' in players_df.columns:
         name_col = 'playerName'
     else:
-        # Try to match with any column that might be a name
-        return None
+        return lookup
 
-    # Try exact match on normalized full name
     for _, player in players_df.iterrows():
-        if name_col in player.index:
-            actual_norm = normalize_player_name(str(player[name_col]))
-            if norm_name == actual_norm:
-                return player.get(points_column, None)
+        name = str(player[name_col])
+        norm_name = normalize_player_name(name)
+        points = player.get(points_column)
+        if points is not None and norm_name:
+            lookup[norm_name] = float(points)
 
-    # No match found
-    return None
+    return lookup
 
 
 def score_lineup(
     lineup_row: pd.Series,
-    actual_players_df: pd.DataFrame,
-    consensus_players_df: pd.DataFrame = None,
+    actual_lookup: Dict[str, float],
+    consensus_lookup: Dict[str, float] = None,
     verbose: bool = False
 ) -> Dict:
     """
@@ -284,8 +328,8 @@ def score_lineup(
 
     Args:
         lineup_row: Row from lineups CSV with position columns
-        actual_players_df: DataFrame with actual fantasy points
-        consensus_players_df: Optional DataFrame with consensus projections for fallback
+        actual_lookup: Dict mapping normalized name -> actual points
+        consensus_lookup: Optional dict for consensus fallback
         verbose: If True, print detailed scoring breakdown
 
     Returns:
@@ -305,9 +349,10 @@ def score_lineup(
             continue
 
         player_name = lineup_row[pos]
+        norm_name = normalize_player_name(player_name)
 
-        # Try to find actual points
-        actual_points = match_player(player_name, actual_players_df, 'actual_points')
+        # O(1) lookup for actual points
+        actual_points = actual_lookup.get(norm_name)
 
         if actual_points is not None:
             total_actual_only += actual_points
@@ -321,10 +366,10 @@ def score_lineup(
                 'source': 'actual'
             })
         else:
-            # Try consensus projection as fallback
+            # O(1) lookup for consensus fallback
             consensus_points = 0.0
-            if consensus_players_df is not None:
-                matched_consensus = match_player(player_name, consensus_players_df, 'fpProjPts')
+            if consensus_lookup is not None:
+                matched_consensus = consensus_lookup.get(norm_name)
                 if matched_consensus is not None:
                     consensus_points = matched_consensus
                     players_consensus += 1
@@ -334,7 +379,6 @@ def score_lineup(
                 players_missing += 1
 
             total_with_consensus += consensus_points
-            # actual_only stays at 0 for this player
 
             breakdown.append({
                 'position': pos,
@@ -367,7 +411,7 @@ def score_all_lineups(
     lineups_df: pd.DataFrame,
     actual_players_df: pd.DataFrame,
     consensus_players_df: pd.DataFrame = None
-) -> pd.DataFrame:
+) -> Tuple[pd.DataFrame, List[Dict]]:
     """
     Score all lineups using actual fantasy points.
 
@@ -376,17 +420,34 @@ def score_all_lineups(
     - actual_with_consensus: Sum with consensus fallback for missing players
 
     Returns:
-        DataFrame with actual scores added
+        (lineups_df, missing_players): DataFrame with scores and list of missing player info
     """
     print(f"\nScoring {len(lineups_df)} lineups using actual results...")
 
+    # Build lookup dictionaries once (O(n) upfront, then O(1) per lookup)
+    actual_lookup = build_player_lookup(actual_players_df, 'actual_points')
+    consensus_lookup = build_player_lookup(consensus_players_df, 'fpProjPts') if consensus_players_df is not None else None
+
+    print(f"  Built lookups: {len(actual_lookup)} actual players, {len(consensus_lookup) if consensus_lookup else 0} consensus players")
+
     results = []
+    missing_players_set = {}  # Track unique missing players with their positions
+
     for idx, row in lineups_df.iterrows():
-        score_info = score_lineup(row, actual_players_df, consensus_players_df)
+        score_info = score_lineup(row, actual_lookup, consensus_lookup)
         results.append(score_info)
 
-        if (idx + 1) % 10 == 0:
-            print(f"  Scored {idx + 1}/{len(lineups_df)} lineups...")
+        # Collect missing players (not found in actual results)
+        for item in score_info['breakdown']:
+            if item['source'] != 'actual':
+                player_name = item['player']
+                if player_name not in missing_players_set:
+                    missing_players_set[player_name] = {
+                        'name': player_name,
+                        'position': item['position'].rstrip('0123456789'),  # Remove numbers like RB1 -> RB
+                        'consensus_points': item['consensus_points'],
+                        'source': item['source']
+                    }
 
     # Add results to lineups - both scoring methods
     lineups_df['actual_only'] = [r['actual_only'] for r in results]
@@ -434,7 +495,8 @@ def score_all_lineups(
         print(f"  Above P90: {above_p90_pct:.1f}% (target: 10%)")
         print(f"  Below P10: {below_p10_pct:.1f}% (target: 10%)")
 
-    return lineups_df
+    missing_players = list(missing_players_set.values())
+    return lineups_df, missing_players
 
 
 # ============================================================================
@@ -561,6 +623,13 @@ def print_summary(summary: Dict):
         pct = count / summary['games']['total'] * 100
         print(f"    {script:20s}: {count:2d} ({pct:5.1f}%)")
 
+    if 'missing_players' in summary and summary['missing_players']['count'] > 0:
+        print(f"\n⚠️  Missing players: {summary['missing_players']['count']}")
+        for name in summary['missing_players']['players'][:10]:  # Show first 10
+            print(f"    - {name}")
+        if summary['missing_players']['count'] > 10:
+            print(f"    ... and {summary['missing_players']['count'] - 10} more")
+
 
 # ============================================================================
 # MAIN
@@ -627,15 +696,12 @@ Examples:
     args = parser.parse_args()
 
     # Determine paths using new or legacy arguments
+    week_path = None  # Track if using new architecture
+
     if args.week_dir and args.run_dir:
-        # New architecture
+        # New architecture - use week_path for loading results
         week_path = Path(args.week_dir)
         run_path = week_path / 'outputs' / args.run_dir
-
-        results_path = week_path / 'inputs' / 'fanduel_results.csv'
-        if not results_path.exists():
-            # Try JSON fallback
-            results_path = week_path / 'inputs' / 'fanduel_results.json'
 
         lineups_path = run_path / '3_lineups.csv'
         output_dir = run_path
@@ -676,11 +742,7 @@ Examples:
         print("  3. --results and --run (legacy)")
         return
 
-    # Validate files exist
-    if not results_path.exists():
-        print(f"Error: Results file not found: {results_path}")
-        return
-
+    # Validate lineups exist
     if not lineups_path.exists():
         print(f"Error: Lineups file not found: {lineups_path}")
         return
@@ -694,12 +756,70 @@ Examples:
     print("=" * 80)
     print("FANTASY OPTIMIZER BACKTEST")
     print("=" * 80)
-    print(f"\nResults file:  {results_path}")
-    print(f"Lineups CSV:   {lineups_path}")
+    print(f"\nLineups CSV:   {lineups_path}")
     print(f"Output dir:    {output_dir}")
 
-    # Parse FanDuel results
-    actual_players_df, games_df = parse_fanduel_json(str(results_path))
+    # Load actual results (CSV preferred, JSON fallback with auto-conversion)
+    if week_path:
+        # New architecture: use load_actual_results which handles CSV/JSON
+        actual_players_df, games_df = load_actual_results(week_path)
+    else:
+        # Legacy: results_path was explicitly provided
+        if not results_path.exists():
+            print(f"Error: Results file not found: {results_path}")
+            return
+
+        # For legacy, convert JSON inline if needed
+        if str(results_path).endswith('.json'):
+            print(f"Loading FanDuel results from: {results_path}")
+            with open(results_path, 'r') as f:
+                data = json.load(f)
+
+            players = []
+            games = {}
+            if 'data' in data and 'leaders' in data['data']:
+                for leader in data['data']['leaders']:
+                    full_name = f"{leader['player']['firstNames']} {leader['player']['lastName']}"
+                    team = leader['player']['associations'][0]['team']['code'] if leader['player']['associations'] else None
+                    players.append({
+                        'name': normalize_player_name(full_name),
+                        'position': leader['position'],
+                        'team': team,
+                        'salary': leader['salary'],
+                        'actual_points': leader['stats']['fantasyPoints']
+                    })
+
+                    if 'fixture' in leader and 'boxscore' in leader:
+                        fixture = leader['fixture']
+                        game_id = fixture['id']
+                        if game_id not in games:
+                            boxscore = leader['boxscore']['stats']['stats']
+                            away_score = home_score = None
+                            for stat in boxscore:
+                                if stat['type'] == 'AWAY_TEAM_TOTAL_SCORE':
+                                    away_score = int(stat['value'])
+                                elif stat['type'] == 'HOME_TEAM_TOTAL_SCORE':
+                                    home_score = int(stat['value'])
+                            if away_score is not None and home_score is not None:
+                                games[game_id] = {
+                                    'game_id': game_id,
+                                    'away_team': fixture['awayTeam']['code'],
+                                    'home_team': fixture['homeTeam']['code'],
+                                    'away_score': away_score,
+                                    'home_score': home_score,
+                                    'total_points': away_score + home_score,
+                                    'point_differential': abs(away_score - home_score)
+                                }
+
+            actual_players_df = pd.DataFrame(players)
+            games_df = pd.DataFrame(list(games.values()))
+            print(f"  Found {len(actual_players_df)} players, {len(games_df)} games")
+        else:
+            # CSV format
+            actual_players_df = pd.read_csv(results_path)
+            actual_players_df['name'] = actual_players_df['name'].apply(normalize_player_name)
+            # For legacy CSV, games would need separate file - just create empty
+            games_df = pd.DataFrame()
 
     # Analyze game scripts
     games_df = analyze_game_scripts(games_df)
@@ -717,7 +837,60 @@ Examples:
         print(f"  Loaded {len(consensus_df)} player projections")
 
     # Score lineups
-    lineups_df = score_all_lineups(lineups_df, actual_players_df, consensus_df)
+    lineups_df, missing_players = score_all_lineups(lineups_df, actual_players_df, consensus_df)
+
+    # Append missing players to 4_actual_players.csv with actual_points=0.0
+    if missing_players and week_path:
+        actual_csv_path = week_path / 'intermediate' / '4_actual_players.csv'
+        if actual_csv_path.exists():
+            # Load existing to check for duplicates
+            existing_df = pd.read_csv(actual_csv_path)
+            existing_names = set(existing_df['name'].apply(normalize_player_name))
+
+            # Load FanDuel salaries for team/salary lookup
+            salaries_path = week_path / 'inputs' / 'fanduel_salaries.csv'
+            salary_lookup = {}
+            if salaries_path.exists():
+                salaries_df = pd.read_csv(salaries_path)
+                # Build lookup: normalized name -> (team, salary)
+                for _, row in salaries_df.iterrows():
+                    name = row.get('Nickname', '')
+                    if name:
+                        norm_name = normalize_player_name(name)
+                        salary_lookup[norm_name] = {
+                            'team': row.get('Team', ''),
+                            'salary': row.get('Salary', 0)
+                        }
+
+            # Filter to only truly new players
+            new_players = []
+            for p in missing_players:
+                norm_name = normalize_player_name(p['name'])
+                if norm_name not in existing_names:
+                    # Look up team and salary from FanDuel salaries
+                    lookup_info = salary_lookup.get(norm_name, {})
+                    new_players.append({
+                        'name': p['name'],
+                        'position': p['position'],
+                        'team': lookup_info.get('team', ''),
+                        'salary': lookup_info.get('salary', 0),
+                        'actual_points': 0.0  # Placeholder for manual entry
+                    })
+
+            if new_players:
+                # Append to CSV
+                new_df = pd.DataFrame(new_players)
+                new_df.to_csv(actual_csv_path, mode='a', header=False, index=False)
+                print(f"\n⚠️  Added {len(new_players)} missing players to: {actual_csv_path}")
+                print(f"   Players added with actual_points=0.0:")
+                for p in new_players:
+                    team_info = f", {p['team']}" if p['team'] else ""
+                    salary_info = f", ${p['salary']:,}" if p['salary'] else ""
+                    print(f"     - {p['name']} ({p['position']}{team_info}{salary_info})")
+                print(f"\n   To complete backtest:")
+                print(f"   1. Edit {actual_csv_path}")
+                print(f"   2. Fill in actual_points for the 0.0 entries")
+                print(f"   3. Re-run backtest")
 
     # Save detailed results
     backtest_lineups_path = output_dir / '5_scored_lineups.csv'
@@ -730,6 +903,18 @@ Examples:
 
     # Generate summary
     summary = generate_summary_report(lineups_df, games_df, output_dir)
+
+    # Add missing players info to summary
+    if missing_players:
+        summary['missing_players'] = {
+            'count': len(missing_players),
+            'players': [p['name'] for p in missing_players]
+        }
+        # Re-save with missing players info
+        summary_path = output_dir / '7_backtest_summary.json'
+        with open(summary_path, 'w') as f:
+            json.dump(summary, f, indent=2)
+
     print_summary(summary)
 
     print("\n" + "=" * 80)

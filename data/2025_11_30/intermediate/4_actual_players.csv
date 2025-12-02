@@ -1,0 +1,210 @@
+name,position,team,salary,actual_points
+A.J. Brown,WR,PHI,8300,33.2
+Bijan Robinson,RB,ATL,9500,30.8
+Seattle Seahawks,D,SEA,5000,30.0
+Patrick Mahomes,QB,KC,8400,29.44
+Jameson Williams,WR,DET,6500,26.4
+Jordan Love,QB,GB,7300,25.76
+Rashee Rice,WR,KC,8600,25.4
+Dontayvion Wicks,WR,GB,5000,25.0
+Dak Prescott,QB,DAL,7900,24.6
+Marcus Mariota,QB,WAS,6700,24.26
+CeeDee Lamb,WR,DAL,8700,23.7
+Jacoby Brissett,QB,ARI,7600,23.64
+D'Andre Swift,RB,CHI,6400,23.3
+Adonai Mitchell,WR,NYJ,5300,23.2
+Kimani Vidal,RB,LAC,6700,23.2
+Bryce Young,QB,CAR,6900,22.54
+De'Von Achane,RB,MIA,8700,22.4
+Kyle Monangai,RB,CHI,6000,22.0
+Trevor Lawrence,QB,JAC,7200,21.66
+Tyrod Taylor,QB,NYJ,6700,21.28
+Jared Goff,QB,DET,8100,20.64
+Drake Maye,QB,NE,8300,20.48
+Bo Nix,QB,DEN,7400,20.44
+Brock Bowers,TE,LV,7200,20.3
+James Cook III,RB,BUF,8800,20.2
+Davante Adams,WR,LAR,8200,19.8
+RJ Harvey,RB,DEN,6300,19.7
+Chuba Hubbard,RB,CAR,5600,19.4
+Devaughn Vele,WR,NO,4900,19.3
+Joe Burrow,QB,CIN,7800,19.24
+Terry McLaurin,WR,WAS,6500,19.1
+Nico Collins,WR,HOU,8100,19.0
+Zach Ertz,TE,WAS,5200,18.6
+Tyler Shough,QB,NO,6500,18.36
+Jakobi Meyers,WR,JAC,6100,18.3
+Trey McBride,TE,ARI,8300,18.2
+Josh Allen,QB,BUF,9400,17.72
+Devin Singletary,RB,NYG,5900,17.7
+Ja'Marr Chase,WR,CIN,9500,17.5
+Jalen Hurts,QB,PHI,9100,17.3
+Brock Purdy,QB,SF,7300,17.12
+Derrick Henry,RB,BAL,8800,16.9
+Christian Watson,WR,GB,6000,16.3
+Daniel Jones,QB,IND,7500,16.14
+Alec Pierce,WR,IND,5800,15.8
+Javonte Williams,RB,DAL,7800,15.5
+Jalen Coker,WR,CAR,5400,15.4
+Christian McCaffrey,RB,SF,8600,15.4
+Zonovan Knight,RB,ARI,6000,15.3
+Bucky Irving,RB,TB,7500,15.1
+Buffalo Bills,D,BUF,4400,15.0
+Chase Brown,RB,CIN,7200,14.8
+Courtland Sutton,WR,DEN,6600,14.7
+Breece Hall,RB,NYJ,7400,14.6
+Baker Mayfield,QB,TB,8200,14.46
+Quinshon Judkins,RB,CLE,7800,14.4
+Blake Corum,RB,LAR,5700,14.1
+Cincinnati Bengals,D,CIN,3400,14.0
+Jacksonville Jaguars,D,JAC,4800,14.0
+Justin Herbert,QB,LAC,8300,13.84
+George Pickens,WR,DAL,8000,13.8
+Matthew Stafford,QB,LAR,8000,13.62
+Jonathan Taylor,RB,IND,9900,13.6
+Jaxson Dart,QB,NYG,7500,13.56
+Kirk Cousins,QB,ATL,6800,13.36
+Kyren Williams,RB,LAR,8500,13.2
+Darius Slayton,WR,NYG,5500,13.1
+Carolina Panthers,D,CAR,3100,13.0
+Travis Kelce,TE,KC,6000,13.0
+Geno Smith,QB,LV,6700,13.0
+Chris Olave,WR,NO,7200,12.7
+Tyler Allgeier,RB,ATL,5800,12.5
+Brenton Strange,TE,JAC,5100,12.0
+Jauan Jennings,WR,SF,6600,11.9
+Ladd McConkey,WR,LAC,7600,11.9
+David Montgomery,RB,DET,6000,11.8
+Kyle Pitts Sr.,TE,ATL,5100,11.7
+Kayshon Boutte,WR,NE,5600,11.5
+Jaret Patterson,RB,LAC,4700,11.4
+Jaylen Warren,RB,PIT,7200,11.4
+Zach Charbonnet,RB,SEA,6300,11.2
+Cole Kmet,TE,CHI,4800,11.1
+Miami Dolphins,D,MIA,3700,11.0
+New England Patriots,D,NE,4700,11.0
+San Francisco 49ers,D,SF,4700,11.0
+Evan Engram,TE,DEN,4900,10.9
+Tetairoa McMillan,WR,CAR,6800,10.8
+Malik Davis,RB,DAL,4800,10.7
+Shedeur Sanders,QB,CLE,6400,10.56
+Isaac TeSlaa,WR,DET,4500,10.5
+Caleb Williams,QB,CHI,8000,10.46
+Puka Nacua,WR,LAR,9300,10.2
+Jahmyr Gibbs,RB,DET,9500,10.1
+Keaton Mitchell,RB,BAL,4400,10.1
+TreVeyon Henderson,RB,NE,7700,10.1
+Chris Rodriguez Jr.,RB,WAS,6200,10.1
+C.J. Stroud,QB,HOU,6800,10.04
+Romeo Doubs,WR,GB,5800,10.0
+Isaiah Likely,TE,BAL,4800,10.0
+Marvin Harrison Jr.,WR,ARI,6700,9.9
+Harold Fannin Jr.,TE,CLE,5100,9.8
+Kyle Williams,WR,NE,4700,9.8
+Quentin Johnston,WR,LAC,6000,9.8
+Tyler Warren,TE,IND,6300,9.7
+Xavier Smith,WR,LAR,4300,9.7
+Josh Jacobs,RB,GB,8500,9.6
+Rhamondre Stevenson,RB,NE,5700,9.5
+Nick Chubb,RB,HOU,5100,9.4
+Andrei Iosivas,WR,CIN,5400,9.4
+Xavier Worthy,WR,KC,5700,9.4
+Chris Godwin Jr.,WR,TB,5900,9.3
+Hunter Henry,TE,NE,5400,9.3
+Ashton Jeanty,RB,LV,7100,9.1
+Minnesota Vikings,D,MIN,3300,9.0
+Hollywood Brown,WR,KC,5200,9.0
+Dalton Schultz,TE,HOU,5200,9.0
+Jayden Higgins,WR,HOU,5600,9.0
+T.J. Hockenson,TE,MIN,5000,8.9
+Rico Dowdle,RB,CAR,8200,8.9
+Kenneth Walker III,RB,SEA,6900,8.9
+Michael Carter,RB,ARI,4800,8.9
+George Kittle,TE,SF,6800,8.7
+Deebo Samuel Sr.,WR,WAS,7500,8.6
+David Sills V,WR,ATL,5200,8.5
+Kareem Hunt,RB,KC,6400,8.5
+Bhayshul Tuten,RB,JAC,5200,8.4
+Devin Neal,RB,NO,5900,8.4
+Los Angeles Chargers,D,LAC,4500,8.0
+Tanner Hudson,TE,CIN,4200,7.9
+Keon Coleman,WR,BUF,5000,7.9
+Lamar Jackson,QB,BAL,8700,7.54
+DeVonta Smith,WR,PHI,7400,7.3
+Woody Marks,RB,HOU,6400,7.2
+KaVontae Turpin,WR,DAL,5100,7.1
+New Orleans Saints,D,NO,3400,7.0
+Tampa Bay Buccaneers,D,TB,4100,7.0
+Treylon Burks,WR,WAS,4000,7.0
+Wan'Dale Robinson,WR,NYG,6400,6.9
+Mark Andrews,TE,BAL,5600,6.7
+Juwan Johnson,TE,NO,5500,6.4
+Cam Ward,QB,TEN,6400,6.34
+Emeka Egbuka,WR,TB,8000,6.2
+Adam Trautman,TE,DEN,4200,6.2
+Ray Davis,RB,BUF,4300,6.2
+Jordan Addison,WR,MIN,6100,6.1
+Jake Ferguson,TE,DAL,6200,6.1
+Marcus Jones,WR,NE,4000,6.0
+Darren Waller,TE,MIA,4000,5.7
+AJ Barner,TE,SEA,5400,5.7
+Pat Bryant,WR,DEN,5200,5.7
+Tua Tagovailoa,QB,MIA,6900,5.68
+Luther Burden III,WR,CHI,4900,5.6
+Saquon Barkley,RB,PHI,8900,5.6
+Tom Kennedy,WR,DET,4200,5.6
+Darnell Washington,TE,PIT,4800,5.5
+Jaylen Waddle,WR,MIA,7000,5.5
+Kenneth Gainwell,RB,PIT,6200,5.5
+Josh Downs,WR,IND,5500,5.4
+Tyjae Spears,RB,TEN,4700,5.4
+Gunnar Helm,TE,TEN,4800,5.3
+Jordan Mason,RB,MIN,5500,5.3
+Michael Wilson,WR,ARI,7100,5.1
+Chicago Bears,D,CHI,3900,5.0
+Indianapolis Colts,D,IND,4200,5.0
+Pittsburgh Steelers,D,PIT,3800,5.0
+Malik Washington,WR,MIA,5500,5.0
+Keenan Allen,WR,LAC,6900,5.0
+Chig Okonkwo,TE,TEN,4900,4.9
+Ryan Flournoy,WR,DAL,4900,4.9
+Xavier Hutchinson,WR,HOU,4900,4.9
+Tony Pollard,RB,TEN,5200,4.8
+DeMario Douglas,WR,NE,5300,4.8
+DK Metcalf,WR,PIT,7300,4.7
+Colby Parkinson,TE,LAR,4800,4.7
+Travis Etienne Jr.,RB,JAC,7300,4.6
+Tre' Harris,WR,LAC,5000,4.5
+Rachaad White,RB,TB,7000,4.4
+Samaje Perine,RB,CIN,4600,4.4
+Theo Johnson,TE,NYG,5400,4.4
+Isiah Pacheco,RB,KC,5500,4.3
+Colston Loveland,TE,CHI,5300,4.3
+Dawson Knox,TE,BUF,4800,4.3
+Jerry Jeudy,WR,CLE,5400,4.1
+Stefon Diggs,WR,NE,6900,4.1
+Denver Broncos,D,DEN,4800,4.0
+Las Vegas Raiders,D,LV,3200,4.0
+New York Jets,D,NYJ,3600,4.0
+Philadelphia Eagles,D,PHI,4200,4.0
+Jeremy McNichols,RB,WAS,5300,4.0
+Ty Johnson,RB,BUF,4800,4.0
+Cooper Kupp,WR,SEA,5400,3.9
+Tyrone Tracy Jr.,RB,NYG,6100,3.8
+Brian Thomas Jr.,WR,JAC,6500,3.8
+Deven Thompkins,WR,ATL,4000,3.8
+Mack Hollins,WR,NE,5900,3.8
+John Metchie III,WR,NYJ,5700,3.7
+Kyle Juszczyk,RB,SF,4300,3.7
+Dallas Goedert,TE,PHI,5700,3.7
+DJ Moore,WR,CHI,6000,3.7
+Darnell Mooney,WR,ATL,6400,3.5
+Troy Franklin,WR,DEN,6200,3.1
+Tennessee Titans,DEF,TEN,3000,3.0
+Khalil Shakir,WR,BUF,6300,1.0
+Arizona Cardinals,DEF,ARI,3500,2.0
+Tre Tucker,WR,LV,5600,3.5
+Atlanta Falcons,DEF,ATL,4000,2.0
+New York Giants,DEF,NYG,3100,2.0
+Cleveland Browns,DEF,CLE,3900,1.0
+Los Angeles Rams,DEF,LAR,4600,2.0

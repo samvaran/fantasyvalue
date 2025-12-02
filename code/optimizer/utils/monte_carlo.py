@@ -10,8 +10,17 @@ from typing import List, Dict, Tuple
 from multiprocessing import Pool, cpu_count
 from functools import partial
 import warnings
+import sys
+from pathlib import Path
+from tqdm import tqdm
 
 from .distribution_fit import sample_shifted_lognormal
+
+# Import config values (add parent dir to path temporarily)
+_parent_dir = str(Path(__file__).parent.parent.parent)
+if _parent_dir not in sys.path:
+    sys.path.insert(0, _parent_dir)
+from config import DEFAULT_SIMS, DEFAULT_PROCESSES
 
 # Note: Distribution parameters (mu, sigma, shift) are now pre-computed during
 # data integration and stored in the player CSV. No need to fit distributions
@@ -129,7 +138,7 @@ def simulate_lineup_once(
 def simulate_lineup(
     lineup_players: List[Dict],
     game_scripts_df: pd.DataFrame,
-    n_sims: int = 10000
+    n_sims: int = DEFAULT_SIMS
 ) -> Dict[str, float]:
     """
     Run Monte Carlo simulation for a lineup.
@@ -201,8 +210,8 @@ def evaluate_lineups_parallel(
     lineups: List[List[str]],
     players_df: pd.DataFrame,
     game_scripts_df: pd.DataFrame,
-    n_sims: int = 10000,
-    n_processes: int = None
+    n_sims: int = DEFAULT_SIMS,
+    n_processes: int = DEFAULT_PROCESSES
 ) -> List[Dict[str, float]]:
     """
     Evaluate multiple lineups in parallel using multiprocessing.
@@ -229,9 +238,13 @@ def evaluate_lineups_parallel(
         for i, lineup in enumerate(lineups)
     ]
 
-    # Run parallel evaluation
+    # Run parallel evaluation with tqdm progress bar
     with Pool(processes=n_processes) as pool:
-        results = pool.map(_evaluate_lineup_worker, args_list)
+        results = list(tqdm(
+            pool.imap(_evaluate_lineup_worker, args_list),
+            total=len(args_list),
+            desc="Monte Carlo"
+        ))
 
     # Sort by lineup index and extract results
     results.sort(key=lambda x: x[0])

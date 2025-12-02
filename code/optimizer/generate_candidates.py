@@ -12,9 +12,17 @@ import numpy as np
 from pathlib import Path
 from typing import List, Dict
 import argparse
+import sys
+from tqdm import tqdm
 
 from utils.milp_solver import create_lineup_milp
 from utils.monte_carlo import sample_game_script, determine_script_key
+
+# Import config values (add parent dir to path temporarily)
+_parent_dir = str(Path(__file__).parent.parent)
+if _parent_dir not in sys.path:
+    sys.path.insert(0, _parent_dir)
+from config import DEFAULT_CANDIDATES, SALARY_CAP
 
 
 def calculate_projection_for_milp(
@@ -45,8 +53,8 @@ def calculate_projection_for_milp(
 def generate_candidates(
     players_df: pd.DataFrame,
     game_scripts_df: pd.DataFrame,
-    n_lineups: int = 1000,
-    salary_cap: float = 60000,
+    n_lineups: int = DEFAULT_CANDIDATES,
+    salary_cap: float = SALARY_CAP,
     output_path: str = 'outputs/lineups_candidates.csv',
     verbose: bool = True
 ) -> pd.DataFrame:
@@ -97,19 +105,17 @@ def generate_candidates(
     lineups = []
     previous_lineups = []
 
-    # ===== TIER 1: Deterministic (Lineups 1-20) =====
+    # ===== TIER 1: Deterministic =====
     if verbose:
-        print("\n=== TIER 1: Deterministic chalk lineups (1-20) ===")
+        print("\n=== TIER 1: Deterministic chalk lineups ===")
 
     tier1_count = min(20, n_lineups)
 
     # Set projections to consensus (same for all tiers now)
     players_df['projection'] = players_df['fpProjPts']
 
-    for i in range(tier1_count):
-        if verbose and (i + 1) % 5 == 0:
-            print(f"  Generating lineup {i + 1}/{ tier1_count}...")
-
+    tier1_iter = tqdm(range(tier1_count), desc="Tier 1 (chalk)", disable=not verbose)
+    for i in tier1_iter:
         lineup = create_lineup_milp(
             players_df,
             salary_cap=salary_cap,
@@ -118,8 +124,7 @@ def generate_candidates(
         )
 
         if lineup is None:
-            if verbose:
-                print(f"  Warning: Failed to generate lineup {i + 1}")
+            tqdm.write(f"  Warning: Failed to generate lineup {i + 1}")
             break
 
         lineups.append({
@@ -135,20 +140,18 @@ def generate_candidates(
     if verbose:
         print(f"  Generated {len(lineups)} chalk lineups")
 
-    # ===== TIER 2: Temperature-based (Lineups 21-100) =====
+    # ===== TIER 2: Temperature-based =====
     if n_lineups > 20:
         if verbose:
-            print("\n=== TIER 2: Temperature-based variation (21-100) ===")
+            print("\n=== TIER 2: Temperature-based variation ===")
 
         tier2_start = len(lineups)
         tier2_count = min(80, n_lineups - tier2_start)
 
-        for i in range(tier2_count):
+        tier2_iter = tqdm(range(tier2_count), desc="Tier 2 (temp)", disable=not verbose)
+        for i in tier2_iter:
             # Temperature ramps from 0.3 to 1.1
             temperature = 0.3 + (1.1 - 0.3) * (i / tier2_count)
-
-            if verbose and (i + 1) % 20 == 0:
-                print(f"  Generating lineup {tier2_start + i + 1}/{tier2_start + tier2_count} (temp={temperature:.2f})...")
 
             # Projections already set to consensus
             # Diversity comes from max_overlap constraint
@@ -175,20 +178,18 @@ def generate_candidates(
         if verbose:
             print(f"  Generated {len(lineups) - tier2_start} temperature-based lineups")
 
-    # ===== TIER 3: Random weighted sampling (Lineups 101-1000) =====
+    # ===== TIER 3: Random weighted sampling =====
     if n_lineups > 100:
         if verbose:
-            print("\n=== TIER 3: Random weighted sampling (101-1000) ===")
+            print("\n=== TIER 3: Random weighted sampling ===")
 
         tier3_start = len(lineups)
         tier3_count = n_lineups - tier3_start
 
-        for i in range(tier3_count):
+        tier3_iter = tqdm(range(tier3_count), desc="Tier 3 (contrarian)", disable=not verbose)
+        for i in tier3_iter:
             # High temperature = more random
             temperature = np.random.uniform(1.5, 3.0)
-
-            if verbose and (i + 1) % 100 == 0:
-                print(f"  Generating lineup {tier3_start + i + 1}/{tier3_start + tier3_count}...")
 
             # Projections already set to consensus
             # Diversity comes from stricter max_overlap constraint
@@ -239,10 +240,10 @@ def generate_candidates(
 def main():
     parser = argparse.ArgumentParser(description="Phase 1: Generate lineup candidates")
     parser.add_argument('--input', default='players_integrated.csv', help='Input players CSV')
-    parser.add_argument('--game-scripts', default='game_script_continuous.csv', help='Game scripts CSV')
+    parser.add_argument('--game-scripts', default='game_script.csv', help='Game scripts CSV')
     parser.add_argument('--output', default='outputs/lineups_candidates.csv', help='Output lineups CSV')
-    parser.add_argument('--n-lineups', type=int, default=1000, help='Number of lineups to generate')
-    parser.add_argument('--salary-cap', type=float, default=60000, help='Salary cap')
+    parser.add_argument('--n-lineups', type=int, default=DEFAULT_CANDIDATES, help=f'Number of lineups to generate (default: {DEFAULT_CANDIDATES})')
+    parser.add_argument('--salary-cap', type=float, default=SALARY_CAP, help=f'Salary cap (default: {SALARY_CAP})')
     parser.add_argument('--quiet', action='store_true', help='Suppress output')
 
     args = parser.parse_args()

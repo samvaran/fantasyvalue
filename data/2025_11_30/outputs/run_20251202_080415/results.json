@@ -1,0 +1,38 @@
+{
+  "run_name": "run_20251202_080415",
+  "state": {
+    "phase_1_complete": true,
+    "phase_2_complete": true,
+    "iterations": [
+      {
+        "iteration": 1,
+        "time": 119.28013324737549,
+        "best_fitness": 162.99211959537064,
+        "best_median": 122.34839206264856,
+        "best_p90": 162.99211959537064,
+        "n_generations": 50,
+        "timestamp": "2025-12-02T08:09:51.063518"
+      }
+    ],
+    "best_fitness_history": [
+      162.99211959537064
+    ],
+    "convergence_count": 0,
+    "total_time": 335.6305239200592,
+    "phase_1_time": 169.63221502304077,
+    "n_candidates": 200,
+    "phase_2_time": 46.707967042922974,
+    "n_simulations": 5000,
+    "completed": true,
+    "phases_completed": [
+      "candidates",
+      "simulations",
+      "genetic_1"
+    ]
+  },
+  "summary": {
+    "total_iterations": 1,
+    "best_fitness": 162.99211959537064,
+    "total_time_minutes": 5.59384206533432
+  }
+}

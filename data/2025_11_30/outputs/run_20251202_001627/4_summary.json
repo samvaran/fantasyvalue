@@ -1,0 +1,20 @@
+{
+  "run_name": "run_20251202_001627",
+  "total_time_minutes": 5.526083135604859,
+  "total_iterations": 1,
+  "best_fitness": 70.16337456773624,
+  "fitness_history": [
+    70.16337456773624
+  ],
+  "iterations": [
+    {
+      "iteration": 1,
+      "time": 117.02166175842285,
+      "best_fitness": 70.16337456773624,
+      "best_median": 122.32131311084575,
+      "best_p90": 163.34576909139557,
+      "n_generations": 50,
+      "timestamp": "2025-12-02T00:21:59.523212"
+    }
+  ]
+}
