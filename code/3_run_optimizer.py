@@ -111,7 +111,7 @@ class OptimizerOrchestrator:
         print(title.center(80))
         print("=" * 80 + "\n")
 
-    def run_phase_1(self, n_candidates: int = DEFAULT_CANDIDATES, force: bool = False):
+    def run_phase_1(self, n_candidates: int = DEFAULT_CANDIDATES, fitness_name: str = DEFAULT_FITNESS, force: bool = False):
         """Phase 1: Generate diverse candidate lineups."""
         candidates_file = self.run_dir / '1_candidates.csv'
 
@@ -134,6 +134,7 @@ class OptimizerOrchestrator:
             game_scripts_df=game_scripts_df,
             n_lineups=n_candidates,
             output_path=str(temp_candidates_file),
+            fitness_name=fitness_name,
             verbose=True
         )
 
@@ -154,14 +155,24 @@ class OptimizerOrchestrator:
         print(f"\nPhase 1 complete in {elapsed:.1f} seconds")
         return candidates_df
 
-    def run_phase_2(self, n_sims: int = DEFAULT_SIMS, n_processes: int = None, force: bool = False):
-        """Phase 2: Evaluate candidates via Monte Carlo."""
-        candidates_file = self.run_dir / '1_candidates.csv'
-        evaluations_file = self.run_dir / '2_simulations.csv'
+    def run_phase_2(self, n_sims: int = DEFAULT_SIMS, n_processes: int = None,
+                    n_select: int = None, fitness_function: str = DEFAULT_FITNESS, force: bool = False):
+        """Phase 2: Evaluate candidates via Monte Carlo and select top N by fitness.
 
-        if self.state['phase_2_complete'] and not force and evaluations_file.exists():
-            print(f"Phase 2 already complete. Loading from {evaluations_file}")
-            return pd.read_csv(evaluations_file)
+        Args:
+            n_sims: Number of Monte Carlo simulations
+            n_processes: Number of parallel processes
+            n_select: Number of top lineups to select (None = keep all)
+            fitness_function: Fitness function for selection
+            force: Force re-evaluation even if complete
+        """
+        candidates_file = self.run_dir / '1_candidates.csv'
+        all_evaluations_file = self.run_dir / '2a_simulations.csv'  # All before selection
+        selected_evaluations_file = self.run_dir / '2b_simulations.csv'  # After selection
+
+        if self.state['phase_2_complete'] and not force and selected_evaluations_file.exists():
+            print(f"Phase 2 already complete. Loading from {selected_evaluations_file}")
+            return pd.read_csv(selected_evaluations_file)
 
         if not candidates_file.exists():
             raise FileNotFoundError(f"Candidates file not found: {candidates_file}")
@@ -170,7 +181,7 @@ class OptimizerOrchestrator:
 
         start_time = time.time()
 
-        # Evaluate candidates (saves to temporary location first)
+        # Evaluate ALL candidates (saves to temporary location first)
         temp_evaluations_file = self.run_dir / 'evaluations_temp.csv'
         evaluations_df = evaluate_candidates(
             candidates_path=str(candidates_file),
@@ -182,22 +193,63 @@ class OptimizerOrchestrator:
             verbose=True
         )
 
-        # Format with position-based columns and save
-        evaluations_formatted = self.format_lineups_by_position(evaluations_df)
-        evaluations_formatted.to_csv(evaluations_file, index=False)
-
         # Clean up temp file
         if temp_evaluations_file.exists():
             temp_evaluations_file.unlink()
+
+        # Calculate fitness for ALL lineups first (needed for both saving and selection)
+        from optimizer.utils.genetic_operators import FITNESS_FUNCTIONS
+        fitness_func = FITNESS_FUNCTIONS.get(fitness_function, FITNESS_FUNCTIONS['tournament'])
+
+        evaluations_df['fitness'] = evaluations_df.apply(
+            lambda row: fitness_func(row.to_dict()),
+            axis=1
+        )
+
+        # Save ALL evaluations BEFORE selection to 2a_simulations.csv
+        all_evaluations_formatted = self.format_lineups_by_position(evaluations_df)
+        all_evaluations_formatted.to_csv(all_evaluations_file, index=False)
+        print(f"\nAll {len(evaluations_df)} evaluations saved to: {all_evaluations_file}")
+
+        # Select top N by fitness after MC evaluation
+        if n_select is not None and n_select < len(evaluations_df):
+            print(f"\n=== SELECTING TOP {n_select} BY FITNESS ({fitness_function}) ===")
+            print(f"  Total evaluated: {len(evaluations_df)}")
+
+            # Sort by fitness and select top N (fitness already calculated above)
+            evaluations_df = evaluations_df.sort_values('fitness', ascending=False).head(n_select)
+            evaluations_df = evaluations_df.reset_index(drop=True)
+            evaluations_df['lineup_id'] = range(len(evaluations_df))
+
+            # Show strategy breakdown in selected
+            print(f"  Selected top {len(evaluations_df)} by {fitness_function} fitness")
+
+            if 'strategy' in evaluations_df.columns:
+                strategy_counts = evaluations_df['strategy'].value_counts()
+                print(f"\n  Strategy breakdown in top {len(evaluations_df)}:")
+                for strat, count in strategy_counts.items():
+                    print(f"    {strat}: {count}")
+
+            if 'tier' in evaluations_df.columns:
+                tier_counts = evaluations_df['tier'].value_counts().sort_index()
+                print(f"\n  Tier breakdown in top {len(evaluations_df)}:")
+                for tier, count in tier_counts.items():
+                    tier_name = {1: 'chalk', 2: 'moderate', 3: 'contrarian'}.get(tier, str(tier))
+                    print(f"    Tier {tier} ({tier_name}): {count}")
+
+        # Format with position-based columns and save SELECTED lineups to 2b_simulations.csv
+        evaluations_formatted = self.format_lineups_by_position(evaluations_df)
+        evaluations_formatted.to_csv(selected_evaluations_file, index=False)
 
         elapsed = time.time() - start_time
         self.state['phase_2_complete'] = True
         self.state['phase_2_time'] = elapsed
         self.state['n_simulations'] = n_sims
+        self.state['n_selected'] = len(evaluations_df)
         self.save_state()
 
         print(f"\nPhase 2 complete in {elapsed / 60:.1f} minutes")
-        print(f"All {len(evaluations_df)} lineups saved to: {evaluations_file}")
+        print(f"Selected {len(evaluations_df)} lineups saved to: {selected_evaluations_file}")
 
         return evaluations_df
 
@@ -442,13 +494,16 @@ class OptimizerOrchestrator:
         # Phase 1: Generate candidates
         candidates_df = self.run_phase_1(
             n_candidates=n_candidates,
+            fitness_name=fitness_function,
             force=force_restart
         )
 
-        # Phase 2: Initial evaluation
+        # Phase 2: Evaluate ALL candidates via MC, then select top N by fitness
         evaluations_df = self.run_phase_2(
             n_sims=n_sims_phase2,
             n_processes=n_processes,
+            n_select=n_candidates,  # Select top N AFTER MC evaluation
+            fitness_function=fitness_function,
             force=force_restart
         )
 
@@ -495,15 +550,22 @@ class OptimizerOrchestrator:
                 print(f"  {i+1}. Fitness: {row.get('fitness', row.get('median')):.2f}, "
                       f"Median: {row['median']:.2f}, P90: {row['p90']:.2f}")
 
+        # Copy training metrics plot to main run directory for easy access
+        training_plot = best_iteration_dir / 'training_metrics.png'
+        if training_plot.exists():
+            import shutil
+            shutil.copy(training_plot, self.run_dir / 'training_metrics.png')
+            print(f"Training metrics plot: {self.run_dir / 'training_metrics.png'}")
+
         print(f"\nAll results saved in: {self.run_dir}")
         print(f"  - config.json: Run configuration (input params)")
         print(f"  - results.json: Run results & state for resumption")
         print(f"  - 1_candidates.csv: All generated candidates")
-        print(f"  - 2_simulations.csv: Monte Carlo evaluations")
+        print(f"  - 2a_simulations.csv: All Monte Carlo evaluations (before selection)")
+        print(f"  - 2b_simulations.csv: Selected lineups (after tournament selection)")
         print(f"  - 3_lineups.csv: Final optimized lineups")
+        print(f"  - training_metrics.png: GA training visualization")
         print(f"  - iteration_N/: Snapshots from each GA iteration")
-        print(f"      - 2_simulations_iterN.csv: Input to iteration N")
-        print(f"      - 3_lineups_iterN.csv: Output of iteration N")
 
 
 def main():

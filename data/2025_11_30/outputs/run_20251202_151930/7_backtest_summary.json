@@ -1,0 +1,52 @@
+{
+  "timestamp": "2025-12-02T15:37:42.800824",
+  "lineups": {
+    "total": 100,
+    "avg_actual_only": 113.3474,
+    "avg_actual_with_consensus": 113.42439999999999,
+    "max_actual_with_consensus": 139.88,
+    "min_actual_with_consensus": 90.03999999999999,
+    "std_actual_with_consensus": 10.831777633752953
+  },
+  "player_matching": {
+    "avg_players_actual": 8.99,
+    "avg_players_consensus": 0.01,
+    "avg_players_missing": 0.0
+  },
+  "games": {
+    "total": 16,
+    "avg_total_points": 42.9375,
+    "script_distribution": {
+      "defensive": 8,
+      "shootout": 5,
+      "blowout_favorite": 3
+    }
+  },
+  "projections": {
+    "avg_projected_mean": 124.64893345707111,
+    "avg_error_vs_mean": -11.22453345707111,
+    "rmse_vs_mean": 15.531969217915625,
+    "correlation_mean": 0.08865048395712122
+  },
+  "calibration": {
+    "within_p10_p90_pct": 99.0,
+    "above_p90_pct": 0.0,
+    "below_p10_pct": 1.0
+  },
+  "top_lineup": {
+    "lineup_id": "16",
+    "actual_only": 139.88,
+    "actual_with_consensus": 139.88,
+    "projected_mean": 123.9190249102872,
+    "projected_median": 120.1994074560471,
+    "players_actual": 9,
+    "players_consensus": 0,
+    "players_missing": 0
+  },
+  "missing_players": {
+    "count": 1,
+    "players": [
+      "Chimere Dike"
+    ]
+  }
+}

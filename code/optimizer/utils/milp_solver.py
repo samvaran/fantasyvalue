@@ -2,13 +2,80 @@
 MILP (Mixed Integer Linear Programming) solver for lineup optimization.
 
 Uses PuLP library to formulate and solve the knapsack problem with constraints.
+
+Performance optimizations:
+- Pre-compute player data as lists/dicts (avoid iterrows)
+- Pre-group players by position
+- Cache solver instance
 """
 
 import pulp
 import pandas as pd
 import numpy as np
-from typing import List, Dict, Optional, Set
+from typing import List, Dict, Optional, Set, Tuple
 import warnings
+
+# Global cache for prepared player data
+_player_cache = {}
+
+
+def _prepare_player_data(players_df: pd.DataFrame) -> Dict:
+    """
+    Pre-compute player data structures for fast MILP construction.
+    Returns cached data if DataFrame hasn't changed.
+    """
+    # Create a cache key based on DataFrame shape and column sum (fast hash proxy)
+    cache_key = (len(players_df), players_df['projection'].sum() if 'projection' in players_df.columns else 0)
+
+    if cache_key in _player_cache:
+        return _player_cache[cache_key]
+
+    # Normalize column names
+    df = players_df.copy()
+    if 'id' not in df.columns and 'name' in df.columns:
+        df['id'] = df['name']
+    if 'fdSalary' not in df.columns and 'salary' in df.columns:
+        df['fdSalary'] = df['salary']
+
+    # Drop players with missing data
+    required_cols = ['id', 'name', 'position', 'fdSalary', 'projection']
+    df = df.dropna(subset=required_cols)
+
+    # Pre-compute as lists (much faster than iterrows)
+    player_ids = df['id'].tolist()
+    player_projections = df['projection'].tolist()
+    player_salaries = df['fdSalary'].tolist()
+    player_positions = df['position'].tolist()
+
+    # Build lookup dicts
+    id_to_idx = {pid: i for i, pid in enumerate(player_ids)}
+    id_to_projection = dict(zip(player_ids, player_projections))
+    id_to_salary = dict(zip(player_ids, player_salaries))
+
+    # Pre-group by position
+    position_ids = {'QB': [], 'RB': [], 'WR': [], 'TE': [], 'D': []}
+    for pid, pos in zip(player_ids, player_positions):
+        if pos in position_ids:
+            position_ids[pos].append(pid)
+
+    # Store player data for solution extraction
+    player_data = {pid: df[df['id'] == pid].iloc[0].to_dict() for pid in player_ids}
+
+    result = {
+        'player_ids': player_ids,
+        'id_to_projection': id_to_projection,
+        'id_to_salary': id_to_salary,
+        'position_ids': position_ids,
+        'player_data': player_data,
+        'df': df
+    }
+
+    # Cache (keep only last 3 to avoid memory bloat)
+    if len(_player_cache) > 3:
+        _player_cache.clear()
+    _player_cache[cache_key] = result
+
+    return result
 
 
 def create_lineup_milp(
@@ -31,21 +98,20 @@ def create_lineup_milp(
     Returns:
         Dict with lineup info, or None if infeasible
     """
-    # Normalize column names (handle both 'id' and 'name', 'fdSalary' and 'salary')
-    if 'id' not in players_df.columns and 'name' in players_df.columns:
-        players_df['id'] = players_df['name']
-    if 'fdSalary' not in players_df.columns and 'salary' in players_df.columns:
-        players_df['fdSalary'] = players_df['salary']
+    # Get pre-computed player data
+    data = _prepare_player_data(players_df)
+
+    player_ids = data['player_ids']
+    id_to_projection = data['id_to_projection']
+    id_to_salary = data['id_to_salary']
+    position_ids = data['position_ids']
+    player_data = data['player_data']
 
     # Filter out excluded players
     if exclude_players:
-        players_df = players_df[~players_df['id'].isin(exclude_players)].copy()
+        player_ids = [pid for pid in player_ids if pid not in exclude_players]
 
-    # Drop players with missing data
-    required_cols = ['id', 'name', 'position', 'fdSalary', 'projection']
-    players_df = players_df.dropna(subset=required_cols)
-
-    if len(players_df) == 0:
+    if len(player_ids) == 0:
         warnings.warn("No valid players after filtering")
         return None
 
@@ -53,121 +119,102 @@ def create_lineup_milp(
     prob = pulp.LpProblem("DFS_Lineup_Optimization", pulp.LpMaximize)
 
     # Decision variables: binary (0 or 1) for each player
-    player_vars = {}
-    for _, player in players_df.iterrows():
-        player_id = player['id']
-        player_vars[player_id] = pulp.LpVariable(
-            f"player_{player_id}",
-            cat=pulp.LpBinary
-        )
+    player_vars = pulp.LpVariable.dicts("player", player_ids, cat=pulp.LpBinary)
 
     # Objective: Maximize total projected points
     prob += pulp.lpSum([
-        player_vars[player['id']] * player['projection']
-        for _, player in players_df.iterrows()
+        player_vars[pid] * id_to_projection[pid]
+        for pid in player_ids
     ]), "Total_Projection"
 
     # Constraint 1: Salary cap
     prob += pulp.lpSum([
-        player_vars[player['id']] * player['fdSalary']
-        for _, player in players_df.iterrows()
+        player_vars[pid] * id_to_salary[pid]
+        for pid in player_ids
     ]) <= salary_cap, "Salary_Cap"
 
     # Constraint 2: Exactly 9 players
-    prob += pulp.lpSum([
-        player_vars[player_id] for player_id in player_vars
-    ]) == 9, "Total_Players"
+    prob += pulp.lpSum([player_vars[pid] for pid in player_ids]) == 9, "Total_Players"
 
-    # Constraint 3: Position requirements
-    # FanDuel positions: QB(1), RB(2), WR(3), TE(1), FLEX(1 - RB/WR/TE), DEF(1)
+    # Constraint 3: Position requirements (using pre-grouped positions)
+    # Filter position lists by available players
+    available_set = set(player_ids)
 
-    # Helper function to filter players by position
-    def get_position_vars(pos: str) -> List:
-        return [
-            player_vars[player['id']]
-            for _, player in players_df.iterrows()
-            if player['position'] == pos
-        ]
+    qb_ids = [pid for pid in position_ids['QB'] if pid in available_set]
+    rb_ids = [pid for pid in position_ids['RB'] if pid in available_set]
+    wr_ids = [pid for pid in position_ids['WR'] if pid in available_set]
+    te_ids = [pid for pid in position_ids['TE'] if pid in available_set]
+    def_ids = [pid for pid in position_ids['D'] if pid in available_set]
 
     # QB: exactly 1
-    qb_vars = get_position_vars('QB')
-    if qb_vars:
-        prob += pulp.lpSum(qb_vars) == 1, "QB_Count"
+    if qb_ids:
+        prob += pulp.lpSum([player_vars[pid] for pid in qb_ids]) == 1, "QB_Count"
     else:
         warnings.warn("No QBs available")
         return None
 
     # RB: at least 2 (can be 3 with FLEX)
-    rb_vars = get_position_vars('RB')
-    if rb_vars:
-        prob += pulp.lpSum(rb_vars) >= 2, "RB_Min"
-        prob += pulp.lpSum(rb_vars) <= 3, "RB_Max"
+    if len(rb_ids) >= 2:
+        prob += pulp.lpSum([player_vars[pid] for pid in rb_ids]) >= 2, "RB_Min"
+        prob += pulp.lpSum([player_vars[pid] for pid in rb_ids]) <= 3, "RB_Max"
     else:
         warnings.warn("Not enough RBs available")
         return None
 
     # WR: at least 3 (can be 4 with FLEX)
-    wr_vars = get_position_vars('WR')
-    if wr_vars:
-        prob += pulp.lpSum(wr_vars) >= 3, "WR_Min"
-        prob += pulp.lpSum(wr_vars) <= 4, "WR_Max"
+    if len(wr_ids) >= 3:
+        prob += pulp.lpSum([player_vars[pid] for pid in wr_ids]) >= 3, "WR_Min"
+        prob += pulp.lpSum([player_vars[pid] for pid in wr_ids]) <= 4, "WR_Max"
     else:
         warnings.warn("Not enough WRs available")
         return None
 
     # TE: at least 1 (can be 2 with FLEX)
-    te_vars = get_position_vars('TE')
-    if te_vars:
-        prob += pulp.lpSum(te_vars) >= 1, "TE_Min"
-        prob += pulp.lpSum(te_vars) <= 2, "TE_Max"
+    if te_ids:
+        prob += pulp.lpSum([player_vars[pid] for pid in te_ids]) >= 1, "TE_Min"
+        prob += pulp.lpSum([player_vars[pid] for pid in te_ids]) <= 2, "TE_Max"
     else:
         warnings.warn("Not enough TEs available")
         return None
 
     # DEF: exactly 1
-    def_vars = get_position_vars('D')
-    if def_vars:
-        prob += pulp.lpSum(def_vars) == 1, "DEF_Count"
+    if def_ids:
+        prob += pulp.lpSum([player_vars[pid] for pid in def_ids]) == 1, "DEF_Count"
     else:
         warnings.warn("No DEFs available")
         return None
 
     # FLEX constraint: RB + WR + TE = 6 or 7 total
-    # (2-3 RB + 3-4 WR + 1-2 TE = 6-7)
-    flex_vars = rb_vars + wr_vars + te_vars
-    prob += pulp.lpSum(flex_vars) >= 6, "FLEX_Min"
-    prob += pulp.lpSum(flex_vars) <= 7, "FLEX_Max"
+    flex_ids = rb_ids + wr_ids + te_ids
+    prob += pulp.lpSum([player_vars[pid] for pid in flex_ids]) >= 6, "FLEX_Min"
+    prob += pulp.lpSum([player_vars[pid] for pid in flex_ids]) <= 7, "FLEX_Max"
 
     # Constraint 4: Diversity (max overlap with previous lineups)
     if max_overlap_with:
         for i, prev_lineup in enumerate(max_overlap_with):
-            overlap_vars = [
-                player_vars[player_id]
-                for player_id in prev_lineup
-                if player_id in player_vars
-            ]
-            if overlap_vars:
-                prob += pulp.lpSum(overlap_vars) <= max_overlap, f"Diversity_{i}"
+            overlap_ids = [pid for pid in prev_lineup if pid in available_set]
+            if overlap_ids:
+                prob += pulp.lpSum([player_vars[pid] for pid in overlap_ids]) <= max_overlap, f"Diversity_{i}"
 
-    # Solve
-    prob.solve(pulp.PULP_CBC_CMD(msg=0))  # Suppress solver output
+    # Solve with optimized settings
+    solver = pulp.PULP_CBC_CMD(msg=0, timeLimit=30, gapRel=0.001)
+    prob.solve(solver)
 
     # Check status
     if prob.status != pulp.LpStatusOptimal:
         warnings.warn(f"MILP solver failed with status: {pulp.LpStatus[prob.status]}")
         return None
 
-    # Extract solution
+    # Extract solution (using pre-computed player data)
     selected_players = []
     total_salary = 0
     total_projection = 0
 
-    for _, player in players_df.iterrows():
-        player_id = player['id']
-        if player_vars[player_id].varValue == 1:
-            selected_players.append(player.to_dict())
-            total_salary += player['fdSalary']
-            total_projection += player['projection']
+    for pid in player_ids:
+        if player_vars[pid].varValue == 1:
+            selected_players.append(player_data[pid])
+            total_salary += id_to_salary[pid]
+            total_projection += id_to_projection[pid]
 
     return {
         'players': selected_players,
@@ -175,6 +222,12 @@ def create_lineup_milp(
         'total_projection': total_projection,
         'player_ids': [p['id'] for p in selected_players]
     }
+
+
+def clear_player_cache():
+    """Clear the player data cache. Call when switching to a different player pool."""
+    global _player_cache
+    _player_cache.clear()
 
 
 def generate_diverse_lineups(
@@ -226,20 +279,27 @@ def generate_diverse_lineups(
 
 
 if __name__ == '__main__':
+    import time
+
     # Test MILP solver with dummy data
     print("Testing MILP solver...")
 
-    # Create dummy players
+    # Create realistic player pool (~150 players like real NFL slate)
+    np.random.seed(42)
     players = []
-    for i in range(50):
-        pos = np.random.choice(['QB', 'RB', 'WR', 'TE', 'D'], p=[0.1, 0.25, 0.35, 0.15, 0.15])
-        players.append({
-            'id': f'player_{i}',
-            'name': f'Player {i}',
-            'position': pos,
-            'fdSalary': np.random.randint(4000, 9000),
-            'projection': np.random.uniform(5, 25)
-        })
+
+    # More realistic position distribution
+    position_counts = {'QB': 32, 'RB': 50, 'WR': 60, 'TE': 25, 'D': 32}
+
+    for pos, count in position_counts.items():
+        for i in range(count):
+            players.append({
+                'id': f'{pos}_{i}',
+                'name': f'{pos} Player {i}',
+                'position': pos,
+                'fdSalary': np.random.randint(4500, 9500),
+                'projection': np.random.uniform(5, 25)
+            })
 
     players_df = pd.DataFrame(players)
 
@@ -250,22 +310,34 @@ if __name__ == '__main__':
     print(f"  TEs: {len(players_df[players_df['position'] == 'TE'])}")
     print(f"  DEFs: {len(players_df[players_df['position'] == 'D'])}")
 
-    # Generate single lineup
-    print("\nGenerating optimal lineup...")
+    # Benchmark: Generate single lineup
+    print("\n--- Single Lineup Generation ---")
+    start = time.time()
     lineup = create_lineup_milp(players_df)
+    elapsed = time.time() - start
+    print(f"Time: {elapsed*1000:.1f}ms")
 
     if lineup:
-        print(f"\nLineup generated:")
-        print(f"  Total projection: {lineup['total_projection']:.2f}")
-        print(f"  Total salary: ${lineup['total_salary']:,}")
-        print(f"  Players: {len(lineup['players'])}")
-        for p in lineup['players']:
-            print(f"    {p['position']:3} {p['name']:15} ${p['fdSalary']:5,} → {p['projection']:.2f} pts")
+        print(f"Projection: {lineup['total_projection']:.2f}, Salary: ${lineup['total_salary']:,}")
 
-    # Generate 5 diverse lineups
-    print("\n\nGenerating 5 diverse lineups...")
-    lineups = generate_diverse_lineups(players_df, n_lineups=5, max_overlap=6)
+    # Benchmark: Generate 50 diverse lineups
+    print("\n--- Generating 50 Diverse Lineups ---")
+    clear_player_cache()  # Clear cache to measure cold start
+    start = time.time()
+    lineups = generate_diverse_lineups(players_df, n_lineups=50, max_overlap=6, verbose=False)
+    elapsed = time.time() - start
 
-    print(f"\nGenerated {len(lineups)} lineups")
-    for i, lineup in enumerate(lineups):
-        print(f"  Lineup {i+1}: {lineup['total_projection']:.2f} pts, ${lineup['total_salary']:,}")
+    print(f"Generated {len(lineups)} lineups in {elapsed:.2f}s")
+    print(f"Average: {elapsed/len(lineups)*1000:.1f}ms per lineup")
+
+    # Benchmark: Generate 200 lineups (typical production run)
+    print("\n--- Generating 200 Diverse Lineups ---")
+    clear_player_cache()
+    start = time.time()
+    lineups = generate_diverse_lineups(players_df, n_lineups=200, max_overlap=7, verbose=False)
+    elapsed = time.time() - start
+
+    print(f"Generated {len(lineups)} lineups in {elapsed:.2f}s")
+    print(f"Average: {elapsed/len(lineups)*1000:.1f}ms per lineup")
+
+    print("\nMILP solver test complete!")

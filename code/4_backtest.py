@@ -27,6 +27,8 @@ from pathlib import Path
 import argparse
 from typing import Dict, List, Tuple
 from datetime import datetime
+import matplotlib.pyplot as plt
+from scipy import stats
 
 
 # ============================================================================
@@ -168,7 +170,10 @@ def load_actual_results(week_path: Path) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """
     Load actual results from CSV files (preferred) or JSON (fallback).
 
-    If JSON exists but CSVs don't, converts JSON to CSV first.
+    Supported formats (checked in order):
+    1. intermediate/4_actual_players.csv + 4_actual_games.csv (preferred)
+    2. inputs/fanduel_results.csv (simple manual format: name,actual_points)
+    3. inputs/fanduel_results.json (FanDuel API response)
 
     Returns:
         (players_df, games_df): DataFrames with actual fantasy points and game scores
@@ -178,25 +183,52 @@ def load_actual_results(week_path: Path) -> Tuple[pd.DataFrame, pd.DataFrame]:
 
     players_csv = intermediate_dir / '4_actual_players.csv'
     games_csv = intermediate_dir / '4_actual_games.csv'
+    simple_csv = inputs_dir / 'fanduel_results.csv'  # Simple manual format
     json_path = inputs_dir / 'fanduel_results.json'
 
-    # Check if CSVs exist
+    # Option 1: Check if processed CSVs exist
     if players_csv.exists() and games_csv.exists():
         print(f"Loading actual results from CSV files...")
         players_df = pd.read_csv(players_csv)
         games_df = pd.read_csv(games_csv)
         print(f"  Loaded {len(players_df)} players, {len(games_df)} games")
+
+    # Option 2: Simple manual CSV (name,actual_points)
+    elif simple_csv.exists():
+        print(f"Loading actual results from simple CSV: {simple_csv}")
+        players_df = pd.read_csv(simple_csv)
+
+        # Ensure required columns exist
+        if 'name' not in players_df.columns:
+            raise ValueError(f"Simple CSV must have 'name' column. Found: {list(players_df.columns)}")
+        if 'actual_points' not in players_df.columns:
+            # Check for common alternatives
+            for alt in ['points', 'fpts', 'fp', 'actual', 'score']:
+                if alt in players_df.columns:
+                    players_df['actual_points'] = players_df[alt]
+                    break
+            else:
+                raise ValueError(f"Simple CSV must have 'actual_points' column (or 'points'/'fpts'). Found: {list(players_df.columns)}")
+
+        print(f"  Loaded {len(players_df)} players from simple CSV")
+
+        # Create empty games_df since we don't have game-level data
+        games_df = pd.DataFrame(columns=['game_id', 'away_team', 'home_team', 'away_score', 'home_score', 'total_points', 'point_differential'])
+        print(f"  Note: No game-level data available from simple CSV format")
+
+    # Option 3: FanDuel JSON (convert to CSV)
     elif json_path.exists():
-        # Convert JSON to CSV
         intermediate_dir.mkdir(parents=True, exist_ok=True)
         players_csv, games_csv = convert_fanduel_json_to_csv(json_path, intermediate_dir)
         players_df = pd.read_csv(players_csv)
         games_df = pd.read_csv(games_csv)
+
     else:
         raise FileNotFoundError(
-            f"No actual results found. Expected either:\n"
-            f"  - {players_csv} and {games_csv}\n"
-            f"  - {json_path}"
+            f"No actual results found. Expected one of:\n"
+            f"  - {players_csv} and {games_csv} (processed format)\n"
+            f"  - {simple_csv} (simple format: name,actual_points)\n"
+            f"  - {json_path} (FanDuel API response)"
         )
 
     # Normalize player names for matching
@@ -574,7 +606,7 @@ def generate_summary_report(
     return summary
 
 
-def print_summary(summary: Dict):
+def print_summary(summary: Dict, week_path: Path = None):
     """Print summary statistics to console."""
     print("\n" + "=" * 80)
     print("BACKTEST SUMMARY")
@@ -629,6 +661,193 @@ def print_summary(summary: Dict):
             print(f"    - {name}")
         if summary['missing_players']['count'] > 10:
             print(f"    ... and {summary['missing_players']['count'] - 10} more")
+
+        # Show hint about where to add missing player data
+        if week_path:
+            actual_players_file = week_path / 'intermediate' / '4_actual_players.csv'
+            print(f"\n   💡 To fix: Add missing players to {actual_players_file}")
+            print(f"      Format: name,position,team,salary,actual_points")
+
+
+def plot_backtest_results(lineups_df: pd.DataFrame, output_dir: Path) -> str:
+    """
+    Create a multi-panel plot showing projected vs actual lineup performance.
+
+    Panels:
+    1. Combined scatter: All projections (Mean, Median, P10, P90) vs Actual (large, top)
+    2. Histogram: Projection Error distribution (bottom left)
+    3. Range plot: Actual vs P10-P90 range calibration (bottom right)
+
+    Args:
+        lineups_df: DataFrame with projected and actual scores
+        output_dir: Directory to save the plot
+
+    Returns:
+        Path to saved plot file
+    """
+    # Check required columns exist
+    required_cols = ['mean', 'median', 'actual_with_consensus']
+    if not all(col in lineups_df.columns for col in required_cols):
+        print("Warning: Missing required columns for backtest plot")
+        return None
+
+    has_percentiles = 'p10' in lineups_df.columns and 'p90' in lineups_df.columns
+
+    # Create figure with GridSpec for custom layout
+    # Top panel (scatter) takes up ~60% of height, bottom row takes 40%
+    fig = plt.figure(figsize=(14, 12))
+    gs = fig.add_gridspec(2, 2, height_ratios=[1.5, 1], hspace=0.25, wspace=0.25)
+
+    # Style settings
+    try:
+        plt.style.use('seaborn-v0_8-darkgrid')
+    except OSError:
+        try:
+            plt.style.use('seaborn-darkgrid')
+        except OSError:
+            pass
+
+    colors = {
+        'mean': '#3498db',      # Blue
+        'median': '#2ecc71',    # Green
+        'p10': '#e74c3c',       # Red
+        'p90': '#9b59b6',       # Purple
+        'neutral': '#7f8c8d',
+        'error': '#e74c3c'
+    }
+
+    y_actual = lineups_df['actual_with_consensus']
+
+    # =========================================================================
+    # Panel 1: Combined Scatter - All Projections vs Actual (spans both top columns)
+    # =========================================================================
+    ax1 = fig.add_subplot(gs[0, :])  # Top row, spanning both columns
+
+    # Collect all x values to determine axis limits
+    all_x_values = list(lineups_df['mean']) + list(lineups_df['median'])
+    if has_percentiles:
+        all_x_values += list(lineups_df['p10']) + list(lineups_df['p90'])
+
+    # Calculate axis limits with small padding (5%) - independent for x and y
+    x_min, x_max = min(all_x_values), max(all_x_values)
+    y_min, y_max = y_actual.min(), y_actual.max()
+    x_padding = (x_max - x_min) * 0.05
+    y_padding = (y_max - y_min) * 0.05
+
+    # Plot each projection type with larger markers for visibility
+    ax1.scatter(lineups_df['mean'], y_actual, alpha=0.5, c=colors['mean'],
+                s=40, label='Mean', marker='o')
+    ax1.scatter(lineups_df['median'], y_actual, alpha=0.5, c=colors['median'],
+                s=40, label='Median', marker='s')
+
+    if has_percentiles:
+        ax1.scatter(lineups_df['p10'], y_actual, alpha=0.4, c=colors['p10'],
+                    s=30, label='P10', marker='v')
+        ax1.scatter(lineups_df['p90'], y_actual, alpha=0.4, c=colors['p90'],
+                    s=30, label='P90', marker='^')
+
+    # Add perfect prediction line (y=x) - draw across the overlapping range
+    line_min = max(x_min - x_padding, y_min - y_padding)
+    line_max = min(x_max + x_padding, y_max + y_padding)
+    ax1.plot([line_min, line_max], [line_min, line_max], '--', color=colors['neutral'],
+             alpha=0.7, linewidth=2, label='Perfect (y=x)')
+
+    # Calculate correlations
+    r_mean = stats.pearsonr(lineups_df['mean'], y_actual)[0]
+    r_median = stats.pearsonr(lineups_df['median'], y_actual)[0]
+
+    corr_text = f'r(mean)={r_mean:.3f}, r(median)={r_median:.3f}'
+    if has_percentiles:
+        r_p10 = stats.pearsonr(lineups_df['p10'], y_actual)[0]
+        r_p90 = stats.pearsonr(lineups_df['p90'], y_actual)[0]
+        corr_text += f', r(p10)={r_p10:.3f}, r(p90)={r_p90:.3f}'
+
+    ax1.set_xlim(x_min - x_padding, x_max + x_padding)
+    ax1.set_ylim(y_min - y_padding, y_max + y_padding)
+    ax1.set_xlabel('Projected Score', fontsize=11)
+    ax1.set_ylabel('Actual Score', fontsize=11)
+    ax1.set_title(f'All Projections vs Actual\n({corr_text})', fontweight='bold', fontsize=12)
+    ax1.legend(loc='upper left', fontsize=10)
+    # No set_aspect('equal') - allow plot to stretch to full width
+
+    # =========================================================================
+    # Panel 2: Error Distribution (bottom left)
+    # =========================================================================
+    ax3 = fig.add_subplot(gs[1, 0])
+
+    errors = lineups_df['actual_with_consensus'] - lineups_df['mean']
+    mean_error = errors.mean()
+    std_error = errors.std()
+
+    ax3.hist(errors, bins=30, color=colors['mean'], alpha=0.7, edgecolor='white')
+    ax3.axvline(x=0, color=colors['neutral'], linestyle='--', linewidth=2, label='Zero error')
+    ax3.axvline(x=mean_error, color=colors['error'], linestyle='-', linewidth=2,
+                label=f'Mean error: {mean_error:+.1f}')
+
+    ax3.set_xlabel('Prediction Error (Actual - Projected Mean)')
+    ax3.set_ylabel('Count')
+    ax3.set_title(f'Prediction Error Distribution\n(μ = {mean_error:+.1f}, σ = {std_error:.1f})',
+                  fontweight='bold')
+    ax3.legend(loc='upper right', fontsize=9)
+
+    # =========================================================================
+    # Panel 3: Calibration - Actual vs P10-P90 Range (bottom right)
+    # =========================================================================
+    ax4 = fig.add_subplot(gs[1, 1])
+
+    if has_percentiles:
+        # Sort by projected median for better visualization
+        sorted_df = lineups_df.sort_values('median').reset_index(drop=True)
+        x_idx = range(len(sorted_df))
+
+        # Plot P10-P90 range as shaded area
+        ax4.fill_between(x_idx, sorted_df['p10'], sorted_df['p90'],
+                         alpha=0.3, color=colors['p90'], label='P10-P90 Range')
+
+        # Plot median line
+        ax4.plot(x_idx, sorted_df['median'], color=colors['p90'],
+                 linewidth=1.5, label='Projected Median')
+
+        # Plot actual points - color based on whether actual was in range
+        in_range = (sorted_df['actual_with_consensus'] >= sorted_df['p10']) & \
+                   (sorted_df['actual_with_consensus'] <= sorted_df['p90'])
+        above_p90 = sorted_df['actual_with_consensus'] > sorted_df['p90']
+        below_p10 = sorted_df['actual_with_consensus'] < sorted_df['p10']
+
+        ax4.scatter([i for i, ir in enumerate(in_range) if ir],
+                    sorted_df.loc[in_range, 'actual_with_consensus'],
+                    c=colors['median'], s=25, alpha=0.7, label='Within range')
+        ax4.scatter([i for i, ap in enumerate(above_p90) if ap],
+                    sorted_df.loc[above_p90, 'actual_with_consensus'],
+                    c=colors['p10'], s=25, alpha=0.7, marker='^', label='Above P90')
+        ax4.scatter([i for i, bp in enumerate(below_p10) if bp],
+                    sorted_df.loc[below_p10, 'actual_with_consensus'],
+                    c=colors['mean'], s=25, alpha=0.7, marker='v', label='Below P10')
+
+        in_range_pct = in_range.sum() / len(in_range) * 100
+
+        ax4.set_xlabel('Lineups (sorted by projected median)')
+        ax4.set_ylabel('Fantasy Points')
+        ax4.set_title(f'Range Calibration\n({in_range_pct:.1f}% in range, target: 80%)',
+                      fontweight='bold')
+        ax4.legend(loc='upper left', fontsize=8)
+    else:
+        ax4.text(0.5, 0.5, 'P10/P90 data not available',
+                 ha='center', va='center', transform=ax4.transAxes)
+        ax4.set_title('Range Calibration', fontweight='bold')
+
+    # Overall title
+    fig.suptitle('Backtest Results: Projected vs Actual Performance',
+                 fontsize=14, fontweight='bold', y=0.98)
+
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+
+    # Save plot
+    plot_path = output_dir / 'backtest_analysis.png'
+    plt.savefig(plot_path, dpi=150, bbox_inches='tight', facecolor='white', edgecolor='none')
+    plt.close(fig)
+
+    return str(plot_path)
 
 
 # ============================================================================
@@ -915,7 +1134,27 @@ Examples:
         with open(summary_path, 'w') as f:
             json.dump(summary, f, indent=2)
 
-    print_summary(summary)
+    print_summary(summary, week_path=week_path)
+
+    # Generate backtest visualization
+    try:
+        plot_path = plot_backtest_results(lineups_df, output_dir)
+        if plot_path:
+            print(f"\nBacktest analysis plot saved to: {plot_path}")
+
+            # Add correlation info to summary interpretation
+            if 'projections' in summary and summary['projections'].get('correlation_mean', 0) > 0:
+                corr = summary['projections']['correlation_mean']
+                if corr > 0.7:
+                    print(f"   Strong positive correlation (r={corr:.3f}) - projections are predictive!")
+                elif corr > 0.4:
+                    print(f"   Moderate positive correlation (r={corr:.3f}) - projections have signal")
+                elif corr > 0:
+                    print(f"   Weak positive correlation (r={corr:.3f}) - some predictive value")
+                else:
+                    print(f"   No positive correlation (r={corr:.3f}) - projections need improvement")
+    except Exception as e:
+        print(f"\nWarning: Could not generate backtest plot: {e}")
 
     print("\n" + "=" * 80)
     print("BACKTEST COMPLETE")

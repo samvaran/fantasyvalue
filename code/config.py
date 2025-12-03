@@ -26,11 +26,11 @@ GAME_SCRIPTS = 'data/intermediate/game_script.csv'
 DEFAULT_CANDIDATES = 200          # Number of lineups to generate
 
 # Phase 2 & 3: Monte Carlo Simulations
-DEFAULT_SIMS = 5000               # Simulations per lineup (production)
+DEFAULT_SIMS = 3000               # Simulations per lineup (production)
 
 # Phase 3: Genetic Algorithm
 DEFAULT_MAX_GENERATIONS = 50       # Max generations for genetic algorithm
-DEFAULT_CONVERGENCE_PATIENCE = 5   # Stop if no improvement for N generations
+DEFAULT_CONVERGENCE_PATIENCE = 50   # Stop if no improvement for N generations
 DEFAULT_CONVERGENCE_THRESHOLD = 0.003  # 1% improvement threshold
 
 # Fitness function
@@ -91,7 +91,7 @@ MAX_DEF = 1
 # Diversity constraints
 MAX_OVERLAP_CHALK = 7              # Max shared players for chalk lineups (1-20)
 MAX_OVERLAP_MODERATE = 6           # Max shared players for moderate lineups (21-100)
-MAX_OVERLAP_CONTRARIAN = 6         # Max shared players for contrarian lineups (101-1000)
+MAX_OVERLAP_CONTRARIAN = 4         # Max shared players for contrarian lineups (101-1000)
 
 # Temperature-based sampling
 # Higher temperature = more randomness

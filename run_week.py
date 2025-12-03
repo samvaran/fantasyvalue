@@ -266,8 +266,9 @@ Examples:
     # ========================================================================
 
     actual_players_csv = intermediate_dir / '4_actual_players.csv'
+    results_csv = inputs_dir / 'fanduel_results.csv'  # Simple manual format
     results_json = inputs_dir / 'fanduel_results.json'
-    has_actual_results = actual_players_csv.exists() or results_json.exists()
+    has_actual_results = actual_players_csv.exists() or results_csv.exists() or results_json.exists()
     outputs_dir = week_dir / 'outputs'
 
     # ========================================================================
@@ -277,7 +278,10 @@ Examples:
     if args.backtest_only:
         if not has_actual_results:
             print(f"\n❌ Cannot run backtest: no actual results found")
-            print(f"   Expected: {actual_players_csv} or {results_json}")
+            print(f"   Expected one of:")
+            print(f"     - {actual_players_csv}")
+            print(f"     - {results_csv} (simple: name,actual_points)")
+            print(f"     - {results_json}")
             sys.exit(1)
 
         # Find run directory
@@ -484,7 +488,15 @@ Examples:
         run_step('code/4_backtest.py', backtest_args, 'Backtest', optional=True)
     else:
         print(f"\n⏭️  Skipping Step 4 (no actual results available)")
-        print(f"\n📋 To run backtest after games complete:")
+        print(f"\n📋 To run backtest after games complete, use ONE of these methods:")
+        print(f"\n   Option A: Simple CSV (easiest for manual entry)")
+        print(f"   1. Create: {results_csv}")
+        print(f"   2. Format: name,actual_points")
+        print(f"   3. Example rows:")
+        print(f"      Josh Allen,25.5")
+        print(f"      Derrick Henry,18.2")
+        print(f"   4. Run: python run_week.py --week {week} --backtest-only")
+        print(f"\n   Option B: FanDuel JSON (full data)")
         print(f"   1. Go to https://www.fanduel.com/live")
         print(f"   2. Open Chrome DevTools (F12) → Network tab")
         print(f"   3. Filter by 'graphql'")
@@ -492,7 +504,7 @@ Examples:
         print(f"   5. Find the latest 'graphql' request in the Network tab")
         print(f"   6. Right-click → Copy → Copy Response")
         print(f"   7. Save response to: {results_json}")
-        print(f"   8. Run: python code/4_backtest.py --week-dir {week_dir} --run-dir {latest_run.name}")
+        print(f"   8. Run: python run_week.py --week {week} --backtest-only")
 
     # ========================================================================
     # COMPLETION

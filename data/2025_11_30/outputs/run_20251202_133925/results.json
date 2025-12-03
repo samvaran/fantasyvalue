@@ -1,0 +1,18 @@
+{
+  "run_name": "run_20251202_133925",
+  "state": {
+    "phase_1_complete": true,
+    "phase_2_complete": false,
+    "iterations": [],
+    "best_fitness_history": [],
+    "convergence_count": 0,
+    "total_time": 0,
+    "phase_1_time": 946.492063999176,
+    "n_candidates": 600
+  },
+  "summary": {
+    "total_iterations": 0,
+    "best_fitness": 0,
+    "total_time_minutes": 0.0
+  }
+}

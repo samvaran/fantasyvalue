@@ -18,6 +18,8 @@ import json
 import time
 import sys
 from typing import List, Dict, Optional, Set
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 
 from utils.genetic_operators import (
     tournament_select_without_replacement,
@@ -26,9 +28,215 @@ from utils.genetic_operators import (
     FITNESS_FUNCTIONS,
     calculate_lineup_salary,
     get_lineup_key,
-    get_player_ids
+    get_player_ids,
+    calculate_hamming_distance
 )
 from utils.monte_carlo import evaluate_lineups_parallel
+
+
+def calculate_population_diversity(population: List[Dict], fitness_func) -> Dict[str, float]:
+    """
+    Calculate diversity metrics for a population.
+
+    Returns:
+        Dict with:
+        - fitness_std: Standard deviation of fitness scores
+        - fitness_range: Max - min fitness
+        - avg_hamming: Average pairwise Hamming distance (player differences)
+        - unique_players: Number of unique players across all lineups
+        - unique_lineups: Number of completely unique lineups
+    """
+    if not population:
+        return {'fitness_std': 0, 'fitness_range': 0, 'avg_hamming': 0,
+                'unique_players': 0, 'unique_lineups': 0}
+
+    # Fitness diversity
+    fitnesses = [fitness_func(lineup) for lineup in population]
+    fitness_std = float(np.std(fitnesses))
+    fitness_range = float(max(fitnesses) - min(fitnesses))
+
+    # Player diversity - unique players across population
+    all_players = set()
+    lineup_keys = set()
+    for lineup in population:
+        player_ids = get_player_ids(lineup)
+        all_players.update(player_ids)
+        lineup_keys.add(get_lineup_key(lineup))
+
+    unique_players = len(all_players)
+    unique_lineups = len(lineup_keys)
+
+    # Average Hamming distance (sample if population is large)
+    n = len(population)
+    if n <= 20:
+        # Full pairwise comparison for small populations
+        hamming_sum = 0
+        count = 0
+        for i in range(n):
+            for j in range(i + 1, n):
+                hamming_sum += calculate_hamming_distance(population[i], population[j])
+                count += 1
+        avg_hamming = hamming_sum / count if count > 0 else 0
+    else:
+        # Sample for larger populations
+        import random
+        sample_size = 100
+        hamming_sum = 0
+        for _ in range(sample_size):
+            i, j = random.sample(range(n), 2)
+            hamming_sum += calculate_hamming_distance(population[i], population[j])
+        avg_hamming = hamming_sum / sample_size
+
+    return {
+        'fitness_std': round(fitness_std, 2),
+        'fitness_range': round(fitness_range, 2),
+        'avg_hamming': round(avg_hamming, 2),
+        'unique_players': unique_players,
+        'unique_lineups': unique_lineups
+    }
+
+
+def plot_training_metrics(
+    best_fitness_history: List[float],
+    diversity_history: List[Dict[str, float]],
+    output_path: str,
+    final_squeeze_generation: Optional[int] = None
+) -> str:
+    """
+    Create a multi-panel plot of training metrics over generations.
+
+    Args:
+        best_fitness_history: List of best fitness values per generation
+        diversity_history: List of diversity metric dicts per generation
+        output_path: Directory to save the plot
+        final_squeeze_generation: Generation where final squeeze occurred (if any)
+
+    Returns:
+        Path to saved plot file
+    """
+    generations = list(range(len(best_fitness_history)))
+
+    # Extract diversity metrics
+    fitness_std = [d['fitness_std'] for d in diversity_history]
+    fitness_range = [d['fitness_range'] for d in diversity_history]
+    avg_hamming = [d['avg_hamming'] for d in diversity_history]
+    unique_players = [d['unique_players'] for d in diversity_history]
+    unique_lineups = [d['unique_lineups'] for d in diversity_history]
+
+    # Create figure with subplots
+    fig = plt.figure(figsize=(14, 10))
+    gs = gridspec.GridSpec(3, 2, figure=fig, hspace=0.3, wspace=0.25)
+
+    # Style settings - try seaborn styles, fall back gracefully
+    try:
+        plt.style.use('seaborn-v0_8-darkgrid')
+    except OSError:
+        try:
+            plt.style.use('seaborn-darkgrid')
+        except OSError:
+            pass  # Use default style
+
+    colors = {
+        'fitness': '#2ecc71',
+        'hamming': '#3498db',
+        'unique_players': '#9b59b6',
+        'unique_lineups': '#e74c3c',
+        'fitness_std': '#f39c12',
+        'fitness_range': '#1abc9c'
+    }
+
+    # Helper to add final squeeze marker
+    def add_squeeze_marker(ax, gen):
+        if gen is not None:
+            ax.axvline(x=gen, color='red', linestyle='--', alpha=0.7, linewidth=1.5)
+            ax.text(gen + 0.2, ax.get_ylim()[1] * 0.95, 'Final\nSqueeze',
+                   fontsize=8, color='red', alpha=0.8, va='top')
+
+    # 1. Best Fitness (top left)
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax1.plot(generations, best_fitness_history, color=colors['fitness'],
+             linewidth=2, marker='o', markersize=4, label='Best Fitness')
+    ax1.set_xlabel('Generation')
+    ax1.set_ylabel('Best Fitness')
+    ax1.set_title('Best Fitness Over Generations', fontweight='bold')
+    ax1.legend(loc='lower right')
+    add_squeeze_marker(ax1, final_squeeze_generation)
+
+    # 2. Avg Hamming Distance (top right)
+    ax2 = fig.add_subplot(gs[0, 1])
+    ax2.plot(generations, avg_hamming, color=colors['hamming'],
+             linewidth=2, marker='s', markersize=4, label='Avg Hamming Distance')
+    ax2.set_xlabel('Generation')
+    ax2.set_ylabel('Avg Hamming Distance')
+    ax2.set_title('Population Diversity (Hamming)', fontweight='bold')
+    ax2.legend(loc='upper right')
+    add_squeeze_marker(ax2, final_squeeze_generation)
+
+    # 3. Unique Players (middle left)
+    ax3 = fig.add_subplot(gs[1, 0])
+    ax3.plot(generations, unique_players, color=colors['unique_players'],
+             linewidth=2, marker='^', markersize=4, label='Unique Players')
+    ax3.set_xlabel('Generation')
+    ax3.set_ylabel('Count')
+    ax3.set_title('Unique Players in Population', fontweight='bold')
+    ax3.legend(loc='upper right')
+    add_squeeze_marker(ax3, final_squeeze_generation)
+
+    # 4. Unique Lineups (middle right)
+    ax4 = fig.add_subplot(gs[1, 1])
+    ax4.plot(generations, unique_lineups, color=colors['unique_lineups'],
+             linewidth=2, marker='d', markersize=4, label='Unique Lineups')
+    ax4.set_xlabel('Generation')
+    ax4.set_ylabel('Count')
+    ax4.set_title('Unique Lineups in Population', fontweight='bold')
+    ax4.legend(loc='upper right')
+    add_squeeze_marker(ax4, final_squeeze_generation)
+
+    # 5. Fitness Spread - σ and Range (bottom left)
+    ax5 = fig.add_subplot(gs[2, 0])
+    ax5.plot(generations, fitness_std, color=colors['fitness_std'],
+             linewidth=2, marker='o', markersize=4, label='Fitness σ')
+    ax5.plot(generations, fitness_range, color=colors['fitness_range'],
+             linewidth=2, marker='s', markersize=4, label='Fitness Range', alpha=0.7)
+    ax5.set_xlabel('Generation')
+    ax5.set_ylabel('Value')
+    ax5.set_title('Fitness Distribution Spread', fontweight='bold')
+    ax5.legend(loc='upper right')
+    add_squeeze_marker(ax5, final_squeeze_generation)
+
+    # 6. Combined normalized metrics (bottom right)
+    ax6 = fig.add_subplot(gs[2, 1])
+
+    # Normalize each metric to [0, 1] for comparison
+    def normalize(data):
+        min_val, max_val = min(data), max(data)
+        if max_val == min_val:
+            return [0.5] * len(data)
+        return [(x - min_val) / (max_val - min_val) for x in data]
+
+    ax6.plot(generations, normalize(best_fitness_history), color=colors['fitness'],
+             linewidth=2, label='Fitness', alpha=0.8)
+    ax6.plot(generations, normalize(avg_hamming), color=colors['hamming'],
+             linewidth=2, label='Hamming', alpha=0.8)
+    ax6.plot(generations, normalize(unique_players), color=colors['unique_players'],
+             linewidth=2, label='Unique Players', alpha=0.8)
+    ax6.set_xlabel('Generation')
+    ax6.set_ylabel('Normalized Value (0-1)')
+    ax6.set_title('Combined Metrics (Normalized)', fontweight='bold')
+    ax6.legend(loc='best', fontsize=8)
+    add_squeeze_marker(ax6, final_squeeze_generation)
+
+    # Overall title
+    fig.suptitle('Genetic Algorithm Training Metrics', fontsize=14, fontweight='bold', y=0.98)
+
+    # Save plot
+    output_dir = Path(output_path).parent
+    plot_path = output_dir / 'training_metrics.png'
+    plt.savefig(plot_path, dpi=150, bbox_inches='tight', facecolor='white', edgecolor='none')
+    plt.close(fig)
+
+    return str(plot_path)
+
 
 # Import config values (add parent dir to path temporarily)
 _parent_dir = str(Path(__file__).parent.parent)
@@ -193,10 +401,32 @@ def optimize_genetic(
 
     best_archive_fitness = elite_archive[0]['fitness'] if elite_archive else 0
     best_fitness_history = [best_archive_fitness]
+    diversity_history = []  # Track population diversity over generations
+    archive_diversity_history = []  # Track elite archive diversity
+    final_squeeze_done = False  # Track if we've done the final high-sim generation
+    final_squeeze_generation = None  # Track which generation the squeeze happened
+
+    # Calculate initial diversity for BOTH population and archive
+    initial_pop_diversity = calculate_population_diversity(population, fitness_func)
+    initial_archive_diversity = calculate_population_diversity(elite_archive, fitness_func)
+    diversity_history.append(initial_pop_diversity)
+    archive_diversity_history.append(initial_archive_diversity)
 
     if verbose:
-        print(f"\nInitial elite archive: {len(elite_archive)} lineups")
-        print(f"  Best fitness: {best_archive_fitness:.2f}")
+        print(f"\n{'='*60}")
+        print(f"INITIAL STATE (Generation 0)")
+        print(f"{'='*60}")
+        print(f"\nStarting Population ({len(population)} lineups):")
+        print(f"  Unique lineups:      {initial_pop_diversity['unique_lineups']}/{len(population)}")
+        print(f"  Unique players:      {initial_pop_diversity['unique_players']}")
+        print(f"  Avg Hamming dist:    {initial_pop_diversity['avg_hamming']:.1f}")
+        print(f"  Fitness range:       {initial_pop_diversity['fitness_range']:.1f} (σ={initial_pop_diversity['fitness_std']:.1f})")
+
+        print(f"\nElite Archive ({len(elite_archive)} lineups):")
+        print(f"  Best fitness:        {best_archive_fitness:.2f}")
+        print(f"  Unique players:      {initial_archive_diversity['unique_players']}")
+        print(f"  Avg Hamming dist:    {initial_archive_diversity['avg_hamming']:.1f}")
+
         print(f"\nStarting evolution...")
 
     # Evolution loop
@@ -358,22 +588,55 @@ def optimize_genetic(
 
         best_fitness_history.append(best_archive_fitness)
 
+        # Calculate and track diversity for BOTH population and archive
+        gen_pop_diversity = calculate_population_diversity(population, fitness_func)
+        gen_archive_diversity = calculate_population_diversity(elite_archive, fitness_func)
+        diversity_history.append(gen_pop_diversity)
+        archive_diversity_history.append(gen_archive_diversity)
+
         gen_time = time.time() - gen_start_time
 
         if verbose:
             print(f"\nElite Archive:")
             print(f"  Size: {len(elite_archive)}/{elite_archive_size}")
             print(f"  Best fitness: {best_archive_fitness:.2f} {'(NEW BEST!)' if improvement else ''}")
+
+            # Show population diversity trend
+            prev_diversity = diversity_history[-2] if len(diversity_history) > 1 else gen_pop_diversity
+            hamming_delta = gen_pop_diversity['avg_hamming'] - prev_diversity['avg_hamming']
+            players_delta = gen_pop_diversity['unique_players'] - prev_diversity['unique_players']
+            print(f"\nPopulation Diversity:")
+            print(f"  Unique lineups: {gen_pop_diversity['unique_lineups']}/{len(population)}")
+            print(f"  Unique players: {gen_pop_diversity['unique_players']} ({players_delta:+d})")
+            print(f"  Avg Hamming distance: {gen_pop_diversity['avg_hamming']:.1f} ({hamming_delta:+.1f})")
+            print(f"  Fitness range: {gen_pop_diversity['fitness_range']:.1f} (σ={gen_pop_diversity['fitness_std']:.1f})")
+
             print(f"\nGeneration time: {gen_time:.1f} seconds")
 
         # =================================================================
-        # 7. CHECK CONVERGENCE
+        # 7. CHECK CONVERGENCE (with final squeeze)
         # =================================================================
         if len(best_fitness_history) > convergence_patience:
             recent = best_fitness_history[-convergence_patience:]
-            if all(recent[i] == recent[0] for i in range(len(recent))):
+            no_improvement = all(recent[i] == recent[0] for i in range(len(recent)))
+
+            if no_improvement and not final_squeeze_done:
+                # About to converge - do one final generation with 2x simulations
+                final_squeeze_done = True
+                final_squeeze_generation = generation + 1  # Next generation will be the squeeze
+                n_sims = n_sims * 2  # Double simulation count for remaining generations
+
                 if verbose:
-                    print(f"\nConverged! No improvement in last {convergence_patience} generations.")
+                    print(f"\n{'='*60}")
+                    print(f"FINAL SQUEEZE: No improvement in {convergence_patience} generations")
+                    print(f"Doubling simulations to {n_sims} for final push...")
+                    print(f"{'='*60}")
+                # Continue to next generation with more sims
+                continue
+            elif no_improvement and final_squeeze_done:
+                # Already did final squeeze, now truly converged
+                if verbose:
+                    print(f"\nConverged! No improvement after final squeeze.")
                 break
 
     # =================================================================
@@ -386,6 +649,47 @@ def optimize_genetic(
         print(f"\nTotal generations: {generation + 1}")
         print(f"Elite archive size: {len(elite_archive)}")
         print(f"Best fitness: {best_archive_fitness:.2f}")
+        if final_squeeze_done:
+            print(f"Final squeeze: Yes (doubled sims on last generation)")
+
+        # Diversity summary - Population
+        if len(diversity_history) >= 2:
+            first_div = diversity_history[0]
+            last_div = diversity_history[-1]
+            print(f"\nPopulation diversity evolution:")
+            print(f"  Unique players: {first_div['unique_players']} → {last_div['unique_players']} "
+                  f"({last_div['unique_players'] - first_div['unique_players']:+d})")
+            print(f"  Avg Hamming:    {first_div['avg_hamming']:.1f} → {last_div['avg_hamming']:.1f} "
+                  f"({last_div['avg_hamming'] - first_div['avg_hamming']:+.1f})")
+            print(f"  Fitness σ:      {first_div['fitness_std']:.1f} → {last_div['fitness_std']:.1f} "
+                  f"({last_div['fitness_std'] - first_div['fitness_std']:+.1f})")
+
+        # Diversity summary - Elite Archive
+        if len(archive_diversity_history) >= 2:
+            first_arch = archive_diversity_history[0]
+            last_arch = archive_diversity_history[-1]
+            print(f"\nElite archive diversity evolution:")
+            print(f"  Unique players: {first_arch['unique_players']} → {last_arch['unique_players']} "
+                  f"({last_arch['unique_players'] - first_arch['unique_players']:+d})")
+            print(f"  Avg Hamming:    {first_arch['avg_hamming']:.1f} → {last_arch['avg_hamming']:.1f} "
+                  f"({last_arch['avg_hamming'] - first_arch['avg_hamming']:+.1f})")
+
+    # Generate training metrics plot
+    if len(best_fitness_history) > 1 and len(diversity_history) > 1:
+        try:
+            plot_path = plot_training_metrics(
+                best_fitness_history=best_fitness_history,
+                diversity_history=diversity_history,
+                output_path=output_path,
+                final_squeeze_generation=final_squeeze_generation
+            )
+            if verbose:
+                print(f"\nTraining metrics plot saved to: {plot_path}")
+        except Exception as e:
+            if verbose:
+                import traceback
+                print(f"\nWarning: Could not generate training plot: {e}")
+                traceback.print_exc()
 
     # Convert elite archive to DataFrame
     elite_df = pd.DataFrame(elite_archive)

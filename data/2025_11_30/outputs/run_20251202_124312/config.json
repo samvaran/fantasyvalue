@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-12-02T12:43:12.098201",
+  "week": "2025_11_30",
+  "candidates": 200,
+  "simulations": 3000,
+  "fitness": "tournament",
+  "max_generations": 50,
+  "convergence_patience": 5,
+  "convergence_threshold": 0.003,
+  "processes": "auto",
+  "data_sources": {
+    "players": "data/2025_11_30/intermediate/1_players.csv",
+    "game_scripts": "data/2025_11_30/intermediate/2_game_scripts.csv"
+  }
+}
