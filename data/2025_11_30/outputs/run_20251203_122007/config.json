@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-12-03T12:20:07.459768",
+  "n_lineups": 5,
+  "n_scenarios": 1000,
+  "alpha": 0.2,
+  "time_limit": 60,
+  "seed": 42,
+  "salary_cap": 60000,
+  "force_include": [],
+  "exclude_players": [],
+  "data_sources": {
+    "players": "../data/2025_11_30/intermediate/1_players.csv",
+    "game_scripts": "../data/2025_11_30/intermediate/2_game_scripts.csv"
+  }
+}

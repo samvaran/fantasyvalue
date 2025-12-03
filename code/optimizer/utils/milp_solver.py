@@ -197,7 +197,7 @@ def create_lineup_milp(
                 prob += pulp.lpSum([player_vars[pid] for pid in overlap_ids]) <= max_overlap, f"Diversity_{i}"
 
     # Solve with optimized settings
-    solver = pulp.PULP_CBC_CMD(msg=0, timeLimit=30, gapRel=0.001)
+    solver = pulp.PULP_CBC_CMD(msg=0, timeLimit=30, gapRel=0.02)
     prob.solve(solver)
 
     # Check status
