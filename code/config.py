@@ -39,7 +39,17 @@ DEFAULT_SOLVER_TIME_LIMIT = 60
 
 # If True, skip anchored strategies and generate all lineups as "general"
 # (no forced players, just exclude previous lineups for diversity)
-GENERAL_ONLY = True
+GENERAL_ONLY = False
+
+# Parallel QB-anchored mode settings
+# If True, use parallel QB-anchored approach instead of sequential strategies
+PARALLEL_QB_ANCHOR = True
+
+# Number of top QBs to anchor on
+N_TOP_QBS = 12
+
+# Number of lineups to generate per QB anchor
+N_LINEUPS_PER_ANCHOR = 5
 
 # ============================================================================
 # PLAYER CONSTRAINTS

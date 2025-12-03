@@ -36,14 +36,59 @@ from config import (
     SALARY_CAP, FORCE_INCLUDE, EXCLUDE_PLAYERS,
     DEFAULT_N_LINEUPS, DEFAULT_N_SCENARIOS, DEFAULT_CVAR_ALPHA,
     DEFAULT_SOLVER_TIME_LIMIT, PLAYERS_INTEGRATED, GAME_SCRIPTS, OUTPUTS_DIR,
-    GENERAL_ONLY
+    GENERAL_ONLY, PARALLEL_QB_ANCHOR, N_TOP_QBS, N_LINEUPS_PER_ANCHOR
 )
+from concurrent.futures import ProcessPoolExecutor, as_completed
+import multiprocessing
 
 # Add optimizer to path
 sys.path.insert(0, str(Path(__file__).parent / 'optimizer'))
 
 from optimizer.scenario_generator import generate_scenario_matrix
 from optimizer.cvar_optimizer import optimize_lineup_cvar
+
+
+def _generate_lineups_for_qb(args):
+    """
+    Worker function for parallel QB-anchored lineup generation.
+    Must be at module level for multiprocessing.
+
+    Args:
+        args: Tuple of (qb_id, qb_name, n_lineups, players_df, scenario_matrix,
+              player_index, alpha, time_limit)
+
+    Returns:
+        List of lineup dicts for this QB
+    """
+    (qb_id, qb_name, n_lineups, players_df, scenario_matrix,
+     player_index, alpha, time_limit) = args
+
+    lineups = []
+    excluded_lineups = []  # Only track exclusions within this QB's lineups
+
+    for i in range(n_lineups):
+        lineup = optimize_lineup_cvar(
+            players_df=players_df,
+            scenario_matrix=scenario_matrix,
+            player_index=player_index,
+            alpha=alpha,
+            salary_cap=SALARY_CAP,
+            force_include=[qb_id] + list(FORCE_INCLUDE),
+            exclude_players=list(EXCLUDE_PLAYERS),
+            exclude_lineups=excluded_lineups,
+            time_limit=time_limit,
+            verbose=False
+        )
+
+        if lineup:
+            lineup['strategy'] = 'qb_anchor'
+            lineup['anchor_player'] = qb_name
+            lineups.append(lineup)
+            excluded_lineups.append(lineup['player_ids'])
+        else:
+            break  # Can't generate more unique lineups for this QB
+
+    return lineups
 
 
 class CVaROptimizer:
@@ -170,6 +215,86 @@ class CVaROptimizer:
             print(f"  Generated {len(lineups)} {strategy_name} lineups")
 
         return lineups
+
+    def generate_qb_anchored_parallel(
+        self,
+        n_top_qbs: int,
+        n_lineups_per_qb: int,
+        alpha: float,
+        time_limit: int,
+        verbose: bool = True,
+        max_workers: int = None
+    ) -> list:
+        """
+        Generate lineups anchored on top QBs in parallel.
+
+        Each QB gets n_lineups_per_qb lineups with uniqueness constraints
+        only within that QB's group (not across all lineups).
+
+        Args:
+            n_top_qbs: Number of top QBs to anchor on
+            n_lineups_per_qb: Number of lineups per QB
+            alpha: CVaR tail probability
+            time_limit: Solver time limit per lineup
+            verbose: Print progress
+            max_workers: Number of parallel workers (default: CPU count)
+
+        Returns:
+            List of all generated lineups
+        """
+        # Get top QBs by projection
+        qb_players = self.players_df[self.players_df['position'] == 'QB'].copy()
+        top_qbs = qb_players.nlargest(n_top_qbs, 'fpProjPts')
+
+        if verbose:
+            print(f"\n--- PARALLEL QB-ANCHORED ({len(top_qbs)} QBs x {n_lineups_per_qb} lineups) ---")
+            print(f"  Top QBs: {', '.join(top_qbs['name'].tolist())}")
+
+        # Prepare args for each QB
+        qb_args = []
+        for _, qb in top_qbs.iterrows():
+            qb_args.append((
+                str(qb['id']),
+                qb['name'],
+                n_lineups_per_qb,
+                self.players_df,
+                self.scenario_matrix,
+                self.player_index,
+                alpha,
+                time_limit
+            ))
+
+        # Run in parallel
+        if max_workers is None:
+            max_workers = min(len(qb_args), multiprocessing.cpu_count())
+
+        all_lineups = []
+
+        if verbose:
+            print(f"  Using {max_workers} parallel workers...")
+
+        with ProcessPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all tasks
+            futures = {executor.submit(_generate_lineups_for_qb, args): args[1] for args in qb_args}
+
+            # Collect results with progress bar
+            with tqdm(total=len(futures), desc="QBs", disable=not verbose) as pbar:
+                for future in as_completed(futures):
+                    qb_name = futures[future]
+                    try:
+                        lineups = future.result()
+                        all_lineups.extend(lineups)
+                        if verbose:
+                            pbar.set_postfix({'last': qb_name, 'lineups': len(lineups)})
+                    except Exception as e:
+                        if verbose:
+                            tqdm.write(f"  Error for {qb_name}: {e}")
+                    pbar.update(1)
+
+        if verbose:
+            print(f"  Generated {len(all_lineups)} total lineups from {len(top_qbs)} QBs")
+
+        return all_lineups
 
     def generate_general_lineups(
         self,
@@ -352,7 +477,20 @@ class CVaROptimizer:
 
         all_lineups = []
 
-        if GENERAL_ONLY:
+        if PARALLEL_QB_ANCHOR:
+            # Use parallel QB-anchored approach
+            print(f"\nStrategy: PARALLEL QB-ANCHORED mode")
+            print(f"  Top {N_TOP_QBS} QBs x {N_LINEUPS_PER_ANCHOR} lineups = {N_TOP_QBS * N_LINEUPS_PER_ANCHOR} target lineups")
+
+            all_lineups = self.generate_qb_anchored_parallel(
+                n_top_qbs=N_TOP_QBS,
+                n_lineups_per_qb=N_LINEUPS_PER_ANCHOR,
+                alpha=alpha,
+                time_limit=time_limit,
+                verbose=verbose
+            )
+
+        elif GENERAL_ONLY:
             # Skip anchored strategies, generate all as general (no exclusions for speed)
             print(f"\nStrategy: GENERAL_ONLY mode (no anchored lineups, no exclusion constraints)")
             print(f"  Target: {n_lineups} lineups")
@@ -445,8 +583,8 @@ class CVaROptimizer:
                 )
                 all_lineups.extend(general_lineups)
 
-        # Trim to exact count
-        if len(all_lineups) > n_lineups:
+        # Trim to exact count (only for non-parallel modes)
+        if not PARALLEL_QB_ANCHOR and len(all_lineups) > n_lineups:
             all_lineups = all_lineups[:n_lineups]
 
         # Step 4: Format and save results
@@ -461,6 +599,10 @@ class CVaROptimizer:
 
         # Format as DataFrame
         lineups_df = self.format_lineups_by_position(all_lineups)
+
+        # Round numerical columns to 2 decimal places
+        numeric_cols = lineups_df.select_dtypes(include=['float64', 'float32']).columns
+        lineups_df[numeric_cols] = lineups_df[numeric_cols].round(2)
 
         # Save lineups
         lineups_file = self.run_dir / '3_lineups.csv'

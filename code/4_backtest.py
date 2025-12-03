@@ -1111,6 +1111,26 @@ Examples:
                 print(f"   2. Fill in actual_points for the 0.0 entries")
                 print(f"   3. Re-run backtest")
 
+    # Reorder columns for better readability
+    # Position columns first, then scores, then distribution stats, then metadata
+    preferred_order = [
+        'QB', 'RB1', 'RB2', 'WR1', 'WR2', 'WR3', 'TE', 'FLEX', 'DEF',
+        'cvar_score', 'actual_only', 'actual_with_consensus',
+        'mean', 'median', 'std', 'p10', 'p80', 'p90',
+        'lineup_id', 'player_ids', 'total_salary', 'strategy', 'anchor_player',
+        'players_actual', 'players_consensus', 'players_missing',
+        'error_vs_mean', 'error_vs_median', 'in_range', 'above_p90', 'below_p10'
+    ]
+    # Only include columns that exist in the dataframe
+    ordered_cols = [col for col in preferred_order if col in lineups_df.columns]
+    # Add any remaining columns not in the preferred order
+    remaining_cols = [col for col in lineups_df.columns if col not in ordered_cols]
+    lineups_df = lineups_df[ordered_cols + remaining_cols]
+
+    # Round numerical columns to 2 decimal places
+    numeric_cols = lineups_df.select_dtypes(include=['float64', 'float32']).columns
+    lineups_df[numeric_cols] = lineups_df[numeric_cols].round(2)
+
     # Save detailed results
     backtest_lineups_path = output_dir / '5_scored_lineups.csv'
     lineups_df.to_csv(backtest_lineups_path, index=False)

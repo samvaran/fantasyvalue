@@ -1,0 +1,52 @@
+{
+  "timestamp": "2025-12-03T13:58:00.468440",
+  "lineups": {
+    "total": 60,
+    "avg_actual_only": 112.96166666666666,
+    "avg_actual_with_consensus": 113.33166666666665,
+    "max_actual_with_consensus": 154.36,
+    "min_actual_with_consensus": 88.03999999999999,
+    "std_actual_with_consensus": 14.488895709130372
+  },
+  "player_matching": {
+    "avg_players_actual": 8.95,
+    "avg_players_consensus": 0.05,
+    "avg_players_missing": 0.0
+  },
+  "games": {
+    "total": 16,
+    "avg_total_points": 42.9375,
+    "script_distribution": {
+      "defensive": 8,
+      "shootout": 5,
+      "blowout_favorite": 3
+    }
+  },
+  "projections": {
+    "avg_projected_mean": 122.11087398377536,
+    "avg_error_vs_mean": -8.779207317108709,
+    "rmse_vs_mean": 16.55430728554322,
+    "correlation_mean": 0.23460824270238484
+  },
+  "calibration": {
+    "within_p10_p90_pct": 91.66666666666666,
+    "above_p90_pct": 0.0,
+    "below_p10_pct": 8.333333333333332
+  },
+  "top_lineup": {
+    "lineup_id": "2",
+    "actual_only": 154.36,
+    "actual_with_consensus": 154.36,
+    "projected_mean": 123.02195632740226,
+    "projected_median": 118.47767714760202,
+    "players_actual": 9,
+    "players_consensus": 0,
+    "players_missing": 0
+  },
+  "missing_players": {
+    "count": 1,
+    "players": [
+      "Cade Otton"
+    ]
+  }
+}
