@@ -1,0 +1,29 @@
+{
+  "run_name": "run_20251203_132332",
+  "timestamp": "2025-12-03T13:29:11.903751",
+  "config": {
+    "timestamp": "2025-12-03T13:23:32.425187",
+    "n_lineups": 20,
+    "n_scenarios": 200,
+    "alpha": 0.2,
+    "time_limit": 60,
+    "seed": null,
+    "salary_cap": 60000,
+    "force_include": [],
+    "exclude_players": [],
+    "data_sources": {
+      "players": "data/2025_11_30/intermediate/1_players.csv",
+      "game_scripts": "data/2025_11_30/intermediate/2_game_scripts.csv"
+    }
+  },
+  "summary": {
+    "lineups_generated": 20,
+    "total_time_seconds": 339.478285074234,
+    "avg_time_per_lineup": 16.9739142537117,
+    "best_cvar_score": 167.7815204734777,
+    "avg_cvar_score": 162.95244274492717,
+    "strategy_breakdown": {
+      "general": 20
+    }
+  }
+}

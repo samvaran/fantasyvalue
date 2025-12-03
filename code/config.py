@@ -23,11 +23,11 @@ GAME_SCRIPTS = 'data/intermediate/game_script.csv'
 # ============================================================================
 
 # Number of lineups to generate
-DEFAULT_N_LINEUPS = 100
+DEFAULT_N_LINEUPS = 20
 
 # Number of scenarios for CVaR optimization
 # More scenarios = more precise optimization but slower
-DEFAULT_N_SCENARIOS = 1000
+DEFAULT_N_SCENARIOS = 200
 
 # CVaR alpha: tail probability to optimize
 # 0.20 = optimize for top 20% (p80)
@@ -36,6 +36,10 @@ DEFAULT_CVAR_ALPHA = 0.20
 
 # Solver time limit per lineup (seconds)
 DEFAULT_SOLVER_TIME_LIMIT = 60
+
+# If True, skip anchored strategies and generate all lineups as "general"
+# (no forced players, just exclude previous lineups for diversity)
+GENERAL_ONLY = True
 
 # ============================================================================
 # PLAYER CONSTRAINTS

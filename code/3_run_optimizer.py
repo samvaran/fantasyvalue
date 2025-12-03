@@ -35,7 +35,8 @@ from tqdm import tqdm
 from config import (
     SALARY_CAP, FORCE_INCLUDE, EXCLUDE_PLAYERS,
     DEFAULT_N_LINEUPS, DEFAULT_N_SCENARIOS, DEFAULT_CVAR_ALPHA,
-    DEFAULT_SOLVER_TIME_LIMIT, PLAYERS_INTEGRATED, GAME_SCRIPTS, OUTPUTS_DIR
+    DEFAULT_SOLVER_TIME_LIMIT, PLAYERS_INTEGRATED, GAME_SCRIPTS, OUTPUTS_DIR,
+    GENERAL_ONLY
 )
 
 # Add optimizer to path
@@ -176,17 +177,26 @@ class CVaROptimizer:
         alpha: float,
         time_limit: int,
         existing_lineups: list,
-        verbose: bool = True
+        verbose: bool = True,
+        skip_exclusions: bool = False
     ) -> list:
-        """Generate general lineups without anchoring."""
+        """Generate general lineups without anchoring.
+
+        Args:
+            skip_exclusions: If True, don't add exclusion constraints (faster but may get duplicates)
+        """
         lineups = []
 
         if verbose:
-            print(f"\n--- GENERAL LINEUPS ({n_lineups} target) ---")
+            mode = " (no exclusions)" if skip_exclusions else ""
+            print(f"\n--- GENERAL LINEUPS ({n_lineups} target){mode} ---")
 
         iterator = tqdm(range(n_lineups), desc="General", disable=not verbose)
 
         for _ in iterator:
+            # Skip exclusion constraints if requested (faster, dedupe later)
+            exclude_list = [] if skip_exclusions else [l['player_ids'] for l in existing_lineups + lineups]
+
             lineup = optimize_lineup_cvar(
                 players_df=self.players_df,
                 scenario_matrix=self.scenario_matrix,
@@ -195,7 +205,7 @@ class CVaROptimizer:
                 salary_cap=SALARY_CAP,
                 force_include=list(FORCE_INCLUDE),
                 exclude_players=list(EXCLUDE_PLAYERS),
-                exclude_lineups=[l['player_ids'] for l in existing_lineups + lineups],
+                exclude_lineups=exclude_list,
                 time_limit=time_limit,
                 verbose=False
             )
@@ -342,73 +352,98 @@ class CVaROptimizer:
 
         all_lineups = []
 
-        # Calculate strategy allocations (proportional to total)
-        # Target: ~25% QB, ~20% DEF, ~20% RB, ~20% WR, ~15% General
-        n_qb = max(1, int(n_lineups * 0.25))
-        n_def = max(1, int(n_lineups * 0.20))
-        n_rb = max(1, int(n_lineups * 0.20))
-        n_wr = max(1, int(n_lineups * 0.20))
-        n_general = max(0, n_lineups - n_qb - n_def - n_rb - n_wr)
+        if GENERAL_ONLY:
+            # Skip anchored strategies, generate all as general (no exclusions for speed)
+            print(f"\nStrategy: GENERAL_ONLY mode (no anchored lineups, no exclusion constraints)")
+            print(f"  Target: {n_lineups} lineups")
 
-        print(f"\nStrategy allocation:")
-        print(f"  QB-anchored: up to {n_qb}")
-        print(f"  DEF-anchored: up to {n_def}")
-        print(f"  RB-anchored: up to {n_rb}")
-        print(f"  WR-anchored: up to {n_wr}")
-        print(f"  General: up to {n_general}")
-
-        # Generate QB-anchored lineups
-        qb_lineups = self.generate_anchored_lineups(
-            position='QB', n_top=n_qb, strategy_name='qb_anchor',
-            alpha=alpha, time_limit=time_limit,
-            existing_lineups=all_lineups, verbose=verbose
-        )
-        all_lineups.extend(qb_lineups)
-
-        # Early stop check
-        if len(all_lineups) >= n_lineups:
-            all_lineups = all_lineups[:n_lineups]
-        else:
-            # Generate DEF-anchored lineups
-            def_lineups = self.generate_anchored_lineups(
-                position='D', n_top=n_def, strategy_name='def_anchor',
-                alpha=alpha, time_limit=time_limit,
-                existing_lineups=all_lineups, verbose=verbose
-            )
-            all_lineups.extend(def_lineups)
-
-        # Early stop check
-        if len(all_lineups) >= n_lineups:
-            all_lineups = all_lineups[:n_lineups]
-        else:
-            # Generate RB-anchored lineups
-            rb_lineups = self.generate_anchored_lineups(
-                position='RB', n_top=n_rb, strategy_name='rb_anchor',
-                alpha=alpha, time_limit=time_limit,
-                existing_lineups=all_lineups, verbose=verbose
-            )
-            all_lineups.extend(rb_lineups)
-
-        # Early stop check
-        if len(all_lineups) >= n_lineups:
-            all_lineups = all_lineups[:n_lineups]
-        else:
-            # Generate WR-anchored lineups
-            wr_lineups = self.generate_anchored_lineups(
-                position='WR', n_top=n_wr, strategy_name='wr_anchor',
-                alpha=alpha, time_limit=time_limit,
-                existing_lineups=all_lineups, verbose=verbose
-            )
-            all_lineups.extend(wr_lineups)
-
-        # Generate general lineups to fill remaining
-        remaining = n_lineups - len(all_lineups)
-        if remaining > 0:
             general_lineups = self.generate_general_lineups(
-                n_lineups=remaining, alpha=alpha, time_limit=time_limit,
+                n_lineups=n_lineups, alpha=alpha, time_limit=time_limit,
+                existing_lineups=all_lineups, verbose=verbose,
+                skip_exclusions=True  # Skip exclusions for speed, dedupe later
+            )
+
+            # Dedupe by player_ids (keep first occurrence, which has best CVaR due to same optimization)
+            seen_lineups = set()
+            unique_lineups = []
+            for lineup in general_lineups:
+                lineup_key = tuple(sorted(lineup['player_ids']))
+                if lineup_key not in seen_lineups:
+                    seen_lineups.add(lineup_key)
+                    unique_lineups.append(lineup)
+
+            if verbose and len(unique_lineups) < len(general_lineups):
+                print(f"  Deduped: {len(general_lineups)} -> {len(unique_lineups)} unique lineups")
+
+            all_lineups.extend(unique_lineups)
+        else:
+            # Calculate strategy allocations (proportional to total)
+            # Target: ~25% QB, ~20% DEF, ~20% RB, ~20% WR, ~15% General
+            n_qb = max(1, int(n_lineups * 0.25))
+            n_def = max(1, int(n_lineups * 0.20))
+            n_rb = max(1, int(n_lineups * 0.20))
+            n_wr = max(1, int(n_lineups * 0.20))
+            n_general = max(0, n_lineups - n_qb - n_def - n_rb - n_wr)
+
+            print(f"\nStrategy allocation:")
+            print(f"  QB-anchored: up to {n_qb}")
+            print(f"  DEF-anchored: up to {n_def}")
+            print(f"  RB-anchored: up to {n_rb}")
+            print(f"  WR-anchored: up to {n_wr}")
+            print(f"  General: up to {n_general}")
+
+            # Generate QB-anchored lineups
+            qb_lineups = self.generate_anchored_lineups(
+                position='QB', n_top=n_qb, strategy_name='qb_anchor',
+                alpha=alpha, time_limit=time_limit,
                 existing_lineups=all_lineups, verbose=verbose
             )
-            all_lineups.extend(general_lineups)
+            all_lineups.extend(qb_lineups)
+
+            # Early stop check
+            if len(all_lineups) >= n_lineups:
+                all_lineups = all_lineups[:n_lineups]
+            else:
+                # Generate DEF-anchored lineups
+                def_lineups = self.generate_anchored_lineups(
+                    position='D', n_top=n_def, strategy_name='def_anchor',
+                    alpha=alpha, time_limit=time_limit,
+                    existing_lineups=all_lineups, verbose=verbose
+                )
+                all_lineups.extend(def_lineups)
+
+            # Early stop check
+            if len(all_lineups) >= n_lineups:
+                all_lineups = all_lineups[:n_lineups]
+            else:
+                # Generate RB-anchored lineups
+                rb_lineups = self.generate_anchored_lineups(
+                    position='RB', n_top=n_rb, strategy_name='rb_anchor',
+                    alpha=alpha, time_limit=time_limit,
+                    existing_lineups=all_lineups, verbose=verbose
+                )
+                all_lineups.extend(rb_lineups)
+
+            # Early stop check
+            if len(all_lineups) >= n_lineups:
+                all_lineups = all_lineups[:n_lineups]
+            else:
+                # Generate WR-anchored lineups
+                wr_lineups = self.generate_anchored_lineups(
+                    position='WR', n_top=n_wr, strategy_name='wr_anchor',
+                    alpha=alpha, time_limit=time_limit,
+                    existing_lineups=all_lineups, verbose=verbose
+                )
+                all_lineups.extend(wr_lineups)
+
+            # Generate general lineups to fill remaining
+            remaining = n_lineups - len(all_lineups)
+            if remaining > 0:
+                general_lineups = self.generate_general_lineups(
+                    n_lineups=remaining, alpha=alpha, time_limit=time_limit,
+                    existing_lineups=all_lineups, verbose=verbose
+                )
+                all_lineups.extend(general_lineups)
 
         # Trim to exact count
         if len(all_lineups) > n_lineups:

@@ -50,8 +50,9 @@ def optimize_lineup_cvar(
     exclude_players: List[str] = None,
     exclude_lineups: List[List[str]] = None,
     time_limit: int = 60,
-    gap_tolerance: float = 0.02,
-    verbose: bool = False
+    gap_tolerance: float = 0.05,
+    verbose: bool = False,
+    warm_start_indices: List[int] = None
 ) -> Optional[Dict]:
     """
     Solve CVaR-MILP for optimal ceiling lineup.
@@ -68,6 +69,7 @@ def optimize_lineup_cvar(
         time_limit: Solver time limit in seconds
         gap_tolerance: MIP gap tolerance (0.005 = 0.5%)
         verbose: Print solver output
+        warm_start_indices: Player indices from previous solution for warm start
 
     Returns:
         Dict with lineup info or None if infeasible
@@ -124,6 +126,12 @@ def optimize_lineup_cvar(
     # Decision variables
     # x[i] = binary, 1 if player i selected
     x = pulp.LpVariable.dicts("x", valid_indices, cat=pulp.LpBinary)
+
+    # Apply warm start if provided
+    if warm_start_indices:
+        warm_start_set = set(warm_start_indices)
+        for i in valid_indices:
+            x[i].setInitialValue(1 if i in warm_start_set else 0)
 
     # t = continuous, threshold for CVaR (the VaR threshold at 1-alpha percentile)
     t = pulp.LpVariable("t", cat=pulp.LpContinuous)
@@ -207,7 +215,8 @@ def optimize_lineup_cvar(
     solver = pulp.HiGHS(
         msg=1 if verbose else 0,
         timeLimit=time_limit,
-        gapRel=gap_tolerance
+        gapRel=gap_tolerance,
+        warmStart=warm_start_indices is not None
     )
     prob.solve(solver)
 
@@ -238,10 +247,12 @@ def optimize_lineup_cvar(
     # Compute lineup statistics from scenario matrix
     lineup_scores = scenario_matrix[selected_indices].sum(axis=0)
 
-    # CVaR score from objective
-    cvar_score = pulp.value(prob.objective)
+    # Compute actual CVaR (average of top alpha% scenarios)
+    threshold = np.percentile(lineup_scores, (1 - alpha) * 100)
+    top_scores = lineup_scores[lineup_scores >= threshold]
+    cvar_actual = float(np.mean(top_scores)) if len(top_scores) > 0 else float(np.percentile(lineup_scores, 80))
 
-    # Additional statistics
+    # Statistics
     stats = {
         'mean': float(np.mean(lineup_scores)),
         'median': float(np.median(lineup_scores)),
@@ -249,13 +260,8 @@ def optimize_lineup_cvar(
         'p10': float(np.percentile(lineup_scores, 10)),
         'p80': float(np.percentile(lineup_scores, 80)),
         'p90': float(np.percentile(lineup_scores, 90)),
-        'cvar_score': float(cvar_score),
+        'cvar_score': cvar_actual,  # Average of top 20% scenarios
     }
-
-    # Compute actual CVaR for verification
-    threshold = np.percentile(lineup_scores, (1 - alpha) * 100)
-    top_scores = lineup_scores[lineup_scores >= threshold]
-    stats['cvar_actual'] = float(np.mean(top_scores)) if len(top_scores) > 0 else stats['p80']
 
     return {
         'players': selected_players,
@@ -300,6 +306,7 @@ def optimize_multiple_lineups(
 
     lineups = []
     excluded_lineups = []
+    last_indices = None  # For warm starting
 
     iterator = tqdm(range(n_lineups), desc="Generating lineups", disable=not verbose)
 
@@ -314,7 +321,8 @@ def optimize_multiple_lineups(
             exclude_players=exclude_players,
             exclude_lineups=excluded_lineups,
             time_limit=time_limit,
-            verbose=False
+            verbose=False,
+            warm_start_indices=last_indices
         )
 
         if lineup is None:
@@ -325,6 +333,7 @@ def optimize_multiple_lineups(
         lineup['lineup_id'] = i
         lineups.append(lineup)
         excluded_lineups.append(lineup['player_ids'])
+        last_indices = lineup['player_indices']  # Use for warm start
 
         if verbose and (i + 1) % 10 == 0:
             tqdm.write(f"  Generated {i + 1} lineups. Best CVaR: {max(l['cvar_score'] for l in lineups):.2f}")
