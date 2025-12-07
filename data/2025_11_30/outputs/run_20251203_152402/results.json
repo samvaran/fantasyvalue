@@ -1,0 +1,39 @@
+{
+  "run_name": "run_20251203_152402",
+  "timestamp": "2025-12-03T15:24:03.561583",
+  "config": {
+    "timestamp": "2025-12-03T15:24:02.267438",
+    "n_lineups": 20,
+    "n_scenarios": 200,
+    "alpha": 0.2,
+    "time_limit": 60,
+    "seed": null,
+    "salary_cap": 60000,
+    "force_include": [
+      "Matthew Stafford",
+      "Jonathan Taylor",
+      "Travis Etienne Jr.",
+      "Michael Wilson",
+      "Ladd McConkey",
+      "Chimere Dike",
+      "Darren Waller",
+      "Kenneth Walker III",
+      "New York Jets"
+    ],
+    "exclude_players": [],
+    "data_sources": {
+      "players": "data/2025_11_30/intermediate/1_players.csv",
+      "game_scripts": "data/2025_11_30/intermediate/2_game_scripts.csv"
+    }
+  },
+  "summary": {
+    "lineups_generated": 1,
+    "total_time_seconds": 1.2939448356628418,
+    "avg_time_per_lineup": 1.2939448356628418,
+    "best_cvar_score": 136.2,
+    "avg_cvar_score": 136.2,
+    "strategy_breakdown": {
+      "qb_anchor": 1
+    }
+  }
+}

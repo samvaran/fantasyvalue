@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-12-03T15:46:10.174154",
+  "lineups": {
+    "total": 60,
+    "avg_actual_only": 109.70000000000002,
+    "avg_actual_with_consensus": 110.60833333333335,
+    "max_actual_with_consensus": 144.22,
+    "min_actual_with_consensus": 83.28,
+    "std_actual_with_consensus": 15.325422455721334
+  },
+  "player_matching": {
+    "avg_players_actual": 8.833333333333334,
+    "avg_players_consensus": 0.16666666666666666,
+    "avg_players_missing": 0.0
+  },
+  "games": {
+    "total": 16,
+    "avg_total_points": 42.9375,
+    "script_distribution": {
+      "defensive": 8,
+      "shootout": 5,
+      "blowout_favorite": 3
+    }
+  },
+  "projections": {
+    "avg_projected_mean": 126.57249999999999,
+    "avg_error_vs_mean": -15.964166666666666,
+    "rmse_vs_mean": 21.799603092717078,
+    "correlation_mean": 0.22332226517213144
+  },
+  "calibration": {
+    "within_p10_p90_pct": 66.66666666666666,
+    "above_p90_pct": 0.0,
+    "below_p10_pct": 33.33333333333333
+  },
+  "top_lineup": {
+    "lineup_id": "54",
+    "actual_only": 144.22,
+    "actual_with_consensus": 144.22,
+    "projected_mean": 128.55,
+    "projected_median": 125.81,
+    "players_actual": 9,
+    "players_consensus": 0,
+    "players_missing": 0
+  },
+  "missing_players": {
+    "count": 4,
+    "players": [
+      "Tyler Lockett",
+      "Taysom Hill",
+      "Gabe Davis",
+      "Ricky Pearsall"
+    ]
+  }
+}
