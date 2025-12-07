@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-07T09:29:18.407653",
+  "timestamp": "2025-12-07T09:38:44.208187",
   "n_lineups": 20,
   "n_scenarios": 200,
   "alpha": 0.2,
@@ -7,7 +7,10 @@
   "seed": null,
   "salary_cap": 60000,
   "force_include": [
-    "Cleveland Browns"
+    "Cleveland Browns",
+    "James Cook III",
+    "Jacoby Brissett",
+    "Michael Wilson"
   ],
   "exclude_players": [],
   "data_sources": {

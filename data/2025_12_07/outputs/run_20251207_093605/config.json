@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-12-07T09:36:05.323308",
+  "n_lineups": 20,
+  "n_scenarios": 200,
+  "alpha": 0.2,
+  "time_limit": 60,
+  "seed": null,
+  "salary_cap": 60000,
+  "force_include": [
+    "Cleveland Browns",
+    "James Cook III"
+  ],
+  "exclude_players": [],
+  "data_sources": {
+    "players": "data/2025_12_07/intermediate/1_players.csv",
+    "game_scripts": "data/2025_12_07/intermediate/2_game_scripts.csv"
+  }
+}

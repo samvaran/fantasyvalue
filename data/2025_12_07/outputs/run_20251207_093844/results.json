@@ -1,0 +1,34 @@
+{
+  "run_name": "run_20251207_093844",
+  "timestamp": "2025-12-07T09:38:58.694319",
+  "config": {
+    "timestamp": "2025-12-07T09:38:44.208187",
+    "n_lineups": 20,
+    "n_scenarios": 200,
+    "alpha": 0.2,
+    "time_limit": 60,
+    "seed": null,
+    "salary_cap": 60000,
+    "force_include": [
+      "Cleveland Browns",
+      "James Cook III",
+      "Jacoby Brissett",
+      "Michael Wilson"
+    ],
+    "exclude_players": [],
+    "data_sources": {
+      "players": "data/2025_12_07/intermediate/1_players.csv",
+      "game_scripts": "data/2025_12_07/intermediate/2_game_scripts.csv"
+    }
+  },
+  "summary": {
+    "lineups_generated": 5,
+    "total_time_seconds": 14.485913038253784,
+    "avg_time_per_lineup": 2.8971826076507567,
+    "best_cvar_score": 143.74,
+    "avg_cvar_score": 143.262,
+    "strategy_breakdown": {
+      "qb_anchor": 5
+    }
+  }
+}

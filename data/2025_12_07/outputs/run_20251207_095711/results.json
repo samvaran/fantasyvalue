@@ -1,0 +1,31 @@
+{
+  "run_name": "run_20251207_095711",
+  "timestamp": "2025-12-07T09:57:41.801556",
+  "config": {
+    "timestamp": "2025-12-07T09:57:11.010861",
+    "n_lineups": 20,
+    "n_scenarios": 200,
+    "alpha": 0.2,
+    "time_limit": 60,
+    "seed": null,
+    "salary_cap": 60000,
+    "force_include": [
+      "Cleveland Browns"
+    ],
+    "exclude_players": [],
+    "data_sources": {
+      "players": "data/2025_12_07/intermediate/1_players.csv",
+      "game_scripts": "data/2025_12_07/intermediate/2_game_scripts.csv"
+    }
+  },
+  "summary": {
+    "lineups_generated": 60,
+    "total_time_seconds": 30.790360689163208,
+    "avg_time_per_lineup": 0.5131726781527202,
+    "best_cvar_score": 150.1,
+    "avg_cvar_score": 143.65500000000003,
+    "strategy_breakdown": {
+      "qb_anchor": 60
+    }
+  }
+}

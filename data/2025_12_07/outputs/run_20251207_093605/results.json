@@ -1,8 +1,8 @@
 {
-  "run_name": "run_20251207_092953",
-  "timestamp": "2025-12-07T09:30:24.981602",
+  "run_name": "run_20251207_093605",
+  "timestamp": "2025-12-07T09:36:29.790165",
   "config": {
-    "timestamp": "2025-12-07T09:29:53.870843",
+    "timestamp": "2025-12-07T09:36:05.323308",
     "n_lineups": 20,
     "n_scenarios": 200,
     "alpha": 0.2,
@@ -10,7 +10,8 @@
     "seed": null,
     "salary_cap": 60000,
     "force_include": [
-      "Cleveland BrownsJames Cook III"
+      "Cleveland Browns",
+      "James Cook III"
     ],
     "exclude_players": [],
     "data_sources": {
@@ -20,10 +21,10 @@
   },
   "summary": {
     "lineups_generated": 60,
-    "total_time_seconds": 31.110543966293335,
-    "avg_time_per_lineup": 0.5185090661048889,
-    "best_cvar_score": 159.17,
-    "avg_cvar_score": 150.1691666666667,
+    "total_time_seconds": 24.46647810935974,
+    "avg_time_per_lineup": 0.4077746351559957,
+    "best_cvar_score": 157.73,
+    "avg_cvar_score": 147.67716666666664,
     "strategy_breakdown": {
       "qb_anchor": 60
     }

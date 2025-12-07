@@ -58,8 +58,7 @@ N_LINEUPS_PER_ANCHOR = 5
 # Force-include players (always in lineup)
 # Use player IDs or exact names as they appear in data
 FORCE_INCLUDE = [
-    'Cleveland Browns'
-    'James Cook III'
+    'Cleveland Browns',
     # Example: '123456-789012',  # FanDuel player ID
     # Example: 'Patrick Mahomes',
 ]
