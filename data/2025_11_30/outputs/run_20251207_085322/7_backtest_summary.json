@@ -1,0 +1,52 @@
+{
+  "timestamp": "2025-12-07T08:54:08.849068",
+  "lineups": {
+    "total": 60,
+    "avg_actual_only": 118.16666666666667,
+    "avg_actual_with_consensus": 118.44666666666667,
+    "max_actual_with_consensus": 137.98,
+    "min_actual_with_consensus": 92.02,
+    "std_actual_with_consensus": 9.772751233233487
+  },
+  "player_matching": {
+    "avg_players_actual": 8.95,
+    "avg_players_consensus": 0.05,
+    "avg_players_missing": 0.0
+  },
+  "games": {
+    "total": 16,
+    "avg_total_points": 42.9375,
+    "script_distribution": {
+      "defensive": 8,
+      "shootout": 5,
+      "blowout_favorite": 3
+    }
+  },
+  "projections": {
+    "avg_projected_mean": 113.77133333333335,
+    "avg_error_vs_mean": 4.675333333333333,
+    "rmse_vs_mean": 11.180776508513768,
+    "correlation_mean": -0.025051693701805922
+  },
+  "calibration": {
+    "within_p10_p90_pct": 98.33333333333333,
+    "above_p90_pct": 0.0,
+    "below_p10_pct": 1.6666666666666667
+  },
+  "top_lineup": {
+    "lineup_id": "8",
+    "actual_only": 137.98,
+    "actual_with_consensus": 137.98,
+    "projected_mean": 117.52,
+    "projected_median": 114.26,
+    "players_actual": 9,
+    "players_consensus": 0,
+    "players_missing": 0
+  },
+  "missing_players": {
+    "count": 1,
+    "players": [
+      "Isaiah Hodgins"
+    ]
+  }
+}

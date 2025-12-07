@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-12-07T02:17:23.116150",
+  "lineups": {
+    "total": 60,
+    "avg_actual_only": 96.75666666666666,
+    "avg_actual_with_consensus": 100.06666666666666,
+    "max_actual_with_consensus": 142.08,
+    "min_actual_with_consensus": 76.64,
+    "std_actual_with_consensus": 11.464898037298445
+  },
+  "player_matching": {
+    "avg_players_actual": 8.616666666666667,
+    "avg_players_consensus": 0.38333333333333336,
+    "avg_players_missing": 0.0
+  },
+  "games": {
+    "total": 16,
+    "avg_total_points": 42.9375,
+    "script_distribution": {
+      "defensive": 8,
+      "shootout": 5,
+      "blowout_favorite": 3
+    }
+  },
+  "projections": {
+    "avg_projected_mean": 112.72650000000003,
+    "avg_error_vs_mean": -12.659833333333333,
+    "rmse_vs_mean": 17.221599180486503,
+    "correlation_mean": -0.040911148353865404
+  },
+  "calibration": {
+    "within_p10_p90_pct": 85.0,
+    "above_p90_pct": 0.0,
+    "below_p10_pct": 15.0
+  },
+  "top_lineup": {
+    "lineup_id": "47",
+    "actual_only": 131.68,
+    "actual_with_consensus": 142.08,
+    "projected_mean": 114.29,
+    "projected_median": 111.75,
+    "players_actual": 8,
+    "players_consensus": 1,
+    "players_missing": 0
+  },
+  "missing_players": {
+    "count": 4,
+    "players": [
+      "Michael Pittman Jr.",
+      "Van Jefferson",
+      "John Bates",
+      "Jonnu Smith"
+    ]
+  }
+}

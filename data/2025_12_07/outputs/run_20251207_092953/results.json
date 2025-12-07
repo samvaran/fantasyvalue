@@ -1,0 +1,31 @@
+{
+  "run_name": "run_20251207_092953",
+  "timestamp": "2025-12-07T09:30:24.981602",
+  "config": {
+    "timestamp": "2025-12-07T09:29:53.870843",
+    "n_lineups": 20,
+    "n_scenarios": 200,
+    "alpha": 0.2,
+    "time_limit": 60,
+    "seed": null,
+    "salary_cap": 60000,
+    "force_include": [
+      "Cleveland BrownsJames Cook III"
+    ],
+    "exclude_players": [],
+    "data_sources": {
+      "players": "data/2025_12_07/intermediate/1_players.csv",
+      "game_scripts": "data/2025_12_07/intermediate/2_game_scripts.csv"
+    }
+  },
+  "summary": {
+    "lineups_generated": 60,
+    "total_time_seconds": 31.110543966293335,
+    "avg_time_per_lineup": 0.5185090661048889,
+    "best_cvar_score": 159.17,
+    "avg_cvar_score": 150.1691666666667,
+    "strategy_breakdown": {
+      "qb_anchor": 60
+    }
+  }
+}

@@ -45,6 +45,7 @@ import multiprocessing
 sys.path.insert(0, str(Path(__file__).parent / 'optimizer'))
 
 from optimizer.scenario_generator import generate_scenario_matrix
+from optimizer.scenario_generator_v2 import generate_scenario_matrix_v2
 from optimizer.cvar_optimizer import optimize_lineup_cvar
 
 
@@ -146,17 +147,35 @@ class CVaROptimizer:
         pos_counts = self.players_df['position'].value_counts()
         print(f"  Positions: {dict(pos_counts)}")
 
-    def generate_scenarios(self, n_scenarios: int, seed: int = None):
-        """Generate scenario matrix for CVaR optimization."""
-        print(f"\nGenerating {n_scenarios} scenarios...")
+    def generate_scenarios(self, n_scenarios: int, seed: int = None, use_v2: bool = True):
+        """Generate scenario matrix for CVaR optimization.
+
+        Args:
+            n_scenarios: Number of scenarios to generate
+            seed: Random seed for reproducibility
+            use_v2: If True, use v2 generator with game-score-based sampling.
+                   If False, use v1 generator with categorical game scripts.
+        """
+        print(f"\nGenerating {n_scenarios} scenarios (v2={use_v2})...")
 
         start = time.time()
-        self.scenario_matrix, self.player_index = generate_scenario_matrix(
-            self.players_df,
-            self.game_scripts_df,
-            n_scenarios=n_scenarios,
-            seed=seed
-        )
+        if use_v2:
+            # V2: Game-score-based sampling with player adjustments
+            self.scenario_matrix, self.player_index = generate_scenario_matrix_v2(
+                self.players_df,
+                self.game_scripts_df,
+                n_scenarios=n_scenarios,
+                seed=seed,
+                use_game_adjustments=True
+            )
+        else:
+            # V1: Categorical game script sampling
+            self.scenario_matrix, self.player_index = generate_scenario_matrix(
+                self.players_df,
+                self.game_scripts_df,
+                n_scenarios=n_scenarios,
+                seed=seed
+            )
         elapsed = time.time() - start
 
         print(f"  Scenario matrix shape: {self.scenario_matrix.shape}")

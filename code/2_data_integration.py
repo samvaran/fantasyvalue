@@ -189,7 +189,18 @@ def load_espn_projections(inputs_dir: Path) -> pd.DataFrame:
         print(f"     Run: python 1_fetch_data.py --espn")
         return pd.DataFrame(columns=['name', 'espnLowScore', 'espnHighScore'])
 
-    df = pd.read_csv(csv_path)
+    # Check if file is empty or too small to be valid
+    if csv_path.stat().st_size < 10:
+        print(f"  ⚠️  ESPN projections file is empty (optional): {csv_path}")
+        print(f"     Run: python 1_fetch_data.py --espn")
+        return pd.DataFrame(columns=['name', 'espnLowScore', 'espnHighScore'])
+
+    try:
+        df = pd.read_csv(csv_path)
+    except Exception as e:
+        print(f"  ⚠️  ESPN projections failed to load (optional): {e}")
+        return pd.DataFrame(columns=['name', 'espnLowScore', 'espnHighScore'])
+
     print(f"  ✓ Loaded {len(df)} players from ESPN Watson projections")
 
     # Normalize names for matching

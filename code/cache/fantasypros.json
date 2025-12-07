@@ -1,0 +1,1844 @@
+{
+  "QB": [
+    {
+      "name": "josh allen",
+      "fpProjPts": 24.5
+    },
+    {
+      "name": "dak prescott",
+      "fpProjPts": 21.3
+    },
+    {
+      "name": "matthew stafford",
+      "fpProjPts": 20.4
+    },
+    {
+      "name": "jalen hurts",
+      "fpProjPts": 19.2
+    },
+    {
+      "name": "jared goff",
+      "fpProjPts": 18.9
+    },
+    {
+      "name": "joe burrow",
+      "fpProjPts": 18.6
+    },
+    {
+      "name": "patrick mahomes",
+      "fpProjPts": 18.3
+    },
+    {
+      "name": "lamar jackson",
+      "fpProjPts": 18.0
+    },
+    {
+      "name": "jayden daniels",
+      "fpProjPts": 17.7
+    },
+    {
+      "name": "bo nix",
+      "fpProjPts": 17.4
+    },
+    {
+      "name": "jordan love",
+      "fpProjPts": 17.2
+    },
+    {
+      "name": "baker mayfield",
+      "fpProjPts": 17.0
+    },
+    {
+      "name": "jacoby brissett",
+      "fpProjPts": 16.8
+    },
+    {
+      "name": "trevor lawrence",
+      "fpProjPts": 16.6
+    },
+    {
+      "name": "daniel jones",
+      "fpProjPts": 16.4
+    },
+    {
+      "name": "sam darnold",
+      "fpProjPts": 16.1
+    },
+    {
+      "name": "justin herbert",
+      "fpProjPts": 15.8
+    },
+    {
+      "name": "tyrod taylor",
+      "fpProjPts": 15.6
+    },
+    {
+      "name": "caleb williams",
+      "fpProjPts": 15.1
+    },
+    {
+      "name": "cj stroud",
+      "fpProjPts": 14.6
+    },
+    {
+      "name": "tyler shough",
+      "fpProjPts": 14.0
+    },
+    {
+      "name": "jj mccarthy",
+      "fpProjPts": 13.5
+    },
+    {
+      "name": "tua tagovailoa",
+      "fpProjPts": 13.0
+    },
+    {
+      "name": "aaron rodgers",
+      "fpProjPts": 12.6
+    },
+    {
+      "name": "kirk cousins",
+      "fpProjPts": 12.2
+    },
+    {
+      "name": "geno smith",
+      "fpProjPts": 11.9
+    },
+    {
+      "name": "shedeur sanders",
+      "fpProjPts": 11.4
+    },
+    {
+      "name": "cam ward",
+      "fpProjPts": 11.1
+    },
+    {
+      "name": "trey lance",
+      "fpProjPts": 0.7
+    },
+    {
+      "name": "marcus mariota",
+      "fpProjPts": 0.6
+    },
+    {
+      "name": "mason rudolph",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "max brosmer",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "teddy bridgewater",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "tyler huntley",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "joe flacco",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "davis mills",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "riley leonard",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "malik willis",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "tyson bagent",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "kenny pickett",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "aidan oconnell",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "mitchell trubisky",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "dillon gabriel",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "jimmy garoppolo",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "joe milton",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "jarrett stidham",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "nick mullens",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "zach wilson",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "spencer rattler",
+      "fpProjPts": 0.2
+    },
+    {
+      "name": "tanner mckee",
+      "fpProjPts": 0.2
+    },
+    {
+      "name": "brandon allen",
+      "fpProjPts": 0.2
+    },
+    {
+      "name": "brett rypien",
+      "fpProjPts": 0.1
+    },
+    {
+      "name": "sam howell",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "gardner minshew",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "drew lock",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "case keenum",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jake haener",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "trevor siemian",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "shane buechele",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jeff driskel",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "graham mertz",
+      "fpProjPts": 0.0
+    }
+  ],
+  "RB": [
+    {
+      "name": "jahmyr gibbs",
+      "fpProjPts": 19.5
+    },
+    {
+      "name": "devon achane",
+      "fpProjPts": 19.5
+    },
+    {
+      "name": "jonathan taylor",
+      "fpProjPts": 19.0
+    },
+    {
+      "name": "james cook",
+      "fpProjPts": 17.8
+    },
+    {
+      "name": "bijan robinson",
+      "fpProjPts": 17.5
+    },
+    {
+      "name": "josh jacobs",
+      "fpProjPts": 17.0
+    },
+    {
+      "name": "bucky irving",
+      "fpProjPts": 14.9
+    },
+    {
+      "name": "derrick henry",
+      "fpProjPts": 14.5
+    },
+    {
+      "name": "breece hall",
+      "fpProjPts": 14.1
+    },
+    {
+      "name": "chase brown",
+      "fpProjPts": 13.6
+    },
+    {
+      "name": "quinshon judkins",
+      "fpProjPts": 13.4
+    },
+    {
+      "name": "saquon barkley",
+      "fpProjPts": 13.4
+    },
+    {
+      "name": "kyren williams",
+      "fpProjPts": 13.2
+    },
+    {
+      "name": "javonte williams",
+      "fpProjPts": 13.0
+    },
+    {
+      "name": "rj harvey",
+      "fpProjPts": 12.7
+    },
+    {
+      "name": "ashton jeanty",
+      "fpProjPts": 12.4
+    },
+    {
+      "name": "kenneth walker",
+      "fpProjPts": 11.5
+    },
+    {
+      "name": "travis etienne",
+      "fpProjPts": 11.5
+    },
+    {
+      "name": "jaylen warren",
+      "fpProjPts": 11.4
+    },
+    {
+      "name": "dandre swift",
+      "fpProjPts": 10.4
+    },
+    {
+      "name": "aaron jones sr",
+      "fpProjPts": 10.1
+    },
+    {
+      "name": "woody marks",
+      "fpProjPts": 10.1
+    },
+    {
+      "name": "devin neal",
+      "fpProjPts": 9.4
+    },
+    {
+      "name": "omarion hampton",
+      "fpProjPts": 9.3
+    },
+    {
+      "name": "david montgomery",
+      "fpProjPts": 9.3
+    },
+    {
+      "name": "kyle monangai",
+      "fpProjPts": 8.7
+    },
+    {
+      "name": "zonovan knight",
+      "fpProjPts": 8.7
+    },
+    {
+      "name": "kareem hunt",
+      "fpProjPts": 8.7
+    },
+    {
+      "name": "chris rodriguez",
+      "fpProjPts": 8.6
+    },
+    {
+      "name": "zach charbonnet",
+      "fpProjPts": 8.2
+    },
+    {
+      "name": "kenneth gainwell",
+      "fpProjPts": 8.2
+    },
+    {
+      "name": "tony pollard",
+      "fpProjPts": 7.9
+    },
+    {
+      "name": "kimani vidal",
+      "fpProjPts": 7.7
+    },
+    {
+      "name": "jordan mason",
+      "fpProjPts": 7.5
+    },
+    {
+      "name": "blake corum",
+      "fpProjPts": 6.9
+    },
+    {
+      "name": "bhayshul tuten",
+      "fpProjPts": 6.9
+    },
+    {
+      "name": "michael carter",
+      "fpProjPts": 6.5
+    },
+    {
+      "name": "tyjae spears",
+      "fpProjPts": 6.3
+    },
+    {
+      "name": "samaje perine",
+      "fpProjPts": 6.1
+    },
+    {
+      "name": "tyler allgeier",
+      "fpProjPts": 6.1
+    },
+    {
+      "name": "isiah pacheco",
+      "fpProjPts": 5.6
+    },
+    {
+      "name": "rachaad white",
+      "fpProjPts": 5.5
+    },
+    {
+      "name": "emanuel wilson",
+      "fpProjPts": 5.3
+    },
+    {
+      "name": "keaton mitchell",
+      "fpProjPts": 4.7
+    },
+    {
+      "name": "jaleel mclaughlin",
+      "fpProjPts": 4.6
+    },
+    {
+      "name": "ty johnson",
+      "fpProjPts": 4.5
+    },
+    {
+      "name": "nick chubb",
+      "fpProjPts": 4.3
+    },
+    {
+      "name": "jeremy mcnichols",
+      "fpProjPts": 4.3
+    },
+    {
+      "name": "ollie gordon",
+      "fpProjPts": 4.2
+    },
+    {
+      "name": "jacory croskeymerritt",
+      "fpProjPts": 4.2
+    },
+    {
+      "name": "ray davis",
+      "fpProjPts": 3.4
+    },
+    {
+      "name": "malik davis",
+      "fpProjPts": 3.3
+    },
+    {
+      "name": "sean tucker",
+      "fpProjPts": 2.9
+    },
+    {
+      "name": "jerome ford",
+      "fpProjPts": 2.8
+    },
+    {
+      "name": "isaiah davis",
+      "fpProjPts": 2.5
+    },
+    {
+      "name": "brashard smith",
+      "fpProjPts": 2.5
+    },
+    {
+      "name": "evan hull",
+      "fpProjPts": 2.3
+    },
+    {
+      "name": "tyler badie",
+      "fpProjPts": 2.0
+    },
+    {
+      "name": "tank bigsby",
+      "fpProjPts": 1.9
+    },
+    {
+      "name": "raheem mostert",
+      "fpProjPts": 1.8
+    },
+    {
+      "name": "rasheen ali",
+      "fpProjPts": 1.8
+    },
+    {
+      "name": "chris brooks",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "dylan sampson",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "kaleb johnson",
+      "fpProjPts": 1.5
+    },
+    {
+      "name": "will shipley",
+      "fpProjPts": 1.4
+    },
+    {
+      "name": "lequint allen",
+      "fpProjPts": 1.4
+    },
+    {
+      "name": "zavier scott",
+      "fpProjPts": 1.3
+    },
+    {
+      "name": "jaylen wright",
+      "fpProjPts": 1.2
+    },
+    {
+      "name": "ameer abdullah",
+      "fpProjPts": 1.0
+    },
+    {
+      "name": "dare ogunbowale",
+      "fpProjPts": 1.0
+    },
+    {
+      "name": "dylan laube",
+      "fpProjPts": 1.0
+    },
+    {
+      "name": "jaret patterson",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "alec ingold",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "audric estime",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "hunter luepke",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "cj ham",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "adam prentice",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "tyler goodson",
+      "fpProjPts": 0.7
+    },
+    {
+      "name": "tahj brooks",
+      "fpProjPts": 0.6
+    },
+    {
+      "name": "julius chestnut",
+      "fpProjPts": 0.6
+    },
+    {
+      "name": "patrick ricard",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "kalel mullings",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "clyde edwardshelaire",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "myles gaskin",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "kene nwangwu",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "trey sermon",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "sione vaki",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "jakob johnson",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "corey kiner",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "chase edmonds",
+      "fpProjPts": 0.3
+    },
+    {
+      "name": "reggie gilliam",
+      "fpProjPts": 0.3
+    },
+    {
+      "name": "jacob saylors",
+      "fpProjPts": 0.3
+    },
+    {
+      "name": "british brooks",
+      "fpProjPts": 0.3
+    },
+    {
+      "name": "ty chandler",
+      "fpProjPts": 0.2
+    },
+    {
+      "name": "kendall milton",
+      "fpProjPts": 0.1
+    },
+    {
+      "name": "ronnie rivers",
+      "fpProjPts": 0.1
+    },
+    {
+      "name": "hassan haskins",
+      "fpProjPts": 0.1
+    },
+    {
+      "name": "owen wright",
+      "fpProjPts": 0.1
+    },
+    {
+      "name": "travis homer",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "trayveon williams",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "emari demercado",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "brittain brown",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "amar johnson",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "elijah mitchell",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jermar jefferson",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "aj dillon",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "dameon pierce",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "khalil herbert",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jarquez hunter",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "zamir white",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jacardia wright",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jeff wilson",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "carlos washington",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "gary brightwell",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "deuce vaughn",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jordan mims",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "carson steele",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jonathan ward",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "donovan edwards",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "frank gore",
+      "fpProjPts": 0.0
+    }
+  ],
+  "WR": [
+    {
+      "name": "jaxon smithnjigba",
+      "fpProjPts": 16.8
+    },
+    {
+      "name": "jamarr chase",
+      "fpProjPts": 16.0
+    },
+    {
+      "name": "ceedee lamb",
+      "fpProjPts": 15.9
+    },
+    {
+      "name": "puka nacua",
+      "fpProjPts": 15.3
+    },
+    {
+      "name": "rashee rice",
+      "fpProjPts": 14.9
+    },
+    {
+      "name": "george pickens",
+      "fpProjPts": 14.7
+    },
+    {
+      "name": "davante adams",
+      "fpProjPts": 14.2
+    },
+    {
+      "name": "nico collins",
+      "fpProjPts": 13.2
+    },
+    {
+      "name": "michael wilson",
+      "fpProjPts": 12.8
+    },
+    {
+      "name": "jameson williams",
+      "fpProjPts": 12.4
+    },
+    {
+      "name": "jaylen waddle",
+      "fpProjPts": 12.2
+    },
+    {
+      "name": "aj brown",
+      "fpProjPts": 12.1
+    },
+    {
+      "name": "amonra st brown",
+      "fpProjPts": 12.0
+    },
+    {
+      "name": "emeka egbuka",
+      "fpProjPts": 11.5
+    },
+    {
+      "name": "chris olave",
+      "fpProjPts": 11.5
+    },
+    {
+      "name": "justin jefferson",
+      "fpProjPts": 11.2
+    },
+    {
+      "name": "devonta smith",
+      "fpProjPts": 10.7
+    },
+    {
+      "name": "christian watson",
+      "fpProjPts": 10.6
+    },
+    {
+      "name": "tee higgins",
+      "fpProjPts": 10.6
+    },
+    {
+      "name": "zay flowers",
+      "fpProjPts": 10.4
+    },
+    {
+      "name": "ladd mcconkey",
+      "fpProjPts": 10.3
+    },
+    {
+      "name": "terry mclaurin",
+      "fpProjPts": 10.2
+    },
+    {
+      "name": "michael pittman",
+      "fpProjPts": 10.1
+    },
+    {
+      "name": "jakobi meyers",
+      "fpProjPts": 10.0
+    },
+    {
+      "name": "courtland sutton",
+      "fpProjPts": 9.7
+    },
+    {
+      "name": "dk metcalf",
+      "fpProjPts": 9.6
+    },
+    {
+      "name": "adonai mitchell",
+      "fpProjPts": 9.5
+    },
+    {
+      "name": "khalil shakir",
+      "fpProjPts": 9.5
+    },
+    {
+      "name": "alec pierce",
+      "fpProjPts": 9.1
+    },
+    {
+      "name": "deebo samuel sr",
+      "fpProjPts": 9.1
+    },
+    {
+      "name": "brian thomas",
+      "fpProjPts": 9.0
+    },
+    {
+      "name": "chris godwin",
+      "fpProjPts": 8.8
+    },
+    {
+      "name": "troy franklin",
+      "fpProjPts": 8.7
+    },
+    {
+      "name": "luther burden",
+      "fpProjPts": 8.6
+    },
+    {
+      "name": "romeo doubs",
+      "fpProjPts": 8.3
+    },
+    {
+      "name": "dj moore",
+      "fpProjPts": 8.2
+    },
+    {
+      "name": "xavier worthy",
+      "fpProjPts": 7.9
+    },
+    {
+      "name": "jordan addison",
+      "fpProjPts": 7.9
+    },
+    {
+      "name": "darnell mooney",
+      "fpProjPts": 7.8
+    },
+    {
+      "name": "keenan allen",
+      "fpProjPts": 7.5
+    },
+    {
+      "name": "quentin johnston",
+      "fpProjPts": 7.5
+    },
+    {
+      "name": "tre tucker",
+      "fpProjPts": 7.3
+    },
+    {
+      "name": "jayden higgins",
+      "fpProjPts": 7.3
+    },
+    {
+      "name": "john metchie",
+      "fpProjPts": 7.2
+    },
+    {
+      "name": "devaughn vele",
+      "fpProjPts": 7.1
+    },
+    {
+      "name": "josh downs",
+      "fpProjPts": 7.1
+    },
+    {
+      "name": "jerry jeudy",
+      "fpProjPts": 7.0
+    },
+    {
+      "name": "pat bryant",
+      "fpProjPts": 6.6
+    },
+    {
+      "name": "cooper kupp",
+      "fpProjPts": 6.5
+    },
+    {
+      "name": "isaac teslaa",
+      "fpProjPts": 6.5
+    },
+    {
+      "name": "malik washington",
+      "fpProjPts": 6.2
+    },
+    {
+      "name": "dontayvion wicks",
+      "fpProjPts": 6.2
+    },
+    {
+      "name": "chimere dike",
+      "fpProjPts": 6.0
+    },
+    {
+      "name": "elic ayomanor",
+      "fpProjPts": 5.8
+    },
+    {
+      "name": "rashid shaheed",
+      "fpProjPts": 5.8
+    },
+    {
+      "name": "keon coleman",
+      "fpProjPts": 5.8
+    },
+    {
+      "name": "jayden reed",
+      "fpProjPts": 5.7
+    },
+    {
+      "name": "tez johnson",
+      "fpProjPts": 5.6
+    },
+    {
+      "name": "gabe davis",
+      "fpProjPts": 5.4
+    },
+    {
+      "name": "rashod bateman",
+      "fpProjPts": 5.2
+    },
+    {
+      "name": "andrei iosivas",
+      "fpProjPts": 5.2
+    },
+    {
+      "name": "marquise brown",
+      "fpProjPts": 5.1
+    },
+    {
+      "name": "david sills v",
+      "fpProjPts": 5.0
+    },
+    {
+      "name": "olamide zaccheaus",
+      "fpProjPts": 5.0
+    },
+    {
+      "name": "calvin austin",
+      "fpProjPts": 4.9
+    },
+    {
+      "name": "cedric tillman",
+      "fpProjPts": 4.6
+    },
+    {
+      "name": "christian kirk",
+      "fpProjPts": 4.6
+    },
+    {
+      "name": "marvin mims",
+      "fpProjPts": 4.5
+    },
+    {
+      "name": "tyler lockett",
+      "fpProjPts": 4.5
+    },
+    {
+      "name": "deandre hopkins",
+      "fpProjPts": 4.5
+    },
+    {
+      "name": "van jefferson",
+      "fpProjPts": 4.3
+    },
+    {
+      "name": "kavontae turpin",
+      "fpProjPts": 4.2
+    },
+    {
+      "name": "jalen nailor",
+      "fpProjPts": 4.1
+    },
+    {
+      "name": "xavier hutchinson",
+      "fpProjPts": 4.0
+    },
+    {
+      "name": "mason tipton",
+      "fpProjPts": 4.0
+    },
+    {
+      "name": "jack bech",
+      "fpProjPts": 3.8
+    },
+    {
+      "name": "sterling shepard",
+      "fpProjPts": 3.8
+    },
+    {
+      "name": "ryan flournoy",
+      "fpProjPts": 3.7
+    },
+    {
+      "name": "tom kennedy",
+      "fpProjPts": 3.7
+    },
+    {
+      "name": "tre harris",
+      "fpProjPts": 3.6
+    },
+    {
+      "name": "jaylin noel",
+      "fpProjPts": 3.6
+    },
+    {
+      "name": "matthew golden",
+      "fpProjPts": 3.6
+    },
+    {
+      "name": "tyrell shavers",
+      "fpProjPts": 3.6
+    },
+    {
+      "name": "isaiah bond",
+      "fpProjPts": 3.4
+    },
+    {
+      "name": "treylon burks",
+      "fpProjPts": 3.3
+    },
+    {
+      "name": "brandin cooks",
+      "fpProjPts": 3.2
+    },
+    {
+      "name": "tyquan thornton",
+      "fpProjPts": 3.2
+    },
+    {
+      "name": "mitch tinsley",
+      "fpProjPts": 3.2
+    },
+    {
+      "name": "jahan dotson",
+      "fpProjPts": 3.1
+    },
+    {
+      "name": "andre baccellia",
+      "fpProjPts": 3.0
+    },
+    {
+      "name": "juju smithschuster",
+      "fpProjPts": 3.0
+    },
+    {
+      "name": "tim patrick",
+      "fpProjPts": 2.9
+    },
+    {
+      "name": "xavier smith",
+      "fpProjPts": 2.9
+    },
+    {
+      "name": "jaylin lane",
+      "fpProjPts": 2.7
+    },
+    {
+      "name": "noah brown",
+      "fpProjPts": 2.6
+    },
+    {
+      "name": "dylan drummond",
+      "fpProjPts": 2.4
+    },
+    {
+      "name": "konata mumpfield",
+      "fpProjPts": 2.3
+    },
+    {
+      "name": "nick westbrookikhine",
+      "fpProjPts": 2.2
+    },
+    {
+      "name": "jordan whittington",
+      "fpProjPts": 2.2
+    },
+    {
+      "name": "allen lazard",
+      "fpProjPts": 2.1
+    },
+    {
+      "name": "trent sherfield sr",
+      "fpProjPts": 2.0
+    },
+    {
+      "name": "austin trammell",
+      "fpProjPts": 2.0
+    },
+    {
+      "name": "dyami brown",
+      "fpProjPts": 1.8
+    },
+    {
+      "name": "isaiah williams",
+      "fpProjPts": 1.7
+    },
+    {
+      "name": "adam thielen",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "malachi corley",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "jalen brooks",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "cedrick wilson",
+      "fpProjPts": 1.5
+    },
+    {
+      "name": "james proche",
+      "fpProjPts": 1.5
+    },
+    {
+      "name": "gage larvadain",
+      "fpProjPts": 1.5
+    },
+    {
+      "name": "marquez valdesscantling",
+      "fpProjPts": 1.5
+    },
+    {
+      "name": "xavier weaver",
+      "fpProjPts": 1.5
+    },
+    {
+      "name": "deven thompkins",
+      "fpProjPts": 1.4
+    },
+    {
+      "name": "cody white",
+      "fpProjPts": 1.4
+    },
+    {
+      "name": "tutu atwell",
+      "fpProjPts": 1.4
+    },
+    {
+      "name": "kameron johnson",
+      "fpProjPts": 1.4
+    },
+    {
+      "name": "dante pettis",
+      "fpProjPts": 1.3
+    },
+    {
+      "name": "devin duvernay",
+      "fpProjPts": 1.2
+    },
+    {
+      "name": "dominic lovett",
+      "fpProjPts": 1.2
+    },
+    {
+      "name": "bo melton",
+      "fpProjPts": 1.0
+    },
+    {
+      "name": "tylan wallace",
+      "fpProjPts": 1.0
+    },
+    {
+      "name": "darius cooper",
+      "fpProjPts": 0.9
+    },
+    {
+      "name": "laquon treadwell",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "mason kinsey",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "liljordan humphrey",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "arian smith",
+      "fpProjPts": 0.7
+    },
+    {
+      "name": "jonathan mingo",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "chris moore",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "kevin austin",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "derius davis",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "ben skowronek",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "shedrick jackson",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "khadarel hodge",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jahdae walker",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "charlie jones",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "anthony gould",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "dee eskridge",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "ryan miller",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jamal agnew",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "dj turner",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "xavier restrepo",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "lajohntay wester",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "myles price",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "tai felton",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jake bobo",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "ricky white",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "xavier gipson",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "britain covey",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jalen royals",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "velus jones",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "jackson meeks",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "scotty miller",
+      "fpProjPts": 0.0
+    }
+  ],
+  "TE": [
+    {
+      "name": "trey mcbride",
+      "fpProjPts": 12.9
+    },
+    {
+      "name": "brock bowers",
+      "fpProjPts": 11.1
+    },
+    {
+      "name": "tyler warren",
+      "fpProjPts": 10.3
+    },
+    {
+      "name": "travis kelce",
+      "fpProjPts": 9.3
+    },
+    {
+      "name": "kyle pitts sr",
+      "fpProjPts": 8.9
+    },
+    {
+      "name": "brenton strange",
+      "fpProjPts": 8.3
+    },
+    {
+      "name": "jake ferguson",
+      "fpProjPts": 8.2
+    },
+    {
+      "name": "mark andrews",
+      "fpProjPts": 8.1
+    },
+    {
+      "name": "zach ertz",
+      "fpProjPts": 7.8
+    },
+    {
+      "name": "juwan johnson",
+      "fpProjPts": 7.8
+    },
+    {
+      "name": "harold fannin",
+      "fpProjPts": 7.7
+    },
+    {
+      "name": "dalton schultz",
+      "fpProjPts": 7.6
+    },
+    {
+      "name": "oronde gadsden",
+      "fpProjPts": 7.5
+    },
+    {
+      "name": "darren waller",
+      "fpProjPts": 7.3
+    },
+    {
+      "name": "colston loveland",
+      "fpProjPts": 7.2
+    },
+    {
+      "name": "dalton kincaid",
+      "fpProjPts": 6.9
+    },
+    {
+      "name": "dallas goedert",
+      "fpProjPts": 6.6
+    },
+    {
+      "name": "aj barner",
+      "fpProjPts": 6.5
+    },
+    {
+      "name": "evan engram",
+      "fpProjPts": 6.1
+    },
+    {
+      "name": "cade otton",
+      "fpProjPts": 6.1
+    },
+    {
+      "name": "isaiah likely",
+      "fpProjPts": 6.1
+    },
+    {
+      "name": "colby parkinson",
+      "fpProjPts": 5.8
+    },
+    {
+      "name": "tj hockenson",
+      "fpProjPts": 5.5
+    },
+    {
+      "name": "mason taylor",
+      "fpProjPts": 5.3
+    },
+    {
+      "name": "gunnar helm",
+      "fpProjPts": 5.1
+    },
+    {
+      "name": "darnell washington",
+      "fpProjPts": 4.9
+    },
+    {
+      "name": "chig okonkwo",
+      "fpProjPts": 4.8
+    },
+    {
+      "name": "mike gesicki",
+      "fpProjPts": 4.8
+    },
+    {
+      "name": "dawson knox",
+      "fpProjPts": 4.7
+    },
+    {
+      "name": "pat freiermuth",
+      "fpProjPts": 4.3
+    },
+    {
+      "name": "jonnu smith",
+      "fpProjPts": 3.9
+    },
+    {
+      "name": "taysom hill",
+      "fpProjPts": 3.6
+    },
+    {
+      "name": "david njoku",
+      "fpProjPts": 3.5
+    },
+    {
+      "name": "cole kmet",
+      "fpProjPts": 3.4
+    },
+    {
+      "name": "ross dwelley",
+      "fpProjPts": 3.2
+    },
+    {
+      "name": "luke musgrave",
+      "fpProjPts": 3.2
+    },
+    {
+      "name": "elijah higgins",
+      "fpProjPts": 3.2
+    },
+    {
+      "name": "noah fant",
+      "fpProjPts": 3.0
+    },
+    {
+      "name": "davis allen",
+      "fpProjPts": 2.8
+    },
+    {
+      "name": "terrance ferguson",
+      "fpProjPts": 2.7
+    },
+    {
+      "name": "jackson hawes",
+      "fpProjPts": 2.7
+    },
+    {
+      "name": "elijah arroyo",
+      "fpProjPts": 2.6
+    },
+    {
+      "name": "greg dulcich",
+      "fpProjPts": 2.6
+    },
+    {
+      "name": "noah gray",
+      "fpProjPts": 2.4
+    },
+    {
+      "name": "adam trautman",
+      "fpProjPts": 2.3
+    },
+    {
+      "name": "josh whyle",
+      "fpProjPts": 2.3
+    },
+    {
+      "name": "ian thomas",
+      "fpProjPts": 2.2
+    },
+    {
+      "name": "cade stover",
+      "fpProjPts": 2.1
+    },
+    {
+      "name": "anthony firkser",
+      "fpProjPts": 2.1
+    },
+    {
+      "name": "foster moreau",
+      "fpProjPts": 1.9
+    },
+    {
+      "name": "jeremy ruckert",
+      "fpProjPts": 1.9
+    },
+    {
+      "name": "charlie kolar",
+      "fpProjPts": 1.9
+    },
+    {
+      "name": "tanner hudson",
+      "fpProjPts": 1.8
+    },
+    {
+      "name": "john fitzpatrick",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "john bates",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "josh oliver",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "luke schoonmaker",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "drew sample",
+      "fpProjPts": 1.6
+    },
+    {
+      "name": "mo aliecox",
+      "fpProjPts": 1.5
+    },
+    {
+      "name": "julian hill",
+      "fpProjPts": 1.5
+    },
+    {
+      "name": "charlie woerner",
+      "fpProjPts": 1.5
+    },
+    {
+      "name": "brevyn spannford",
+      "fpProjPts": 1.4
+    },
+    {
+      "name": "grant calcaterra",
+      "fpProjPts": 1.3
+    },
+    {
+      "name": "drew ogletree",
+      "fpProjPts": 1.2
+    },
+    {
+      "name": "ben sinnott",
+      "fpProjPts": 1.1
+    },
+    {
+      "name": "quintin morris",
+      "fpProjPts": 1.1
+    },
+    {
+      "name": "kylen granson",
+      "fpProjPts": 1.1
+    },
+    {
+      "name": "hunter long",
+      "fpProjPts": 1.0
+    },
+    {
+      "name": "payne durham",
+      "fpProjPts": 1.0
+    },
+    {
+      "name": "teagan quitoriano",
+      "fpProjPts": 1.0
+    },
+    {
+      "name": "jack stoll",
+      "fpProjPts": 0.9
+    },
+    {
+      "name": "tyler conklin",
+      "fpProjPts": 0.9
+    },
+    {
+      "name": "durham smythe",
+      "fpProjPts": 0.9
+    },
+    {
+      "name": "pharaoh brown",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "jared wiley",
+      "fpProjPts": 0.8
+    },
+    {
+      "name": "connor heyward",
+      "fpProjPts": 0.7
+    },
+    {
+      "name": "robert tonyan",
+      "fpProjPts": 0.7
+    },
+    {
+      "name": "will dissly",
+      "fpProjPts": 0.6
+    },
+    {
+      "name": "andrew beck",
+      "fpProjPts": 0.6
+    },
+    {
+      "name": "devin culp",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "josiah deguara",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "nick vannett",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "nick kallerup",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "david martinrobinson",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "tucker fisk",
+      "fpProjPts": 0.5
+    },
+    {
+      "name": "robbie ouzts",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "blake whiteheart",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "ben sims",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "michael mayer",
+      "fpProjPts": 0.4
+    },
+    {
+      "name": "jordan franks",
+      "fpProjPts": 0.3
+    },
+    {
+      "name": "cameron latu",
+      "fpProjPts": 0.1
+    },
+    {
+      "name": "stone smartt",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "keleki latu",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "carter runyon",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "colson yankoff",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "marcedes lewis",
+      "fpProjPts": 0.0
+    },
+    {
+      "name": "brady russell",
+      "fpProjPts": 0.0
+    }
+  ],
+  "D": [
+    {
+      "name": "broncos",
+      "fpProjPts": 12.0
+    },
+    {
+      "name": "browns",
+      "fpProjPts": 9.7
+    },
+    {
+      "name": "buccaneers",
+      "fpProjPts": 9.6
+    },
+    {
+      "name": "rams",
+      "fpProjPts": 7.8
+    },
+    {
+      "name": "seahawks",
+      "fpProjPts": 7.7
+    },
+    {
+      "name": "commanders",
+      "fpProjPts": 7.4
+    },
+    {
+      "name": "titans",
+      "fpProjPts": 7.2
+    },
+    {
+      "name": "dolphins",
+      "fpProjPts": 7.1
+    },
+    {
+      "name": "eagles",
+      "fpProjPts": 6.8
+    },
+    {
+      "name": "texans",
+      "fpProjPts": 6.7
+    },
+    {
+      "name": "ravens",
+      "fpProjPts": 6.7
+    },
+    {
+      "name": "packers",
+      "fpProjPts": 6.7
+    },
+    {
+      "name": "chiefs",
+      "fpProjPts": 6.7
+    },
+    {
+      "name": "colts",
+      "fpProjPts": 6.5
+    },
+    {
+      "name": "vikings",
+      "fpProjPts": 6.4
+    },
+    {
+      "name": "steelers",
+      "fpProjPts": 6.3
+    },
+    {
+      "name": "jaguars",
+      "fpProjPts": 6.3
+    },
+    {
+      "name": "chargers",
+      "fpProjPts": 6.3
+    },
+    {
+      "name": "bills",
+      "fpProjPts": 6.1
+    },
+    {
+      "name": "jets",
+      "fpProjPts": 6.1
+    },
+    {
+      "name": "falcons",
+      "fpProjPts": 6.0
+    },
+    {
+      "name": "lions",
+      "fpProjPts": 5.7
+    },
+    {
+      "name": "saints",
+      "fpProjPts": 5.6
+    },
+    {
+      "name": "bears",
+      "fpProjPts": 5.4
+    },
+    {
+      "name": "cowboys",
+      "fpProjPts": 5.3
+    },
+    {
+      "name": "raiders",
+      "fpProjPts": 5.1
+    },
+    {
+      "name": "cardinals",
+      "fpProjPts": 4.7
+    },
+    {
+      "name": "bengals",
+      "fpProjPts": 4.3
+    }
+  ]
+}
